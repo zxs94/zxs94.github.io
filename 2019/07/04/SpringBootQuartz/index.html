@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在做springboot的项目中有一个特殊需求，前端动态添加定时任务，动态停启定时任务，任务内容是通过动态新增的数据来发起post请求请求python对外接口。 首先想到使用SpringBoot自带的注解@Scheduled来实现定时，通过相关注解可以配置同步、异步任务。 后来发现对这种动态的支持不是很好，所以改用quartz来实现。 Quartz 简单介绍Quartz 是一个完全由 Java 编">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot整合Quartz(一)">
+<meta property="og:url" content="http://zxs94.github.io/2019/07/04/SpringBootQuartz/index.html">
+<meta property="og:site_name" content="个人博客">
+<meta property="og:description" content="在做springboot的项目中有一个特殊需求，前端动态添加定时任务，动态停启定时任务，任务内容是通过动态新增的数据来发起post请求请求python对外接口。 首先想到使用SpringBoot自带的注解@Scheduled来实现定时，通过相关注解可以配置同步、异步任务。 后来发现对这种动态的支持不是很好，所以改用quartz来实现。 Quartz 简单介绍Quartz 是一个完全由 Java 编">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-31T08:48:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SpringBoot整合Quartz(一)">
+<meta name="twitter:description" content="在做springboot的项目中有一个特殊需求，前端动态添加定时任务，动态停启定时任务，任务内容是通过动态新增的数据来发起post请求请求python对外接口。 首先想到使用SpringBoot自带的注解@Scheduled来实现定时，通过相关注解可以配置同步、异步任务。 后来发现对这种动态的支持不是很好，所以改用quartz来实现。 Quartz 简单介绍Quartz 是一个完全由 Java 编">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zxs94.github.io/2019/07/04/SpringBootQuartz/">
+
+
+
+
+
+  <title>SpringBoot整合Quartz(一) | 个人博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zxs94.github.io/2019/07/04/SpringBootQuartz/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZXS">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SpringBoot整合Quartz(一)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-04T14:40:10+08:00">
+                2019-07-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在做springboot的项目中有一个特殊需求，前端动态添加定时任务，动态停启定时任务，任务内容是通过动态新增的数据来发起post请求请求python对外接口。</p>
+<p>首先想到使用SpringBoot自带的注解@Scheduled来实现定时，通过相关注解可以配置同步、异步任务。</p>
+<p>后来发现对这种动态的支持不是很好，所以改用quartz来实现。</p>
+<h2 id="Quartz-简单介绍"><a href="#Quartz-简单介绍" class="headerlink" title="Quartz 简单介绍"></a>Quartz 简单介绍</h2><p>Quartz 是一个完全由 Java 编写的开源作业调度框架，为在 Java 应用程序中进行作业调度提供了简单却强大的机制。<br>Quartz 可以与 J2EE 与 J2SE 应用程序相结合也可以单独使用。<br>Quartz 允许程序开发人员根据时间的间隔来调度作业。<br>Quartz 实现了作业和触发器的多对多的关系，还能把多个作业与不同的触发器关联。</p>
+<h2 id="Quartz-核心概念"><a href="#Quartz-核心概念" class="headerlink" title="Quartz 核心概念"></a>Quartz 核心概念</h2><p>我们需要明白 Quartz 的几个核心概念，这样理解起 Quartz 的原理就会变得简单了。</p>
+<a id="more"></a>
+<p>1.<strong><font color="blue">Job</font></strong> 表示一个工作，要执行的具体内容。此接口中只有一个方法，如下：</p>
+<pre><code class="java"><span class="function"><span class="keyword">void</span> <span class="title">execute</span><span class="params">(JobExecutionContext context)</span> </span></code></pre>
+<p>2.<strong><font color="blue">JobDetail</font></strong>  表示一个具体的可执行的调度程序，Job 是这个可执行程调度程序所要执行的内容，另外 JobDetail 还包含了这个任务调度的方案和策略。 </p>
+<p>3.<strong><font color="blue">Trigger</font></strong> 代表一个调度参数的配置，什么时候去调。 </p>
+<p>4.<strong><font color="blue">Scheduler</font></strong> 代表一个调度容器，一个调度容器中可以注册多个 JobDetail 和 Trigger。<br>当 Trigger 与 JobDetail 组合，就可以被 Scheduler 容器调度了。</p>
+<p><strong>在Springboot中整合quartz非常简单，在高版本的springboot中自带quartz支持和默认配置。</strong></p>
+<h2 id="Quartz-触发器"><a href="#Quartz-触发器" class="headerlink" title="Quartz 触发器"></a>Quartz 触发器</h2><p>在这里简单说一下quartz的触发器，在项目中需求定时要求输入开始时间，结束时间，时间间隔和单位，分析之后选择使用日历触发器来实现。</p>
+<p>例举quartz的触发器：</p>
+<h3 id="SimpleTrigger"><a href="#SimpleTrigger" class="headerlink" title="SimpleTrigger"></a>SimpleTrigger</h3><p>简单触发器，适用于短期内的循环定时任务，定义一个开始时间到达开始时间就执行定时，进行循环。<br>因为需求原因需要区别日期，例如当月1日10点执行，下个月1日10点在触发。简单触发器就不支持，直接间隔年月日这种类型。</p>
+<h3 id="CronTrigger"><a href="#CronTrigger" class="headerlink" title="CronTrigger"></a>CronTrigger</h3><p>cron表达式的触发器，这种触发器支持基于日历来定时，不过需要生成cron表达式，在前端集成插件或者后台判断生成cron都比较重，我们的功能要求的比较简单所以没采用cron的触发器。</p>
+<h3 id="CalendarIntervalTrigger"><a href="#CalendarIntervalTrigger" class="headerlink" title="CalendarIntervalTrigger"></a>CalendarIntervalTrigger</h3><p>日历触发器，类似于SimpleTrigger，指定从某一个时间开始，以一定的时间间隔执行的任务。 但是不同的是SimpleTrigger指定的时间间隔为毫秒，没办法指定每隔一个月执行一次（每月的时间间隔不是固定值），而CalendarIntervalTrigger支持的间隔单位有秒，分钟，小时，天，月，年，星期。</p>
+<p><strong>所以在项目中我们选择这种触发器来实现。</strong></p>
+<h3 id="DailyTimeIntervalTrigger"><a href="#DailyTimeIntervalTrigger" class="headerlink" title="DailyTimeIntervalTrigger"></a>DailyTimeIntervalTrigger</h3><p>指定每天的某个时间段内，以一定的时间间隔执行任务。并且它可以支持指定星期。<br>它适合的任务类似于：指定每天9:00 至 18:00 ，每隔70秒执行一次，并且只要周一至周五执行。</p>
+<h3 id="NthIncludedDayTrigger"><a href="#NthIncludedDayTrigger" class="headerlink" title="NthIncludedDayTrigger"></a>NthIncludedDayTrigger</h3><p>org.quartz.NthIncludedDayTrigger 是 Quartz 开发团队最新加入到框架中的一个 Trigger。它设计用于在每一间隔类型的第几天执行 Job。</p>
+<p>例如，你要在每个月的 15 号执行一个 Job，用 NthIncludedDayTrigger 就再合适不过了。Quartz 的 Caldendar 也可与 Trigger 关联以此把周末与节假日考虑进来，并在必要时跳开这些日期。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/03/SpringBootDataSource/" rel="next" title="SpringBoot之多数据源配置">
+                <i class="fa fa-chevron-left"></i> SpringBoot之多数据源配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/04/SpringBootQuartz2/" rel="prev" title="SpringBoot整合Quartz(二)">
+                SpringBoot整合Quartz(二) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ZXS">
+            
+              <p class="site-author-name" itemprop="name">ZXS</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quartz-简单介绍"><span class="nav-number">1.</span> <span class="nav-text">Quartz 简单介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quartz-核心概念"><span class="nav-number">2.</span> <span class="nav-text">Quartz 核心概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quartz-触发器"><span class="nav-number">3.</span> <span class="nav-text">Quartz 触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SimpleTrigger"><span class="nav-number">3.1.</span> <span class="nav-text">SimpleTrigger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CronTrigger"><span class="nav-number">3.2.</span> <span class="nav-text">CronTrigger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CalendarIntervalTrigger"><span class="nav-number">3.3.</span> <span class="nav-text">CalendarIntervalTrigger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DailyTimeIntervalTrigger"><span class="nav-number">3.4.</span> <span class="nav-text">DailyTimeIntervalTrigger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NthIncludedDayTrigger"><span class="nav-number">3.5.</span> <span class="nav-text">NthIncludedDayTrigger</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZXS</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
