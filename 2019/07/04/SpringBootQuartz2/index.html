@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Quartz,">
 
 
 
@@ -80,13 +80,14 @@
 
 
 <meta name="description" content="接上一篇文章，本文中展示在springboot项目中根据特定需求配置quartz定时任务。 POM文件中添加依赖1234&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;spring-boot-starter-quartz&amp;lt;/artifactId&amp;gt;&amp;l">
+<meta name="keywords" content="Quartz">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot整合Quartz(二)">
 <meta property="og:url" content="http://zxs94.github.io/2019/07/04/SpringBootQuartz2/index.html">
 <meta property="og:site_name" content="个人博客">
 <meta property="og:description" content="接上一篇文章，本文中展示在springboot项目中根据特定需求配置quartz定时任务。 POM文件中添加依赖1234&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;spring-boot-starter-quartz&amp;lt;/artifactId&amp;gt;&amp;l">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-31T08:50:06.000Z">
+<meta property="og:updated_time" content="2019-09-05T08:53:56.459Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot整合Quartz(二)">
 <meta name="twitter:description" content="接上一篇文章，本文中展示在springboot项目中根据特定需求配置quartz定时任务。 POM文件中添加依赖1234&amp;lt;dependency&amp;gt;	&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;spring-boot-starter-quartz&amp;lt;/artifactId&amp;gt;&amp;l">
@@ -99,7 +100,7 @@
     root: '/',
     scheme: 'Pisces',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -210,6 +211,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -292,6 +303,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SpringBoot/" itemprop="url" rel="index">
+                    <span itemprop="name">SpringBoot</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -324,7 +357,7 @@
 
 <h2 id="配置类-StartQuartzJobListener-java"><a href="#配置类-StartQuartzJobListener-java" class="headerlink" title="配置类 StartQuartzJobListener.java"></a>配置类 StartQuartzJobListener.java</h2><p>首先需要有个配置类来初始化quartz，<br>QuartzManager 是 quartz的具体管理类。<br>MyJobFactory 是一个自定义的Job工厂类，用来解决默认的Job类不支持spring注入。<br>TimeTaskPlanMapper 是具体的业务Mapper接口用来查询数据库中的配置。</p>
 <a id="more"></a>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StartQuartzJobListener</span> <span class="keyword">implements</span> <span class="title">ApplicationListener</span>&lt;<span class="title">ContextRefreshedEvent</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(StartQuartzJobListener.class);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* quartz */</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> QuartzManager quartzManager;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MyJobFactory myJobFactory;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">	<span class="keyword">private</span> TimeTaskPlanMapper ttpm;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 初始启动quartz</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onApplicationEvent</span><span class="params">(ContextRefreshedEvent event)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">        	logger.debug(<span class="string">"查询配置表中启动的定时任务集合"</span>);</span><br><span class="line">        	<span class="comment">// 从数据库查询定时任务列表</span></span><br><span class="line">	    	List&lt;UpperCaseMap&gt; tasklist = ttpm.getTimeTasks();</span><br><span class="line">	    	<span class="keyword">for</span> (UpperCaseMap upperCaseMap : tasklist) &#123;</span><br><span class="line">	    		<span class="keyword">int</span> task_plan_code = (<span class="keyword">int</span>) upperCaseMap.get(<span class="string">"task_plan_code"</span>); <span class="comment">// xxx</span></span><br><span class="line">	    		String task_id = (String) upperCaseMap.get(<span class="string">"task_id"</span>);  <span class="comment">// xxx</span></span><br><span class="line">	    		String model_name = (String) upperCaseMap.get(<span class="string">"model_name"</span>); <span class="comment">// xxx</span></span><br><span class="line">				<span class="keyword">int</span> repeat_interval = (<span class="keyword">int</span>) upperCaseMap.get(<span class="string">"repeat_interval"</span>);<span class="comment">// xxx</span></span><br><span class="line">				String unit = (String) upperCaseMap.get(<span class="string">"unit"</span>);<span class="comment">// xxx</span></span><br><span class="line">				Date start_time = (Date) upperCaseMap.get(<span class="string">"start_time"</span>);<span class="comment">// xxx</span></span><br><span class="line">				Date end_time = (Date) upperCaseMap.get(<span class="string">"end_time"</span>);<span class="comment">// xxx</span></span><br><span class="line">				quartzManager.startJob(task_plan_code,task_id,model_name,repeat_interval,unit,start_time,end_time);</span><br><span class="line">				logger.info(<span class="string">"项目初始化定时任务已经启动...定时任务编号"</span>+task_id);</span><br><span class="line">	    	&#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SchedulerException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@title</span>:修改默认的jobFactory 支持Job中注入</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@author</span>:zhangxueshan</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@date</span> 2019年6月20日 下午4:19:06</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SchedulerFactoryBean <span class="title">schedulerFactoryBean</span> <span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        SchedulerFactoryBean factoryBean = <span class="keyword">new</span> SchedulerFactoryBean();</span><br><span class="line">        factoryBean.setOverwriteExistingJobs(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">//延时启动20秒</span></span><br><span class="line">        factoryBean.setStartupDelay(<span class="number">20</span>);</span><br><span class="line">        factoryBean.setJobFactory(myJobFactory);</span><br><span class="line">        <span class="keyword">return</span> factoryBean;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StartQuartzJobListener</span> <span class="keyword">implements</span> <span class="title">ApplicationListener</span>&lt;<span class="title">ContextRefreshedEvent</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(StartQuartzJobListener.class);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* quartz */</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> QuartzManager quartzManager;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MyJobFactory myJobFactory;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">	<span class="keyword">private</span> TimeTaskPlanMapper ttpm;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 初始启动quartz</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onApplicationEvent</span><span class="params">(ContextRefreshedEvent event)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">        	logger.debug(<span class="string">"查询配置表中启动的定时任务集合"</span>);</span><br><span class="line">        	<span class="comment">// 从数据库查询定时任务列表</span></span><br><span class="line">	    	List&lt;UpperCaseMap&gt; tasklist = ttpm.getTimeTasks();</span><br><span class="line">	    	<span class="keyword">for</span> (UpperCaseMap upperCaseMap : tasklist) &#123;</span><br><span class="line">	    		<span class="keyword">int</span> task_plan_code = (<span class="keyword">int</span>) upperCaseMap.get(<span class="string">"task_plan_code"</span>); <span class="comment">// xxx</span></span><br><span class="line">	    		String task_id = (String) upperCaseMap.get(<span class="string">"task_id"</span>);  <span class="comment">// xxx</span></span><br><span class="line">	    		String model_name = (String) upperCaseMap.get(<span class="string">"model_name"</span>); <span class="comment">// xxx</span></span><br><span class="line">				<span class="keyword">int</span> repeat_interval = (<span class="keyword">int</span>) upperCaseMap.get(<span class="string">"repeat_interval"</span>);<span class="comment">// xxx</span></span><br><span class="line">				String unit = (String) upperCaseMap.get(<span class="string">"unit"</span>);<span class="comment">// xxx</span></span><br><span class="line">				Date start_time = (Date) upperCaseMap.get(<span class="string">"start_time"</span>);<span class="comment">// xxx</span></span><br><span class="line">				Date end_time = (Date) upperCaseMap.get(<span class="string">"end_time"</span>);<span class="comment">// xxx</span></span><br><span class="line">				quartzManager.startJob(task_plan_code,task_id,model_name,repeat_interval,unit,start_time,end_time);</span><br><span class="line">				logger.info(<span class="string">"项目初始化定时任务已经启动...定时任务编号"</span>+task_id);</span><br><span class="line">	    	&#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SchedulerException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@title</span>:修改默认的jobFactory 支持Job中注入</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@author</span>:zhangxueshan</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@date</span> 2019年6月20日 下午4:19:06</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SchedulerFactoryBean <span class="title">schedulerFactoryBean</span> <span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        SchedulerFactoryBean factoryBean = <span class="keyword">new</span> SchedulerFactoryBean();</span><br><span class="line">        factoryBean.setOverwriteExistingJobs(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">//延时启动20秒</span></span><br><span class="line">        factoryBean.setStartupDelay(<span class="number">20</span>);</span><br><span class="line">        factoryBean.setJobFactory(myJobFactory);</span><br><span class="line">        <span class="keyword">return</span> factoryBean;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 初始注入scheduler</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> SchedulerException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span>(name = <span class="string">"scheduler"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Scheduler <span class="title">scheduler</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> schedulerFactoryBean().getScheduler();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="Quartz定时任务管理类-QuartzManager-java"><a href="#Quartz定时任务管理类-QuartzManager-java" class="headerlink" title="Quartz定时任务管理类 QuartzManager.java"></a>Quartz定时任务管理类 QuartzManager.java</h2><p>真正启动quartz的类，包括启动移除</p>
 <p>startJobDemo中的是我们需要在任务启动的时候传入的一些参数以及指定任务的分组名称、以及使用哪种触发器。<br>具体的触发器的创建可以根据需求换成不同的触发器以应对不同的需求场景。</p>
@@ -344,6 +377,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Quartz/" rel="tag"># Quartz</a>
+          
+        </div>
       
 
       
@@ -445,14 +484,32 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
             
 
           </nav>
@@ -491,7 +548,6 @@
       
 
       
-
     </div>
   </aside>
 
@@ -502,7 +558,8 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -524,7 +581,12 @@
 
 
 
-
+<br>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
         
 
 
@@ -540,6 +602,8 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     
@@ -694,5 +758,5 @@
 
   
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

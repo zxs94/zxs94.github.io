@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="hexo,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -79,18 +79,14 @@
 
 
 
-<meta name="description" content="经过参考资料决定使用hexo-asset-image插件来实现博客的图片引用">
-<meta name="keywords" content="hexo">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Hexo图片引用">
-<meta property="og:url" content="http://zxs94.github.io/2019/08/08/hexo-image/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="categories">
+<meta property="og:url" content="http://zxs94.github.io/categories/index.html">
 <meta property="og:site_name" content="个人博客">
-<meta property="og:description" content="经过参考资料决定使用hexo-asset-image插件来实现博客的图片引用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-05T09:17:48.910Z">
+<meta property="og:updated_time" content="2019-09-05T08:49:27.882Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo图片引用">
-<meta name="twitter:description" content="经过参考资料决定使用hexo-asset-image插件来实现博客的图片引用">
+<meta name="twitter:title" content="categories">
 
 
 
@@ -120,13 +116,13 @@
 
 
 
-  <link rel="canonical" href="http://zxs94.github.io/2019/08/08/hexo-image/">
+  <link rel="canonical" href="http://zxs94.github.io/categories/">
 
 
 
 
 
-  <title>Hexo图片引用 | 个人博客</title>
+  <title>categories | 个人博客</title>
   
 
 
@@ -251,188 +247,40 @@
 
   <div id="posts" class="posts-expand">
     
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zxs94.github.io/2019/08/08/hexo-image/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZXS">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人博客">
-    </span>
-
     
+    
+    <div class="post-block page">
       <header class="post-header">
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">Hexo图片引用</h1>
-        
+	<h1 class="post-title" itemprop="name headline">categories</h1>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-08T15:51:15+08:00">
-                2019-08-08
-              </time>
-            
 
-            
 
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">hexo</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</header>
 
       
       
-
       
-        <p>经过参考资料决定使用hexo-asset-image插件来实现博客的图片引用</p>
-<a id="more"></a>
-
-<h2 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h2><p>基本参照网上的配置方式</p>
-<ol>
-<li><p>设置站点配置_config.yml:将post_asset_folder: false改为post_asset_folder: true</p>
-</li>
-<li><p>执行 npm install hexo-asset-image –save 装插件</p>
-</li>
-<li><p>执行hexo new [xxxx],生成xxxx.md和xxxx文件夹</p>
-</li>
-<li><p>把要引用的图片拷贝到xxxx文件夹中</p>
-</li>
-<li><p>使用 ![](xxxx/example.jpg) 来引用本地图片  </p>
-</li>
-</ol>
-<h2 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h2><p>使用以上配置在项目中插入图片发现，页面引用时无法显示，查看生成的静态页面发现标签图片是<br>&#60;img src=”/.io//xxx.png”/&#62;</p>
-<p>经过一番查询找了一个解决办法、就是将博客根目录下的package.json中的插件版本换成0.0.1版本<br>原有版本为(1.0.0),编辑完成后 hexo clean hexo g 即可看到图片img标签变为<br>&#60;img src=”/2019/08/08/<font color="blue">‘文章文件名称’</font>/<font color="blue">‘图片名称’</font>.png”/&#62;</p>
-<p>降低插件版本后即可成功引用。</p>
-
+      <div class="post-body">
+        
+        
+          <div class="category-all-page">
+            <div class="category-all-title">
+                目前共计 5 个分类
+            </div>
+            <div class="category-all">
+              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/">SpringBoot</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/pandas/">pandas</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/uwsgi/">uwsgi</a><span class="category-list-count">1</span></li></ul>
+            </div>
+          </div>
+        
+      </div>
+      
+      
       
     </div>
     
     
     
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/hexo/" rel="tag"># hexo</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/08/08/SpringBootTransactional/" rel="next" title="SpringBoot之事务踩坑">
-                <i class="fa fa-chevron-left"></i> SpringBoot之事务踩坑
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/09/04/Pandas1/" rel="prev" title="Pandas使用经验(一)">
-                Pandas使用经验(一) <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
@@ -465,17 +313,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -537,22 +376,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用流程"><span class="nav-number">1.</span> <span class="nav-text">使用流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#踩坑"><span class="nav-number">2.</span> <span class="nav-text">踩坑</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
