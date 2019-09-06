@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="个人博客">
 <meta property="og:description" content="git提交npm install --save hexo-deployer-git文章中引用图片npm install https://github.com/CodeFalling/hexo-asset-image --save2D动态看板娘npm install --save hexo-helper-live2d  # 人物模型下载  model后面跟着指定模型名称 npm install --">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-05T09:17:27.343Z">
+<meta property="og:updated_time" content="2019-09-06T03:39:43.406Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo优化配置">
 <meta name="twitter:description" content="git提交npm install --save hexo-deployer-git文章中引用图片npm install https://github.com/CodeFalling/hexo-asset-image --save2D动态看板娘npm install --save hexo-helper-live2d  # 人物模型下载  model后面跟着指定模型名称 npm install --">
@@ -376,7 +376,10 @@ normal，night， night blue， night bright， night eighties</code></pre><h4 i
 &lt;i class=&quot;fa fa-user-md&quot;&gt;&lt;/i&gt;&lt;span id=&quot;busuanzi_container_site_uv&quot;&gt;
   本站访客数:&lt;span id=&quot;busuanzi_value_site_uv&quot;&gt;&lt;/span&gt;
 &lt;/span&gt;
-&lt;/div&gt;</code></pre><h4 id><a href="#" class="headerlink" title="#"></a>#</h4>
+&lt;/div&gt;</code></pre><h4 id="文章目录默认展开"><a href="#文章目录默认展开" class="headerlink" title="文章目录默认展开"></a>文章目录默认展开</h4><p>进入 themes\next\source\css_custom\custom.styl 添加如下代码：</p>
+<pre><code>//文章目录默认展开
+.post-toc .nav .nav-child { display: block; }</code></pre><h4 id="文章底部标签样式修改"><a href="#文章底部标签样式修改" class="headerlink" title="文章底部标签样式修改"></a>文章底部标签样式修改</h4><p>修改模板/themes/next/layout/_macro/post.swig</p>
+<pre><code>搜索 rel=&quot;tag&quot;&gt;#，将 # 换成&lt;i class=&quot;fa fa-tag&quot;&gt;&lt;/i&gt;    </code></pre>
       
     </div>
     
@@ -393,7 +396,7 @@ normal，night， night blue， night bright， night eighties</code></pre><h4 i
       
         <div class="post-tags">
           
-            <a href="/tags/hexo/" rel="tag"># hexo</a>
+            <a href="/tags/hexo/" rel="tag"><i class="fa fa-tag"></i> hexo</a>
           
         </div>
       
@@ -548,7 +551,7 @@ normal，night， night blue， night bright， night eighties</code></pre><h4 i
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#git提交"><span class="nav-number">1.</span> <span class="nav-text">git提交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文章中引用图片"><span class="nav-number">2.</span> <span class="nav-text">文章中引用图片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2D动态看板娘"><span class="nav-number">3.</span> <span class="nav-text">2D动态看板娘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码高亮主题"><span class="nav-number">4.</span> <span class="nav-text">代码高亮主题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#底部访问人数统计"><span class="nav-number">5.</span> <span class="nav-text">底部访问人数统计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">6.</span> <span class="nav-text">#</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#git提交"><span class="nav-number">1.</span> <span class="nav-text">git提交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文章中引用图片"><span class="nav-number">2.</span> <span class="nav-text">文章中引用图片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2D动态看板娘"><span class="nav-number">3.</span> <span class="nav-text">2D动态看板娘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码高亮主题"><span class="nav-number">4.</span> <span class="nav-text">代码高亮主题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#底部访问人数统计"><span class="nav-number">5.</span> <span class="nav-text">底部访问人数统计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文章目录默认展开"><span class="nav-number">6.</span> <span class="nav-text">文章目录默认展开</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文章底部标签样式修改"><span class="nav-number">7.</span> <span class="nav-text">文章底部标签样式修改</span></a></li></ol></div>
             
 
           </div>

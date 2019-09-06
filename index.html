@@ -376,7 +376,10 @@ normal，night， night blue， night bright， night eighties</code></pre><h4 i
 &lt;i class=&quot;fa fa-user-md&quot;&gt;&lt;/i&gt;&lt;span id=&quot;busuanzi_container_site_uv&quot;&gt;
   本站访客数:&lt;span id=&quot;busuanzi_value_site_uv&quot;&gt;&lt;/span&gt;
 &lt;/span&gt;
-&lt;/div&gt;</code></pre><h4 id><a href="#" class="headerlink" title="#"></a>#</h4>
+&lt;/div&gt;</code></pre><h4 id="文章目录默认展开"><a href="#文章目录默认展开" class="headerlink" title="文章目录默认展开"></a>文章目录默认展开</h4><p>进入 themes\next\source\css_custom\custom.styl 添加如下代码：</p>
+<pre><code>//文章目录默认展开
+.post-toc .nav .nav-child { display: block; }</code></pre><h4 id="文章底部标签样式修改"><a href="#文章底部标签样式修改" class="headerlink" title="文章底部标签样式修改"></a>文章底部标签样式修改</h4><p>修改模板/themes/next/layout/_macro/post.swig</p>
+<pre><code>搜索 rel=&quot;tag&quot;&gt;#，将 # 换成&lt;i class=&quot;fa fa-tag&quot;&gt;&lt;/i&gt;    </code></pre>
           
         
       
@@ -865,153 +868,6 @@ normal，night， night blue， night bright， night eighties</code></pre><h4 i
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zxs94.github.io/2019/07/31/uwsgi1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZXS">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/31/uwsgi1/" itemprop="url">uWSGI入门</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-31T00:00:00+08:00">
-                2019-07-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/uwsgi/" itemprop="url" rel="index">
-                    <span itemprop="name">uwsgi</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="什么是uWSGI？"><a href="#什么是uWSGI？" class="headerlink" title="什么是uWSGI？"></a>什么是uWSGI？</h1><p>uWSGI是一个Web服务器，它实现了WSGI协议、uwsgi、http等协议。<br>它是一个Web服务器（如nginx，uWSGI等服务器）与web应用（如用Flask框架写的程序）通信的一种规范。</p>
-<p>要注意 WSGI / uwsgi / uWSGI 这三个概念的区分。<br><font color="blue">WSGI</font>是一种通信协议。<br><font color="blue">uwsgi</font>是一种线路协议而不是通信协议，在此常用于在uWSGI服务器与其他网络服务器的数据通信。<br><font color="blue">uWSGI</font>是实现了uwsgi和WSGI两种协议的Web服务器。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/31/uwsgi1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://zxs94.github.io/2019/07/31/PythonAdvance1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1109,6 +965,153 @@ normal，night， night blue， night bright， night eighties</code></pre><h4 i
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/07/31/PythonAdvance1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zxs94.github.io/2019/07/31/uwsgi1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZXS">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/31/uwsgi1/" itemprop="url">uWSGI入门</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-31T00:00:00+08:00">
+                2019-07-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/uwsgi/" itemprop="url" rel="index">
+                    <span itemprop="name">uwsgi</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="什么是uWSGI？"><a href="#什么是uWSGI？" class="headerlink" title="什么是uWSGI？"></a>什么是uWSGI？</h1><p>uWSGI是一个Web服务器，它实现了WSGI协议、uwsgi、http等协议。<br>它是一个Web服务器（如nginx，uWSGI等服务器）与web应用（如用Flask框架写的程序）通信的一种规范。</p>
+<p>要注意 WSGI / uwsgi / uWSGI 这三个概念的区分。<br><font color="blue">WSGI</font>是一种通信协议。<br><font color="blue">uwsgi</font>是一种线路协议而不是通信协议，在此常用于在uWSGI服务器与其他网络服务器的数据通信。<br><font color="blue">uWSGI</font>是实现了uwsgi和WSGI两种协议的Web服务器。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/07/31/uwsgi1/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
