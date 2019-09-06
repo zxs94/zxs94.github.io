@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="个人博客">
 <meta property="og:description" content="git提交npm install --save hexo-deployer-git  git config --global user.name &amp;quot;GitHub 用户名&amp;quot; git config --global user.email &amp;quot;GitHub 邮箱&amp;quot;文章中引用图片npm install https://github.com/CodeFalling/he">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-06T03:44:33.471Z">
+<meta property="og:updated_time" content="2019-09-06T03:56:33.139Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo优化配置">
 <meta name="twitter:description" content="git提交npm install --save hexo-deployer-git  git config --global user.name &amp;quot;GitHub 用户名&amp;quot; git config --global user.email &amp;quot;GitHub 邮箱&amp;quot;文章中引用图片npm install https://github.com/CodeFalling/he">
@@ -382,7 +382,26 @@ normal，night， night blue， night bright， night eighties</code></pre><h4 i
 &lt;/div&gt;</code></pre><h4 id="文章目录默认展开"><a href="#文章目录默认展开" class="headerlink" title="文章目录默认展开"></a>文章目录默认展开</h4><p>进入 themes\next\source\css_custom\custom.styl 添加如下代码：</p>
 <pre><code>//文章目录默认展开
 .post-toc .nav .nav-child { display: block; }</code></pre><h4 id="文章底部标签样式修改"><a href="#文章底部标签样式修改" class="headerlink" title="文章底部标签样式修改"></a>文章底部标签样式修改</h4><p>修改模板/themes/next/layout/_macro/post.swig</p>
-<pre><code>搜索 rel=&quot;tag&quot;&gt;#，将 # 换成&lt;i class=&quot;fa fa-tag&quot;&gt;&lt;/i&gt;    </code></pre>
+<pre><code>搜索 rel=&quot;tag&quot;&gt;#，将 # 换成&lt;i class=&quot;fa fa-tag&quot;&gt;&lt;/i&gt;    </code></pre><h4 id="底部powered-By-Hexo-强力驱动-隐藏"><a href="#底部powered-By-Hexo-强力驱动-隐藏" class="headerlink" title="底部powered By Hexo / 强力驱动 隐藏"></a>底部powered By Hexo / 强力驱动 隐藏</h4><p>themes/next/layout/_partials/footer.swig 注释相应代码的代码即可</p>
+<pre><code>&lt;!--
+{% if theme.footer.powered %}
+	  <div class="powered-by">{#
+	  #}{{ __('footer.powered', '<a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a>') }}{#
+	#}</div>
+	{% endif %}
+
+{% if theme.footer.powered and theme.footer.theme.enable %}
+	  <span class="post-meta-divider">|</span>
+	{% endif %}
+
+{% if theme.footer.theme.enable %}
+	  <div class="theme-info">{#
+	  #}{{ __('footer.theme') }} &mdash; {#
+	  #}<a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">{#
+	    #}NexT.{{ theme.scheme }}{#
+	  #}</a>{% if theme.footer.theme.version %} v{{ theme.version }}{% endif %}&lt;/div&gt;
+{% endif %} 
+--&gt;</div></code></pre>
       
     </div>
     
@@ -554,7 +573,7 @@ normal，night， night blue， night bright， night eighties</code></pre><h4 i
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#git提交"><span class="nav-number">1.</span> <span class="nav-text">git提交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文章中引用图片"><span class="nav-number">2.</span> <span class="nav-text">文章中引用图片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2D动态看板娘"><span class="nav-number">3.</span> <span class="nav-text">2D动态看板娘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码高亮主题"><span class="nav-number">4.</span> <span class="nav-text">代码高亮主题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#底部访问人数统计"><span class="nav-number">5.</span> <span class="nav-text">底部访问人数统计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文章目录默认展开"><span class="nav-number">6.</span> <span class="nav-text">文章目录默认展开</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文章底部标签样式修改"><span class="nav-number">7.</span> <span class="nav-text">文章底部标签样式修改</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#git提交"><span class="nav-number">1.</span> <span class="nav-text">git提交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文章中引用图片"><span class="nav-number">2.</span> <span class="nav-text">文章中引用图片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2D动态看板娘"><span class="nav-number">3.</span> <span class="nav-text">2D动态看板娘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码高亮主题"><span class="nav-number">4.</span> <span class="nav-text">代码高亮主题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#底部访问人数统计"><span class="nav-number">5.</span> <span class="nav-text">底部访问人数统计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文章目录默认展开"><span class="nav-number">6.</span> <span class="nav-text">文章目录默认展开</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文章底部标签样式修改"><span class="nav-number">7.</span> <span class="nav-text">文章底部标签样式修改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#底部powered-By-Hexo-强力驱动-隐藏"><span class="nav-number">8.</span> <span class="nav-text">底部powered By Hexo / 强力驱动 隐藏</span></a></li></ol></div>
             
 
           </div>
@@ -582,6 +601,7 @@ normal，night， night blue， night bright， night eighties</code></pre><h4 i
   
 </div>
 
+<!--
 
   <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
@@ -592,7 +612,8 @@ normal，night， night blue， night bright， night eighties</code></pre><h4 i
 
 
   <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
-
+ 
+-->
 
 
 

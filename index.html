@@ -382,7 +382,26 @@ normal，night， night blue， night bright， night eighties</code></pre><h4 i
 &lt;/div&gt;</code></pre><h4 id="文章目录默认展开"><a href="#文章目录默认展开" class="headerlink" title="文章目录默认展开"></a>文章目录默认展开</h4><p>进入 themes\next\source\css_custom\custom.styl 添加如下代码：</p>
 <pre><code>//文章目录默认展开
 .post-toc .nav .nav-child { display: block; }</code></pre><h4 id="文章底部标签样式修改"><a href="#文章底部标签样式修改" class="headerlink" title="文章底部标签样式修改"></a>文章底部标签样式修改</h4><p>修改模板/themes/next/layout/_macro/post.swig</p>
-<pre><code>搜索 rel=&quot;tag&quot;&gt;#，将 # 换成&lt;i class=&quot;fa fa-tag&quot;&gt;&lt;/i&gt;    </code></pre>
+<pre><code>搜索 rel=&quot;tag&quot;&gt;#，将 # 换成&lt;i class=&quot;fa fa-tag&quot;&gt;&lt;/i&gt;    </code></pre><h4 id="底部powered-By-Hexo-强力驱动-隐藏"><a href="#底部powered-By-Hexo-强力驱动-隐藏" class="headerlink" title="底部powered By Hexo / 强力驱动 隐藏"></a>底部powered By Hexo / 强力驱动 隐藏</h4><p>themes/next/layout/_partials/footer.swig 注释相应代码的代码即可</p>
+<pre><code>&lt;!--
+{% if theme.footer.powered %}
+	  <div class="powered-by">{#
+	  #}{{ __('footer.powered', '<a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a>') }}{#
+	#}</div>
+	{% endif %}
+
+{% if theme.footer.powered and theme.footer.theme.enable %}
+	  <span class="post-meta-divider">|</span>
+	{% endif %}
+
+{% if theme.footer.theme.enable %}
+	  <div class="theme-info">{#
+	  #}{{ __('footer.theme') }} &mdash; {#
+	  #}<a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">{#
+	    #}NexT.{{ theme.scheme }}{#
+	  #}</a>{% if theme.footer.theme.version %} v{{ theme.version }}{% endif %}&lt;/div&gt;
+{% endif %} 
+--&gt;</div></code></pre>
           
         
       
@@ -1861,6 +1880,7 @@ normal，night， night blue， night bright， night eighties</code></pre><h4 i
   
 </div>
 
+<!--
 
   <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
@@ -1871,7 +1891,8 @@ normal，night， night blue， night bright， night eighties</code></pre><h4 i
 
 
   <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
-
+ 
+-->
 
 
 
