@@ -352,6 +352,7 @@
       
         
           <p>为了更深入了解python和大数据准备学习网络爬虫，参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。</p>
+<p>部分内容参考以下博文整理 ，方便自己学习总结。<br>地址：<a href="https://python3webspider.cuiqingcai.com" target="_blank" rel="noopener">https://python3webspider.cuiqingcai.com</a></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/09/11/PythonWebSpider1/#more" rel="contents">
@@ -497,65 +498,14 @@
 
       
         
-          
-            <h4 id="git提交"><a href="#git提交" class="headerlink" title="git提交"></a>git提交</h4><pre><code>npm install --save hexo-deployer-git
-
-git config --global user.name &quot;GitHub 用户名&quot;
-git config --global user.email &quot;GitHub 邮箱&quot;</code></pre><h4 id="文章中引用图片"><a href="#文章中引用图片" class="headerlink" title="文章中引用图片"></a>文章中引用图片</h4><pre><code>npm install https://github.com/CodeFalling/hexo-asset-image --save</code></pre><h4 id="2D动态看板娘"><a href="#2D动态看板娘" class="headerlink" title="2D动态看板娘"></a>2D动态看板娘</h4><pre><code>npm install --save hexo-helper-live2d
-
-# 人物模型下载  model后面跟着指定模型名称
-npm install --save live2d-widget-model-wanko
-
-# 主配置文件中添加代码
-live2d:
-  enable: true
-  scriptFrom: local
-  model: 
-    use: live2d-widget-model-wanko
-  display: 
-    position: right
-    width: 150
-    height: 300
-  mobile: 
-    show: true</code></pre><h4 id="代码高亮主题"><a href="#代码高亮主题" class="headerlink" title="代码高亮主题"></a>代码高亮主题</h4><pre><code># 默认为白色主题
-normal，night， night blue， night bright， night eighties</code></pre><h4 id="底部访问人数统计"><a href="#底部访问人数统计" class="headerlink" title="底部访问人数统计"></a>底部访问人数统计</h4><p>打开\themes\next\layout_partials\footer.swig文件,在标签 class = copyright前加上代码：</p>
-<pre><code>&lt;script async src=&quot;https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;</code></pre><p>在文件最下方添加代码：</p>
-<pre><code>&lt;br&gt;
-&lt;div class=&quot;powered-by&quot;&gt;
-&lt;i class=&quot;fa fa-user-md&quot;&gt;&lt;/i&gt;&lt;span id=&quot;busuanzi_container_site_uv&quot;&gt;
-  本站访客数:&lt;span id=&quot;busuanzi_value_site_uv&quot;&gt;&lt;/span&gt;
-&lt;/span&gt;
-&lt;/div&gt;</code></pre><h4 id="文章目录默认展开"><a href="#文章目录默认展开" class="headerlink" title="文章目录默认展开"></a>文章目录默认展开</h4><p>进入 themes\next\source\css_custom\custom.styl 添加如下代码：</p>
-<pre><code>//文章目录默认展开
-.post-toc .nav .nav-child { display: block; }</code></pre><h4 id="文章底部标签样式修改"><a href="#文章底部标签样式修改" class="headerlink" title="文章底部标签样式修改"></a>文章底部标签样式修改</h4><p>修改模板/themes/next/layout/_macro/post.swig</p>
-<pre><code>搜索 rel=&quot;tag&quot;&gt;#，将 # 换成&lt;i class=&quot;fa fa-tag&quot;&gt;&lt;/i&gt;    </code></pre><h4 id="底部powered-By-Hexo-强力驱动-隐藏"><a href="#底部powered-By-Hexo-强力驱动-隐藏" class="headerlink" title="底部powered By Hexo / 强力驱动 隐藏"></a>底部powered By Hexo / 强力驱动 隐藏</h4><p>themes/next/layout/_partials/footer.swig 注释相应代码的代码即可</p>
-<pre><code>&lt;!--
-{% if theme.footer.powered %}
-	  <div class="powered-by">{#
-	  #}{{ __('footer.powered', '<a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a>') }}{#
-	#}</div>
-	{% endif %}
-
-{% if theme.footer.powered and theme.footer.theme.enable %}
-	  <span class="post-meta-divider">|</span>
-	{% endif %}
-
-{% if theme.footer.theme.enable %}
-	  <div class="theme-info">{#
-	  #}{{ __('footer.theme') }} &mdash; {#
-	  #}<a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">{#
-	    #}NexT.{{ theme.scheme }}{#
-	  #}</a>{% if theme.footer.theme.version %} v{{ theme.version }}{% endif %}&lt;/div&gt;
-{% endif %} 
---&gt;</div></code></pre><h4 id="博客背景"><a href="#博客背景" class="headerlink" title="博客背景"></a>博客背景</h4><p>在themes\next\source\css_custom\custom.styl 添加如下代码 引用素材网站随机图加载可能较慢</p>
-<pre><code>body {
-    background:url(https://source.unsplash.com/random/1600x900?nature,water);
-    background-repeat: no-repeat;
-    background-attachment:fixed;
-    background-position:50% 50%;
-    background-size:cover;
-}</code></pre>
-          
+          <p>博客搭建过程中的配置记录，优化hexo的next主题配置。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/09/05/hexo-config/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

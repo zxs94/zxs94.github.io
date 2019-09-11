@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="python,爬虫,">
+  <meta name="keywords" content="爬虫,python,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="为了更深入了解python和大数据准备学习网络爬虫，参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。">
-<meta name="keywords" content="python,爬虫">
+<meta name="description" content="为了更深入了解python和大数据准备学习网络爬虫，参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。 部分内容参考以下博文整理 ，方便自己学习总结。地址：https://python3webspider.cuiqingcai.com">
+<meta name="keywords" content="爬虫,python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python网络爬虫入门">
 <meta property="og:url" content="http://zxs94.github.io/2019/09/11/PythonWebSpider1/index.html">
 <meta property="og:site_name" content="个人博客">
-<meta property="og:description" content="为了更深入了解python和大数据准备学习网络爬虫，参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。">
+<meta property="og:description" content="为了更深入了解python和大数据准备学习网络爬虫，参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。 部分内容参考以下博文整理 ，方便自己学习总结。地址：https://python3webspider.cuiqingcai.com">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-11T07:50:18.047Z">
+<meta property="og:updated_time" content="2019-09-11T10:01:11.273Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python网络爬虫入门">
-<meta name="twitter:description" content="为了更深入了解python和大数据准备学习网络爬虫，参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。">
+<meta name="twitter:description" content="为了更深入了解python和大数据准备学习网络爬虫，参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。 部分内容参考以下博文整理 ，方便自己学习总结。地址：https://python3webspider.cuiqingcai.com">
 
 
 
@@ -353,6 +353,7 @@
 
       
         <p>为了更深入了解python和大数据准备学习网络爬虫，参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。</p>
+<p>部分内容参考以下博文整理 ，方便自己学习总结。<br>地址：<a href="https://python3webspider.cuiqingcai.com" target="_blank" rel="noopener">https://python3webspider.cuiqingcai.com</a></p>
 <a id="more"></a>
 
 <p><strong>python环境的安装配置不再过多赘述</strong></p>
@@ -382,7 +383,35 @@
 <p>官方还推荐安装如下两个库：一个是字符编码检测库 cchardet，另一个是加速 DNS 的解析库 aiodns。  </p>
 <pre><code>pip install aiohttp
 pip install cchardet aiodns</code></pre><p>在python交互模型 引入不报错即安装成功</p>
-<pre><code>import aiohttp​</code></pre>
+<pre><code>import aiohttp</code></pre><h3 id="解析库安装"><a href="#解析库安装" class="headerlink" title="解析库安装"></a>解析库安装</h3><h4 id="lxml-的安装"><a href="#lxml-的安装" class="headerlink" title="lxml 的安装"></a>lxml 的安装</h4><p>lxml 是 Python 的一个解析库，支持 HTML 和 XML 的解析，支持 XPath 解析方式</p>
+<p><strong>相关链接</strong></p>
+<p>官方网站：<a href="http://lxml.de" target="_blank" rel="noopener">http://lxml.de</a><br>GitHub：<a href="https://github.com/lxml/lxml" target="_blank" rel="noopener">https://github.com/lxml/lxml</a><br>PyPI：<a href="https://pypi.python.org/pypi/lxml" target="_blank" rel="noopener">https://pypi.python.org/pypi/lxml</a></p>
+<p><strong>安装命令</strong></p>
+<p>没有报错就代表成功 如果报错在查询是否需要安装其他依赖</p>
+<pre><code>pip install lxml</code></pre><h4 id="Beautiful-Soup-的安装"><a href="#Beautiful-Soup-的安装" class="headerlink" title="Beautiful Soup 的安装"></a>Beautiful Soup 的安装</h4><p>Beautiful Soup 是 Python 的一个 HTML 或 XML 的解析库，我们可以用它来方便地从网页中提取数据。</p>
+<p><strong>相关链接</strong>  </p>
+<p>官方文档：<a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc" target="_blank" rel="noopener">https://www.crummy.com/software/BeautifulSoup/bs4/doc</a><br>中文文档：<a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh" target="_blank" rel="noopener">https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh</a><br>PyPI：<a href="https://pypi.python.org/pypi/beautifulsoup4" target="_blank" rel="noopener">https://pypi.python.org/pypi/beautifulsoup4</a></p>
+<p>Beautiful Soup 的 HTML 和 XML 解析器是依赖于 lxml 库的，所以在此之前请确保已经成功安装好了 lxml 库。</p>
+<p><strong>安装命令</strong></p>
+<pre><code>pip install beautifulsoup4</code></pre><p><strong>测试程序</strong> </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup  </span><br><span class="line">soup = BeautifulSoup(<span class="string">'&amp;lt;p&amp;gt;Hello&amp;lt;/p&amp;gt;'</span>, <span class="string">'lxml'</span>)  </span><br><span class="line">print(soup.p.string)</span><br></pre></td></tr></table></figure>
+
+<p>输出结果 Hello 证明成功</p>
+<h4 id="pyquery-的安装"><a href="#pyquery-的安装" class="headerlink" title="pyquery 的安装"></a>pyquery 的安装</h4><p>pyquery 同样是一个强大的网页解析工具，它提供了和 jQuery 类似的语法来解析 HTML 文档，支持 CSS 选择器。</p>
+<p><strong>相关链接</strong></p>
+<p>GitHub：<a href="https://github.com/gawel/pyquery" target="_blank" rel="noopener">https://github.com/gawel/pyquery</a><br>PyPI：<a href="https://pypi.python.org/pypi/pyquery" target="_blank" rel="noopener">https://pypi.python.org/pypi/pyquery</a><br>官方文档：<a href="http://pyquery.readthedocs.io" target="_blank" rel="noopener">http://pyquery.readthedocs.io</a></p>
+<p><strong>安装命令</strong></p>
+<pre><code>pip install pyquery</code></pre><p>验证 交互命令导入依赖 不报错即为成功</p>
+<pre><code>import pyquery</code></pre><h4 id="tesserocr-的安装"><a href="#tesserocr-的安装" class="headerlink" title="tesserocr 的安装"></a>tesserocr 的安装</h4><p>在爬虫过程中，难免会遇到各种各样的验证码，而大多数验证码还是图形验证码，这时候我们可以直接用 OCR 来识别。</p>
+<p>OCR，即 Optical Character Recognition，光学字符识别，是指通过扫描字符，然后通过其形状将其翻译成电子文本的过程。</p>
+<p><strong>相关链接</strong></p>
+<p>GitHub：<a href="https://github.com/sirfz/tesserocr" target="_blank" rel="noopener">https://github.com/sirfz/tesserocr</a><br>PyPI：<a href="https://pypi.python.org/pypi/tesserocr" target="_blank" rel="noopener">https://pypi.python.org/pypi/tesserocr</a><br>下载地址：<a href="http://digi.bib.uni-mannheim.de/tesseract" target="_blank" rel="noopener">http://digi.bib.uni-mannheim.de/tesseract</a><br>GitHub：<a href="https://github.com/tesseract-ocr/tesseract" target="_blank" rel="noopener">https://github.com/tesseract-ocr/tesseract</a><br>语言包：<a href="https://github.com/tesseract-ocr/tessdata" target="_blank" rel="noopener">https://github.com/tesseract-ocr/tessdata</a><br>文档：<a href="https://github.com/tesseract-ocr/tesseract/wiki/Documentation" target="_blank" rel="noopener">https://github.com/tesseract-ocr/tesseract/wiki/Documentation</a></p>
+<p><strong>window下</strong></p>
+<p>首先需要下载tesserocr 傻瓜式安装<br>选择不带dev的稳定版tesseract-ocr-setup-3.05.01.exe安装</p>
+<p>勾选 Additional language data (download) 选项来安装 OCR 识别支持的语言包，这样 OCR 便可以识别多国语言。<br>注意语言包下载很大需要1.3G 网络不好可能下载不动。</p>
+<p>在环境下安装 tesserocr</p>
+<p><strong>安装命令</strong></p>
+<pre><code>pip install tesserocr pillow</code></pre>
       
     </div>
     
@@ -399,9 +428,9 @@ pip install cchardet aiodns</code></pre><p>在python交互模型 引入不报错
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
-          
             <a href="/tags/爬虫/" rel="tag"><i class="fa fa-tag"></i> 爬虫</a>
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
           
         </div>
       
@@ -556,7 +585,7 @@ pip install cchardet aiodns</code></pre><p>在python交互模型 引入不报错
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#请求库安装"><span class="nav-number">1.</span> <span class="nav-text">请求库安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#requests-的安装"><span class="nav-number">1.1.</span> <span class="nav-text">requests 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Selenium-的安装"><span class="nav-number">1.2.</span> <span class="nav-text">Selenium 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ChromeDriver、GeckoDriver、PhantomJS-的安装"><span class="nav-number">1.3.</span> <span class="nav-text">ChromeDriver、GeckoDriver、PhantomJS 的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ChromeDriver"><span class="nav-number">1.3.1.</span> <span class="nav-text">ChromeDriver</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#GeckoDriver"><span class="nav-number">1.3.2.</span> <span class="nav-text">GeckoDriver</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PhantomJS"><span class="nav-number">1.3.3.</span> <span class="nav-text">PhantomJS</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#aiohttp-的安装"><span class="nav-number">1.4.</span> <span class="nav-text">aiohttp 的安装</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#请求库安装"><span class="nav-number">1.</span> <span class="nav-text">请求库安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#requests-的安装"><span class="nav-number">1.1.</span> <span class="nav-text">requests 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Selenium-的安装"><span class="nav-number">1.2.</span> <span class="nav-text">Selenium 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ChromeDriver、GeckoDriver、PhantomJS-的安装"><span class="nav-number">1.3.</span> <span class="nav-text">ChromeDriver、GeckoDriver、PhantomJS 的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ChromeDriver"><span class="nav-number">1.3.1.</span> <span class="nav-text">ChromeDriver</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#GeckoDriver"><span class="nav-number">1.3.2.</span> <span class="nav-text">GeckoDriver</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PhantomJS"><span class="nav-number">1.3.3.</span> <span class="nav-text">PhantomJS</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#aiohttp-的安装"><span class="nav-number">1.4.</span> <span class="nav-text">aiohttp 的安装</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析库安装"><span class="nav-number">2.</span> <span class="nav-text">解析库安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#lxml-的安装"><span class="nav-number">2.1.</span> <span class="nav-text">lxml 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Beautiful-Soup-的安装"><span class="nav-number">2.2.</span> <span class="nav-text">Beautiful Soup 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pyquery-的安装"><span class="nav-number">2.3.</span> <span class="nav-text">pyquery 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tesserocr-的安装"><span class="nav-number">2.4.</span> <span class="nav-text">tesserocr 的安装</span></a></li></ol></li></ol></div>
             
 
           </div>
