@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="python,爬虫,">
+  <meta name="keywords" content="爬虫,python,">
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="为了更深入了解python和大数据、准备学习网络爬虫、参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。">
-<meta name="keywords" content="python,爬虫">
+<meta name="keywords" content="爬虫,python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python网络爬虫入门">
 <meta property="og:url" content="http://zxs94.github.io/2019/09/11/PythonWebSpider1/index.html">
 <meta property="og:site_name" content="个人博客">
 <meta property="og:description" content="为了更深入了解python和大数据、准备学习网络爬虫、参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-11T07:22:02.918Z">
+<meta property="og:updated_time" content="2019-09-11T07:49:04.675Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python网络爬虫入门">
 <meta name="twitter:description" content="为了更深入了解python和大数据、准备学习网络爬虫、参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。">
@@ -374,15 +374,15 @@
 <h5 id="PhantomJS"><a href="#PhantomJS" class="headerlink" title="PhantomJS"></a>PhantomJS</h5><p>官方网站: <a href="http://phantomjs.org" target="_blank" rel="noopener">http://phantomjs.org</a><br>官方文档: <a href="ttp://phantomjs.org/quick-start.html" target="_blank" rel="noopener">http://phantomjs.org/quick-start.html</a><br>下载地址: <a href="http://phantomjs.org/download.html" target="_blank" rel="noopener">http://phantomjs.org/download.html</a><br>API接口说明: <a href="http://phantomjs.org/api/command-line.html" target="_blank" rel="noopener">http://phantomjs.org/api/command-line.html</a> </p>
 <p>命令验证  </p>
 <pre><code>phantomjs </code></pre><p>测试程序  没有弹出页面控制台输出百度网址<br>    <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line">browser = webdriver.PhantomJS()</span><br><span class="line">browser.get(<span class="string">'https://www.baidu.com'</span>)</span><br><span class="line">print(browser.current_url)</span><br></pre></td></tr></table></figure></p>
-<h5 id="aiohttp-的安装"><a href="#aiohttp-的安装" class="headerlink" title="aiohttp 的安装"></a>aiohttp 的安装</h5><p>requests 库是一个阻塞式 HTTP 请求库，当我们发出一个请求后，程序会一直等待服务器响应，直到得到响应后，程序才会进行下一步处理。</p>
+<h4 id="aiohttp-的安装"><a href="#aiohttp-的安装" class="headerlink" title="aiohttp 的安装"></a>aiohttp 的安装</h4><p>requests 库是一个阻塞式 HTTP 请求库，当我们发出一个请求后，程序会一直等待服务器响应，直到得到响应后，程序才会进行下一步处理。</p>
 <p>aiohttp 就是这样一个提供异步 Web 服务的库，从 Python 3.5 版本开始，Python 中加入了 async/await 关键字，使得回调的写法更加直观和人性化。</p>
 <p><strong>相关链接</strong></p>
 <p>官方文档：<a href="http://aiohttp.readthedocs.io/en/stable" target="_blank" rel="noopener">http://aiohttp.readthedocs.io/en/stable</a><br>GitHub：<a href="https://github.com/aio-libs/aiohttp" target="_blank" rel="noopener">https://github.com/aio-libs/aiohttp</a><br>PyPI：<a href="https://pypi.python.org/pypi/aiohttp" target="_blank" rel="noopener">https://pypi.python.org/pypi/aiohttp</a></p>
 <p><strong>安装</strong>  </p>
 <p>官方还推荐安装如下两个库：一个是字符编码检测库 cchardet，另一个是加速 DNS 的解析库 aiodns。  </p>
 <pre><code>pip install aiohttp
-pip install cchardet aiodns
-​</code></pre>
+pip install cchardet aiodns</code></pre><p>在python交互模型 引入不报错即安装成功</p>
+<pre><code>import aiohttp​</code></pre>
       
     </div>
     
@@ -399,9 +399,9 @@ pip install cchardet aiodns
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
-          
             <a href="/tags/爬虫/" rel="tag"><i class="fa fa-tag"></i> 爬虫</a>
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
           
         </div>
       
@@ -556,7 +556,7 @@ pip install cchardet aiodns
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#请求库安装"><span class="nav-number">1.</span> <span class="nav-text">请求库安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#requests-的安装"><span class="nav-number">1.1.</span> <span class="nav-text">requests 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Selenium-的安装"><span class="nav-number">1.2.</span> <span class="nav-text">Selenium 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ChromeDriver、GeckoDriver、PhantomJS-的安装"><span class="nav-number">1.3.</span> <span class="nav-text">ChromeDriver、GeckoDriver、PhantomJS 的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ChromeDriver"><span class="nav-number">1.3.1.</span> <span class="nav-text">ChromeDriver</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#GeckoDriver"><span class="nav-number">1.3.2.</span> <span class="nav-text">GeckoDriver</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PhantomJS"><span class="nav-number">1.3.3.</span> <span class="nav-text">PhantomJS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#aiohttp-的安装"><span class="nav-number">1.3.4.</span> <span class="nav-text">aiohttp 的安装</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#请求库安装"><span class="nav-number">1.</span> <span class="nav-text">请求库安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#requests-的安装"><span class="nav-number">1.1.</span> <span class="nav-text">requests 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Selenium-的安装"><span class="nav-number">1.2.</span> <span class="nav-text">Selenium 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ChromeDriver、GeckoDriver、PhantomJS-的安装"><span class="nav-number">1.3.</span> <span class="nav-text">ChromeDriver、GeckoDriver、PhantomJS 的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ChromeDriver"><span class="nav-number">1.3.1.</span> <span class="nav-text">ChromeDriver</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#GeckoDriver"><span class="nav-number">1.3.2.</span> <span class="nav-text">GeckoDriver</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PhantomJS"><span class="nav-number">1.3.3.</span> <span class="nav-text">PhantomJS</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#aiohttp-的安装"><span class="nav-number">1.4.</span> <span class="nav-text">aiohttp 的安装</span></a></li></ol></li></ol></div>
             
 
           </div>

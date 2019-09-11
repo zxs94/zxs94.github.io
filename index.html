@@ -547,7 +547,14 @@ normal，night， night blue， night bright， night eighties</code></pre><h4 i
 	    #}NexT.{{ theme.scheme }}{#
 	  #}</a>{% if theme.footer.theme.version %} v{{ theme.version }}{% endif %}&lt;/div&gt;
 {% endif %} 
---&gt;</div></code></pre>
+--&gt;</div></code></pre><h4 id="博客背景"><a href="#博客背景" class="headerlink" title="博客背景"></a>博客背景</h4><p>在themes\next\source\css_custom\custom.styl 添加如下代码 引用素材网站随机图加载可能较慢</p>
+<pre><code>body {
+    background:url(https://source.unsplash.com/random/1600x900?nature,water);
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-position:50% 50%;
+    background-size:cover;
+}</code></pre>
           
         
       
