@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="python,">
+  <meta name="keywords" content="python,爬虫,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="维护模型接口代码的时候，发现在装饰器的函数内部和解析函数上面经常使用args, *kwargs,这两个参数。 这两个参数到底代表什么呢？">
-<meta name="keywords" content="python">
+<meta name="description" content="为了更深入了解python和大数据、准备学习网络爬虫、参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。">
+<meta name="keywords" content="python,爬虫">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python进阶之：*args,**kwargs的使用">
-<meta property="og:url" content="http://zxs94.github.io/2019/07/31/PythonAdvance1/index.html">
+<meta property="og:title" content="Python网络爬虫入门">
+<meta property="og:url" content="http://zxs94.github.io/2019/09/11/PythonWebSpider1/index.html">
 <meta property="og:site_name" content="个人博客">
-<meta property="og:description" content="维护模型接口代码的时候，发现在装饰器的函数内部和解析函数上面经常使用args, *kwargs,这两个参数。 这两个参数到底代表什么呢？">
+<meta property="og:description" content="为了更深入了解python和大数据、准备学习网络爬虫、参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-05T08:58:26.279Z">
+<meta property="og:updated_time" content="2019-09-11T07:22:02.918Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python进阶之：*args,**kwargs的使用">
-<meta name="twitter:description" content="维护模型接口代码的时候，发现在装饰器的函数内部和解析函数上面经常使用args, *kwargs,这两个参数。 这两个参数到底代表什么呢？">
+<meta name="twitter:title" content="Python网络爬虫入门">
+<meta name="twitter:description" content="为了更深入了解python和大数据、准备学习网络爬虫、参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://zxs94.github.io/2019/07/31/PythonAdvance1/">
+  <link rel="canonical" href="http://zxs94.github.io/2019/09/11/PythonWebSpider1/">
 
 
 
 
 
-  <title>Python进阶之：*args,**kwargs的使用 | 个人博客</title>
+  <title>Python网络爬虫入门 | 个人博客</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zxs94.github.io/2019/07/31/PythonAdvance1/">
+    <link itemprop="mainEntityOfPage" href="http://zxs94.github.io/2019/09/11/PythonWebSpider1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZXS">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Python进阶之：*args,**kwargs的使用</h1>
+          <h1 class="post-title" itemprop="name headline">Python网络爬虫入门</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-31T00:00:00+08:00">
-                2019-07-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-11T14:06:07+08:00">
+                2019-09-11
               </time>
             
 
@@ -352,25 +352,37 @@
       
 
       
-        <p>维护模型接口代码的时候，发现在装饰器的函数内部和解析函数上面经常使用<em>args, *</em>kwargs,这两个参数。</p>
-<p>这两个参数到底代表什么呢？</p>
+        <p>为了更深入了解python和大数据、准备学习网络爬虫、参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。</p>
 <a id="more"></a>
 
-<h2 id="1-args"><a href="#1-args" class="headerlink" title="1. *args"></a>1. *args</h2><p>这个参数主要表示一个系列的参数，元素名前面带 *并不是指代指针，而是表示指向一系列的参数。 </p>
-<p>例举：</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*list = <span class="string">'red'</span>, <span class="string">'blue'</span>,<span class="string">'green'</span></span><br></pre></td></tr></table></figure>
-
-<p>所以我们可以对函数传入一系列的参数，而只定义一个参数。这样做的好处就在于当函数参数个数未定的情况下，我们可以使用这种参数声明，给我们的编程带来便捷，特别是在参数确定不了的情况下。</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(*args)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i, item <span class="keyword">in</span> enumerate(args):</span><br><span class="line">        print(i, item)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"test:"</span>)</span><br><span class="line">test(<span class="string">'red'</span>, <span class="string">'blue'</span>, <span class="string">'green'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>向函数传递三个参数，输出结果：</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">test:</span><br><span class="line"><span class="number">0</span> red</span><br><span class="line"><span class="number">1</span> blue</span><br><span class="line"><span class="number">2</span> green</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-kwargs"><a href="#2-kwargs" class="headerlink" title="2. **kwargs"></a>2. **kwargs</h2><p>在python中这个主要用于传入一个字典类型的（key=parameter）一系列 </p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">testKey</span><span class="params">(**kwargs)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> key, parameter <span class="keyword">in</span> kwargs.items():</span><br><span class="line">        print(key, parameter)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"testKey:"</span>)</span><br><span class="line">test2(a=<span class="string">'1'</span>, b=<span class="string">'2'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>输出结果</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">testKey:</span><br><span class="line">a <span class="number">1</span> </span><br><span class="line">b <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p><strong>python环境的安装配置不再过多赘述</strong></p>
+<h3 id="请求库安装"><a href="#请求库安装" class="headerlink" title="请求库安装"></a>请求库安装</h3><h4 id="requests-的安装"><a href="#requests-的安装" class="headerlink" title="requests 的安装"></a>requests 的安装</h4><p> requests 属于第三方库，Python 默认不会自带这个库</p>
+<pre><code>pip install requests</code></pre><p><strong>相关链接</strong></p>
+<p>GitHub:<a href="https://github.com/requests/requests" target="_blank" rel="noopener">https://github.com/requests/requests</a><br>PyPi: <a href="https://pypi.python.org/pypi/requests" target="_blank" rel="noopener">https://pypi.python.org/pypi/requests</a><br>官方文档: <a href="http://www.python-requests.org" target="_blank" rel="noopener">http://www.python-requests.org</a><br>中文文档: <a href="http://docs.python-requests.org/zh_CN/latest" target="_blank" rel="noopener">http://docs.python-requests.org/zh_CN/latest</a></p>
+<h4 id="Selenium-的安装"><a href="#Selenium-的安装" class="headerlink" title="Selenium 的安装"></a>Selenium 的安装</h4><p>Selenium 是一个自动化测试工具，利用它我们可以驱动浏览器执行特定的动作，如点击、下拉等操作。</p>
+<pre><code>pip install selenium</code></pre><p><strong>相关链接</strong></p>
+<p>官方网站: <a href="http://www.seleniumhq.org" target="_blank" rel="noopener">http://www.seleniumhq.org</a><br>GitHub: <a href="https://github.com/SeleniumHQ/selenium/tree/master/py" target="_blank" rel="noopener">(https://github.com/SeleniumHQ/selenium/tree/master/py</a><br>PyPI: <a href="https://pypi.python.org/pypi/selenium" target="_blank" rel="noopener">https://pypi.python.org/pypi/selenium</a><br>官方文档: <a href="http://selenium-python.readthedocs.io" target="_blank" rel="noopener">http://selenium-python.readthedocs.io</a><br>中文文档: <a href="http://selenium-python-zh.readthedocs.io" target="_blank" rel="noopener">http://selenium-python-zh.readthedocs.io</a></p>
+<h4 id="ChromeDriver、GeckoDriver、PhantomJS-的安装"><a href="#ChromeDriver、GeckoDriver、PhantomJS-的安装" class="headerlink" title="ChromeDriver、GeckoDriver、PhantomJS 的安装"></a>ChromeDriver、GeckoDriver、PhantomJS 的安装</h4><p>前面我们成功安装好了 Selenium 库，但是它是一个自动化测试工具，需要浏览器来配合使用<br>ChromeDriver、GeckoDriver 分别是谷歌和火狐的驱动</p>
+<p>PhantomJS 是一个无界面的、可脚本编程的 WebKit 浏览器引擎，它原生支持多种 Web 标准：DOM 操作、CSS 选择器、JSON、Canvas 以及 SVG。<br>Selenium 支持 PhantomJS，这样在运行的时候就不会再弹出一个浏览器了。而且 PhantomJS 的运行效率也很高，还支持各种参数配置，使用非常方便。</p>
+<p>这三个插件的配置方式都类似，我才用最简单的方法，去官网下载驱动包将.exe文件拷贝到python目录下，因为我使用的是anaconda所以直接赋值到相应的环境目录下即可。</p>
+<h5 id="ChromeDriver"><a href="#ChromeDriver" class="headerlink" title="ChromeDriver"></a>ChromeDriver</h5><p>官方网站: <a href="https://sites.google.com/a/chromium.org/chromedriver" target="_blank" rel="noopener">https://sites.google.com/a/chromium.org/chromedriver</a><br>下载地址: <a href="https://chromedriver.storage.googleapis.com/index.html" target="_blank" rel="noopener">https://chromedriver.storage.googleapis.com/index.html</a><br>阿里镜像源: <a href="http://npm.taobao.org/mirrors/chromedriver/" target="_blank" rel="noopener">http://npm.taobao.org/mirrors/chromedriver/</a></p>
+<p>解压下载后的文件 拷贝 chromedriver.exe 到目录下  </p>
+<pre><code>chromedriver
+#控制台有版本信息之类的输出证明配置成功</code></pre><p>在python程序中测试  执行弹出浏览器即为成功<br>    <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line">browser = webdriver.Chrome()</span><br></pre></td></tr></table></figure></p>
+<h5 id="GeckoDriver"><a href="#GeckoDriver" class="headerlink" title="GeckoDriver"></a>GeckoDriver</h5><p>火狐的驱动暂时没有安装基本步骤类似谷歌  </p>
+<p>GitHub: <a href="https://github.com/mozilla/geckodriver" target="_blank" rel="noopener">https://github.com/mozilla/geckodriver</a><br>下载地址: <a href="https://github.com/mozilla/geckodriver/releases" target="_blank" rel="noopener">https://github.com/mozilla/geckodriver/releases</a></p>
+<h5 id="PhantomJS"><a href="#PhantomJS" class="headerlink" title="PhantomJS"></a>PhantomJS</h5><p>官方网站: <a href="http://phantomjs.org" target="_blank" rel="noopener">http://phantomjs.org</a><br>官方文档: <a href="ttp://phantomjs.org/quick-start.html" target="_blank" rel="noopener">http://phantomjs.org/quick-start.html</a><br>下载地址: <a href="http://phantomjs.org/download.html" target="_blank" rel="noopener">http://phantomjs.org/download.html</a><br>API接口说明: <a href="http://phantomjs.org/api/command-line.html" target="_blank" rel="noopener">http://phantomjs.org/api/command-line.html</a> </p>
+<p>命令验证  </p>
+<pre><code>phantomjs </code></pre><p>测试程序  没有弹出页面控制台输出百度网址<br>    <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line">browser = webdriver.PhantomJS()</span><br><span class="line">browser.get(<span class="string">'https://www.baidu.com'</span>)</span><br><span class="line">print(browser.current_url)</span><br></pre></td></tr></table></figure></p>
+<h5 id="aiohttp-的安装"><a href="#aiohttp-的安装" class="headerlink" title="aiohttp 的安装"></a>aiohttp 的安装</h5><p>requests 库是一个阻塞式 HTTP 请求库，当我们发出一个请求后，程序会一直等待服务器响应，直到得到响应后，程序才会进行下一步处理。</p>
+<p>aiohttp 就是这样一个提供异步 Web 服务的库，从 Python 3.5 版本开始，Python 中加入了 async/await 关键字，使得回调的写法更加直观和人性化。</p>
+<p><strong>相关链接</strong></p>
+<p>官方文档：<a href="http://aiohttp.readthedocs.io/en/stable" target="_blank" rel="noopener">http://aiohttp.readthedocs.io/en/stable</a><br>GitHub：<a href="https://github.com/aio-libs/aiohttp" target="_blank" rel="noopener">https://github.com/aio-libs/aiohttp</a><br>PyPI：<a href="https://pypi.python.org/pypi/aiohttp" target="_blank" rel="noopener">https://pypi.python.org/pypi/aiohttp</a></p>
+<p><strong>安装</strong>  </p>
+<p>官方还推荐安装如下两个库：一个是字符编码检测库 cchardet，另一个是加速 DNS 的解析库 aiodns。  </p>
+<pre><code>pip install aiohttp
+pip install cchardet aiodns
+​</code></pre>
       
     </div>
     
@@ -389,6 +401,8 @@
           
             <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
           
+            <a href="/tags/爬虫/" rel="tag"><i class="fa fa-tag"></i> 爬虫</a>
+          
         </div>
       
 
@@ -400,8 +414,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/31/uwsgi1/" rel="next" title="uWSGI入门">
-                <i class="fa fa-chevron-left"></i> uWSGI入门
+              <a href="/2019/09/05/hexo-config/" rel="next" title="hexo优化配置">
+                <i class="fa fa-chevron-left"></i> hexo优化配置
               </a>
             
           </div>
@@ -409,10 +423,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/08/SpringBootTransactional/" rel="prev" title="SpringBoot之事务踩坑">
-                SpringBoot之事务踩坑 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -546,7 +556,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-args"><span class="nav-number">1.</span> <span class="nav-text">1. *args</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-kwargs"><span class="nav-number">2.</span> <span class="nav-text">2. **kwargs</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#请求库安装"><span class="nav-number">1.</span> <span class="nav-text">请求库安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#requests-的安装"><span class="nav-number">1.1.</span> <span class="nav-text">requests 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Selenium-的安装"><span class="nav-number">1.2.</span> <span class="nav-text">Selenium 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ChromeDriver、GeckoDriver、PhantomJS-的安装"><span class="nav-number">1.3.</span> <span class="nav-text">ChromeDriver、GeckoDriver、PhantomJS 的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ChromeDriver"><span class="nav-number">1.3.1.</span> <span class="nav-text">ChromeDriver</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#GeckoDriver"><span class="nav-number">1.3.2.</span> <span class="nav-text">GeckoDriver</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PhantomJS"><span class="nav-number">1.3.3.</span> <span class="nav-text">PhantomJS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#aiohttp-的安装"><span class="nav-number">1.3.4.</span> <span class="nav-text">aiohttp 的安装</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
