@@ -88,7 +88,7 @@
 <meta property="og:description" content="今天生产上传文件的功能无法使用，定位问题，springboot项目日志输出IO异常，如下图  观察异常信息，明显是指在linux服务器下/tmp下的一个临时文件路径不可用。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://zxs94.github.io/2019/10/08/SpringBootUploadTmp/error.png">
-<meta property="og:updated_time" content="2019-10-08T08:11:42.226Z">
+<meta property="og:updated_time" content="2019-10-08T09:36:40.697Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot上传踩坑-linux临时文件">
 <meta name="twitter:description" content="今天生产上传文件的功能无法使用，定位问题，springboot项目日志输出IO异常，如下图  观察异常信息，明显是指在linux服务器下/tmp下的一个临时文件路径不可用。">
@@ -363,7 +363,7 @@
 <p>这个报错也是在十一国庆假期后发现的，在开发测试中因为经常重启所以可能这个问题没有暴露出来，引以为戒。</p>
 <p>重启项目只是治标不治本的方法，所以我们在启动类中指定临时文件的路径，这样我们在服务器上创建一个固定的位置就不用但是会被清理掉了。</p>
 <h4 id="springboot指定上传临时路径"><a href="#springboot指定上传临时路径" class="headerlink" title="springboot指定上传临时路径"></a>springboot指定上传临时路径</h4><p>在你的springboot项目的启动类中添加如下代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> MultipartConfigElement <span class="title">multipartConfigElement</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	MultipartConfigFactory factory = <span class="keyword">new</span> MultipartConfigFactory();</span><br><span class="line">	# 指定服务器上的固定路径</span><br><span class="line">	factory.setLocation(<span class="string">"/app/mms/upload"</span>);</span><br><span class="line">	<span class="keyword">return</span> factory.createMultipartConfig();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> MultipartConfigElement <span class="title">multipartConfigElement</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	MultipartConfigFactory factory = <span class="keyword">new</span> MultipartConfigFactory();</span><br><span class="line">	<span class="comment">// 指定服务器上的固定路径</span></span><br><span class="line">	factory.setLocation(<span class="string">"/app/mms/upload"</span>);</span><br><span class="line">	<span class="keyword">return</span> factory.createMultipartConfig();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>配置完成后就不用担心临时文件路径的问题了！</p>
 
