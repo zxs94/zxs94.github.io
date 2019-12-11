@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="python,urllib,requests,正则,">
+  <meta name="keywords" content="supervisor,">
 
 
 
@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="主要介绍 urllib、request 相关请求技术，异常捕获，正则表达。">
-<meta name="keywords" content="python,urllib,requests,正则">
+<meta name="description" content="简介Supervisor 是一个用 Python 写的进程管理工具，可以很方便的用来在 UNIX-like 系统（不支持 Windows）下启动、重启（自动重启程序）、关闭进程（不仅仅是 Python 进程）。">
+<meta name="keywords" content="supervisor">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python网络爬虫入门(二) 基础库的使用">
-<meta property="og:url" content="http://zxs94.github.io/2019/09/19/PythonWebSpider2/index.html">
+<meta property="og:title" content="Supervisor">
+<meta property="og:url" content="http://zxs94.github.io/2019/11/04/Supervisor/index.html">
 <meta property="og:site_name" content="个人博客">
-<meta property="og:description" content="主要介绍 urllib、request 相关请求技术，异常捕获，正则表达。">
+<meta property="og:description" content="简介Supervisor 是一个用 Python 写的进程管理工具，可以很方便的用来在 UNIX-like 系统（不支持 Windows）下启动、重启（自动重启程序）、关闭进程（不仅仅是 Python 进程）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-23T01:20:44.833Z">
+<meta property="og:image" content="http://zxs94.github.io/2019/11/04/Supervisor/supervisor-web.png">
+<meta property="og:updated_time" content="2019-11-13T06:05:46.611Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python网络爬虫入门(二) 基础库的使用">
-<meta name="twitter:description" content="主要介绍 urllib、request 相关请求技术，异常捕获，正则表达。">
+<meta name="twitter:title" content="Supervisor">
+<meta name="twitter:description" content="简介Supervisor 是一个用 Python 写的进程管理工具，可以很方便的用来在 UNIX-like 系统（不支持 Windows）下启动、重启（自动重启程序）、关闭进程（不仅仅是 Python 进程）。">
+<meta name="twitter:image" content="http://zxs94.github.io/2019/11/04/Supervisor/supervisor-web.png">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://zxs94.github.io/2019/09/19/PythonWebSpider2/">
+  <link rel="canonical" href="http://zxs94.github.io/2019/11/04/Supervisor/">
 
 
 
 
 
-  <title>Python网络爬虫入门(二) 基础库的使用 | 个人博客</title>
+  <title>Supervisor | 个人博客</title>
   
 
 
@@ -263,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zxs94.github.io/2019/09/19/PythonWebSpider2/">
+    <link itemprop="mainEntityOfPage" href="http://zxs94.github.io/2019/11/04/Supervisor/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZXS">
@@ -280,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Python网络爬虫入门(二) 基础库的使用</h1>
+          <h1 class="post-title" itemprop="name headline">Supervisor</h1>
         
 
         <div class="post-meta">
@@ -292,8 +294,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-19T14:39:37+08:00">
-                2019-09-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-04T14:25:32+08:00">
+                2019-11-04
               </time>
             
 
@@ -315,8 +317,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/supervisor/" itemprop="url" rel="index">
+                    <span itemprop="name">supervisor</span>
                   </a>
                 </span>
 
@@ -352,12 +354,31 @@
       
 
       
-        <p>主要介绍 urllib、request 相关请求技术，异常捕获，正则表达。</p>
-<a id="more"></a> 
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Supervisor 是一个用 Python 写的进程管理工具，可以很方便的用来在 UNIX-like 系统（不支持 Windows）下启动、重启（自动重启程序）、关闭进程（不仅仅是 Python 进程）。</p>
+<a id="more"></a>
 
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install supervisor</span><br></pre></td></tr></table></figure>
 
-<p>requests</p>
-<p>提示需要idna包，从pip官网下载2.7版本的(python3.6以下)</p>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>这里采用引入式 正则匹配目录下的其他配置 </p>
+<p>*<em>主配置文件supervisor.conf *</em> </p>
+<p>在include中引入其他配置 不需要配置[program]进程相关信息 并且把进程状态发布到9003端口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[supervisord]</span><br><span class="line">loglevel=debug</span><br><span class="line"></span><br><span class="line">[supervisorctl]</span><br><span class="line">serverurl = http://127.0.0.1:9003</span><br><span class="line">username = admin</span><br><span class="line">password = xxx</span><br><span class="line"></span><br><span class="line">[inet_http_server]</span><br><span class="line">port = :9003</span><br><span class="line">username = admin</span><br><span class="line">password = xxx</span><br><span class="line"></span><br><span class="line">[rpcinterface:supervisor]</span><br><span class="line">supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface</span><br><span class="line"></span><br><span class="line">[include]</span><br><span class="line">files = /app/supervisor-conf/*.conf</span><br></pre></td></tr></table></figure>
+
+<p><strong>进程配置</strong> </p>
+<p>只需要配置进程属性中的配置信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[program:mms]</span><br><span class="line">command=java -jar mms.jar</span><br><span class="line">directory = /app/mms</span><br><span class="line">startsecs=0</span><br><span class="line">stopwaitsecs=0</span><br><span class="line">autostart=true</span><br><span class="line">autorestart=false</span><br><span class="line">stdout_logfile=/app/mms/supervisor_log/supervisord.log</span><br><span class="line">stderr_logfile=/app/mms/supervisor_log/supervisord.err</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动指令"><a href="#启动指令" class="headerlink" title="启动指令"></a>启动指令</h3><p>启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">supervisord -c supervisor.conf</span><br></pre></td></tr></table></figure>
+
+<p>执行指令进入交互界面</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">supervisorctl -c supervisor.conf</span><br></pre></td></tr></table></figure>
+
+<p>supervisorctl命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">help # 查看帮助</span><br><span class="line">status # 查看程序状态</span><br><span class="line">stop program_name # 关闭 指定的程序</span><br><span class="line">start program_name # 启动 指定的程序</span><br><span class="line">restart program_name # 重启 指定的程序</span><br><span class="line">tail -f program_name # 查看 该程序的日志</span><br><span class="line">update # 重启配置文件修改过的程序（修改了配置，通过这个命令加载新的配置)</span><br><span class="line">reload # 重新加载并且重启supervisor</span><br></pre></td></tr></table></figure>
+
+<h3 id="web服务进行控制"><a href="#web服务进行控制" class="headerlink" title="web服务进行控制"></a>web服务进行控制</h3><p>登录监听的端口 使用配置好的用户名和密码可以查看到监控的进程的状态，可以进行启动、停止、重启操作并且可以实时查看进程输出日志。</p>
+<p><img src="/2019/11/04/Supervisor/supervisor-web.png" alt></p>
 
       
     </div>
@@ -375,13 +396,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
-          
-            <a href="/tags/urllib/" rel="tag"><i class="fa fa-tag"></i> urllib</a>
-          
-            <a href="/tags/requests/" rel="tag"><i class="fa fa-tag"></i> requests</a>
-          
-            <a href="/tags/正则/" rel="tag"><i class="fa fa-tag"></i> 正则</a>
+            <a href="/tags/supervisor/" rel="tag"><i class="fa fa-tag"></i> supervisor</a>
           
         </div>
       
@@ -394,8 +409,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/11/PythonWebSpider1/" rel="next" title="Python网络爬虫入门">
-                <i class="fa fa-chevron-left"></i> Python网络爬虫入门
+              <a href="/2019/10/08/SpringBootUploadTmp/" rel="next" title="SpringBoot上传踩坑-linux临时文件">
+                <i class="fa fa-chevron-left"></i> SpringBoot上传踩坑-linux临时文件
               </a>
             
           </div>
@@ -403,10 +418,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/10/08/SpringBootUploadTmp/" rel="prev" title="SpringBoot上传踩坑-linux临时文件">
-                SpringBoot上传踩坑-linux临时文件 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -458,8 +469,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -521,6 +541,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件"><span class="nav-number">3.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动指令"><span class="nav-number">4.</span> <span class="nav-text">启动指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web服务进行控制"><span class="nav-number">5.</span> <span class="nav-text">web服务进行控制</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
