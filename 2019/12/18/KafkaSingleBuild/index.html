@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="个人博客">
 <meta property="og:description" content="Kafka介绍Kafka是LinkedIn开源的分布式发布-订阅消息系统，目前归属于Apache顶级项目。Kafka主要特点是基于Pull的模式来处理消息消费，追求高吞吐量，一开始的目的就是用于日志收集和传输。不支持事务，对消息的重复、丢失、错误没有严格要求，适合产生大量数据的互联网服务的数据收集业务。 单节点卡夫卡搭建1.Zookeeper因为kafka使用zk作为注册中心、所以我们需要先在服务">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-18T09:45:24.930Z">
+<meta property="og:updated_time" content="2019-12-24T06:33:37.008Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kafka单节点搭建">
 <meta name="twitter:description" content="Kafka介绍Kafka是LinkedIn开源的分布式发布-订阅消息系统，目前归属于Apache顶级项目。Kafka主要特点是基于Pull的模式来处理消息消费，追求高吞吐量，一开始的目的就是用于日志收集和传输。不支持事务，对消息的重复、丢失、错误没有严格要求，适合产生大量数据的互联网服务的数据收集业务。 单节点卡夫卡搭建1.Zookeeper因为kafka使用zk作为注册中心、所以我们需要先在服务">
@@ -363,7 +363,11 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./zkServer.sh start</span><br></pre></td></tr></table></figure>
 
 <p>zookeeper.out 查看启动信息</p>
-<h3 id="2-Kafka"><a href="#2-Kafka" class="headerlink" title="2. Kafka"></a>2. Kafka</h3>
+<h3 id="2-Kafka"><a href="#2-Kafka" class="headerlink" title="2. Kafka"></a>2. Kafka</h3><p>解压kafka  </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf kafka_2.12-2.1.0.tgz</span><br></pre></td></tr></table></figure>
+
+<p>相关指令  </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">1.zookeeper启动</span><br><span class="line"><span class="built_in">cd</span> zookeeper-3.4.13/bin</span><br><span class="line">./zkServer.sh start</span><br><span class="line"></span><br><span class="line">2.kafka启动</span><br><span class="line"><span class="comment"># 修改配置 listeners=PLAINTEXT://localhost:9092 最好修改成服务器ip</span></span><br><span class="line">./bin/kafka-server-start.sh -daemon ./config/server.properties </span><br><span class="line"></span><br><span class="line">3.kafka创建topic</span><br><span class="line">bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line">4.kafka查询topic</span><br><span class="line">bin/kafka-topics.sh --list --zookeeper localhost:2181</span><br><span class="line"></span><br><span class="line">5.kafka删除topic</span><br><span class="line">bin/kafka-topics.sh --delete --zookeeper localhost:2181 --topic <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line">6.发送消息</span><br><span class="line">bin/kafka-console-producer.sh --broker-list localhost:9092 --topic <span class="built_in">test</span> </span><br><span class="line"></span><br><span class="line">7.消费消息</span><br><span class="line">bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic <span class="built_in">test</span> --from-beginning</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -403,8 +407,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/12/18/SpringBoot-Kafka/" rel="prev" title="SpringBoot-Kafka">
-                SpringBoot-Kafka <i class="fa fa-chevron-right"></i>
+              <a href="/2019/12/18/SpringBoot-Kafka/" rel="prev" title="SpringBoot集成kafka实现生产消费">
+                SpringBoot集成kafka实现生产消费 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -484,7 +488,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -495,7 +499,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -506,7 +510,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

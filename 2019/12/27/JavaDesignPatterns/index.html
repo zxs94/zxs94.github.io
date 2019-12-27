@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="python,">
+  <meta name="keywords" content="设计模式,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="维护模型接口代码的时候，发现在装饰器的函数内部和解析函数上面经常使用args, *kwargs,这两个参数。 这两个参数到底代表什么呢？">
-<meta name="keywords" content="python">
+<meta name="description" content="设计模式的分类创建型模式(5种)：工厂方法模式、抽象工厂模式、单例模式、建造者模式、原型模式。结构型模式(7种)：适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模式、享元模式。行为型模式(11种)：策略模式、模板方法模式、观察者模式、迭代子模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介模式、解释器模式。另外两类：并发型模式、线程池模式。">
+<meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python进阶之：*args,**kwargs的使用">
-<meta property="og:url" content="http://zxs94.github.io/2019/07/31/PythonAdvance1/index.html">
+<meta property="og:title" content="Java设计模式">
+<meta property="og:url" content="http://zxs94.github.io/2019/12/27/JavaDesignPatterns/index.html">
 <meta property="og:site_name" content="个人博客">
-<meta property="og:description" content="维护模型接口代码的时候，发现在装饰器的函数内部和解析函数上面经常使用args, *kwargs,这两个参数。 这两个参数到底代表什么呢？">
+<meta property="og:description" content="设计模式的分类创建型模式(5种)：工厂方法模式、抽象工厂模式、单例模式、建造者模式、原型模式。结构型模式(7种)：适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模式、享元模式。行为型模式(11种)：策略模式、模板方法模式、观察者模式、迭代子模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介模式、解释器模式。另外两类：并发型模式、线程池模式。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-05T08:58:26.279Z">
+<meta property="og:updated_time" content="2019-12-27T05:53:52.382Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python进阶之：*args,**kwargs的使用">
-<meta name="twitter:description" content="维护模型接口代码的时候，发现在装饰器的函数内部和解析函数上面经常使用args, *kwargs,这两个参数。 这两个参数到底代表什么呢？">
+<meta name="twitter:title" content="Java设计模式">
+<meta name="twitter:description" content="设计模式的分类创建型模式(5种)：工厂方法模式、抽象工厂模式、单例模式、建造者模式、原型模式。结构型模式(7种)：适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模式、享元模式。行为型模式(11种)：策略模式、模板方法模式、观察者模式、迭代子模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介模式、解释器模式。另外两类：并发型模式、线程池模式。">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://zxs94.github.io/2019/07/31/PythonAdvance1/">
+  <link rel="canonical" href="http://zxs94.github.io/2019/12/27/JavaDesignPatterns/">
 
 
 
 
 
-  <title>Python进阶之：*args,**kwargs的使用 | 个人博客</title>
+  <title>Java设计模式 | 个人博客</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zxs94.github.io/2019/07/31/PythonAdvance1/">
+    <link itemprop="mainEntityOfPage" href="http://zxs94.github.io/2019/12/27/JavaDesignPatterns/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZXS">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Python进阶之：*args,**kwargs的使用</h1>
+          <h1 class="post-title" itemprop="name headline">Java设计模式</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-31T00:00:00+08:00">
-                2019-07-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-27T13:49:51+08:00">
+                2019-12-27
               </time>
             
 
@@ -315,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
                   </a>
                 </span>
 
@@ -352,25 +352,15 @@
       
 
       
-        <p>维护模型接口代码的时候，发现在装饰器的函数内部和解析函数上面经常使用<em>args, *</em>kwargs,这两个参数。</p>
-<p>这两个参数到底代表什么呢？</p>
+        <h3 id="设计模式的分类"><a href="#设计模式的分类" class="headerlink" title="设计模式的分类"></a>设计模式的分类</h3><p>创建型模式(5种)：工厂方法模式、抽象工厂模式、单例模式、建造者模式、原型模式。<br>结构型模式(7种)：适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模式、享元模式。<br>行为型模式(11种)：策略模式、模板方法模式、观察者模式、迭代子模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介模式、解释器模式。<br>另外两类：并发型模式、线程池模式。</p>
 <a id="more"></a>
 
-<h2 id="1-args"><a href="#1-args" class="headerlink" title="1. *args"></a>1. *args</h2><p>这个参数主要表示一个系列的参数，元素名前面带 *并不是指代指针，而是表示指向一系列的参数。 </p>
-<p>例举：</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*list = <span class="string">'red'</span>, <span class="string">'blue'</span>,<span class="string">'green'</span></span><br></pre></td></tr></table></figure>
+<h3 id="设计模式六大原则"><a href="#设计模式六大原则" class="headerlink" title="设计模式六大原则"></a>设计模式六大原则</h3><p><strong>1.开闭原则(Open Close Principle)</strong><br>开闭原则就是说<strong>对扩展开放，对修改关闭</strong>。在程序需要进程拓展的时候不能去修改原有的代码，实现一个热插拔的效果。所以一句话的概括就是：为了使程序的扩展性好、易于维护和升级。想要达到这样的效果要使用接口和抽象类。</p>
+<p><strong>2.里氏代换原则(Liskov Substitution Principle)</strong><br>里氏代换原则（LSP）面向对象设计的基本原则之一。里氏代换原则中说，任何鸡肋可以出现的地方，子类一定可以出现。LSP是继承复用的基石，只有当衍生类可以替换掉基类，软件单位的功能不受影响时，基类才能真正被复用，而衍生类也能够在基类的基础上增加新的行为。里氏代换原则是对“开-闭”原则的补充。实现“开-闭”原则的关键步骤就是抽象化。而基类与子类的继承关系就是抽象化的具体实现，所以里氏代换原则是对实现抽象化的具体步骤的规范。  </p>
+<p><strong>3.依赖倒转原则(Dependence Inversion Principle)</strong><br>开闭原则的基础，针对接口编程依赖于抽象不依赖于具体。    </p>
+<p><strong>4.接口隔离原则(Interface Segregation Principle)</strong><br>这个原则的意思是：使用多个隔离的接口，比使用单个接口要好。还是一个降低之间耦合度的意思，从这里可以看出设计模型就是软件的设计思想，从大型软件架构出发，为了升级和维护方便。<br><strong>5.迪米特法则(最少知道原则)(Demeter Principle)</strong><br>为什么叫做最少知道原则：一个实体应当少量的与其他实体之间发生相互作用，使得系统功能模块相对独立。<br><strong>6.合成复用原则(Composite Reuse Principle)</strong><br>原则是尽量使用合成/聚合的方式，而不是使用继承。</p>
+<h3 id="详解23种设计模式"><a href="#详解23种设计模式" class="headerlink" title="详解23种设计模式"></a>详解23种设计模式</h3><h4 id="工厂方法模式-Factory-Method"><a href="#工厂方法模式-Factory-Method" class="headerlink" title="工厂方法模式(Factory Method)"></a>工厂方法模式(Factory Method)</h4><h5 id="普通工厂模式"><a href="#普通工厂模式" class="headerlink" title="普通工厂模式"></a>普通工厂模式</h5><p>创建一个工厂类，对实现了同一个接口的类进行实例的创建。  </p>
 
-<p>所以我们可以对函数传入一系列的参数，而只定义一个参数。这样做的好处就在于当函数参数个数未定的情况下，我们可以使用这种参数声明，给我们的编程带来便捷，特别是在参数确定不了的情况下。</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(*args)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i, item <span class="keyword">in</span> enumerate(args):</span><br><span class="line">        print(i, item)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"test:"</span>)</span><br><span class="line">test(<span class="string">'red'</span>, <span class="string">'blue'</span>, <span class="string">'green'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>向函数传递三个参数，输出结果：</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">test:</span><br><span class="line"><span class="number">0</span> red</span><br><span class="line"><span class="number">1</span> blue</span><br><span class="line"><span class="number">2</span> green</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-kwargs"><a href="#2-kwargs" class="headerlink" title="2. **kwargs"></a>2. **kwargs</h2><p>在python中这个主要用于传入一个字典类型的（key=parameter）一系列 </p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">testKey</span><span class="params">(**kwargs)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> key, parameter <span class="keyword">in</span> kwargs.items():</span><br><span class="line">        print(key, parameter)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"testKey:"</span>)</span><br><span class="line">test2(a=<span class="string">'1'</span>, b=<span class="string">'2'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>输出结果</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">testKey:</span><br><span class="line">a <span class="number">1</span> </span><br><span class="line">b <span class="number">2</span></span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -387,7 +377,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+            <a href="/tags/设计模式/" rel="tag"><i class="fa fa-tag"></i> 设计模式</a>
           
         </div>
       
@@ -400,8 +390,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/31/uwsgi1/" rel="next" title="uWSGI入门">
-                <i class="fa fa-chevron-left"></i> uWSGI入门
+              <a href="/2019/12/24/SpringBoot-ODPS/" rel="next" title="SpringBoot集成ODPS">
+                <i class="fa fa-chevron-left"></i> SpringBoot集成ODPS
               </a>
             
           </div>
@@ -409,10 +399,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/08/SpringBootTransactional/" rel="prev" title="SpringBoot之事务踩坑">
-                SpringBoot之事务踩坑 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -546,7 +532,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-args"><span class="nav-number">1.</span> <span class="nav-text">1. *args</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-kwargs"><span class="nav-number">2.</span> <span class="nav-text">2. **kwargs</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#设计模式的分类"><span class="nav-number">1.</span> <span class="nav-text">设计模式的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计模式六大原则"><span class="nav-number">2.</span> <span class="nav-text">设计模式六大原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#详解23种设计模式"><span class="nav-number">3.</span> <span class="nav-text">详解23种设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#工厂方法模式-Factory-Method"><span class="nav-number">3.1.</span> <span class="nav-text">工厂方法模式(Factory Method)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#普通工厂模式"><span class="nav-number">3.1.1.</span> <span class="nav-text">普通工厂模式</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

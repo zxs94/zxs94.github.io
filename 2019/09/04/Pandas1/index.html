@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="个人博客">
 <meta property="og:description" content="Pandas: 强大的Python数据分析工具包Pandas是一个开源的，BSD许可的库，为Python编程语言提供高性能，易于使用的数据结构和数据分析工具。 官方api地址：地址 导入方式 1import pandas as pd">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-05T09:18:24.133Z">
+<meta property="og:updated_time" content="2019-12-24T07:01:47.588Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pandas使用经验(一)">
 <meta name="twitter:description" content="Pandas: 强大的Python数据分析工具包Pandas是一个开源的，BSD许可的库，为Python编程语言提供高性能，易于使用的数据结构和数据分析工具。 官方api地址：地址 导入方式 1import pandas as pd">
@@ -359,7 +359,9 @@
 
 <h4 id="1-pandas读取mysql查询结果"><a href="#1-pandas读取mysql查询结果" class="headerlink" title="1.pandas读取mysql查询结果"></a>1.pandas读取mysql查询结果</h4><p>参数：sql语句 数据库连接<br>pd.read_sql(sql,connection_obj)  </p>
 <p>例：<br>使用pymsql创建一个连接并查询  </p>
-<pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sql = <span class="string">'select * from xxx'</span></span><br><span class="line">connection = pymysql.connect(</span><br><span class="line">	host=<span class="string">'10.10.10.10'</span>,</span><br><span class="line">	port=<span class="number">3306</span>,</span><br><span class="line">	user=<span class="string">'root'</span>,</span><br><span class="line">	password=<span class="string">'123'</span>,</span><br><span class="line">	database=<span class="string">'xxx'</span>,</span><br><span class="line">	charset=<span class="string">'utf8'</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">df = pd.read_sql(sql,connection)</span><br></pre></td></tr></table></figure></code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sql = <span class="string">'select * from xxx'</span></span><br><span class="line">connection = pymysql.connect(</span><br><span class="line">	host=<span class="string">'10.10.10.10'</span>,</span><br><span class="line">	port=<span class="number">3306</span>,</span><br><span class="line">	user=<span class="string">'root'</span>,</span><br><span class="line">	password=<span class="string">'123'</span>,</span><br><span class="line">	database=<span class="string">'xxx'</span>,</span><br><span class="line">	charset=<span class="string">'utf8'</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">df = pd.read_sql(sql,connection)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-pandas将dataframe数据写入数据库"><a href="#2-pandas将dataframe数据写入数据库" class="headerlink" title="2.pandas将dataframe数据写入数据库"></a>2.pandas将dataframe数据写入数据库</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> create_engine</span><br><span class="line">e = create_engine(<span class="string">'mysql+pymysql://root:root@localhost:3306/question?charset=utf8'</span>)</span><br><span class="line"></span><br><span class="line">df.to_sql(<span class="string">'table_name'</span>, con=e, if_exists=<span class="string">'append'</span>,index=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -482,7 +484,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -493,7 +495,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -504,7 +506,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -537,7 +539,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pandas-强大的Python数据分析工具包"><span class="nav-number">1.</span> <span class="nav-text">Pandas: 强大的Python数据分析工具包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-pandas读取mysql查询结果"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.pandas读取mysql查询结果</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pandas-强大的Python数据分析工具包"><span class="nav-number">1.</span> <span class="nav-text">Pandas: 强大的Python数据分析工具包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-pandas读取mysql查询结果"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.pandas读取mysql查询结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-pandas将dataframe数据写入数据库"><span class="nav-number">1.0.2.</span> <span class="nav-text">2.pandas将dataframe数据写入数据库</span></a></li></ol></li></ol></div>
             
 
           </div>
