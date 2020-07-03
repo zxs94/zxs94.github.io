@@ -83,19 +83,19 @@
 <meta name="keywords" content="kafka">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot集成kafka实现生产消费">
-<meta property="og:url" content="https://gitee.com/zxs94/2019/12/18/SpringBoot-Kafka/index.html">
+<meta property="og:url" content="https://gitee.com/zxs94/blog/2019/12/18/SpringBoot-Kafka/index.html">
 <meta property="og:site_name" content="个人博客">
 <meta property="og:description" content="场景对接方需要使用kafka作为消息中间件来交互数据，需要提供一个消费接口消费对方柜面系统前端实时更新的数据，结合我们平台本身的批处理定时任务，模型跑完数据需要生产到另一个主题供对接方消费。 依赖引入pom.xml 引入依赖 注意kafka版本">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://gitee.com/blog/zxs94/2019/12/18/SpringBoot-Kafka/pom-import.png">
-<meta property="og:image" content="https://gitee.com/blog/zxs94/2019/12/18/SpringBoot-Kafka/settings.png">
-<meta property="og:image" content="https://gitee.com/blog/zxs94/2019/12/18/SpringBoot-Kafka/consumer.png">
-<meta property="og:image" content="https://gitee.com/blog/zxs94/2019/12/18/SpringBoot-Kafka/producer.png">
+<meta property="og:image" content="https://gitee.com/blog/zxs94/blog/2019/12/18/SpringBoot-Kafka/pom-import.png">
+<meta property="og:image" content="https://gitee.com/blog/zxs94/blog/2019/12/18/SpringBoot-Kafka/settings.png">
+<meta property="og:image" content="https://gitee.com/blog/zxs94/blog/2019/12/18/SpringBoot-Kafka/consumer.png">
+<meta property="og:image" content="https://gitee.com/blog/zxs94/blog/2019/12/18/SpringBoot-Kafka/producer.png">
 <meta property="og:updated_time" content="2019-12-24T07:13:06.911Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot集成kafka实现生产消费">
 <meta name="twitter:description" content="场景对接方需要使用kafka作为消息中间件来交互数据，需要提供一个消费接口消费对方柜面系统前端实时更新的数据，结合我们平台本身的批处理定时任务，模型跑完数据需要生产到另一个主题供对接方消费。 依赖引入pom.xml 引入依赖 注意kafka版本">
-<meta name="twitter:image" content="https://gitee.com/blog/zxs94/2019/12/18/SpringBoot-Kafka/pom-import.png">
+<meta name="twitter:image" content="https://gitee.com/blog/zxs94/blog/2019/12/18/SpringBoot-Kafka/pom-import.png">
 
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="https://gitee.com/zxs94/2019/12/18/SpringBoot-Kafka/">
+  <link rel="canonical" href="https://gitee.com/zxs94/blog/2019/12/18/SpringBoot-Kafka/">
 
 
 
@@ -268,7 +268,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gitee.com/zxs94/blog/2019/12/18/SpringBoot-Kafka/">
+    <link itemprop="mainEntityOfPage" href="https://gitee.com/zxs94/blog/blog/2019/12/18/SpringBoot-Kafka/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZXS">
@@ -359,10 +359,10 @@
       
         <h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>对接方需要使用kafka作为消息中间件来交互数据，需要提供一个消费接口消费对方柜面系统前端实时更新的数据，结合我们平台本身的批处理定时任务，模型跑完数据需要生产到另一个主题供对接方消费。</p>
 <h3 id="依赖引入"><a href="#依赖引入" class="headerlink" title="依赖引入"></a>依赖引入</h3><p>pom.xml 引入依赖 注意kafka版本</p>
-<p><img src="/blog/zxs94/2019/12/18/SpringBoot-Kafka/pom-import.png" alt="引入依赖"></p>
+<p><img src="/blog/zxs94/blog/2019/12/18/SpringBoot-Kafka/pom-import.png" alt="引入依赖"></p>
 <a id="more"></a>
 <p>springboot配置文件里加入kafka配置</p>
-<p><img src="/blog/zxs94/2019/12/18/SpringBoot-Kafka/settings.png" alt="配置文件"></p>
+<p><img src="/blog/zxs94/blog/2019/12/18/SpringBoot-Kafka/settings.png" alt="配置文件"></p>
 <p>注意如果关闭自动提交需要如图listener中配置 否则在使用Acknowledgment自动提交时会报参数异常，但是在低版本的kafka没有这个问题。</p>
 <p>一些kafka配置 仅供参考</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#kafka配置信息</span></span><br><span class="line"><span class="attr">kafka:</span></span><br><span class="line"><span class="attr">  producer:</span></span><br><span class="line"><span class="attr">        bootstrap-servers:</span><span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span><span class="string">:9092</span></span><br><span class="line"><span class="attr">        batch-size:</span> <span class="number">16785</span>                                   <span class="comment">#一次最多发送数据量</span></span><br><span class="line"><span class="attr">        retries:</span> <span class="number">1</span>                                          <span class="comment">#发送失败后的重复发送次数</span></span><br><span class="line"><span class="attr">        buffer-memory:</span> <span class="number">33554432</span>                             <span class="comment">#32M批处理缓冲区</span></span><br><span class="line"><span class="attr">        linger:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">  consumer:</span></span><br><span class="line"><span class="attr">    group-id:</span> <span class="string">mms_test</span></span><br><span class="line"><span class="attr">    bootstrap-servers:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span><span class="string">:9092</span></span><br><span class="line"><span class="attr">    auto-offset-reset:</span> <span class="string">latest</span>                           <span class="comment">#最早未被消费的offset earliest</span></span><br><span class="line"><span class="attr">    enable-auto-commit:</span> <span class="literal">false</span>                           <span class="comment">#是否开启自动提交</span></span><br><span class="line"><span class="attr">        max-poll-records:</span> <span class="number">3100</span>                              <span class="comment">#批量消费一次最大拉取的数据量</span></span><br><span class="line"><span class="attr">        auto-commit-interval:</span> <span class="number">1000</span>                          <span class="comment">#自动提交的间隔时间</span></span><br><span class="line"><span class="attr">        session-timeout:</span> <span class="number">20000</span>                              <span class="comment">#连接超时时间</span></span><br><span class="line"><span class="attr">        max-poll-interval:</span> <span class="number">15000</span>                            <span class="comment">#手动提交设置与poll的心跳数,如果消息队列中没有消息，等待毫秒后，调用poll()方法。如果队列中有消息，立即消费消息，每次消费的消息的多少可以通过max.poll.records配置。</span></span><br><span class="line"><span class="attr">        max-partition-fetch-bytes:</span> <span class="number">15728640</span>                 <span class="comment">#设置拉取数据的大小,15M</span></span><br><span class="line"><span class="attr">  listener:</span></span><br><span class="line"><span class="attr">    ack-mode:</span> <span class="string">manual</span> <span class="comment"># 配置参数 手动提交偏移量</span></span><br><span class="line"><span class="attr">    batch-listener:</span> <span class="literal">true</span>                                <span class="comment">#是否开启批量消费，true表示批量消费</span></span><br><span class="line"><span class="attr">    concurrency:</span> <span class="number">5</span>                                      <span class="comment">#设置消费的线程数</span></span><br><span class="line"><span class="attr">    poll-timeout:</span> <span class="number">1500</span></span><br></pre></td></tr></table></figure>
@@ -370,10 +370,10 @@
 <h3 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h3><p>核心注解  </p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@KafkaListener</span>(topics= &#123;<span class="string">"$&#123;kafka-consumer-topic&#125;"</span>&#125;)</span><br><span class="line">#topics 注入约定的主题名称</span><br></pre></td></tr></table></figure>
 
-<p><img src="/blog/zxs94/2019/12/18/SpringBoot-Kafka/consumer.png" alt="消费者"></p>
+<p><img src="/blog/zxs94/blog/2019/12/18/SpringBoot-Kafka/consumer.png" alt="消费者"></p>
 <h3 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h3><p>实现方式 </p>
 <p>注入kafkaTemplate</p>
-<p><img src="/blog/zxs94/2019/12/18/SpringBoot-Kafka/producer.png" alt="生产者"></p>
+<p><img src="/blog/zxs94/blog/2019/12/18/SpringBoot-Kafka/producer.png" alt="生产者"></p>
 
       
     </div>
