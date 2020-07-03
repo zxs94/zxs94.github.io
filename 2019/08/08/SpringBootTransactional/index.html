@@ -83,19 +83,19 @@
 <meta name="keywords" content="事务">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot之事务踩坑">
-<meta property="og:url" content="http://zxs94.gitee.io/blog/2019/08/08/SpringBootTransactional/index.html">
+<meta property="og:url" content="http://zxs94.gitee.io/2019/08/08/SpringBootTransactional/index.html">
 <meta property="og:site_name" content="个人博客">
 <meta property="og:description" content="在项目多使用了多数据源(因为可能会有odps等多数据源的查询需求)，并且是手动配置数据源的方式，在配置了一段时间后使用数据源和切换都没有问题，但是在开发业务的时候发现在一个插入操作里，分别要向4张数据表中记录数据，最后请求服务，通过服务的响应来决定数据是否回滚，因为没有异常操作，所以我使用手动回滚的方式在if判断里回滚数据，结果尴尬的发现事务不好用了。。。！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://zxs94.gitee.io/blog/blog/2019/08/08/SpringBootTransactional/transactionInfo.png">
-<meta property="og:image" content="http://zxs94.gitee.io/blog/blog/2019/08/08/SpringBootTransactional/txManager1.png">
-<meta property="og:image" content="http://zxs94.gitee.io/blog/blog/2019/08/08/SpringBootTransactional/datasource.png">
-<meta property="og:image" content="http://zxs94.gitee.io/blog/blog/2019/08/08/SpringBootTransactional/txManager2.png">
+<meta property="og:image" content="http://zxs94.gitee.io/blog/2019/08/08/SpringBootTransactional/transactionInfo.png">
+<meta property="og:image" content="http://zxs94.gitee.io/blog/2019/08/08/SpringBootTransactional/txManager1.png">
+<meta property="og:image" content="http://zxs94.gitee.io/blog/2019/08/08/SpringBootTransactional/datasource.png">
+<meta property="og:image" content="http://zxs94.gitee.io/blog/2019/08/08/SpringBootTransactional/txManager2.png">
 <meta property="og:updated_time" content="2019-09-05T08:56:36.669Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot之事务踩坑">
 <meta name="twitter:description" content="在项目多使用了多数据源(因为可能会有odps等多数据源的查询需求)，并且是手动配置数据源的方式，在配置了一段时间后使用数据源和切换都没有问题，但是在开发业务的时候发现在一个插入操作里，分别要向4张数据表中记录数据，最后请求服务，通过服务的响应来决定数据是否回滚，因为没有异常操作，所以我使用手动回滚的方式在if判断里回滚数据，结果尴尬的发现事务不好用了。。。！">
-<meta name="twitter:image" content="http://zxs94.gitee.io/blog/blog/2019/08/08/SpringBootTransactional/transactionInfo.png">
+<meta name="twitter:image" content="http://zxs94.gitee.io/blog/2019/08/08/SpringBootTransactional/transactionInfo.png">
 
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="http://zxs94.gitee.io/blog/2019/08/08/SpringBootTransactional/">
+  <link rel="canonical" href="http://zxs94.gitee.io/2019/08/08/SpringBootTransactional/">
 
 
 
@@ -268,7 +268,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zxs94.gitee.io/blog/blog/2019/08/08/SpringBootTransactional/">
+    <link itemprop="mainEntityOfPage" href="http://zxs94.gitee.io/blog/2019/08/08/SpringBootTransactional/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZXS">
@@ -367,12 +367,12 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();</span><br></pre></td></tr></table></figure>
 
 <p>4.数据库需要支持事务、比如用的是mysql就必须使用innoDB的引擎，否则不支持事务。</p>
-<h2 id="问题跟踪"><a href="#问题跟踪" class="headerlink" title="问题跟踪"></a>问题跟踪</h2><p>在确定自己没有犯以上的错误后，事务还是无法回滚。。。最后决定开始debug跟一下源码发现，在拿到数据连接对象执行回滚之前要判断transactionInfo这个对象是否为空，结果发现，虽然事务管理器是开启了，但是数据库连接的事务对象是null..<br><img src="/blog/blog/2019/08/08/SpringBootTransactional/transactionInfo.png" alt></p>
+<h2 id="问题跟踪"><a href="#问题跟踪" class="headerlink" title="问题跟踪"></a>问题跟踪</h2><p>在确定自己没有犯以上的错误后，事务还是无法回滚。。。最后决定开始debug跟一下源码发现，在拿到数据连接对象执行回滚之前要判断transactionInfo这个对象是否为空，结果发现，虽然事务管理器是开启了，但是数据库连接的事务对象是null..<br><img src="/blog/2019/08/08/SpringBootTransactional/transactionInfo.png" alt></p>
 <p>也就是说，在数据源初始化配置的时候开启的事务管理器和项目中使用的数据源连接根本就没有绑定上</p>
-<p>再看一下我多数据源在实例化事务管理器的代码：<br><img src="/blog/blog/2019/08/08/SpringBootTransactional/txManager1.png" alt><br>这里的test1DataSoource是我在实例化动态数据源配置对象的时候的默认数据源、也就是主数据源。</p>
-<p>实例化动态数据源对象配置：<br><img src="/blog/blog/2019/08/08/SpringBootTransactional/datasource.png" alt></p>
+<p>再看一下我多数据源在实例化事务管理器的代码：<br><img src="/blog/2019/08/08/SpringBootTransactional/txManager1.png" alt><br>这里的test1DataSoource是我在实例化动态数据源配置对象的时候的默认数据源、也就是主数据源。</p>
+<p>实例化动态数据源对象配置：<br><img src="/blog/2019/08/08/SpringBootTransactional/datasource.png" alt></p>
 <p>问题找到了，问题就出现在我在事务管理器初始化时用的数据源不是我配置的动态数据源的DataSource对象dynamicDataSource，而是test1DataSource。。。</p>
-<p><img src="/blog/blog/2019/08/08/SpringBootTransactional/txManager2.png" alt><br>将实例化事务管理器的声明参数修改成dynamicDataSource、试验回滚方法成功！</p>
+<p><img src="/blog/2019/08/08/SpringBootTransactional/txManager2.png" alt><br>将实例化事务管理器的声明参数修改成dynamicDataSource、试验回滚方法成功！</p>
 
       
     </div>
@@ -403,8 +403,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2019/07/31/uwsgi1/" rel="next" title="uWSGI入门">
-                <i class="fa fa-chevron-left"></i> uWSGI入门
+              <a href="/blog/2019/07/31/PythonAdvance1/" rel="next" title="Python进阶之：*args,**kwargs的使用">
+                <i class="fa fa-chevron-left"></i> Python进阶之：*args,**kwargs的使用
               </a>
             
           </div>
