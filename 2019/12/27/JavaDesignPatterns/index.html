@@ -83,18 +83,18 @@
 <meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java设计模式">
-<meta property="og:url" content="https://gitee.com/zxs94/blog/2019/12/27/JavaDesignPatterns/index.html">
+<meta property="og:url" content="http://zxs94.gitee.io/blog/2019/12/27/JavaDesignPatterns/index.html">
 <meta property="og:site_name" content="个人博客">
 <meta property="og:description" content="设计模式的分类创建型模式(5种)：工厂方法模式、抽象工厂模式、单例模式、建造者模式、原型模式。结构型模式(7种)：适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模式、享元模式。行为型模式(11种)：策略模式、模板方法模式、观察者模式、迭代子模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介模式、解释器模式。另外两类：并发型模式、线程池模式。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://gitee.com/blog/zxs94/blog/2019/12/27/JavaDesignPatterns/1.1.png">
-<meta property="og:image" content="https://gitee.com/blog/zxs94/blog/2019/12/27/JavaDesignPatterns/1.2.jpg">
-<meta property="og:image" content="https://gitee.com/blog/zxs94/blog/2019/12/27/JavaDesignPatterns/2.jpg">
+<meta property="og:image" content="http://zxs94.gitee.io/blog/blog/2019/12/27/JavaDesignPatterns/1.1.png">
+<meta property="og:image" content="http://zxs94.gitee.io/blog/blog/2019/12/27/JavaDesignPatterns/1.2.jpg">
+<meta property="og:image" content="http://zxs94.gitee.io/blog/blog/2019/12/27/JavaDesignPatterns/2.jpg">
 <meta property="og:updated_time" content="2019-12-27T07:10:09.286Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java设计模式">
 <meta name="twitter:description" content="设计模式的分类创建型模式(5种)：工厂方法模式、抽象工厂模式、单例模式、建造者模式、原型模式。结构型模式(7种)：适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模式、享元模式。行为型模式(11种)：策略模式、模板方法模式、观察者模式、迭代子模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介模式、解释器模式。另外两类：并发型模式、线程池模式。">
-<meta name="twitter:image" content="https://gitee.com/blog/zxs94/blog/2019/12/27/JavaDesignPatterns/1.1.png">
+<meta name="twitter:image" content="http://zxs94.gitee.io/blog/blog/2019/12/27/JavaDesignPatterns/1.1.png">
 
 
 
@@ -124,7 +124,7 @@
 
 
 
-  <link rel="canonical" href="https://gitee.com/zxs94/blog/2019/12/27/JavaDesignPatterns/">
+  <link rel="canonical" href="http://zxs94.gitee.io/blog/2019/12/27/JavaDesignPatterns/">
 
 
 
@@ -267,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gitee.com/zxs94/blog/blog/2019/12/27/JavaDesignPatterns/">
+    <link itemprop="mainEntityOfPage" href="http://zxs94.gitee.io/blog/blog/2019/12/27/JavaDesignPatterns/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZXS">
@@ -364,7 +364,7 @@
 <p><strong>3.依赖倒转原则(Dependence Inversion Principle)</strong><br>开闭原则的基础，针对接口编程依赖于抽象不依赖于具体。    </p>
 <p><strong>4.接口隔离原则(Interface Segregation Principle)</strong><br>这个原则的意思是：使用多个隔离的接口，比使用单个接口要好。还是一个降低之间耦合度的意思，从这里可以看出设计模型就是软件的设计思想，从大型软件架构出发，为了升级和维护方便。<br><strong>5.迪米特法则(最少知道原则)(Demeter Principle)</strong><br>为什么叫做最少知道原则：一个实体应当少量的与其他实体之间发生相互作用，使得系统功能模块相对独立。<br><strong>6.合成复用原则(Composite Reuse Principle)</strong><br>原则是尽量使用合成/聚合的方式，而不是使用继承。</p>
 <h3 id="详解23种设计模式"><a href="#详解23种设计模式" class="headerlink" title="详解23种设计模式"></a>详解23种设计模式</h3><h4 id="工厂方法模式-Factory-Method"><a href="#工厂方法模式-Factory-Method" class="headerlink" title="工厂方法模式(Factory Method)"></a>工厂方法模式(Factory Method)</h4><h5 id="普通工厂方法模式"><a href="#普通工厂方法模式" class="headerlink" title="普通工厂方法模式"></a>普通工厂方法模式</h5><p>创建一个工厂类，对实现了同一个接口的类进行实例的创建。  </p>
-<p><img src="/blog/zxs94/blog/2019/12/27/JavaDesignPatterns/1.1.png" alt="普通工厂方法模式"></p>
+<p><img src="/blog/blog/2019/12/27/JavaDesignPatterns/1.1.png" alt="普通工厂方法模式"></p>
 <p>接口  </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Sender</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Send</span><span class="params">()</span></span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -381,7 +381,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FactoryTest</span> </span>&#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </span><br><span class="line">        SendFactory factory = <span class="keyword">new</span> SendFactory();  </span><br><span class="line">        Sender sender = factory.produce(<span class="string">"sms"</span>);  </span><br><span class="line">        sender.Send();  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h5 id="多个工厂方法模式"><a href="#多个工厂方法模式" class="headerlink" title="多个工厂方法模式"></a>多个工厂方法模式</h5><p>是对普通工厂方法模式的改进，在普通工厂方法模式中，如果传递的字符串出错，则不能正确创建对象，而多个工厂方法模式是提供多个工厂方法，分别创建对象。  </p>
-<p><img src="/blog/zxs94/blog/2019/12/27/JavaDesignPatterns/1.2.jpg" alt="多个工厂方法模式"></p>
+<p><img src="/blog/blog/2019/12/27/JavaDesignPatterns/1.2.jpg" alt="多个工厂方法模式"></p>
 <p>改写工厂类  </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SendFactory</span> </span>&#123;  </span><br><span class="line">	<span class="function"><span class="keyword">public</span> Sender <span class="title">produceMail</span><span class="params">()</span></span>&#123;  </span><br><span class="line">	    <span class="keyword">return</span> <span class="keyword">new</span> MailSender();  </span><br><span class="line">	&#125;  </span><br><span class="line">      </span><br><span class="line">	<span class="function"><span class="keyword">public</span> Sender <span class="title">produceSms</span><span class="params">()</span></span>&#123;  </span><br><span class="line">	    <span class="keyword">return</span> <span class="keyword">new</span> SmsSender();  </span><br><span class="line">	&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -397,7 +397,7 @@
 
 <p>工厂模式适合：凡是出现了大量的产品需要创建，并且具有共同的接口时，可以通过工厂方法模式进行创建。在以上的三种模式中，第一种如果传入的字符串有误，不能正确创建对象，第三种相对于第二种，不需要实例化工厂类，所以，大多数情况下，我们会选用第三种——静态工厂方法模式。</p>
 <h4 id="抽象工厂模式（Abstract-Factory）"><a href="#抽象工厂模式（Abstract-Factory）" class="headerlink" title="抽象工厂模式（Abstract Factory）"></a>抽象工厂模式（Abstract Factory）</h4><p>工厂方法模式有一个问题就是，类的创建依赖工厂类，也就是说，如果想要拓展程序，必须对工厂类进行修改，这违背了闭包原则，所以，从设计角度考虑，有一定的问题，如何解决？就用到抽象工厂模式，创建多个工厂类，这样一旦需要增加新的功能，直接增加新的工厂类就可以了，不需要修改之前的代码。因为抽象工厂不太好理解，我们先看看图，然后就和代码，就比较容易理解。</p>
-<p><img src="/blog/zxs94/blog/2019/12/27/JavaDesignPatterns/2.jpg" alt="抽象工厂模式"></p>
+<p><img src="/blog/blog/2019/12/27/JavaDesignPatterns/2.jpg" alt="抽象工厂模式"></p>
 <p>接口  </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Sender</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Send</span><span class="params">()</span></span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
