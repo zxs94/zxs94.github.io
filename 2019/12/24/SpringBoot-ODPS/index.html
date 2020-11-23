@@ -6,10 +6,10 @@
 
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
 
 
@@ -20,8 +20,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -40,7 +40,7 @@
 
   
   
-  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -48,9 +48,9 @@
 
 
 
-<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="odps," />
+  <meta name="keywords" content="odps,">
 
 
 
@@ -80,26 +80,26 @@
 
 
 <meta name="description" content="场景需求需要在原来一个springboot+mysql的项目里实现读取odps组织报文推送数据的功能，因为原来集成过多数据源，jdbc又有专门针对odps的驱动。 依赖引入pom文件中引入依赖">
+<meta name="keywords" content="odps">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot集成ODPS">
-<meta property="og:url" content="http://zxs94.gitee.io/2019/12/24/SpringBoot-ODPS/index.html">
+<meta property="og:url" content="http://zxs94.github.io/2019/12/24/SpringBoot-ODPS/index.html">
 <meta property="og:site_name" content="个人博客">
 <meta property="og:description" content="场景需求需要在原来一个springboot+mysql的项目里实现读取odps组织报文推送数据的功能，因为原来集成过多数据源，jdbc又有专门针对odps的驱动。 依赖引入pom文件中引入依赖">
-<meta property="og:locale">
-<meta property="og:image" content="http://zxs94.gitee.io/blog/2019/12/24/SpringBoot-ODPS/pom.png">
-<meta property="article:published_time" content="2019-12-24T07:06:05.000Z">
-<meta property="article:modified_time" content="2019-12-24T07:13:20.000Z">
-<meta property="article:author" content="ZXS">
-<meta property="article:tag" content="odps">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://zxs94.github.io/blog/2019/12/24/SpringBoot-ODPS/pom.png">
+<meta property="og:updated_time" content="2019-12-24T07:13:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://zxs94.gitee.io/blog/2019/12/24/SpringBoot-ODPS/pom.png">
+<meta name="twitter:title" content="SpringBoot集成ODPS">
+<meta name="twitter:description" content="场景需求需要在原来一个springboot+mysql的项目里实现读取odps组织报文推送数据的功能，因为原来集成过多数据源，jdbc又有专门针对odps的驱动。 依赖引入pom文件中引入依赖">
+<meta name="twitter:image" content="http://zxs94.github.io/blog/2019/12/24/SpringBoot-ODPS/pom.png">
 
 
 
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '',
+    root: '/blog/',
     scheme: 'Gemini',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
@@ -122,7 +122,7 @@
 
 
 
-  <link rel="canonical" href="http://zxs94.gitee.io/2019/12/24/SpringBoot-ODPS/"/>
+  <link rel="canonical" href="http://zxs94.github.io/2019/12/24/SpringBoot-ODPS/">
 
 
 
@@ -138,7 +138,7 @@
 
 
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+</head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -156,7 +156,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/blog/"  class="brand" rel="start">
+      <a href="/blog/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">个人博客</span>
         <span class="logo-line-after"><i></i></span>
@@ -184,9 +184,9 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/blog/%20" rel="section">
+          <a href="/blog/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -194,9 +194,9 @@
       
         
         <li class="menu-item menu-item-about">
-          <a href="/blog/about/%20" rel="section">
+          <a href="/blog/about/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -204,9 +204,9 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/blog/tags/%20" rel="section">
+          <a href="/blog/tags/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -214,9 +214,9 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/blog/categories/%20" rel="section">
+          <a href="/blog/categories/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             分类
           </a>
@@ -224,9 +224,9 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/blog/archives/%20" rel="section">
+          <a href="/blog/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -265,11 +265,11 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zxs94.gitee.io/blog/2019/12/24/SpringBoot-ODPS/">
+    <link itemprop="mainEntityOfPage" href="http://zxs94.github.io/blog/2019/12/24/SpringBoot-ODPS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="ZXS">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/blog/images/avatar.gif">
     </span>
 
@@ -305,7 +305,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -465,11 +465,9 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image"
-                src="/blog/images/avatar.gif"
-                alt="" />
+              <img class="site-author-image" itemprop="image" src="/blog/images/avatar.gif" alt="ZXS">
             
-              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-author-name" itemprop="name">ZXS</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
@@ -478,7 +476,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/blog/archives/%20%7C%7C%20archive">
+                <a href="/blog/archives/">
               
                   <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
@@ -535,7 +533,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E5%BC%95%E5%85%A5"><span class="nav-number">2.</span> <span class="nav-text">依赖引入</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#场景"><span class="nav-number">1.</span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖引入"><span class="nav-number">2.</span> <span class="nav-text">依赖引入</span></a></li></ol></div>
             
 
           </div>
@@ -589,8 +587,8 @@
 
 
         
-      </div>
-    </footer>
+      </footer></div>
+    
 
     
       <div class="back-to-top">
@@ -603,7 +601,7 @@
 
     
 
-  </div>
+  
 
   
 
@@ -751,5 +749,5 @@
 
   
 
-<script src="/blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/blog/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
