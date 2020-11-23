@@ -40,7 +40,7 @@
 
   
   
-  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -48,21 +48,21 @@
 
 
 
-<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
 
 
-  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
 
 
 
@@ -87,22 +87,22 @@
 <meta property="og:site_name" content="个人博客">
 <meta property="og:description" content="场景对接方需要使用kafka作为消息中间件来交互数据，需要提供一个消费接口消费对方柜面系统前端实时更新的数据，结合我们平台本身的批处理定时任务，模型跑完数据需要生产到另一个主题供对接方消费。 依赖引入pom.xml 引入依赖 注意kafka版本">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://zxs94.github.io/blog/2019/12/18/SpringBoot-Kafka/pom-import.png">
-<meta property="og:image" content="http://zxs94.github.io/blog/2019/12/18/SpringBoot-Kafka/settings.png">
-<meta property="og:image" content="http://zxs94.github.io/blog/2019/12/18/SpringBoot-Kafka/consumer.png">
-<meta property="og:image" content="http://zxs94.github.io/blog/2019/12/18/SpringBoot-Kafka/producer.png">
+<meta property="og:image" content="http://zxs94.github.io/2019/12/18/SpringBoot-Kafka/pom-import.png">
+<meta property="og:image" content="http://zxs94.github.io/2019/12/18/SpringBoot-Kafka/settings.png">
+<meta property="og:image" content="http://zxs94.github.io/2019/12/18/SpringBoot-Kafka/consumer.png">
+<meta property="og:image" content="http://zxs94.github.io/2019/12/18/SpringBoot-Kafka/producer.png">
 <meta property="og:updated_time" content="2019-12-24T07:13:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot集成kafka实现生产消费">
 <meta name="twitter:description" content="场景对接方需要使用kafka作为消息中间件来交互数据，需要提供一个消费接口消费对方柜面系统前端实时更新的数据，结合我们平台本身的批处理定时任务，模型跑完数据需要生产到另一个主题供对接方消费。 依赖引入pom.xml 引入依赖 注意kafka版本">
-<meta name="twitter:image" content="http://zxs94.github.io/blog/2019/12/18/SpringBoot-Kafka/pom-import.png">
+<meta name="twitter:image" content="http://zxs94.github.io/2019/12/18/SpringBoot-Kafka/pom-import.png">
 
 
 
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/blog/',
+    root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
@@ -159,7 +159,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/blog/" class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">个人博客</span>
         <span class="logo-line-after"><i></i></span>
@@ -187,7 +187,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/blog/" rel="section">
+          <a href="/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
@@ -197,7 +197,7 @@
       
         
         <li class="menu-item menu-item-about">
-          <a href="/blog/about/" rel="section">
+          <a href="/about/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
@@ -207,7 +207,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/blog/tags/" rel="section">
+          <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
@@ -217,7 +217,7 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/blog/categories/" rel="section">
+          <a href="/categories/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
@@ -227,7 +227,7 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/blog/archives/" rel="section">
+          <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
@@ -268,12 +268,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zxs94.github.io/blog/2019/12/18/SpringBoot-Kafka/">
+    <link itemprop="mainEntityOfPage" href="http://zxs94.github.io/2019/12/18/SpringBoot-Kafka/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZXS">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -320,7 +320,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/SpringBoot/" itemprop="url" rel="index">
+                  <a href="/categories/SpringBoot/" itemprop="url" rel="index">
                     <span itemprop="name">SpringBoot</span>
                   </a>
                 </span>
@@ -359,10 +359,10 @@
       
         <h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>对接方需要使用kafka作为消息中间件来交互数据，需要提供一个消费接口消费对方柜面系统前端实时更新的数据，结合我们平台本身的批处理定时任务，模型跑完数据需要生产到另一个主题供对接方消费。</p>
 <h3 id="依赖引入"><a href="#依赖引入" class="headerlink" title="依赖引入"></a>依赖引入</h3><p>pom.xml 引入依赖 注意kafka版本</p>
-<p><img src="/blog/2019/12/18/SpringBoot-Kafka/pom-import.png" alt="引入依赖"></p>
+<p><img src="/2019/12/18/SpringBoot-Kafka/pom-import.png" alt="引入依赖"></p>
 <a id="more"></a>
 <p>springboot配置文件里加入kafka配置</p>
-<p><img src="/blog/2019/12/18/SpringBoot-Kafka/settings.png" alt="配置文件"></p>
+<p><img src="/2019/12/18/SpringBoot-Kafka/settings.png" alt="配置文件"></p>
 <p>注意如果关闭自动提交需要如图listener中配置 否则在使用Acknowledgment自动提交时会报参数异常，但是在低版本的kafka没有这个问题。</p>
 <p>一些kafka配置 仅供参考</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#kafka配置信息</span></span><br><span class="line"><span class="attr">kafka:</span></span><br><span class="line"><span class="attr">  producer:</span></span><br><span class="line"><span class="attr">        bootstrap-servers:</span><span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span><span class="string">:9092</span></span><br><span class="line"><span class="attr">        batch-size:</span> <span class="number">16785</span>                                   <span class="comment">#一次最多发送数据量</span></span><br><span class="line"><span class="attr">        retries:</span> <span class="number">1</span>                                          <span class="comment">#发送失败后的重复发送次数</span></span><br><span class="line"><span class="attr">        buffer-memory:</span> <span class="number">33554432</span>                             <span class="comment">#32M批处理缓冲区</span></span><br><span class="line"><span class="attr">        linger:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">  consumer:</span></span><br><span class="line"><span class="attr">    group-id:</span> <span class="string">mms_test</span></span><br><span class="line"><span class="attr">    bootstrap-servers:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span><span class="string">:9092</span></span><br><span class="line"><span class="attr">    auto-offset-reset:</span> <span class="string">latest</span>                           <span class="comment">#最早未被消费的offset earliest</span></span><br><span class="line"><span class="attr">    enable-auto-commit:</span> <span class="literal">false</span>                           <span class="comment">#是否开启自动提交</span></span><br><span class="line"><span class="attr">        max-poll-records:</span> <span class="number">3100</span>                              <span class="comment">#批量消费一次最大拉取的数据量</span></span><br><span class="line"><span class="attr">        auto-commit-interval:</span> <span class="number">1000</span>                          <span class="comment">#自动提交的间隔时间</span></span><br><span class="line"><span class="attr">        session-timeout:</span> <span class="number">20000</span>                              <span class="comment">#连接超时时间</span></span><br><span class="line"><span class="attr">        max-poll-interval:</span> <span class="number">15000</span>                            <span class="comment">#手动提交设置与poll的心跳数,如果消息队列中没有消息，等待毫秒后，调用poll()方法。如果队列中有消息，立即消费消息，每次消费的消息的多少可以通过max.poll.records配置。</span></span><br><span class="line"><span class="attr">        max-partition-fetch-bytes:</span> <span class="number">15728640</span>                 <span class="comment">#设置拉取数据的大小,15M</span></span><br><span class="line"><span class="attr">  listener:</span></span><br><span class="line"><span class="attr">    ack-mode:</span> <span class="string">manual</span> <span class="comment"># 配置参数 手动提交偏移量</span></span><br><span class="line"><span class="attr">    batch-listener:</span> <span class="literal">true</span>                                <span class="comment">#是否开启批量消费，true表示批量消费</span></span><br><span class="line"><span class="attr">    concurrency:</span> <span class="number">5</span>                                      <span class="comment">#设置消费的线程数</span></span><br><span class="line"><span class="attr">    poll-timeout:</span> <span class="number">1500</span></span><br></pre></td></tr></table></figure>
@@ -370,10 +370,10 @@
 <h3 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h3><p>核心注解  </p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@KafkaListener</span>(topics= &#123;<span class="string">"$&#123;kafka-consumer-topic&#125;"</span>&#125;)</span><br><span class="line">#topics 注入约定的主题名称</span><br></pre></td></tr></table></figure>
 
-<p><img src="/blog/2019/12/18/SpringBoot-Kafka/consumer.png" alt="消费者"></p>
+<p><img src="/2019/12/18/SpringBoot-Kafka/consumer.png" alt="消费者"></p>
 <h3 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h3><p>实现方式 </p>
 <p>注入kafkaTemplate</p>
-<p><img src="/blog/2019/12/18/SpringBoot-Kafka/producer.png" alt="生产者"></p>
+<p><img src="/2019/12/18/SpringBoot-Kafka/producer.png" alt="生产者"></p>
 
       
     </div>
@@ -391,7 +391,7 @@
       
         <div class="post-tags">
           
-            <a href="/blog/tags/kafka/" rel="tag"><i class="fa fa-tag"></i> kafka</a>
+            <a href="/tags/kafka/" rel="tag"><i class="fa fa-tag"></i> kafka</a>
           
         </div>
       
@@ -404,7 +404,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2019/12/18/KafkaSingleBuild/" rel="next" title="Kafka单节点搭建">
+              <a href="/2019/12/18/KafkaSingleBuild/" rel="next" title="Kafka单节点搭建">
                 <i class="fa fa-chevron-left"></i> Kafka单节点搭建
               </a>
             
@@ -414,7 +414,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/blog/2019/12/24/SpringBoot-ODPS/" rel="prev" title="SpringBoot集成ODPS">
+              <a href="/2019/12/24/SpringBoot-ODPS/" rel="prev" title="SpringBoot集成ODPS">
                 SpringBoot集成ODPS <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -482,7 +482,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/blog/images/avatar.gif" alt="ZXS">
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ZXS">
             
               <p class="site-author-name" itemprop="name">ZXS</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -493,7 +493,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/blog/archives/">
+                <a href="/archives/">
               
                   <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
@@ -505,7 +505,7 @@
               
               
               <div class="site-state-item site-state-categories">
-                <a href="/blog/categories/index.html">
+                <a href="/categories/index.html">
                   <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
@@ -516,7 +516,7 @@
               
               
               <div class="site-state-item site-state-tags">
-                <a href="/blog/tags/index.html">
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
@@ -651,64 +651,64 @@
 
   
   
-    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
 
   
   
-    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
   
 
   
   
-    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
   
 
   
   
-    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
   
   
-    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
   
   
-    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
-
-
-  
-
-
-  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
-
 
 
   
 
 
-  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -766,5 +766,5 @@
 
   
 
-<script src="/blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/blog/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
