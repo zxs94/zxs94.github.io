@@ -84,10 +84,10 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo优化配置">
 <meta property="og:url" content="http://zxs94.github.io/2019/09/05/hexo-config/index.html">
-<meta property="og:site_name" content="个人博客">
+<meta property="og:site_name" content="Phantom">
 <meta property="og:description" content="博客搭建过程中的配置记录，优化hexo的next主题配置。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-11T08:09:08.000Z">
+<meta property="og:updated_time" content="2020-12-25T08:59:10.242Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo优化配置">
 <meta name="twitter:description" content="博客搭建过程中的配置记录，优化hexo的next主题配置。">
@@ -126,7 +126,7 @@
 
 
 
-  <title>hexo优化配置 | 个人博客</title>
+  <title>hexo优化配置 | Phantom</title>
   
 
 
@@ -156,7 +156,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">个人博客</span>
+        <span class="site-title">Phantom</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -266,13 +266,13 @@
     <link itemprop="mainEntityOfPage" href="http://zxs94.github.io/2019/09/05/hexo-config/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZXS">
+      <meta itemprop="name" content="zhxs">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/auther.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人博客">
+      <meta itemprop="name" content="Phantom">
     </span>
 
     
@@ -377,42 +377,22 @@ live2d:
   mobile: 
     show: true</code></pre><h4 id="代码高亮主题"><a href="#代码高亮主题" class="headerlink" title="代码高亮主题"></a>代码高亮主题</h4><pre><code># 默认为白色主题
 normal，night， night blue， night bright， night eighties</code></pre><h4 id="底部访问人数统计"><a href="#底部访问人数统计" class="headerlink" title="底部访问人数统计"></a>底部访问人数统计</h4><p>打开\themes\next\layout_partials\footer.swig文件,在标签 class = copyright前加上代码：</p>
-<pre><code>&lt;script async src=&quot;https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;&lt;/script&gt;</code></pre><p>在文件最下方添加代码：</p>
-<pre><code>&lt;br&gt;
-&lt;div class=&quot;powered-by&quot;&gt;
-&lt;i class=&quot;fa fa-user-md&quot;&gt;&lt;/i&gt;&lt;span id=&quot;busuanzi_container_site_uv&quot;&gt;
-  本站访客数:&lt;span id=&quot;busuanzi_value_site_uv&quot;&gt;&lt;/span&gt;
-&lt;/span&gt;
-&lt;/div&gt;</code></pre><h4 id="文章目录默认展开"><a href="#文章目录默认展开" class="headerlink" title="文章目录默认展开"></a>文章目录默认展开</h4><p>进入 themes\next\source\css_custom\custom.styl 添加如下代码：</p>
-<pre><code>//文章目录默认展开
-.post-toc .nav .nav-child { display: block; }</code></pre><h4 id="文章底部标签样式修改"><a href="#文章底部标签样式修改" class="headerlink" title="文章底部标签样式修改"></a>文章底部标签样式修改</h4><p>修改模板/themes/next/layout/_macro/post.swig</p>
-<pre><code>搜索 rel=&quot;tag&quot;&gt;#，将 # 换成&lt;i class=&quot;fa fa-tag&quot;&gt;&lt;/i&gt;    </code></pre><h4 id="底部powered-By-Hexo-强力驱动-隐藏"><a href="#底部powered-By-Hexo-强力驱动-隐藏" class="headerlink" title="底部powered By Hexo / 强力驱动 隐藏"></a>底部powered By Hexo / 强力驱动 隐藏</h4><p>themes/next/layout/_partials/footer.swig 注释相应代码的代码即可</p>
-<pre><code>&lt;!--
-{% if theme.footer.powered %}
-	  <div class="powered-by">{#
-	  #}{{ __('footer.powered', '<a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a>') }}{#
-	#}</div>
-	{% endif %}
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script <span class="keyword">async</span> src=<span class="string">"https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 
-{% if theme.footer.powered and theme.footer.theme.enable %}
-	  <span class="post-meta-divider">|</span>
-	{% endif %}
+<p>在文件最下方添加代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"powered-by"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"fa fa-user-md"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"busuanzi_container_site_uv"</span>&gt;</span></span><br><span class="line">  本站访客数:<span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"busuanzi_value_site_uv"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-{% if theme.footer.theme.enable %}
-	  <div class="theme-info">{#
-	  #}{{ __('footer.theme') }} &mdash; {#
-	  #}<a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">{#
-	    #}NexT.{{ theme.scheme }}{#
-	  #}</a>{% if theme.footer.theme.version %} v{{ theme.version }}{% endif %}&lt;/div&gt;
-{% endif %} 
---&gt;</div></code></pre><h4 id="博客背景"><a href="#博客背景" class="headerlink" title="博客背景"></a>博客背景</h4><p>在themes\next\source\css_custom\custom.styl 添加如下代码 引用素材网站随机图加载可能较慢</p>
-<pre><code>body {
-    background:url(https://source.unsplash.com/random/1600x900?nature,water);
-    background-repeat: no-repeat;
-    background-attachment:fixed;
-    background-position:50% 50%;
-    background-size:cover;
-}</code></pre>
+<h4 id="文章目录默认展开"><a href="#文章目录默认展开" class="headerlink" title="文章目录默认展开"></a>文章目录默认展开</h4><p>进入 themes\next\source\css_custom\custom.styl 添加如下代码：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//文章目录默认展开</span><br><span class="line"><span class="selector-class">.post-toc</span> <span class="selector-class">.nav</span> <span class="selector-class">.nav-child</span> &#123; <span class="attribute">display</span>: block; &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="文章底部标签样式修改"><a href="#文章底部标签样式修改" class="headerlink" title="文章底部标签样式修改"></a>文章底部标签样式修改</h4><p>修改模板/themes/next/layout/_macro/post.swig</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">搜索 rel="tag"&gt;#，将 # 换成<span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"fa fa-tag"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="底部powered-By-Hexo-强力驱动-隐藏"><a href="#底部powered-By-Hexo-强力驱动-隐藏" class="headerlink" title="底部powered By Hexo / 强力驱动 隐藏"></a>底部powered By Hexo / 强力驱动 隐藏</h4><p>themes/next/layout/_partials/footer.swig 注释相应代码的代码即可</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--</span><br><span class="line">&#123;% <span class="keyword">if</span> theme.footer.powered %&#125;</span><br><span class="line">  &lt;div class="powered-by"&gt;&#123;#</span><br><span class="line">  #&#125;&#123;&#123; __('footer.powered', '&lt;a class="theme-link" target="_blank" href="https://hexo.io"&gt;Hexo&lt;/a&gt;') &#125;&#125;&#123;#</span><br><span class="line">#&#125;&lt;/div&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% <span class="keyword">if</span> theme.footer.powered and theme.footer.theme.enable %&#125;</span><br><span class="line">  &lt;span <span class="class"><span class="keyword">class</span></span>=<span class="string">"post-meta-divider"</span>&gt;|<span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% <span class="keyword">if</span> theme.footer.theme.enable %&#125;</span><br><span class="line">  &lt;div class="theme-info"&gt;&#123;#</span><br><span class="line">  #&#125;&#123;&#123; __('footer.theme') &#125;&#125; &amp;mdash; &#123;#</span><br><span class="line">  #&#125;&lt;a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next"&gt;&#123;#</span><br><span class="line">    #&#125;NexT.&#123;&#123; theme.scheme &#125;&#125;&#123;#</span><br><span class="line">  #&#125;&lt;/a&gt;&#123;% if theme.footer.theme.version %&#125; v&#123;&#123; theme.version &#125;&#125;&#123;% endif %&#125;&#123;#</span><br><span class="line">#&#125;&lt;/div&gt;</span><br><span class="line">&#123;% endif %&#125; </span><br><span class="line">--&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="博客背景"><a href="#博客背景" class="headerlink" title="博客背景"></a>博客背景</h4><p>在themes\next\source\css_custom\custom.styl 添加如下代码 引用素材网站随机图加载可能较慢</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>:<span class="built_in">url</span>(https://source.unsplash.com/random/1600x900?nature,water);</span><br><span class="line">    <span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">    <span class="attribute">background-attachment</span>:fixed;</span><br><span class="line">    <span class="attribute">background-position</span>:<span class="number">50%</span> <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">background-size</span>:cover;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -520,9 +500,9 @@ normal，night， night blue， night bright， night eighties</code></pre><h4 i
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ZXS">
+              <img class="site-author-image" itemprop="image" src="/images/auther.jpg" alt="zhxs">
             
-              <p class="site-author-name" itemprop="name">ZXS</p>
+              <p class="site-author-name" itemprop="name">zhxs</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
@@ -611,7 +591,7 @@ normal，night， night blue， night bright， night eighties</code></pre><h4 i
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">ZXS</span>
+  <span class="author" itemprop="copyrightHolder">zhxs</span>
 
   
 </div>
@@ -802,6 +782,14 @@ normal，night， night blue， night bright， night eighties</code></pre><h4 i
 
   
 
+  
+
+   <!-- 引入脚本文件 添加鼠标点击效果 -->
+  
+  
+    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas>
+    <script src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+    <script src="/js/cursor/explosion.min.js"></script>
   
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>

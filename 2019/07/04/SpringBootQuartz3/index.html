@@ -84,7 +84,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot整合Quartz(三)">
 <meta property="og:url" content="http://zxs94.github.io/2019/07/04/SpringBootQuartz3/index.html">
-<meta property="og:site_name" content="个人博客">
+<meta property="og:site_name" content="Phantom">
 <meta property="og:description" content="MyJobFactory.java由于业务需要在执行时调用业务逻辑，所以在job类的执行时就必须注入，在开始写配置的时候，执行注入的mapper接口的方法时报了空指针异常。查了资料发现是由于quartz的Job默认是由quartz创建的不受spring管理，所以无法注入。所以使用继承AdaptableJobFactory的自定义工厂来创建定时器。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-09-05T08:54:08.000Z">
@@ -126,7 +126,7 @@
 
 
 
-  <title>SpringBoot整合Quartz(三) | 个人博客</title>
+  <title>SpringBoot整合Quartz(三) | Phantom</title>
   
 
 
@@ -156,7 +156,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">个人博客</span>
+        <span class="site-title">Phantom</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -266,13 +266,13 @@
     <link itemprop="mainEntityOfPage" href="http://zxs94.github.io/2019/07/04/SpringBootQuartz3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZXS">
+      <meta itemprop="name" content="zhxs">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/auther.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人博客">
+      <meta itemprop="name" content="Phantom">
     </span>
 
     
@@ -468,9 +468,9 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ZXS">
+              <img class="site-author-image" itemprop="image" src="/images/auther.jpg" alt="zhxs">
             
-              <p class="site-author-name" itemprop="name">ZXS</p>
+              <p class="site-author-name" itemprop="name">zhxs</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
@@ -559,7 +559,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">ZXS</span>
+  <span class="author" itemprop="copyrightHolder">zhxs</span>
 
   
 </div>
@@ -750,6 +750,14 @@
 
   
 
+  
+
+   <!-- 引入脚本文件 添加鼠标点击效果 -->
+  
+  
+    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas>
+    <script src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+    <script src="/js/cursor/explosion.min.js"></script>
   
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>

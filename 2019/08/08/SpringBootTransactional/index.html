@@ -84,7 +84,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot之事务踩坑">
 <meta property="og:url" content="http://zxs94.github.io/2019/08/08/SpringBootTransactional/index.html">
-<meta property="og:site_name" content="个人博客">
+<meta property="og:site_name" content="Phantom">
 <meta property="og:description" content="在项目多使用了多数据源(因为可能会有odps等多数据源的查询需求)，并且是手动配置数据源的方式，在配置了一段时间后使用数据源和切换都没有问题，但是在开发业务的时候发现在一个插入操作里，分别要向4张数据表中记录数据，最后请求服务，通过服务的响应来决定数据是否回滚，因为没有异常操作，所以我使用手动回滚的方式在if判断里回滚数据，结果尴尬的发现事务不好用了。。。！">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://zxs94.github.io/2019/08/08/SpringBootTransactional/transactionInfo.png">
@@ -131,7 +131,7 @@
 
 
 
-  <title>SpringBoot之事务踩坑 | 个人博客</title>
+  <title>SpringBoot之事务踩坑 | Phantom</title>
   
 
 
@@ -161,7 +161,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">个人博客</span>
+        <span class="site-title">Phantom</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -271,13 +271,13 @@
     <link itemprop="mainEntityOfPage" href="http://zxs94.github.io/2019/08/08/SpringBootTransactional/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZXS">
+      <meta itemprop="name" content="zhxs">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/auther.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="个人博客">
+      <meta itemprop="name" content="Phantom">
     </span>
 
     
@@ -481,9 +481,9 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="ZXS">
+              <img class="site-author-image" itemprop="image" src="/images/auther.jpg" alt="zhxs">
             
-              <p class="site-author-name" itemprop="name">ZXS</p>
+              <p class="site-author-name" itemprop="name">zhxs</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
@@ -572,7 +572,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">ZXS</span>
+  <span class="author" itemprop="copyrightHolder">zhxs</span>
 
   
 </div>
@@ -763,6 +763,14 @@
 
   
 
+  
+
+   <!-- 引入脚本文件 添加鼠标点击效果 -->
+  
+  
+    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas>
+    <script src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+    <script src="/js/cursor/explosion.min.js"></script>
   
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
