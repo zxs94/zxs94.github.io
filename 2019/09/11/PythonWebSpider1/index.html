@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" integrity="sha256-jTIdiMuX/e3DGJUGwl3pKSxuc6YOuqtJYkM0bGQESA4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zxs94.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="为了更深入了解python和大数据准备学习网络爬虫，参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。 部分内容参考以下博文整理 ，方便自己学习总结。地址：https:&#x2F;&#x2F;python3webspider.cuiqingcai.com">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python网络爬虫入门">
+<meta property="og:url" content="https://zxs94.github.io/2019/09/11/PythonWebSpider1/index.html">
+<meta property="og:site_name" content="Phantom">
+<meta property="og:description" content="为了更深入了解python和大数据准备学习网络爬虫，参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。 部分内容参考以下博文整理 ，方便自己学习总结。地址：https:&#x2F;&#x2F;python3webspider.cuiqingcai.com">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zxs94.github.io/2019/09/11/PythonWebSpider1/MongoDB-CMD.png">
+<meta property="og:image" content="https://zxs94.github.io/2019/09/11/PythonWebSpider1/MongoDB-service.png">
+<meta property="og:image" content="https://zxs94.github.io/2019/09/11/PythonWebSpider1/MongoDB-server.png">
+<meta property="og:image" content="https://zxs94.github.io/2019/09/11/PythonWebSpider1/delete-mongo-server.png">
+<meta property="og:image" content="https://zxs94.github.io/2019/09/11/PythonWebSpider1/mongo-start.png">
+<meta property="og:image" content="https://zxs94.github.io/2019/09/11/PythonWebSpider1/pyspider-run-error.png">
+<meta property="og:image" content="https://zxs94.github.io/2019/09/11/PythonWebSpider1/pyspider-run-error2.png">
+<meta property="og:image" content="https://zxs94.github.io/2019/09/11/PythonWebSpider1/pyspider-run-error3.png">
+<meta property="og:image" content="https://zxs94.github.io/2019/09/11/PythonWebSpider1/scrapy-error.png">
+<meta property="article:published_time" content="2019-09-11T06:06:07.000Z">
+<meta property="article:modified_time" content="2019-09-18T07:30:54.000Z">
+<meta property="article:author" content="zhxs">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="爬虫">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zxs94.github.io/2019/09/11/PythonWebSpider1/MongoDB-CMD.png">
+
+
+<link rel="canonical" href="https://zxs94.github.io/2019/09/11/PythonWebSpider1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://zxs94.github.io/2019/09/11/PythonWebSpider1/","path":"2019/09/11/PythonWebSpider1/","title":"Python网络爬虫入门"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Python网络爬虫入门 | Phantom</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Phantom</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%BA%93%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">请求库安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#requests-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">1.1.</span> <span class="nav-text">requests 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Selenium-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">1.2.</span> <span class="nav-text">Selenium 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ChromeDriver%E3%80%81GeckoDriver%E3%80%81PhantomJS-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">1.3.</span> <span class="nav-text">ChromeDriver、GeckoDriver、PhantomJS 的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ChromeDriver"><span class="nav-number">1.3.1.</span> <span class="nav-text">ChromeDriver</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#GeckoDriver"><span class="nav-number">1.3.2.</span> <span class="nav-text">GeckoDriver</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PhantomJS"><span class="nav-number">1.3.3.</span> <span class="nav-text">PhantomJS</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#aiohttp-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">1.4.</span> <span class="nav-text">aiohttp 的安装</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90%E5%BA%93%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">解析库安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#lxml-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">lxml 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Beautiful-Soup-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">2.2.</span> <span class="nav-text">Beautiful Soup 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pyquery-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">2.3.</span> <span class="nav-text">pyquery 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tesserocr-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">2.4.</span> <span class="nav-text">tesserocr 的安装</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">数据库的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">3.1.</span> <span class="nav-text">MySQL 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MongoDB-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">3.2.</span> <span class="nav-text">MongoDB 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Redis-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">3.3.</span> <span class="nav-text">Redis 的安装</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%BA%93%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">4.</span> <span class="nav-text">存储库的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PyMySQL-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">4.1.</span> <span class="nav-text">PyMySQL  的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PyMongo-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">4.2.</span> <span class="nav-text">PyMongo 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis-py-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">4.3.</span> <span class="nav-text">redis-py 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RedisDump-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">4.4.</span> <span class="nav-text">RedisDump 的安装</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web%E5%BA%93%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">5.</span> <span class="nav-text">Web库的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Flask-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">5.1.</span> <span class="nav-text">Flask 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tornado-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">5.2.</span> <span class="nav-text">Tornado 的安装</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#App%E7%88%AC%E5%8F%96%E7%9B%B8%E5%85%B3%E5%BA%93%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">6.</span> <span class="nav-text">App爬取相关库的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">7.</span> <span class="nav-text">爬虫框架的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pyspider-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">7.1.</span> <span class="nav-text">pyspider 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Scrapy-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">7.2.</span> <span class="nav-text">Scrapy 的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Scrapy-Splash-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">7.3.</span> <span class="nav-text">Scrapy-Splash 的安装</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="zhxs"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">zhxs</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zxs94.github.io/2019/09/11/PythonWebSpider1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="zhxs">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantom">
+      <meta itemprop="description" content="">
+    </span>
+    
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Python网络爬虫入门 | Phantom">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python网络爬虫入门
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-09-11 14:06:07" itemprop="dateCreated datePublished" datetime="2019-09-11T14:06:07+08:00">2019-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2019-09-18 15:30:54" itemprop="dateModified" datetime="2019-09-18T15:30:54+08:00">2019-09-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>为了更深入了解python和大数据准备学习网络爬虫，参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。</p>
+<p>部分内容参考以下博文整理 ，方便自己学习总结。<br>地址：<a target="_blank" rel="noopener" href="https://python3webspider.cuiqingcai.com/">https://python3webspider.cuiqingcai.com</a></p>
+<span id="more"></span>
+
+<p><strong>python环境的安装配置不再过多赘述</strong></p>
+<h3 id="请求库安装"><a href="#请求库安装" class="headerlink" title="请求库安装"></a>请求库安装</h3><h4 id="requests-的安装"><a href="#requests-的安装" class="headerlink" title="requests 的安装"></a>requests 的安装</h4><p> requests 属于第三方库，Python 默认不会自带这个库</p>
+<pre><code>pip install requests
+</code></pre>
+<p><strong>相关链接</strong></p>
+<p>GitHub:<a target="_blank" rel="noopener" href="https://github.com/requests/requests">https://github.com/requests/requests</a><br>PyPi: <a target="_blank" rel="noopener" href="https://pypi.python.org/pypi/requests">https://pypi.python.org/pypi/requests</a><br>官方文档: <a target="_blank" rel="noopener" href="http://www.python-requests.org/">http://www.python-requests.org</a><br>中文文档: <a target="_blank" rel="noopener" href="http://docs.python-requests.org/zh_CN/latest">http://docs.python-requests.org/zh_CN&#x2F;latest</a></p>
+<h4 id="Selenium-的安装"><a href="#Selenium-的安装" class="headerlink" title="Selenium 的安装"></a>Selenium 的安装</h4><p>Selenium 是一个自动化测试工具，利用它我们可以驱动浏览器执行特定的动作，如点击、下拉等操作。</p>
+<pre><code>pip install selenium
+</code></pre>
+<p><strong>相关链接</strong></p>
+<p>官方网站: <a target="_blank" rel="noopener" href="http://www.seleniumhq.org/">http://www.seleniumhq.org</a><br>GitHub: <a target="_blank" rel="noopener" href="https://github.com/SeleniumHQ/selenium/tree/master/py">(https://github.com/SeleniumHQ/selenium/tree/master/py</a><br>PyPI: <a target="_blank" rel="noopener" href="https://pypi.python.org/pypi/selenium">https://pypi.python.org/pypi/selenium</a><br>官方文档: <a target="_blank" rel="noopener" href="http://selenium-python.readthedocs.io/">http://selenium-python.readthedocs.io</a><br>中文文档: <a target="_blank" rel="noopener" href="http://selenium-python-zh.readthedocs.io/">http://selenium-python-zh.readthedocs.io</a></p>
+<h4 id="ChromeDriver、GeckoDriver、PhantomJS-的安装"><a href="#ChromeDriver、GeckoDriver、PhantomJS-的安装" class="headerlink" title="ChromeDriver、GeckoDriver、PhantomJS 的安装"></a>ChromeDriver、GeckoDriver、PhantomJS 的安装</h4><p>前面我们成功安装好了 Selenium 库，但是它是一个自动化测试工具，需要浏览器来配合使用<br>ChromeDriver、GeckoDriver 分别是谷歌和火狐的驱动</p>
+<p>PhantomJS 是一个无界面的、可脚本编程的 WebKit 浏览器引擎，它原生支持多种 Web 标准：DOM 操作、CSS 选择器、JSON、Canvas 以及 SVG。<br>Selenium 支持 PhantomJS，这样在运行的时候就不会再弹出一个浏览器了。而且 PhantomJS 的运行效率也很高，还支持各种参数配置，使用非常方便。</p>
+<p>这三个插件的配置方式都类似，我才用最简单的方法，去官网下载驱动包将.exe文件拷贝到python目录下，因为我使用的是anaconda所以直接赋值到相应的环境目录下即可。</p>
+<h5 id="ChromeDriver"><a href="#ChromeDriver" class="headerlink" title="ChromeDriver"></a>ChromeDriver</h5><p>官方网站: <a target="_blank" rel="noopener" href="https://sites.google.com/a/chromium.org/chromedriver">https://sites.google.com/a/chromium.org/chromedriver</a><br>下载地址: <a target="_blank" rel="noopener" href="https://chromedriver.storage.googleapis.com/index.html">https://chromedriver.storage.googleapis.com/index.html</a><br>阿里镜像源: <a target="_blank" rel="noopener" href="http://npm.taobao.org/mirrors/chromedriver/">http://npm.taobao.org/mirrors/chromedriver/</a></p>
+<p>解压下载后的文件 拷贝 chromedriver.exe 到目录下  </p>
+<pre><code>chromedriver
+#控制台有版本信息之类的输出证明配置成功
+</code></pre>
+<p>在python程序中测试  执行弹出浏览器即为成功<br>    <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line">browser = webdriver.Chrome()	</span><br></pre></td></tr></table></figure></p>
+<h5 id="GeckoDriver"><a href="#GeckoDriver" class="headerlink" title="GeckoDriver"></a>GeckoDriver</h5><p>火狐的驱动暂时没有安装基本步骤类似谷歌  </p>
+<p>GitHub: <a target="_blank" rel="noopener" href="https://github.com/mozilla/geckodriver">https://github.com/mozilla/geckodriver</a><br>下载地址: <a target="_blank" rel="noopener" href="https://github.com/mozilla/geckodriver/releases">https://github.com/mozilla/geckodriver/releases</a></p>
+<h5 id="PhantomJS"><a href="#PhantomJS" class="headerlink" title="PhantomJS"></a>PhantomJS</h5><p>官方网站: <a target="_blank" rel="noopener" href="http://phantomjs.org/">http://phantomjs.org</a><br>官方文档: <a href="ttp://phantomjs.org/quick-start.html">http://phantomjs.org/quick-start.html</a><br>下载地址: <a target="_blank" rel="noopener" href="http://phantomjs.org/download.html">http://phantomjs.org/download.html</a><br>API接口说明: <a target="_blank" rel="noopener" href="http://phantomjs.org/api/command-line.html">http://phantomjs.org/api/command-line.html</a> </p>
+<p>命令验证  </p>
+<pre><code>phantomjs 
+</code></pre>
+<p>测试程序  没有弹出页面控制台输出百度网址<br>    <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line">browser = webdriver.PhantomJS()</span><br><span class="line">browser.get(<span class="string">&#x27;https://www.baidu.com&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(browser.current_url)</span><br></pre></td></tr></table></figure></p>
+<h4 id="aiohttp-的安装"><a href="#aiohttp-的安装" class="headerlink" title="aiohttp 的安装"></a>aiohttp 的安装</h4><p>requests 库是一个阻塞式 HTTP 请求库，当我们发出一个请求后，程序会一直等待服务器响应，直到得到响应后，程序才会进行下一步处理。</p>
+<p>aiohttp 就是这样一个提供异步 Web 服务的库，从 Python 3.5 版本开始，Python 中加入了 async&#x2F;await 关键字，使得回调的写法更加直观和人性化。</p>
+<p><strong>相关链接</strong></p>
+<p>官方文档：<a target="_blank" rel="noopener" href="http://aiohttp.readthedocs.io/en/stable">http://aiohttp.readthedocs.io/en/stable</a><br>GitHub：<a target="_blank" rel="noopener" href="https://github.com/aio-libs/aiohttp">https://github.com/aio-libs/aiohttp</a><br>PyPI：<a target="_blank" rel="noopener" href="https://pypi.python.org/pypi/aiohttp">https://pypi.python.org/pypi/aiohttp</a></p>
+<p><strong>安装</strong>  </p>
+<p>官方还推荐安装如下两个库：一个是字符编码检测库 cchardet，另一个是加速 DNS 的解析库 aiodns。  </p>
+<pre><code>pip install aiohttp
+pip install cchardet aiodns
+</code></pre>
+<p>在python交互模型 引入不报错即安装成功</p>
+<pre><code>import aiohttp
+</code></pre>
+<h3 id="解析库安装"><a href="#解析库安装" class="headerlink" title="解析库安装"></a>解析库安装</h3><h4 id="lxml-的安装"><a href="#lxml-的安装" class="headerlink" title="lxml 的安装"></a>lxml 的安装</h4><p>lxml 是 Python 的一个解析库，支持 HTML 和 XML 的解析，支持 XPath 解析方式</p>
+<p><strong>相关链接</strong></p>
+<p>官方网站：<a target="_blank" rel="noopener" href="http://lxml.de/">http://lxml.de</a><br>GitHub：<a target="_blank" rel="noopener" href="https://github.com/lxml/lxml">https://github.com/lxml/lxml</a><br>PyPI：<a target="_blank" rel="noopener" href="https://pypi.python.org/pypi/lxml">https://pypi.python.org/pypi/lxml</a></p>
+<p><strong>安装命令</strong></p>
+<p>没有报错就代表成功 如果报错在查询是否需要安装其他依赖</p>
+<pre><code>pip install lxml
+</code></pre>
+<h4 id="Beautiful-Soup-的安装"><a href="#Beautiful-Soup-的安装" class="headerlink" title="Beautiful Soup 的安装"></a>Beautiful Soup 的安装</h4><p>Beautiful Soup 是 Python 的一个 HTML 或 XML 的解析库，我们可以用它来方便地从网页中提取数据。</p>
+<p><strong>相关链接</strong>  </p>
+<p>官方文档：<a target="_blank" rel="noopener" href="https://www.crummy.com/software/BeautifulSoup/bs4/doc">https://www.crummy.com/software/BeautifulSoup/bs4/doc</a><br>中文文档：<a target="_blank" rel="noopener" href="https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh">https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh</a><br>PyPI：<a target="_blank" rel="noopener" href="https://pypi.python.org/pypi/beautifulsoup4">https://pypi.python.org/pypi/beautifulsoup4</a></p>
+<p>Beautiful Soup 的 HTML 和 XML 解析器是依赖于 lxml 库的，所以在此之前请确保已经成功安装好了 lxml 库。</p>
+<p><strong>安装命令</strong></p>
+<pre><code>pip install beautifulsoup4
+</code></pre>
+<p><strong>测试程序</strong> </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup  </span><br><span class="line">soup = BeautifulSoup(<span class="string">&#x27;&amp;lt;p&amp;gt;Hello&amp;lt;/p&amp;gt;&#x27;</span>, <span class="string">&#x27;lxml&#x27;</span>)  </span><br><span class="line"><span class="built_in">print</span>(soup.p.string)</span><br></pre></td></tr></table></figure>
+
+<p>输出结果 Hello 证明成功</p>
+<h4 id="pyquery-的安装"><a href="#pyquery-的安装" class="headerlink" title="pyquery 的安装"></a>pyquery 的安装</h4><p>pyquery 同样是一个强大的网页解析工具，它提供了和 jQuery 类似的语法来解析 HTML 文档，支持 CSS 选择器。</p>
+<p><strong>相关链接</strong></p>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/gawel/pyquery">https://github.com/gawel/pyquery</a><br>PyPI：<a target="_blank" rel="noopener" href="https://pypi.python.org/pypi/pyquery">https://pypi.python.org/pypi/pyquery</a><br>官方文档：<a target="_blank" rel="noopener" href="http://pyquery.readthedocs.io/">http://pyquery.readthedocs.io</a></p>
+<p><strong>安装命令</strong></p>
+<pre><code>pip install pyquery
+</code></pre>
+<p>验证 交互命令导入依赖 不报错即为成功</p>
+<pre><code>import pyquery
+</code></pre>
+<h4 id="tesserocr-的安装"><a href="#tesserocr-的安装" class="headerlink" title="tesserocr 的安装"></a>tesserocr 的安装</h4><p>在爬虫过程中，难免会遇到各种各样的验证码，而大多数验证码还是图形验证码，这时候我们可以直接用 OCR 来识别。</p>
+<p>OCR，即 Optical Character Recognition，光学字符识别，是指通过扫描字符，然后通过其形状将其翻译成电子文本的过程。</p>
+<p><strong>相关链接</strong></p>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/sirfz/tesserocr">https://github.com/sirfz/tesserocr</a><br>PyPI：<a target="_blank" rel="noopener" href="https://pypi.python.org/pypi/tesserocr">https://pypi.python.org/pypi/tesserocr</a><br>下载地址：<a target="_blank" rel="noopener" href="http://digi.bib.uni-mannheim.de/tesseract">http://digi.bib.uni-mannheim.de/tesseract</a><br>GitHub：<a target="_blank" rel="noopener" href="https://github.com/tesseract-ocr/tesseract">https://github.com/tesseract-ocr/tesseract</a><br>语言包：<a target="_blank" rel="noopener" href="https://github.com/tesseract-ocr/tessdata">https://github.com/tesseract-ocr/tessdata</a><br>文档：<a target="_blank" rel="noopener" href="https://github.com/tesseract-ocr/tesseract/wiki/Documentation">https://github.com/tesseract-ocr/tesseract/wiki/Documentation</a></p>
+<p><strong>window下</strong></p>
+<p>首先需要下载tesseract<br>选择不带dev的稳定版安装</p>
+<p>勾选 Additional language data (download) 选项来安装 OCR 识别支持的语言包，这样 OCR 便可以识别多国语言。</p>
+<p>安装后记得配置环境变量，配置在用户的path下。</p>
+<p>在环境下安装 tesserocr window下需要依赖c环境没有需要下载安装<br>本人使用github上下载的对应3.6python环境的.whl文件安装的，推荐这种安装方式。</p>
+<p><strong>安装命令</strong></p>
+<pre><code>pip install tesserocr pillow
+</code></pre>
+<p><strong>验证 tesseract和tesserocr</strong></p>
+<h3 id="数据库的安装"><a href="#数据库的安装" class="headerlink" title="数据库的安装"></a>数据库的安装</h3><p>数据库主要用到关系型数据库mysql、非关系型Redis和MongoDB</p>
+<h4 id="MySQL-的安装"><a href="#MySQL-的安装" class="headerlink" title="MySQL 的安装"></a>MySQL 的安装</h4><p>Mysql的安装不在过多描述 推荐5.6以上版本。</p>
+<h4 id="MongoDB-的安装"><a href="#MongoDB-的安装" class="headerlink" title="MongoDB 的安装"></a>MongoDB 的安装</h4><p>MongoDB 是由 C++ 语言编写的非关系型数据库，是一个基于分布式文件存储的开源数据库系统，其内容存储形式类似 JSON 对象，它的字段值可以包含其他文档、数组及文档数组，非常灵活。</p>
+<p><strong>相关链接</strong></p>
+<p>官方网站：<a target="_blank" rel="noopener" href="https://www.mongodb.com/">https://www.mongodb.com</a><br>官方文档：<a target="_blank" rel="noopener" href="https://docs.mongodb.com/">https://docs.mongodb.com</a><br>GitHub：<a target="_blank" rel="noopener" href="https://github.com/mongodb">https://github.com/mongodb</a><br>中文教程：<a target="_blank" rel="noopener" href="http://www.runoob.com/mongodb/mongodb-tutorial.html">http://www.runoob.com/mongodb/mongodb-tutorial.html</a></p>
+<p><strong>登录官网下载</strong> </p>
+<p>找到 sever标签<br>MongoDB Community Server 选择适合的版本、操作系统 下载MSI文件进行安装。</p>
+<p>安装时选择custom、新版会自动配置data和log的位置不用手动创建了。<br>但是需要在data下创建db文件夹。</p>
+<p>安装后进入bin目录、输入指令，路径换成你自己的目录，路径前记得加空格不然指令报错。</p>
+<pre><code>mongod --dbpath &quot;D:\MongoDB\Server\4.2\data\db&quot;
+</code></pre>
+<p>看到如下图输出信息，就代表成功启动了</p>
+<p><img src="/2019/09/11/PythonWebSpider1/MongoDB-CMD.png" alt="控制台输出"></p>
+<p>但是如果我们想一直使用 MongoDB，就不能关闭此命令行了。如果意外关闭或重启，MongoDB 服务就不能使用了。所以，接下来还需将 MongoDB 配置成系统服务。</p>
+<p>使用管理员启动cmd，在bin和data同级的log下创建mongodb.log文件。</p>
+<p><strong>命令行输入以下指令：</strong></p>
+<p>注意指令间的空格</p>
+<pre><code>mongod --bind_ip 0.0.0.0 --logpath &quot;D:\MongoDB\Server\4.2\log\mongodb.log&quot; --logappend --dbpath &quot;D:\MongoDB\Server\4.2\data\db&quot;--port 27017 --serviceName &quot;MongoDB&quot; --serviceDisplayName &quot;MongoDB&quot; --install
+</code></pre>
+<p>这里的意思是绑定 IP 为 0.0.0.0（即任意 IP 均可访问），指定日志路径、数据库路径和端口，指定服务名称。需要注意的是，这里依然需要把路径替换成你的 MongoDB 安装路径，运行此命令后即可安装服务，运行结果如图所示。</p>
+<p><img src="/2019/09/11/PythonWebSpider1/MongoDB-service.png" alt="配置服务"></p>
+<p>如果没有出现错误提示，则证明 MongoDB 服务已经安装成功。<br>可以在服务管理页面查看到系统服务。</p>
+<p>但是我发现新版本的MongoDB不需要手动配置，自动就有一个服务名称：MongoDB Server..</p>
+<p><img src="/2019/09/11/PythonWebSpider1/MongoDB-server.png" alt="配置服务"></p>
+<p>但是启动的时候发现报错了&#x3D; &#x3D;。。</p>
+<p>查阅资料找到了一种成功配置的方法</p>
+<p>首先删除自带的服务</p>
+<p><img src="/2019/09/11/PythonWebSpider1/delete-mongo-server.png" alt="删除服务"></p>
+<p>使用以下指令 成功添加服务，不知道是不是自带的服务没删除的原因，之前创建服务的命令没有成功所以我换了下边这种。。</p>
+<pre><code>mongod --dbpath=D:\MongoDB\Server\4.2\data\db  --logpath=D:\MongoDB\Server\4.2\log\mongodb.log --install --serviceName &quot;MongoDB&quot;
+</code></pre>
+<p>启动MongoDB，到bin目录下启动，也可以配置环境变量。</p>
+<p>成功启动如图，警告是因为新版本需要创建管理用户连接。</p>
+<p><img src="/2019/09/11/PythonWebSpider1/mongo-start.png" alt="启动Mongo"></p>
+<p>到此Mongo的配置就基本完成。</p>
+<h4 id="Redis-的安装"><a href="#Redis-的安装" class="headerlink" title="Redis 的安装"></a>Redis 的安装</h4><p>Redis的安装比较简单，因为我已经安装了好了本地环境,就不重复安装了。</p>
+<p><strong>相关链接</strong></p>
+<p>官方网站：<a target="_blank" rel="noopener" href="https://redis.io/">https://redis.io</a><br>官方文档：<a target="_blank" rel="noopener" href="https://redis.io/documentation">https://redis.io/documentation</a><br>中文官网：<a target="_blank" rel="noopener" href="http://www.redis.cn/">http://www.redis.cn</a><br>GitHub：<a target="_blank" rel="noopener" href="https://github.com/antirez/redis">https://github.com/antirez/redis</a><br>中文教程：<a target="_blank" rel="noopener" href="http://www.runoob.com/redis/redis-tutorial.html">http://www.runoob.com/redis/redis-tutorial.html</a><br>Redis Desktop Manager：<a target="_blank" rel="noopener" href="https://redisdesktop.com/">https://redisdesktop.com</a><br>Redis Desktop Manager GitHub：<a target="_blank" rel="noopener" href="https://github.com/uglide/RedisDesktopManager">https://github.com/uglide/RedisDesktopManager</a></p>
+<p>推荐一个网页端的Redis管理工具：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/yswenli/WebRedisManager">https://github.com/yswenli/WebRedisManager</a></p>
+<h3 id="存储库的安装"><a href="#存储库的安装" class="headerlink" title="存储库的安装"></a>存储库的安装</h3><p>如果想要和 Python 交互的话，还需要安装一些 Python 存储库，如 MySQL 需要安装 PyMySQL，MongoDB 需要安装 PyMongo 等。</p>
+<h4 id="PyMySQL-的安装"><a href="#PyMySQL-的安装" class="headerlink" title="PyMySQL  的安装"></a>PyMySQL  的安装</h4><p>因为以前使用过pymysql操作MySql数据库所以不多描述。</p>
+<p><strong>相关链接</strong></p>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/PyMySQL/PyMySQL">https://github.com/PyMySQL/PyMySQL</a><br>官方文档：<a target="_blank" rel="noopener" href="http://pymysql.readthedocs.io/">http://pymysql.readthedocs.io/</a><br>PyPI：<a target="_blank" rel="noopener" href="https://pypi.python.org/pypi/PyMySQL">https://pypi.python.org/pypi/PyMySQL</a></p>
+<p><strong>安装命令</strong></p>
+<pre><code>pip install pymysql
+</code></pre>
+<p><strong>验证</strong></p>
+<p>在python程序中导入</p>
+<pre><code>import pymysql
+</code></pre>
+<h4 id="PyMongo-的安装"><a href="#PyMongo-的安装" class="headerlink" title="PyMongo 的安装"></a>PyMongo 的安装</h4><p>在 Python 中，如果想要和 MongoDB 进行交互，就需要借助于 PyMongo 库，这里就来了解一下它的安装方法。</p>
+<p><strong>相关链接</strong></p>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/mongodb/mongo-python-driver">https://github.com/mongodb/mongo-python-driver</a><br>官方文档：<a target="_blank" rel="noopener" href="https://api.mongodb.com/python/current/">https://api.mongodb.com/python/current/</a><br>PyPI：<a target="_blank" rel="noopener" href="https://pypi.python.org/pypi/pymongo">https://pypi.python.org/pypi/pymongo</a></p>
+<p><strong>安装指令</strong></p>
+<pre><code>pip install pymongo
+</code></pre>
+<p><strong>验证</strong></p>
+<pre><code>import pymongo
+pymongo.version
+</code></pre>
+<p>输出版本号即成功安装</p>
+<h4 id="redis-py-的安装"><a href="#redis-py-的安装" class="headerlink" title="redis-py 的安装"></a>redis-py 的安装</h4><p>对于 Redis 要使用 redis-py 库来与其交互</p>
+<p><strong>相关链接</strong></p>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/andymccurdy/redis-py">https://github.com/andymccurdy/redis-py</a><br>官方文档：<a target="_blank" rel="noopener" href="https://redis-py.readthedocs.io/">https://redis-py.readthedocs.io/</a></p>
+<p><strong>安装指令</strong></p>
+<pre><code>pip install redis
+</code></pre>
+<p><strong>验证</strong></p>
+<pre><code>import redis
+redis.VERSION
+</code></pre>
+<p>打印版本信息即为成功安装</p>
+<h4 id="RedisDump-的安装"><a href="#RedisDump-的安装" class="headerlink" title="RedisDump 的安装"></a>RedisDump 的安装</h4><p>RedisDump 是一个用于 Redis 数据导入 &#x2F; 导出的工具，是基于 Ruby 实现的，所以要安装 RedisDump，需要先安装 Ruby。</p>
+<p><strong>相关链接</strong></p>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/delano/redis-dump">https://github.com/delano/redis-dump</a><br>官方文档：<a target="_blank" rel="noopener" href="http://delanotes.com/redis-dump">http://delanotes.com/redis-dump</a></p>
+<p><strong>安装 Ruby</strong></p>
+<p>参考  <a target="_blank" rel="noopener" href="http://www.ruby-lang.org/zh_cn/documentation/installation">http://www.ruby-lang.org/zh_cn&#x2F;documentation&#x2F;installation</a></p>
+<p><strong>gem 安装</strong></p>
+<p>安装完成之后，就可以执行 gem 命令了</p>
+<pre><code>gem install redis-dump
+</code></pre>
+<p><strong>验证安装</strong></p>
+<p>安装成功后，就可以执行如下两个命令：</p>
+<pre><code>redis-dump  
+redis-load
+</code></pre>
+<p>调用成功代表安装成功</p>
+<p>相当于使用ruby的一个包来操作，需要在响应环境下执行指令。</p>
+<h3 id="Web库的安装"><a href="#Web库的安装" class="headerlink" title="Web库的安装"></a>Web库的安装</h3><h4 id="Flask-的安装"><a href="#Flask-的安装" class="headerlink" title="Flask 的安装"></a>Flask 的安装</h4><p>Flask 是一个轻量级的 Web 服务程序，它简单、易用、灵活，这里主要用来做一些 API 服务</p>
+<p><strong>相关链接</strong></p>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/pallets/flask">https://github.com/pallets/flask</a><br>官方文档：<a target="_blank" rel="noopener" href="http://flask.pocoo.org/">http://flask.pocoo.org</a><br>中文文档：<a target="_blank" rel="noopener" href="http://docs.jinkan.org/docs/flask">http://docs.jinkan.org/docs/flask</a><br>PyPI：<a target="_blank" rel="noopener" href="https://pypi.python.org/pypi/Flask">https://pypi.python.org/pypi/Flask</a></p>
+<p><strong>安装命令：</strong></p>
+<pre><code>pip install flask
+</code></pre>
+<p>利用 Flask + Redis 维护动态代理池和 Cookies 池</p>
+<h4 id="Tornado-的安装"><a href="#Tornado-的安装" class="headerlink" title="Tornado 的安装"></a>Tornado 的安装</h4><p>Tornado 是一个支持异步的 Web 框架，通过使用非阻塞 I&#x2F;O 流，它可以支撑成千上万的开放连接，效率非常高。</p>
+<p><strong>相关链接</strong></p>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/tornadoweb/tornado">https://github.com/tornadoweb/tornado</a><br>PyPI：<a target="_blank" rel="noopener" href="https://pypi.python.org/pypi/tornado">https://pypi.python.org/pypi/tornado</a><br>官方文档：<a target="_blank" rel="noopener" href="http://www.tornadoweb.org/">http://www.tornadoweb.org</a></p>
+<p><strong>安装命令：</strong></p>
+<pre><code>pip install tornado
+</code></pre>
+<p>利用 Tornado + Redis 来搭建一个 ADSL 拨号代理池</p>
+<h3 id="App爬取相关库的安装"><a href="#App爬取相关库的安装" class="headerlink" title="App爬取相关库的安装"></a>App爬取相关库的安装</h3><p>暂时不考虑 后续有相关需求参考资料进行安装</p>
+<h3 id="爬虫框架的安装"><a href="#爬虫框架的安装" class="headerlink" title="爬虫框架的安装"></a>爬虫框架的安装</h3><p>我们直接用 requests、Selenium 等库写爬虫，如果爬取量不是太大，速度要求不高，是完全可以满足需求的。但是写多了会发现其内部许多代码和组件是可以复用的，如果我们把这些组件抽离出来，将各个功能模块化，就慢慢会形成一个框架雏形，久而久之，爬虫框架就诞生了。<br>主要介绍的爬虫框架有 pyspider 和 Scrapy。</p>
+<h4 id="pyspider-的安装"><a href="#pyspider-的安装" class="headerlink" title="pyspider 的安装"></a>pyspider 的安装</h4><p>pyspider 是国人 binux 编写的强大的网络爬虫框架，它带有强大的 WebUI、脚本编辑器、任务监控器、项目管理器以及结果处理器，同时支持多种数据库后端、多种消息队列，另外还支持 JavaScript 渲染页面的爬取</p>
+<p><strong>相关链接</strong></p>
+<p>官方文档：<a target="_blank" rel="noopener" href="http://docs.pyspider.org/">http://docs.pyspider.org/</a><br>PyPi：<a target="_blank" rel="noopener" href="https://pypi.python.org/pypi/pyspider">https://pypi.python.org/pypi/pyspider</a><br>GitHub：<a target="_blank" rel="noopener" href="https://github.com/binux/pyspider">https://github.com/binux/pyspider</a><br>官方教程：<a target="_blank" rel="noopener" href="http://docs.pyspider.org/en/latest/tutorial">http://docs.pyspider.org/en/latest/tutorial</a><br>在线实例：<a target="_blank" rel="noopener" href="http://demo.pyspider.org/">http://demo.pyspider.org</a></p>
+<p>pyspider 是支持 JavaScript 渲染的，而这个过程是依赖于 PhantomJS </p>
+<p><strong>推荐使用 pip 安装</strong>  </p>
+<pre><code>pip install pyspider
+</code></pre>
+<p>安装时报错提示，pycurl需要安装依赖包，下载whl文件安装，安装后启动pyspider发现如下报错</p>
+<p><img src="/2019/09/11/PythonWebSpider1/pyspider-run-error.png"></p>
+<p><strong>解决方法：</strong><br>找到pyspider安装位置 site-packages\pyspider\webui找到webui下webdav.py文件 修改209行</p>
+<pre><code>&#39;domaincontroller&#39;: NeedAuthController(app),替换为
+&#39;http_authenticator.domain_controller&#39;: NeedAuthController(app)
+</code></pre>
+<p><img src="/2019/09/11/PythonWebSpider1/pyspider-run-error2.png"></p>
+<p>执行成功运行在5000端口上</p>
+<p><img src="/2019/09/11/PythonWebSpider1/pyspider-run-error3.png"></p>
+<h4 id="Scrapy-的安装"><a href="#Scrapy-的安装" class="headerlink" title="Scrapy 的安装"></a>Scrapy 的安装</h4><p>Scrapy 是一个十分强大的爬虫框架，依赖的库比较多，至少需要依赖的库有 Twisted 14.0、lxml 3.4 和 pyOpenSSL 0.14。在不同的平台环境下，它所依赖的库也各不相同，所以在安装之前，最好确保把一些基本库安装好。</p>
+<p><strong>相关链接</strong></p>
+<p>官方网站：<a target="_blank" rel="noopener" href="https://scrapy.org/">https://scrapy.org</a><br>官方文档：<a target="_blank" rel="noopener" href="https://docs.scrapy.org/">https://docs.scrapy.org</a><br>PyPi：<a target="_blank" rel="noopener" href="https://pypi.python.org/pypi/Scrapy">https://pypi.python.org/pypi/Scrapy</a><br>GitHub：<a target="_blank" rel="noopener" href="https://github.com/scrapy/scrapy">https://github.com/scrapy/scrapy</a><br>中文文档：<a target="_blank" rel="noopener" href="http://scrapy-chs.readthedocs.io/">http://scrapy-chs.readthedocs.io</a></p>
+<p>使用conda安装</p>
+<pre><code>conda install Scrapy
+</code></pre>
+<p>运行命令scrapy报错</p>
+<p><img src="/2019/09/11/PythonWebSpider1/scrapy-error.png"></p>
+<p>使用 pip 安装后成功启动</p>
+<pre><code>pip install Scrapy
+</code></pre>
+<h4 id="Scrapy-Splash-的安装"><a href="#Scrapy-Splash-的安装" class="headerlink" title="Scrapy-Splash 的安装"></a>Scrapy-Splash 的安装</h4><p>Scrapy-Splash 是一个 Scrapy 中支持 JavaScript 渲染的工具</p>
+<p><strong>相关链接</strong></p>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/scrapy-plugins/scrapy-splash">https://github.com/scrapy-plugins/scrapy-splash</a><br>PyPi：<a target="_blank" rel="noopener" href="https://pypi.python.org/pypi/scrapy-splash">https://pypi.python.org/pypi/scrapy-splash</a><br>使用说明：<a target="_blank" rel="noopener" href="https://github.com/scrapy-plugins/scrapy-splash#configuration">https://github.com/scrapy-plugins/scrapy-splash#configuration</a><br>Splash 官方文档：<a target="_blank" rel="noopener" href="http://splash.readthedocs.io/">http://splash.readthedocs.io</a></p>
+<p>由于相关前置包 Splash 需要依赖docker环境所以暂时先不配置，后续按需配置。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+              <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"><i class="fa fa-tag"></i> 爬虫</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/09/05/hexo-config/" rel="prev" title="hexo优化配置">
+                  <i class="fa fa-chevron-left"></i> hexo优化配置
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/09/19/PythonWebSpider2/" rel="next" title="Python网络爬虫入门(二) 基础库的使用">
+                  Python网络爬虫入门(二) 基础库的使用 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhxs</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" integrity="sha256-jTIdiMuX/e3DGJUGwl3pKSxuc6YOuqtJYkM0bGQESA4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zxs94.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="应用背景因为项目需求导致需要连接多个数据源，可能为Mysql及其他源，所以需要在项目中配置多数据源，来达到执行不同业务的时候切换不同的数据源。 参考了很多资料，结合应用本身，决定使用配置类来配置动态数据源，通过配置AOP在service层上配置切点来控制数据源的切换。 1.动态数据源 DynamicDataSource.java首先定义一个动态数据源类 1234567public class Dy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot之多数据源配置">
+<meta property="og:url" content="https://zxs94.github.io/2019/07/03/SpringBootDataSource/index.html">
+<meta property="og:site_name" content="Phantom">
+<meta property="og:description" content="应用背景因为项目需求导致需要连接多个数据源，可能为Mysql及其他源，所以需要在项目中配置多数据源，来达到执行不同业务的时候切换不同的数据源。 参考了很多资料，结合应用本身，决定使用配置类来配置动态数据源，通过配置AOP在service层上配置切点来控制数据源的切换。 1.动态数据源 DynamicDataSource.java首先定义一个动态数据源类 1234567public class Dy">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-07-03T06:14:44.000Z">
+<meta property="article:modified_time" content="2019-09-05T08:57:54.000Z">
+<meta property="article:author" content="zhxs">
+<meta property="article:tag" content="多数据源">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://zxs94.github.io/2019/07/03/SpringBootDataSource/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://zxs94.github.io/2019/07/03/SpringBootDataSource/","path":"2019/07/03/SpringBootDataSource/","title":"SpringBoot之多数据源配置"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>SpringBoot之多数据源配置 | Phantom</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Phantom</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">应用背景</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%8A%A8%E6%80%81%E6%95%B0%E6%8D%AE%E6%BA%90-DynamicDataSource-java"><span class="nav-number">1.1.</span> <span class="nav-text">1.动态数据源 DynamicDataSource.java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%88%87%E6%8D%A2%E6%95%B0%E6%8D%AE%E6%BA%90%E7%BA%BF%E7%A8%8B%E7%B1%BB-DataSourceType-java"><span class="nav-number">1.2.</span> <span class="nav-text">2.切换数据源线程类 DataSourceType.java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E9%85%8D%E7%BD%AE%E7%B1%BB-DataSourceConfig-java"><span class="nav-number">1.3.</span> <span class="nav-text">3.配置类 DataSourceConfig.java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-AOP%E7%B1%BB-DataSourceAop-java"><span class="nav-number">1.4.</span> <span class="nav-text">4.AOP类 DataSourceAop.java</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="zhxs"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">zhxs</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zxs94.github.io/2019/07/03/SpringBootDataSource/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="zhxs">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantom">
+      <meta itemprop="description" content="">
+    </span>
+    
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="SpringBoot之多数据源配置 | Phantom">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SpringBoot之多数据源配置
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-07-03 14:14:44" itemprop="dateCreated datePublished" datetime="2019-07-03T14:14:44+08:00">2019-07-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2019-09-05 16:57:54" itemprop="dateModified" datetime="2019-09-05T16:57:54+08:00">2019-09-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/SpringBoot/" itemprop="url" rel="index"><span itemprop="name">SpringBoot</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="应用背景"><a href="#应用背景" class="headerlink" title="应用背景"></a>应用背景</h1><p>因为项目需求导致需要连接多个数据源，可能为Mysql及其他源，所以需要在项目中配置多数据源，来达到执行不同业务的时候切换不同的数据源。</p>
+<p>参考了很多资料，结合应用本身，决定使用配置类来配置动态数据源，通过配置AOP在service层上配置切点来控制数据源的切换。</p>
+<h2 id="1-动态数据源-DynamicDataSource-java"><a href="#1-动态数据源-DynamicDataSource-java" class="headerlink" title="1.动态数据源 DynamicDataSource.java"></a>1.动态数据源 DynamicDataSource.java</h2><p>首先定义一个动态数据源类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DynamicDataSource</span> <span class="keyword">extends</span> <span class="title class_">AbstractRoutingDataSource</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> Object <span class="title function_">determineCurrentLookupKey</span><span class="params">()</span> &#123;</span><br><span class="line">        DataSourceType.<span class="type">DataBaseType</span> <span class="variable">dataBaseType</span> <span class="operator">=</span> DataSourceType.getDataBaseType();</span><br><span class="line">        <span class="keyword">return</span> dataBaseType;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<h2 id="2-切换数据源线程类-DataSourceType-java"><a href="#2-切换数据源线程类-DataSourceType-java" class="headerlink" title="2.切换数据源线程类 DataSourceType.java"></a>2.切换数据源线程类 DataSourceType.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DataSourceType</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">DataBaseType</span> &#123;</span><br><span class="line">        DATA1, DATA2</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用ThreadLocal保证线程安全</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ThreadLocal&lt;DataBaseType&gt; TYPE = <span class="keyword">new</span> <span class="title class_">ThreadLocal</span>&lt;DataBaseType&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 往当前线程里设置数据源类型</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">setDataBaseType</span><span class="params">(DataBaseType dataBaseType)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (dataBaseType == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NullPointerException</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        System.err.println(<span class="string">&quot;[将当前数据源改为]：&quot;</span> + dataBaseType);</span><br><span class="line">        TYPE.set(dataBaseType);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取数据源类型</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> DataBaseType <span class="title function_">getDataBaseType</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">DataBaseType</span> <span class="variable">dataBaseType</span> <span class="operator">=</span> TYPE.get() == <span class="literal">null</span> ? DataBaseType.DATA1 : TYPE.get();</span><br><span class="line">        System.err.println(<span class="string">&quot;[当前数据源]：&quot;</span> + dataBaseType);</span><br><span class="line">        <span class="keyword">return</span> dataBaseType;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 清空数据类型</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">clearDataBaseType</span><span class="params">()</span> &#123;</span><br><span class="line">        TYPE.remove();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-配置类-DataSourceConfig-java"><a href="#3-配置类-DataSourceConfig-java" class="headerlink" title="3.配置类 DataSourceConfig.java"></a>3.配置类 DataSourceConfig.java</h2><p>用来配置包扫描 自定义sqlSessionFactory </p>
+<p>@Configuration 代表springboot加载配置，因为手动定义数据源，所以需要在springboot的启动类中添加注解防止重复实例，还需要取消启动类中的包扫描配置。<br>@MapperScan 填充值为dao包或者mapper接口包名</p>
+<p><font color="red">在启动类中添加注解</font><br>@SpringBootApplication(exclude &#x3D; {DataSourceAutoConfiguration.class,DruidDataSourceAutoConfigure.class})</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@MapperScan(basePackages = &quot;com.xxx.xxx.mapper&quot;, sqlSessionFactoryRef = &quot;SqlSessionFactory&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DataSourceConfig</span> &#123;</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> Environment env;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 默认数据源</span></span><br><span class="line">	<span class="comment">// 通过配置文件创建数据源 此处使用自定义的配置</span></span><br><span class="line">    <span class="meta">@Primary</span></span><br><span class="line">    <span class="meta">@Bean(name = &quot;test1DataSource&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> DataSource <span class="title function_">getDateSource1</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    	<span class="type">Properties</span> <span class="variable">props</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Properties</span>();</span><br><span class="line">    	props.put(<span class="string">&quot;type&quot;</span>, env.getProperty(<span class="string">&quot;spring.datasource.test1.type&quot;</span>));</span><br><span class="line">    	props.put(<span class="string">&quot;driverClassName&quot;</span>, env.getProperty(<span class="string">&quot;spring.datasource.test1.driver-class-name&quot;</span>));</span><br><span class="line">    	props.put(<span class="string">&quot;url&quot;</span>, env.getProperty(<span class="string">&quot;spring.datasource.test1.url&quot;</span>));</span><br><span class="line">    	props.put(<span class="string">&quot;username&quot;</span>, env.getProperty(<span class="string">&quot;spring.datasource.test1.username&quot;</span>));</span><br><span class="line">    	props.put(<span class="string">&quot;password&quot;</span>, env.getProperty(<span class="string">&quot;spring.datasource.test1.password&quot;</span>));</span><br><span class="line">        <span class="keyword">return</span> DruidDataSourceFactory.createDataSource(props);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Bean(name = &quot;test2DataSource&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> DataSource <span class="title function_">getDateSource2</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    	<span class="type">Properties</span> <span class="variable">props</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Properties</span>();</span><br><span class="line">    	props.put(<span class="string">&quot;type&quot;</span>, env.getProperty(<span class="string">&quot;spring.datasource.test2.type&quot;</span>));</span><br><span class="line">    	props.put(<span class="string">&quot;driverClassName&quot;</span>, env.getProperty(<span class="string">&quot;spring.datasource.test2.driver-class-name&quot;</span>));</span><br><span class="line">    	props.put(<span class="string">&quot;url&quot;</span>, env.getProperty(<span class="string">&quot;spring.datasource.test2.url&quot;</span>));</span><br><span class="line">    	props.put(<span class="string">&quot;username&quot;</span>, env.getProperty(<span class="string">&quot;spring.datasource.test2.username&quot;</span>));</span><br><span class="line">    	props.put(<span class="string">&quot;password&quot;</span>, env.getProperty(<span class="string">&quot;spring.datasource.test2.password&quot;</span>));</span><br><span class="line">        <span class="keyword">return</span> DruidDataSourceFactory.createDataSource(props);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Bean(name = &quot;dynamicDataSource&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> DynamicDataSource <span class="title function_">DataSource</span><span class="params">(<span class="meta">@Qualifier(&quot;test1DataSource&quot;)</span> DataSource test1DataSource,</span></span><br><span class="line"><span class="params">            <span class="meta">@Qualifier(&quot;test2DataSource&quot;)</span> DataSource test2DataSource)</span> &#123;</span><br><span class="line">        Map&lt;Object, Object&gt; targetDataSource = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        targetDataSource.put(DataSourceType.DataBaseType.DATA1, test1DataSource);</span><br><span class="line">        targetDataSource.put(DataSourceType.DataBaseType.DATA2, test2DataSource);</span><br><span class="line">        <span class="type">DynamicDataSource</span> <span class="variable">dataSource</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DynamicDataSource</span>();</span><br><span class="line">        dataSource.setTargetDataSources(targetDataSource);</span><br><span class="line">        dataSource.setDefaultTargetDataSource(test1DataSource);</span><br><span class="line">        <span class="keyword">return</span> dataSource;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Bean(name = &quot;SqlSessionFactory&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> SqlSessionFactory <span class="title function_">test1SqlSessionFactory</span><span class="params">(<span class="meta">@Qualifier(&quot;dynamicDataSource&quot;)</span> DataSource dynamicDataSource)</span></span><br><span class="line">            <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">SqlSessionFactoryBean</span> <span class="variable">bean</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SqlSessionFactoryBean</span>();</span><br><span class="line">        bean.setDataSource(dynamicDataSource);</span><br><span class="line">        bean.setMapperLocations(</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">PathMatchingResourcePatternResolver</span>().getResources(<span class="string">&quot;classpath*:mapper/*.xml&quot;</span>));</span><br><span class="line">        <span class="keyword">return</span> bean.getObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-AOP类-DataSourceAop-java"><a href="#4-AOP类-DataSourceAop-java" class="headerlink" title="4.AOP类 DataSourceAop.java"></a>4.AOP类 DataSourceAop.java</h2><p>通过配置aop切点来切换数据源，此处使用简单的aop配置 只配置切点和方法执行前切换数据源。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DataSourceAop</span> &#123;</span><br><span class="line">	<span class="comment">// 配置切点</span></span><br><span class="line">	<span class="meta">@Pointcut(&quot;execution(* com.xxx.xxx..*.*(..))&quot;)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">dataSourcePointCut</span><span class="params">()</span> &#123;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Before(&quot;dataSourcePointCut()&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setDataSource2test01</span><span class="params">()</span> &#123;</span><br><span class="line">        System.err.println(<span class="string">&quot;DATA1业务&quot;</span>);</span><br><span class="line">        DataSourceType.setDataBaseType(DataBaseType.DATA1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before(&quot;dataSourcePointCut()&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setDataSource2test02</span><span class="params">()</span> &#123;</span><br><span class="line">        System.err.println(<span class="string">&quot;DATA2业务&quot;</span>);</span><br><span class="line">        DataSourceType.setDataBaseType(DataBaseType.DATA2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;	</span><br></pre></td></tr></table></figure>
+
+<p>配置完成后启动项目，在响应切点配置方法的执行前会输出切换的提示。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[当前数据源]：DATA1</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/" rel="tag"><i class="fa fa-tag"></i> 多数据源</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/07/04/SpringBootQuartz/" rel="next" title="SpringBoot整合Quartz(一)">
+                  SpringBoot整合Quartz(一) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhxs</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
