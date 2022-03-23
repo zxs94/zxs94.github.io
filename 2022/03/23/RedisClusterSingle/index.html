@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/xisuo.jpeg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/xisuo.jpeg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" integrity="sha256-jTIdiMuX/e3DGJUGwl3pKSxuc6YOuqtJYkM0bGQESA4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zxs94.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="实践场景由于公司原因只能使用4以下的redis版本进行投产，所以记录下redis-3.2.8的单节点集群搭建实践过程。 1.进入测试服务器redis-3.2.8目录下2.创建conf目录用于存放集群配置文件redis-3.2.8目录下创建  123456redis-3.2.8&#x2F;conf&#x2F;6379redis-3.2.8&#x2F;conf&#x2F;6378redis-3.2.8&#x2F;conf&#x2F;6377redis-3.2.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis实践之单点集群搭建">
+<meta property="og:url" content="https://zxs94.github.io/2022/03/23/RedisClusterSingle/index.html">
+<meta property="og:site_name" content="Phantom">
+<meta property="og:description" content="实践场景由于公司原因只能使用4以下的redis版本进行投产，所以记录下redis-3.2.8的单节点集群搭建实践过程。 1.进入测试服务器redis-3.2.8目录下2.创建conf目录用于存放集群配置文件redis-3.2.8目录下创建  123456redis-3.2.8&#x2F;conf&#x2F;6379redis-3.2.8&#x2F;conf&#x2F;6378redis-3.2.8&#x2F;conf&#x2F;6377redis-3.2.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zxs94.github.io/2022/03/23/RedisClusterSingle/1.png">
+<meta property="article:published_time" content="2022-03-23T07:38:01.000Z">
+<meta property="article:modified_time" content="2022-03-23T07:49:47.691Z">
+<meta property="article:author" content="zhxs">
+<meta property="article:tag" content="redis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zxs94.github.io/2022/03/23/RedisClusterSingle/1.png">
+
+
+<link rel="canonical" href="https://zxs94.github.io/2022/03/23/RedisClusterSingle/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://zxs94.github.io/2022/03/23/RedisClusterSingle/","path":"2022/03/23/RedisClusterSingle/","title":"Redis实践之单点集群搭建"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Redis实践之单点集群搭建 | Phantom</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Phantom</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E8%B7%B5%E5%9C%BA%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">实践场景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E8%BF%9B%E5%85%A5%E6%B5%8B%E8%AF%95%E6%9C%8D%E5%8A%A1%E5%99%A8redis-3-2-8%E7%9B%AE%E5%BD%95%E4%B8%8B"><span class="nav-number">2.</span> <span class="nav-text">1.进入测试服务器redis-3.2.8目录下</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E5%88%9B%E5%BB%BAconf%E7%9B%AE%E5%BD%95%E7%94%A8%E4%BA%8E%E5%AD%98%E6%94%BE%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">2.创建conf目录用于存放集群配置文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9"><span class="nav-number">4.</span> <span class="nav-text">3.配置文件修改</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E5%85%B3%E4%BA%8E%E9%9B%86%E7%BE%A4%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">5.</span> <span class="nav-text">4.关于集群的配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-%E5%A4%8D%E5%88%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">5.复制配置文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-%E5%90%AF%E5%8A%A8redis%E5%AE%9E%E4%BE%8B"><span class="nav-number">7.</span> <span class="nav-text">6.启动redis实例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-%E9%9B%86%E7%BE%A4%E5%90%AF%E5%8A%A8%E6%9D%A1%E4%BB%B6"><span class="nav-number">8.</span> <span class="nav-text">7.集群启动条件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-%E9%99%84%E4%B8%8A%E5%87%A0%E5%BC%A0%E5%88%9B%E5%BB%BA%E9%9B%86%E7%BE%A4%E7%9A%84%E6%88%AA%E5%9B%BE"><span class="nav-number">9.</span> <span class="nav-text">8.附上几张创建集群的截图</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-%E9%87%8D%E5%90%AF%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%EF%BC%88%E8%B8%A9%E5%9D%91%EF%BC%89"><span class="nav-number">10.</span> <span class="nav-text">9.重启注意事项（踩坑）</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="zhxs"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">zhxs</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://zxs94.github.io/2022/03/23/RedisClusterSingle/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="zhxs">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phantom">
+      <meta itemprop="description" content="">
+    </span>
+    
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Redis实践之单点集群搭建 | Phantom">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Redis实践之单点集群搭建
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-03-23 15:38:01 / 修改时间：15:49:47" itemprop="dateCreated datePublished" datetime="2022-03-23T15:38:01+08:00">2022-03-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h5 id="实践场景"><a href="#实践场景" class="headerlink" title="实践场景"></a>实践场景</h5><p>由于公司原因只能使用4以下的redis版本进行投产，所以记录下redis-3.2.8的单节点集群搭建实践过程。</p>
+<h5 id="1-进入测试服务器redis-3-2-8目录下"><a href="#1-进入测试服务器redis-3-2-8目录下" class="headerlink" title="1.进入测试服务器redis-3.2.8目录下"></a>1.进入测试服务器redis-3.2.8目录下</h5><h5 id="2-创建conf目录用于存放集群配置文件"><a href="#2-创建conf目录用于存放集群配置文件" class="headerlink" title="2.创建conf目录用于存放集群配置文件"></a>2.创建conf目录用于存放集群配置文件</h5><p>redis-3.2.8目录下创建 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">redis-3.2.8/conf/6379</span><br><span class="line">redis-3.2.8/conf/6378</span><br><span class="line">redis-3.2.8/conf/6377</span><br><span class="line">redis-3.2.8/conf/6376</span><br><span class="line">redis-3.2.8/conf/6375</span><br><span class="line">redis-3.2.8/conf/6374</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-配置文件修改"><a href="#3-配置文件修改" class="headerlink" title="3.配置文件修改"></a>3.配置文件修改</h5><p>这里举例6379的配置文件</p>
+<p>配置为127.0.0.1只能本地支持不能远程连接，所以修改为0.0.0.0,出于安全考虑也可以配置需要连接的ip用空格间隔</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">50 # ~~~ WARNING ~~~ If the computer running Redis is directly exposed to the</span><br><span class="line">51 # internet, binding to all the interfaces is dangerous and will expose the</span><br><span class="line">52 # instance to everybody on the internet. So by default we uncomment the</span><br><span class="line">53 # following bind directive, that will force Redis to listen only into</span><br><span class="line">54 # the IPv4 lookback interface address (this means Redis will be able to</span><br><span class="line">55 # accept connections only from clients running into the same computer it</span><br><span class="line">56 # is running).</span><br><span class="line">57 #</span><br><span class="line">58 # IF YOU ARE SURE YOU WANT YOUR INSTANCE TO LISTEN TO ALL THE INTERFACES</span><br><span class="line">59 # JUST COMMENT THE FOLLOWING LINE.</span><br><span class="line">60 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">61 #bind 127.0.0.1</span><br><span class="line">62 bind 0.0.0.0</span><br></pre></td></tr></table></figure>
+
+<p>保护模式配置 配合bind和密码使用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">64 # Protected mode is a layer of security protection, in order to avoid that</span><br><span class="line">65 # Redis instances left open on the internet are accessed and exploited.</span><br><span class="line">66 #</span><br><span class="line">67 # When protected mode is on and if:</span><br><span class="line">68 #</span><br><span class="line">69 # 1) The server is not binding explicitly to a set of addresses using the</span><br><span class="line">70 #    &quot;bind&quot; directive.</span><br><span class="line">71 # 2) No password is configured.</span><br><span class="line">72 #</span><br><span class="line">73 # The server only accepts connections from clients connecting from the</span><br><span class="line">74 # IPv4 and IPv6 loopback addresses 127.0.0.1 and ::1, and from Unix domain</span><br><span class="line">75 # sockets.</span><br><span class="line">76 #</span><br><span class="line">77 # By default protected mode is enabled. You should disable it only if</span><br><span class="line">78 # you are sure you want clients from other hosts to connect to Redis</span><br><span class="line">79 # even if no authentication is configured, nor a specific set of interfaces</span><br><span class="line">80 # are explicitly listed using the &quot;bind&quot; directive.</span><br><span class="line">81 protected-mode yes</span><br></pre></td></tr></table></figure>
+
+<p>端口号指定6379</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">83 # Accept connections on the specified port, default is 6379 (IANA #815344).</span><br><span class="line">84 # If port 0 is specified Redis will not listen on a TCP socket.</span><br><span class="line">85 port 6379</span><br></pre></td></tr></table></figure>
+
+<p>打开后台运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127 # By default Redis does not run as a daemon. Use &#x27;yes&#x27; if you need it.</span><br><span class="line">128 # Note that Redis will write a pid file in /var/run/redis.pid when daemonized.</span><br><span class="line">129 daemonize yes</span><br></pre></td></tr></table></figure>
+
+<p>进程号保存位置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">142 # If a pid file is specified, Redis writes it where specified at startup</span><br><span class="line">143 # and removes it at exit.</span><br><span class="line">144 #</span><br><span class="line">145 # When the server runs non daemonized, no pid file is created if none is</span><br><span class="line">146 # specified in the configuration. When the server is daemonized, the pid file</span><br><span class="line">147 # is used even if not specified, defaulting to &quot;/var/run/redis.pid&quot;.</span><br><span class="line">148 #</span><br><span class="line">149 # Creating a pid file is best effort: if Redis is not able to create it</span><br><span class="line">150 # nothing bad happens, the server will start and run normally.</span><br><span class="line">151 pidfile /var/run/redis_6379.pid</span><br></pre></td></tr></table></figure>
+
+<p>日志保存位置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">161 # Specify the log file name. Also the empty string can be used to force</span><br><span class="line">162 # Redis to log on the standard output. Note that if you use standard</span><br><span class="line">163 # output for logging but daemonize, logs will be sent to /dev/null</span><br><span class="line">164 logfile /mysql/redis-3.2.8/conf/6379/6379.log</span><br></pre></td></tr></table></figure>
+
+<p>设置连接密码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">470 # Require clients to issue AUTH &lt;PASSWORD&gt; before processing any other</span><br><span class="line">471 # commands.  This might be useful in environments in which you do not trust</span><br><span class="line">472 # others with access to the host running redis-server.</span><br><span class="line">473 #</span><br><span class="line">474 # This should stay commented out for backward compatibility and because most</span><br><span class="line">475 # people do not need auth (e.g. they run their own servers).</span><br><span class="line">476 #</span><br><span class="line">477 # Warning: since Redis is pretty fast an outside user can try up to</span><br><span class="line">478 # 150k passwords per second against a good box. This means that you should</span><br><span class="line">479 # use a very strong password otherwise it will be very easy to break.</span><br><span class="line">480 #</span><br><span class="line">481 requirepass Py%Kj278hU</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-关于集群的配置"><a href="#4-关于集群的配置" class="headerlink" title="4.关于集群的配置"></a>4.关于集群的配置</h5><p>是否使用集群</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">711 ################################ REDIS CLUSTER  ###############################</span><br><span class="line">712 #</span><br><span class="line">713 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</span><br><span class="line">714 # WARNING EXPERIMENTAL: Redis Cluster is considered to be stable code, however</span><br><span class="line">715 # in order to mark it as &quot;mature&quot; we need to wait for a non trivial percentage</span><br><span class="line">716 # of users to deploy it in production.</span><br><span class="line">717 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</span><br><span class="line">718 #</span><br><span class="line">719 # Normal Redis instances can&#x27;t be part of a Redis Cluster; only nodes that are</span><br><span class="line">720 # started as cluster nodes can. In order to start a Redis instance as a</span><br><span class="line">721 # cluster node enable the cluster support uncommenting the following:</span><br><span class="line">722 #</span><br><span class="line">723 cluster-enabled yes</span><br></pre></td></tr></table></figure>
+
+<p>集群配置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">725 # Every cluster node has a cluster configuration file. This file is not</span><br><span class="line">726 # intended to be edited by hand. It is created and updated by Redis nodes.</span><br><span class="line">727 # Every Redis Cluster node requires a different cluster configuration file.</span><br><span class="line">728 # Make sure that instances running in the same system do not have</span><br><span class="line">729 # overlapping cluster configuration file names.</span><br><span class="line">730 #</span><br><span class="line">731 cluster-config-file nodes-6379.conf</span><br></pre></td></tr></table></figure>
+
+<h5 id="5-复制配置文件"><a href="#5-复制配置文件" class="headerlink" title="5.复制配置文件"></a>5.复制配置文件</h5><p>复制6379的配置到其他5个配置文件中，修改端口号的差异部分。</p>
+<h5 id="6-启动redis实例"><a href="#6-启动redis实例" class="headerlink" title="6.启动redis实例"></a>6.启动redis实例</h5><p>进入到reids命令目录下执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[mysql@i-p0v0xuma src]$ ./redis-server ../conf/6379/6379.conf </span><br><span class="line">[mysql@i-p0v0xuma src]$ ./redis-server ../conf/6378/6378.conf </span><br><span class="line">[mysql@i-p0v0xuma src]$ ./redis-server ../conf/6377/6377.conf </span><br><span class="line">[mysql@i-p0v0xuma src]$ ./redis-server ../conf/6376/6376.conf </span><br><span class="line">[mysql@i-p0v0xuma src]$ ./redis-server ../conf/6375/6375.conf </span><br><span class="line">[mysql@i-p0v0xuma src]$ ./redis-server ../conf/6374/6374.conf </span><br></pre></td></tr></table></figure>
+
+<p>可以查询以及启动的redis集群进程</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql     5018     1  0 17:01 ?        00:00:04 ./redis-server 0.0.0.0:6378 [cluster]</span><br><span class="line">mysql     5031     1  0 17:01 ?        00:00:04 ./redis-server 0.0.0.0:6377 [cluster]</span><br><span class="line">mysql     5044     1  0 17:01 ?        00:00:04 ./redis-server 0.0.0.0:6376 [cluster]</span><br><span class="line">mysql     5080     1  0 17:01 ?        00:00:04 ./redis-server 0.0.0.0:6375 [cluster]</span><br><span class="line">mysql     5093     1  0 17:01 ?        00:00:04 ./redis-server 0.0.0.0:6374 [cluster]</span><br><span class="line">mysql    20150     1  0 18:26 ?        00:00:00 ./redis-server 0.0.0.0:6379 [cluster]</span><br></pre></td></tr></table></figure>
+
+<p>执行创建集群命令redis4版本以下,创建集群ip要用实际ip</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./redis-trib.rb create --replicas 1 127.0.0.1:6379 127.0.0.1:6378 \</span><br><span class="line">127.0.0.1:6377 127.0.0.1:6376 127.0.0.1:6375 127.0.0.1:6374</span><br></pre></td></tr></table></figure>
+
+<p>由于redis5以下的版本依赖ruby所以需要有权限安装执行相关插件启动</p>
+<h5 id="7-集群启动条件"><a href="#7-集群启动条件" class="headerlink" title="7.集群启动条件"></a>7.集群启动条件</h5><p>1.安装ruby</p>
+<p>yum -y install ruby ruby-devel rubygems rpm-build </p>
+<p>2.gem 安装 redis</p>
+<p>手动上传 gem源下载的redis-3.2.2.gem</p>
+<p>gem install redis-3.2.2.gem</p>
+<p>redis-trib.rb脚本修改</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> 94     def connect(o=&#123;&#125;)</span><br><span class="line"> 95         return if @r</span><br><span class="line"> 96         print &quot;Connecting to node #&#123;self&#125;: &quot; if $verbose</span><br><span class="line"> 97         STDOUT.flush</span><br><span class="line"> 98         begin</span><br><span class="line"> 99             @r = Redis.new(:host =&gt; @info[:host], :port =&gt; @info[:port], :timeout =&gt; 60, :password =&gt; &#x27;密码&#x27;)</span><br><span class="line">100             @r.ping</span><br><span class="line">101         rescue</span><br><span class="line">102             xputs &quot;[ERR] Sorry, can&#x27;t connect to node #&#123;self&#125;&quot;</span><br><span class="line">103             exit 1 if o[:abort]</span><br><span class="line">104             @r = nil</span><br><span class="line">105         end</span><br><span class="line">106         xputs &quot;OK&quot; if $verbose</span><br><span class="line">107     end</span><br></pre></td></tr></table></figure>
+
+<h5 id="8-附上几张创建集群的截图"><a href="#8-附上几张创建集群的截图" class="headerlink" title="8.附上几张创建集群的截图"></a>8.附上几张创建集群的截图</h5><img src="/2022/03/23/RedisClusterSingle/1.png" style="zoom:50%;">
+![](RedisClusterSingle/2.png)
+
+<h5 id="9-重启注意事项（踩坑）"><a href="#9-重启注意事项（踩坑）" class="headerlink" title="9.重启注意事项（踩坑）"></a>9.重启注意事项（踩坑）</h5><p>1.修改配置文件 cluster-enabled yes  723行<br>2.分别启动6个实例 集群模型<br>3.登录每个节点 执行  否则可能会保slot的err<br>flushall<br>cluster reset<br>4.执行shell脚本创建集群</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/redis/" rel="tag"><i class="fa fa-tag"></i> redis</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/04/13/RedisBasics/" rel="prev" title="Redis基础">
+                  <i class="fa fa-chevron-left"></i> Redis基础
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhxs</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
