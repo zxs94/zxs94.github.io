@@ -18,37 +18,18 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" integrity="sha256-jTIdiMuX/e3DGJUGwl3pKSxuc6YOuqtJYkM0bGQESA4=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"zxs94.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"zxs94.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="airflow安装及配置说明：该环境不需要自己装redis、mysql，但需要能够访问 建议可以创建一个单独数据库，存放airflow相关表（不然会显得比较乱） 首先确保有bzip2功能 如果没有需要获取,不然安装时会出现错误： sudo yum install -y bzip2 离线安装anaconda3,附带所有需要依赖的包，包通过拷贝其他site-packages的方式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Airflow生产实践">
+<meta property="og:title" content="Airflow生产实践（一）安装配置">
 <meta property="og:url" content="https://zxs94.github.io/2022/03/23/AirflowProduct/index.html">
 <meta property="og:site_name" content="Phantom">
 <meta property="og:description" content="airflow安装及配置说明：该环境不需要自己装redis、mysql，但需要能够访问 建议可以创建一个单独数据库，存放airflow相关表（不然会显得比较乱） 首先确保有bzip2功能 如果没有需要获取,不然安装时会出现错误： sudo yum install -y bzip2 离线安装anaconda3,附带所有需要依赖的包，包通过拷贝其他site-packages的方式">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://zxs94.github.io/2022/03/23/AirflowProduct/1.png">
-<meta property="og:image" content="https://zxs94.github.io/2022/03/23/AirflowProduct/2.png">
-<meta property="og:image" content="https://zxs94.github.io/2022/03/23/AirflowProduct/3.png">
-<meta property="og:image" content="https://zxs94.github.io/2022/03/23/AirflowProduct/4.png">
-<meta property="og:image" content="https://zxs94.github.io/2022/03/23/AirflowProduct/5.png">
-<meta property="og:image" content="https://zxs94.github.io/2022/03/23/AirflowProduct/6.png">
-<meta property="og:image" content="https://zxs94.github.io/2022/03/23/AirflowProduct/7.png">
-<meta property="og:image" content="https://zxs94.github.io/2022/03/23/AirflowProduct/8.png">
-<meta property="og:image" content="https://zxs94.github.io/2022/03/23/AirflowProduct/9.png">
-<meta property="og:image" content="https://zxs94.github.io/2022/03/23/AirflowProduct/10.png">
-<meta property="og:image" content="https://zxs94.github.io/2022/03/23/AirflowProduct/11.png">
-<meta property="og:image" content="https://zxs94.github.io/2022/03/23/AirflowProduct/12.png">
-<meta property="og:image" content="https://zxs94.github.io/2022/03/23/AirflowProduct/13.png">
-<meta property="og:image" content="https://zxs94.github.io/2022/03/23/AirflowProduct/14.png">
-<meta property="og:image" content="https://zxs94.github.io/2022/03/23/AirflowProduct/15.png">
-<meta property="og:image" content="https://zxs94.github.io/2022/03/23/AirflowProduct/16.png">
-<meta property="og:image" content="https://zxs94.github.io/2022/03/23/AirflowProduct/17.png">
-<meta property="og:image" content="https://zxs94.github.io/2022/03/23/AirflowProduct/18.png">
-<meta property="og:image" content="https://zxs94.github.io/2022/03/23/AirflowProduct/19.png">
-<meta property="og:image" content="https://zxs94.github.io/2022/03/23/AirflowProduct/20.png">
 <meta property="article:published_time" content="2022-03-23T08:45:39.000Z">
-<meta property="article:modified_time" content="2022-03-23T09:31:41.148Z">
+<meta property="article:modified_time" content="2022-03-24T01:06:29.965Z">
 <meta property="article:author" content="zhxs">
 <meta property="article:tag" content="Airflow">
 <meta name="twitter:card" content="summary">
@@ -59,10 +40,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://zxs94.github.io/2022/03/23/AirflowProduct/","path":"2022/03/23/AirflowProduct/","title":"Airflow生产实践"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://zxs94.github.io/2022/03/23/AirflowProduct/","path":"2022/03/23/AirflowProduct/","title":"Airflow生产实践（一）安装配置"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Airflow生产实践 | Phantom</title>
+<title>Airflow生产实践（一）安装配置 | Phantom</title>
   
 
 
@@ -142,7 +123,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#airflow%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">airflow安装及配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C%EF%BC%9A%E8%81%94%E7%BD%91%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.1.</span> <span class="nav-text">准备工作：联网下载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A6%BB%E7%BA%BF%E6%8B%B7%E8%B4%9D-%E5%B9%B6%E5%AE%89%E8%A3%85anaconda3"><span class="nav-number">1.2.</span> <span class="nav-text">离线拷贝,并安装anaconda3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%85%BC%E5%AE%B9"><span class="nav-number">1.3.</span> <span class="nav-text">问题兼容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%B7%E8%B4%9Dsite-packages%EF%BC%88%E5%85%B3%E9%94%AE%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">拷贝site-packages（关键）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEairflow"><span class="nav-number">1.5.</span> <span class="nav-text">配置airflow</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#mysql%E6%93%8D%E4%BD%9C"><span class="nav-number">1.5.1.</span> <span class="nav-text">mysql操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#redis%E6%93%8D%E4%BD%9C"><span class="nav-number">1.5.2.</span> <span class="nav-text">redis操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#airflow%E9%A2%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.5.3.</span> <span class="nav-text">airflow预初始化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#airflow%E9%85%8D%E7%BD%AE"><span class="nav-number">1.5.4.</span> <span class="nav-text">airflow配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#airflow%E5%88%9D%E5%A7%8B%E5%8C%96%E5%8F%8A%E5%AF%86%E7%A0%81%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.5.5.</span> <span class="nav-text">airflow初始化及密码设置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%87%8D%E5%90%AF%E6%96%87%E4%BB%B6"><span class="nav-number">1.5.6.</span> <span class="nav-text">配置重启文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#airflow%E6%A6%82%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text">airflow概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-airflow%E7%AE%80%E4%BB%8B"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 airflow简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Airflow%E9%87%8D%E8%A6%81%E6%A6%82%E5%BF%B5"><span class="nav-number">2.2.</span> <span class="nav-text">Airflow重要概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DAG"><span class="nav-number">2.3.</span> <span class="nav-text">DAG</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-Operators"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 Operators</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#BaseOperator"><span class="nav-number">2.4.1.</span> <span class="nav-text">BaseOperator</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#BashOperator"><span class="nav-number">2.4.2.</span> <span class="nav-text">BashOperator</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PythonOperator"><span class="nav-number">2.4.3.</span> <span class="nav-text">PythonOperator</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89Operator"><span class="nav-number">2.4.4.</span> <span class="nav-text">自定义Operator</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Task-%E4%BB%BB%E5%8A%A1"><span class="nav-number">2.5.</span> <span class="nav-text">Task (任务)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Task-Instance-%E4%BB%BB%E5%8A%A1%E5%AE%9E%E4%BE%8B"><span class="nav-number">2.6.</span> <span class="nav-text">Task Instance (任务实例)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#airflow%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">airflow操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#web%E9%A1%B5%E9%9D%A2%E6%93%8D%E4%BD%9C"><span class="nav-number">3.1.</span> <span class="nav-text">web页面操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A6%96%E9%A1%B5"><span class="nav-number">3.1.1.</span> <span class="nav-text">首页</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8F%9C%E5%8D%95%E6%A0%8F"><span class="nav-number">3.1.2.</span> <span class="nav-text">菜单栏</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DAGS%E6%93%8D%E4%BD%9C"><span class="nav-number">3.1.3.</span> <span class="nav-text">DAGS操作</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DAG%E5%BC%80%E5%8F%91%E6%93%8D%E4%BD%9C"><span class="nav-number">3.2.</span> <span class="nav-text">DAG开发操作</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#airflow%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">airflow安装及配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C%EF%BC%9A%E8%81%94%E7%BD%91%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.1.</span> <span class="nav-text">准备工作：联网下载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A6%BB%E7%BA%BF%E6%8B%B7%E8%B4%9D-%E5%B9%B6%E5%AE%89%E8%A3%85anaconda3"><span class="nav-number">1.2.</span> <span class="nav-text">离线拷贝,并安装anaconda3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%85%BC%E5%AE%B9"><span class="nav-number">1.3.</span> <span class="nav-text">问题兼容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%B7%E8%B4%9Dsite-packages%EF%BC%88%E5%85%B3%E9%94%AE%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">拷贝site-packages（关键）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEairflow"><span class="nav-number">1.5.</span> <span class="nav-text">配置airflow</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#mysql%E6%93%8D%E4%BD%9C"><span class="nav-number">1.5.1.</span> <span class="nav-text">mysql操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#redis%E6%93%8D%E4%BD%9C"><span class="nav-number">1.5.2.</span> <span class="nav-text">redis操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#airflow%E9%A2%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.5.3.</span> <span class="nav-text">airflow预初始化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#airflow%E9%85%8D%E7%BD%AE"><span class="nav-number">1.5.4.</span> <span class="nav-text">airflow配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#airflow%E5%88%9D%E5%A7%8B%E5%8C%96%E5%8F%8A%E5%AF%86%E7%A0%81%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.5.5.</span> <span class="nav-text">airflow初始化及密码设置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%87%8D%E5%90%AF%E6%96%87%E4%BB%B6"><span class="nav-number">1.5.6.</span> <span class="nav-text">配置重启文件</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -157,7 +138,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -168,7 +149,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -220,12 +201,12 @@
     </span>
     
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Airflow生产实践 | Phantom">
+      <meta itemprop="name" content="Airflow生产实践（一）安装配置 | Phantom">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Airflow生产实践
+          Airflow生产实践（一）安装配置
         </h1>
 
         <div class="post-meta-container">
@@ -235,9 +216,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-03-23 16:45:39 / 修改时间：17:31:41" itemprop="dateCreated datePublished" datetime="2022-03-23T16:45:39+08:00">2022-03-23</time>
+      <time title="创建时间：2022-03-23 16:45:39" itemprop="dateCreated datePublished" datetime="2022-03-23T16:45:39+08:00">2022-03-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-03-24 09:06:29" itemprop="dateModified" datetime="2022-03-24T09:06:29+08:00">2022-03-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -309,165 +296,7 @@
 <h5 id="配置重启文件"><a href="#配置重启文件" class="headerlink" title="配置重启文件"></a>配置重启文件</h5><p>为了方便airflow重启，可配置重启文件 restart.sh 放在airflow目录下</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">set -u</span><br><span class="line">ps -ef | grep -Ei &#x27;celeryd&#x27; | grep -v &#x27;grep&#x27; | awk &#x27;&#123;print $2&#125;&#x27; | xargs -i kill &#123;&#125;</span><br><span class="line">ps -ef | grep -Ei &#x27;airflow&#x27; | grep -v &#x27;grep&#x27; | awk &#x27;&#123;print $2&#125;&#x27; | xargs -i kill &#123;&#125;</span><br><span class="line">cd /app/mms_lhq/mms_feature/airflow/</span><br><span class="line">\#rm -f log/webserver.log</span><br><span class="line">\#rm -f log/worker.log</span><br><span class="line">nohup airflow webserver &gt;&gt;log/webserver.log 2&gt;&amp;1 &amp;</span><br><span class="line">nohup airflow scheduler &gt;&gt;log/scheduler.log 2&gt;&amp;1 &amp;</span><br><span class="line">nohup airflow celery worker &gt;&gt;log/worker.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
 
-<h3 id="airflow概述"><a href="#airflow概述" class="headerlink" title="airflow概述"></a>airflow概述</h3><h4 id="2-1-airflow简介"><a href="#2-1-airflow简介" class="headerlink" title="2.1 airflow简介"></a>2.1 airflow简介</h4><p>airflow是一个使用Python编写实现的任务管理、调度、监控工作流平台。</p>
-<ul>
-<li><p>由Airbnb开源，airflow 将workflow编排为由tasks组成的DAGs(有向无环图)</p>
-</li>
-<li><p>airflow 提供了丰富的命令行工具和简单易用的用户界面以便用户查看和操作</p>
-</li>
-<li><p>airflow提供了监控和报警系统。</p>
-</li>
-<li><p>airflow的调度依赖于crontab命令</p>
-</li>
-<li><p>与crontab相比, airflow可以直观的看到任务执行情况、任务之间的逻辑依赖关系、可以设定任务出错时邮件提醒、可以查看任务执行日志。</p>
-</li>
-</ul>
-<img src="/2022/03/23/AirflowProduct/2.png" style="zoom:50%;float:left"> 
 
- 
-
-<h4 id="Airflow重要概念"><a href="#Airflow重要概念" class="headerlink" title="Airflow重要概念"></a>Airflow重要概念</h4><p><strong>DAG</strong></p>
-<p>DAG 意为有向无循环图，在 Airflow 中则定义了整个完整的作业。同一个 DAG 中的所有 Task 拥有相同的调度时间。</p>
-<p><strong>Task</strong></p>
-<p>Task 为 DAG 中具体的作业任务，它必须存在于某一个 DAG 之中。Task 在 DAG 中配置依赖关系，跨 DAG 的依赖是可行的，****但是并不推荐****。跨 DAG 依赖会导致 DAG 图的直观性降低，并给依赖管理带来麻烦。</p>
-<p><strong>DAG Run</strong></p>
-<p>当一个 DAG 满足它的调度时间，或者被外部触发时，就会产生一个 DAG Run。可以理解为由 DAG 实例化的实例。</p>
-<p><strong>Task Instance</strong></p>
-<p>当一个 Task 被调度启动时，就会产生一个 Task Instance。可以理解为由 Task 实例化的实例。</p>
-<h4 id="DAG"><a href="#DAG" class="headerlink" title="DAG"></a>DAG</h4><p>在 Airflow 中，DAG（或者叫有向无环图）是您要运行的所有任务的集合，以反映其关系和依赖关系的方式进行组织。</p>
-<p>例如，一个简单的 DAG 可以包含三个任务：A，B 和 C.</p>
-<ul>
-<li>可以设定 A 必须在 B 可以运行之前成功运行，但 C 可以随时运行。</li>
-<li>可以设定任务 A 在 5 分钟后超时，并且 B 可以重新启动最多 5 次以防它失败。</li>
-<li>也可以设定工作流程将在每天晚上 10 点运行，但不应该在某个特定日期之前开始。</li>
-</ul>
-<p>重要的是，DAG 并不关心其组成任务的作用;它的工作是确保他们都在正确的时间，或正确的顺序，或正确处理任何意外的问题。</p>
-<p>DAG 是在标准 Python 文件中定义的，这些文件放在 Airflow 的DAG_FOLDER中。Airflow 将执行每个文件中的代码以动态构建DAG对象。 您可以拥有任意数量的 DAG，每个 DAG 都可以描述任意数量的任务。通常，每个应该对应于单个逻辑工作流。</p>
-<h4 id="2-4-Operators"><a href="#2-4-Operators" class="headerlink" title="2.4 Operators"></a>2.4 Operators</h4><p>Operator：执行某些工作的模板的类。</p>
-<p>Operators 允许生成特定类型的任务，这些任务在实例化时成为 DAG 中的任务节点。所有的 Operator 均派生自 BaseOperator，并以这种方式继承许多属性和方法。 </p>
-<p>Operator 描述工作流中的单个任务。Operator 通常（但并非总是）是原子的，这意味着他们可以独立运行，而不需要与任何其他 Operator 共享资源。DAG 将确保 Operator 以正确的顺序运行; 除了这些依赖项之外， Operator 通常独立运行。实际上，它们可以在两台完全不同的机器上运行。</p>
-<p>Operator 主要有三种类型:</p>
-<ul>
-<li>执行一项操作或在远程机器上执行一项操作。</li>
-<li>将数据从一个系统移动到另一个系统</li>
-<li>类似传感器，是一种特定类型 Operator，它将持续运行，直到满足某种条件。例如在 HDFS 或 S3 中等待特定文件到达，在 Hive 中出现特定的分区，继承自 BaseSensorOperator。</li>
-</ul>
-<p>Airflow 为许多常见任务提供 Operator ，包括：</p>
-<ul>
-<li><p>BashOperator - 执行 bash 命令</p>
-</li>
-<li><p>PythonOperator - 调用任意 Python 函数</p>
-</li>
-<li><p>EmailOperator - 发送电子邮件</p>
-</li>
-<li><p>SimpleHttpOperator - 发送 HTTP 请求</p>
-</li>
-<li><p>MySqlOperator，SqliteOperator，PostgresOperator，OracleOperator，JdbcOperator等 </p>
-</li>
-<li><p>Sensor - 等待一定时间，文件，数据库行，S3 键等…</p>
-</li>
-</ul>
-<p>除了这些基本构建块之外，还有许多特定的 Operator ： DockerOperator，HiveOperator，S3FileTransformOperator，PrestoToMysqlOperator，SlackOperator等。还可以自定义Operator。</p>
-<h5 id="BaseOperator"><a href="#BaseOperator" class="headerlink" title="BaseOperator"></a>BaseOperator</h5><p>所有的 Operator 都是从 BaseOperator 派生而来，并通过继承获得更多功能。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">airflow</span>.models.BaseOperator(task_id, owner=<span class="string">&#x27;Airflow&#x27;</span>, email=<span class="literal">None</span>, email_on_retry=<span class="literal">True</span>, email_on_failure=<span class="literal">True</span>, retries=<span class="number">0</span>, retry_delay=datetime.timedelta(<span class="number">0</span>, <span class="number">300</span>), retry_exponential_backoff=<span class="literal">False</span>, max_retry_delay=<span class="literal">None</span>, start_date=<span class="literal">None</span>, end_date=<span class="literal">None</span>, schedule_interval=<span class="literal">None</span>, depends_on_past=<span class="literal">False</span>, wait_for_downstream=<span class="literal">False</span>, dag=<span class="literal">None</span>, params=<span class="literal">None</span>, default_args=<span class="literal">None</span>, adhoc=<span class="literal">False</span>, priority_weight=<span class="number">1</span>, weight_rule=<span class="string">u&#x27;downstream&#x27;</span>, queue=<span class="string">&#x27;default&#x27;</span>, pool=<span class="literal">None</span>, sla=<span class="literal">None</span>, execution_timeout=<span class="literal">None</span>, on_failure_callback=<span class="literal">None</span>, on_success_callback=<span class="literal">None</span>, on_retry_callback=<span class="literal">None</span>, trigger_rule=<span class="string">u&#x27;all_success&#x27;</span>, resources=<span class="literal">None</span>, run_as_user=<span class="literal">None</span>, task_concurrency=<span class="literal">None</span>, executor_config=<span class="literal">None</span>, inlets=<span class="literal">None</span>, outlets=<span class="literal">None</span>, *args, **kwargs)</span><br></pre></td></tr></table></figure>
-
-
-
-<p>参数分析：</p>
-<p>task_id:任务id</p>
-<p>start_date:决定了任务第一次运行的时间</p>
-<p>airflow 将 start_date 加上 schedule_interval 作为执行日期。</p>
-<p>如果需要执行一个日常任务，比如每天下午 2 点开始执行，可以在 DAG中使用 cron 表达式:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">schedule_interval=<span class="string">&quot;0 14 * * *&quot;</span> </span><br></pre></td></tr></table></figure>
-
-<h5 id="BashOperator"><a href="#BashOperator" class="headerlink" title="BashOperator"></a>BashOperator</h5><p>使用BashOperator在Bash shell 中执行命令。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">run_this = BashOperator(</span><br><span class="line"></span><br><span class="line">  task_id=<span class="string">&#x27;run_after_loop&#x27;</span>,</span><br><span class="line"></span><br><span class="line">  bash_command=<span class="string">&#x27;echo 1&#x27;</span>,</span><br><span class="line"></span><br><span class="line">  dag=dag)</span><br></pre></td></tr></table></figure>
-
-<p>这里直接调用的是 bash 命令，其实也可以传入带路径的 bash 脚本</p>
-<h5 id="PythonOperator"><a href="#PythonOperator" class="headerlink" title="PythonOperator"></a>PythonOperator</h5><p>PythonOperator 可以调用 Python 函数，由于 Python 基本可以调用任何类型的任务，如果实在找不到合适的 Operator，将任务转为 Python 函数，再使用 PythonOperator 也是一种选择。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">print_context</span> ( ds , ** kwargs ):</span><br><span class="line"></span><br><span class="line">  pprint ( kwargs )</span><br><span class="line"></span><br><span class="line">  <span class="built_in">print</span> ( ds )</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="string">&#x27;Whatever you return gets printed in the logs&#x27;</span></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">run_this = PythonOperator (</span><br><span class="line"></span><br><span class="line">  task_id = <span class="string">&#x27;print_the_context&#x27;</span> ,</span><br><span class="line"></span><br><span class="line">  provide_context = <span class="literal">True</span> ,</span><br><span class="line"></span><br><span class="line">  python_callable = print_context ,</span><br><span class="line"></span><br><span class="line">  dag = dag )</span><br></pre></td></tr></table></figure>
-
-<p> python_callable 传入的是 Python 函数.</p>
-<h5 id="自定义Operator"><a href="#自定义Operator" class="headerlink" title="自定义Operator"></a>自定义Operator</h5><p>继承 BaseOperator 并实现 execute 方法即可。也可以继承其他Operator进行自定义实现。</p>
-<h4 id="Task-任务"><a href="#Task-任务" class="headerlink" title="Task (任务)"></a>Task (任务)</h4><p>一旦 Operator 被实例化，它就被称为“任务”。实例化在调用抽象 Operator 时定义特定值，参数化任务成为 DAG 中的节点。</p>
-<h4 id="Task-Instance-任务实例"><a href="#Task-Instance-任务实例" class="headerlink" title="Task Instance (任务实例)"></a>Task Instance (任务实例)</h4><p>任务实例表示任务的特定运行，其特征在于 dag、任务和时间点的组合。 任务实例也有一个指示状态，可以是“running”, “success”, “failed”, “skipped”, “up for retry”等。</p>
-<h3 id="airflow操作"><a href="#airflow操作" class="headerlink" title="airflow操作"></a>airflow操作</h3><h4 id="web页面操作"><a href="#web页面操作" class="headerlink" title="web页面操作"></a>web页面操作</h4><h5 id="首页"><a href="#首页" class="headerlink" title="首页"></a>首页</h5><p>首页展示DAGs,分为All,Active和Paused。其中Active下面的DAG是可以执行的DAG.</p>
-<img src="/2022/03/23/AirflowProduct/3.png" style="zoom:50%;float:left"> 
-
-<h5 id="菜单栏"><a href="#菜单栏" class="headerlink" title="菜单栏"></a>菜单栏</h5><p>菜单栏分别如下：</p>
-<p>DAGs为跳回首页。</p>
-<p>Security包含用户、角色、权限等查看功能。</p>
-<img src="/2022/03/23/AirflowProduct/4.png" style="height:200px;width:250px;float:left">
-
-
-<p>Browse包含Airflow包含的DAG Runs、Jobs、Task Instances等列表信息。</p>
-<img src="/2022/03/23/AirflowProduct/5.png" style="height:200px;width:250px;float:left">
-
-<p>Admin包含一些配置等操作。其中Variables可以配置变量，在DAG代码中可以调用。Connection包含连接配置等Url地址。</p>
-<img src="/2022/03/23/AirflowProduct/6.png" style="height:200px;width:250px;float:left">
-
-<img src="/2022/03/23/AirflowProduct/7.png" style="zoom:50%;float:left">
-
-<p>Docs中可以查看一些官方文档、API接口等。更多详细内容可以在这里查看。</p>
-<img src="/2022/03/23/AirflowProduct/8.png" style="height:200px;width:250px;float:left">
-
-<h5 id="DAGS操作"><a href="#DAGS操作" class="headerlink" title="DAGS操作"></a>DAGS操作</h5><img src="/2022/03/23/AirflowProduct/9.png" style="zoom:50%;float:left">
-
-<p>DAGs首页列表中，从左到右依次为：</p>
-<p>按钮：Active开关</p>
-<p>DAG：显示DAG名字和标签</p>
-<p>Owner所属者</p>
-<p>Runs ：最近的DAG run状态</p>
-<p>Schedule: 定时方式，None表示没有指定定时</p>
-<p>Last Run：</p>
-<p>Recent Tasks：最近的Tasks状态</p>
-<p>Actions：操作按钮，分别为手动触发DAG,刷新DAG,删除DAG(删除不要轻易操作)</p>
-<p>Links：一系列操作链接，鼠标放在按钮上可以出现操作键</p>
-<img src="/2022/03/23/AirflowProduct/10.png" style="zoom:50%;float:left">
-
-<p>依次如下：</p>
-<p>Tree View（常用）</p>
-<p>可以树状图形式查看具体DAG Task的执行状态，从左往右按时间顺序展示。</p>
-<img src="/2022/03/23/AirflowProduct/11.png" style="zoom:50%;float:left">
-
-
-<p>Graph View（常用）</p>
-<p>流程图图形形式显示DAG任务执行状态。</p>
-<img src="/2022/03/23/AirflowProduct/12.png" style="zoom:50%;float:left">
-
-<p>点击对应Task的按钮，可以弹出Task操作内容：</p>
-<p>可以按照下面选项，对Task执行Run、Clear、Mark Failed、Mark Success等操作。</p>
-<p>也可以点击最上面一行，查看实例详情，该任务具体执行命令、log日志、该Task所有实例、过滤Task只保留该Task及其上游Task。</p>
-<img src="/2022/03/23/AirflowProduct/13.png" style="zoom:30%;float:left">
-
-<p>Calendar View</p>
-<p>显示具体日期DAG的运行情况</p>
-<img src="/2022/03/23/AirflowProduct/14.png" style="zoom:30%;float:left">
-
-<p>Task Duration</p>
-<p>任务Task执行时间统计</p>
-<img src="/2022/03/23/AirflowProduct/15.png" style="zoom:25%;float:left">
-
-<p>Task Tries</p>
-<p>任务重试次数</p>
-<img src="/2022/03/23/AirflowProduct/16.png" style="zoom:25%;float:left">
-
-<img src="/2022/03/23/AirflowProduct/17.png" style="zoom:25%;float:left">
-
-<p>Gantt 甘特图</p>
-<img src="/2022/03/23/AirflowProduct/18.png" style="zoom:25%;float:left">
-
-<p>Detais </p>
-<p>DAG详细信息</p>
-<img src="/2022/03/23/AirflowProduct/19.png" style="zoom:25%;float:left">
-
-<p>Code</p>
-<p>DAG代码</p>
-<img src="/2022/03/23/AirflowProduct/20.png" style="zoom:25%;float:left">
-
-
-<h4 id="DAG开发操作"><a href="#DAG开发操作" class="headerlink" title="DAG开发操作"></a>DAG开发操作</h4><p>具体开发可参考官方示例：</p>
-<p><a target="_blank" rel="noopener" href="https://airflow.apache.org/docs/apache-airflow/2.1.3/tutorial.html#">https://airflow.apache.org/docs/apache-airflow/2.1.3/tutorial.html#</a></p>
 
     </div>
 
@@ -489,6 +318,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2022/03/24/AirflowProduct2/" rel="next" title="Airflow生产实践（二）概述">
+                  Airflow生产实践（二）概述 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
