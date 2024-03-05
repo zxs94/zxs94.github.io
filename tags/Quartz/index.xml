@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Quartz on Phantom</title>
+    <link>http://localhost:1313/tags/quartz/</link>
+    <description>Recent content in Quartz on Phantom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 04 Jul 2019 15:58:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/quartz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SpringBoot整合Quartz(三)</title>
+      <link>http://localhost:1313/posts/springbootquartz3/</link>
+      <pubDate>Thu, 04 Jul 2019 15:58:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/springbootquartz3/</guid>
+      <description>MyJobFactory.java 链接到标题 由于业务需要在执行时调用业务逻辑，所以在job类的执行时就必须注入，在开始写配置的时候，执行注入的mapper接口的方法时报了空指针异常。&#xA;查了资料发现是由于quartz的Job默认是由quartz创建的不受spring管理，所以无法注入。所以使用继承AdaptableJobFactory的自定义工厂来创建定时器。&#xA;/** * @title: 自定义Job工厂 * 解决job由quartz创建spring无法注入的问题 * @author zhangxueshan * @date:2019年6月20日 下午4:11:43 */ @Component public class MyJobFactory extends AdaptableJobFactory { @Autowired private AutowireCapableBeanFactory capableBeanFactory; protected Object createJobInstance(TriggerFiredBundle bundle) throws Exception { Object jobInstance = super.createJobInstance(bundle); capableBeanFactory.autowireBean(jobInstance); return jobInstance; } } QuartzJob.java 链接到标题 最后就是job类了，在里面写好要执行的业务逻辑，其实就是调用service层的方法。&#xA;/** * @title:定时任务类 * @author zhangxueshan * @date:2019年5月16日 下午5:15:23 */ @Service public class QuartzJob implements Job{ private static final Logger logger = LoggerFactory.</description>
+    </item>
+    <item>
+      <title>SpringBoot整合Quartz(二)</title>
+      <link>http://localhost:1313/posts/springbootquartz2/</link>
+      <pubDate>Thu, 04 Jul 2019 15:32:11 +0000</pubDate>
+      <guid>http://localhost:1313/posts/springbootquartz2/</guid>
+      <description>接上一篇文章，本文中展示在springboot项目中根据特定需求配置quartz定时任务。&#xA;POM文件中添加依赖 链接到标题 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-quartz&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; 配置类 StartQuartzJobListener.java 链接到标题 首先需要有个配置类来初始化quartz，&#xA;QuartzManager 是 quartz的具体管理类。&#xA;MyJobFactory 是一个自定义的Job工厂类，用来解决默认的Job类不支持spring注入。 TimeTaskPlanMapper 是具体的业务Mapper接口用来查询数据库中的配置。&#xA;@Configuration public class StartQuartzJobListener implements ApplicationListener&amp;lt;ContextRefreshedEvent&amp;gt; { private static final Logger logger = LoggerFactory.getLogger(StartQuartzJobListener.class); /* quartz */ @Autowired private QuartzManager quartzManager; @Autowired private MyJobFactory myJobFactory; @Resource private TimeTaskPlanMapper ttpm; /** * 初始启动quartz */ @Override public void onApplicationEvent(ContextRefreshedEvent event) { try { logger.debug(&amp;#34;查询配置表中启动的定时任务集合&amp;#34;); // 从数据库查询定时任务列表 List&amp;lt;UpperCaseMap&amp;gt; tasklist = ttpm.getTimeTasks(); for (UpperCaseMap upperCaseMap : tasklist) { int task_plan_code = (int) upperCaseMap.</description>
+    </item>
+    <item>
+      <title>SpringBoot整合Quartz(一)</title>
+      <link>http://localhost:1313/posts/springbootquartz/</link>
+      <pubDate>Thu, 04 Jul 2019 14:40:10 +0000</pubDate>
+      <guid>http://localhost:1313/posts/springbootquartz/</guid>
+      <description>在做springboot的项目中有一个特殊需求，前端动态添加定时任务，动态停启定时任务，任务内容是通过动态新增的数据来发起post请求请求python对外接口。&#xA;首先想到使用SpringBoot自带的注解@Scheduled来实现定时，通过相关注解可以配置同步、异步任务。&#xA;后来发现对这种动态的支持不是很好，所以改用quartz来实现。&#xA;Quartz 简单介绍 链接到标题 Quartz 是一个完全由 Java 编写的开源作业调度框架，为在 Java 应用程序中进行作业调度提供了简单却强大的机制。 Quartz 可以与 J2EE 与 J2SE 应用程序相结合也可以单独使用。 Quartz 允许程序开发人员根据时间的间隔来调度作业。 Quartz 实现了作业和触发器的多对多的关系，还能把多个作业与不同的触发器关联。&#xA;Quartz 核心概念 链接到标题 我们需要明白 Quartz 的几个核心概念，这样理解起 Quartz 的原理就会变得简单了。&#xA;1.Job 表示一个工作，要执行的具体内容。此接口中只有一个方法，如下：&#xA;void execute(JobExecutionContext context) 2.JobDetail 表示一个具体的可执行的调度程序，Job 是这个可执行程调度程序所要执行的内容，另外 JobDetail 还包含了这个任务调度的方案和策略。&#xA;3.Trigger 代表一个调度参数的配置，什么时候去调。&#xA;4.Scheduler 代表一个调度容器，一个调度容器中可以注册多个 JobDetail 和 Trigger。 当 Trigger 与 JobDetail 组合，就可以被 Scheduler 容器调度了。&#xA;在Springboot中整合quartz非常简单，在高版本的springboot中自带quartz支持和默认配置。&#xA;Quartz 触发器 链接到标题 在这里简单说一下quartz的触发器，在项目中需求定时要求输入开始时间，结束时间，时间间隔和单位，分析之后选择使用日历触发器来实现。&#xA;例举quartz的触发器：&#xA;SimpleTrigger 链接到标题 简单触发器，适用于短期内的循环定时任务，定义一个开始时间到达开始时间就执行定时，进行循环。 因为需求原因需要区别日期，例如当月1日10点执行，下个月1日10点在触发。简单触发器就不支持，直接间隔年月日这种类型。&#xA;CronTrigger 链接到标题 cron表达式的触发器，这种触发器支持基于日历来定时，不过需要生成cron表达式，在前端集成插件或者后台判断生成cron都比较重，我们的功能要求的比较简单所以没采用cron的触发器。&#xA;CalendarIntervalTrigger 链接到标题 日历触发器，类似于SimpleTrigger，指定从某一个时间开始，以一定的时间间隔执行的任务。 但是不同的是SimpleTrigger指定的时间间隔为毫秒，没办法指定每隔一个月执行一次（每月的时间间隔不是固定值），而CalendarIntervalTrigger支持的间隔单位有秒，分钟，小时，天，月，年，星期。</description>
+    </item>
+  </channel>
+</rss>

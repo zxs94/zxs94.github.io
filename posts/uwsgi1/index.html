@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  uWSGI入门 · Phantom
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="ZHXS">
+<meta name="description" content="什么是uWSGI？ 链接到标题 uWSGI是一个Web服务器，它实现了WSGI协议、uwsgi、http等协议。 它是一个Web服务器（如nginx，uWSGI等服务器）与web应用（如用Flask框架写的程序）通信的一种规范。
+要注意 WSGI / uwsgi / uWSGI 这三个概念的区分。
+WSGI是一种通信协议。
+uwsgi是一种线路协议而不是通信协议，在此常用于在uWSGI服务器与其他网络服务器的数据通信。
+uWSGI是实现了uwsgi和WSGI两种协议的Web服务器。
+安装uWSGI 链接到标题 pip install uwsgitop 核心配置文件 uwsgi.ini
+配置文件 链接到标题 配置文件内容如下：
+[uwsgi] master = true #启动主进程，来管理其他进程，其它的uwsgi进程都是这个master进程的子进程，如果kill这个master进程，相当于重启所有的uwsgi进程。 # 主进程的名称自定义 procname-master = project_name pythonpath = /app/project_name #在app加载前切换到当前目录， 指定运行目录 wsgi-file = /app/project_name/run.py touch-reload=/app/project_name/app/ #当文件夹下的文件发生变化时自动重载 stats = /app/model_platform/run/uwsgi.status #stats = 0.0.0.0:9000 #容器运行状态 每个work运行状态 也可以发布到一个http服务上 lazy-apps = true #在每个worker而不是master中加载应用 http = 0.0.0.0:8000 #服务发布的端口号 callable = app processes = 2 #启动2个工作进程，生成指定数目的worker/进程 threads = 2 #每个进程的线程数 buffer-size = 65536 #设置用于uwsgi包解析的内部缓存区大小为64k。默认是4k。 daemonize = /app/project_name/log/myapp_uwsgi.">
+<meta name="keywords" content="blog,developer,personal">
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="uWSGI入门"/>
+<meta name="twitter:description" content="什么是uWSGI？ 链接到标题 uWSGI是一个Web服务器，它实现了WSGI协议、uwsgi、http等协议。 它是一个Web服务器（如nginx，uWSGI等服务器）与web应用（如用Flask框架写的程序）通信的一种规范。
+要注意 WSGI / uwsgi / uWSGI 这三个概念的区分。
+WSGI是一种通信协议。
+uwsgi是一种线路协议而不是通信协议，在此常用于在uWSGI服务器与其他网络服务器的数据通信。
+uWSGI是实现了uwsgi和WSGI两种协议的Web服务器。
+安装uWSGI 链接到标题 pip install uwsgitop 核心配置文件 uwsgi.ini
+配置文件 链接到标题 配置文件内容如下：
+[uwsgi] master = true #启动主进程，来管理其他进程，其它的uwsgi进程都是这个master进程的子进程，如果kill这个master进程，相当于重启所有的uwsgi进程。 # 主进程的名称自定义 procname-master = project_name pythonpath = /app/project_name #在app加载前切换到当前目录， 指定运行目录 wsgi-file = /app/project_name/run.py touch-reload=/app/project_name/app/ #当文件夹下的文件发生变化时自动重载 stats = /app/model_platform/run/uwsgi.status #stats = 0.0.0.0:9000 #容器运行状态 每个work运行状态 也可以发布到一个http服务上 lazy-apps = true #在每个worker而不是master中加载应用 http = 0.0.0.0:8000 #服务发布的端口号 callable = app processes = 2 #启动2个工作进程，生成指定数目的worker/进程 threads = 2 #每个进程的线程数 buffer-size = 65536 #设置用于uwsgi包解析的内部缓存区大小为64k。默认是4k。 daemonize = /app/project_name/log/myapp_uwsgi."/>
+
+<meta property="og:title" content="uWSGI入门" />
+<meta property="og:description" content="什么是uWSGI？ 链接到标题 uWSGI是一个Web服务器，它实现了WSGI协议、uwsgi、http等协议。 它是一个Web服务器（如nginx，uWSGI等服务器）与web应用（如用Flask框架写的程序）通信的一种规范。
+要注意 WSGI / uwsgi / uWSGI 这三个概念的区分。
+WSGI是一种通信协议。
+uwsgi是一种线路协议而不是通信协议，在此常用于在uWSGI服务器与其他网络服务器的数据通信。
+uWSGI是实现了uwsgi和WSGI两种协议的Web服务器。
+安装uWSGI 链接到标题 pip install uwsgitop 核心配置文件 uwsgi.ini
+配置文件 链接到标题 配置文件内容如下：
+[uwsgi] master = true #启动主进程，来管理其他进程，其它的uwsgi进程都是这个master进程的子进程，如果kill这个master进程，相当于重启所有的uwsgi进程。 # 主进程的名称自定义 procname-master = project_name pythonpath = /app/project_name #在app加载前切换到当前目录， 指定运行目录 wsgi-file = /app/project_name/run.py touch-reload=/app/project_name/app/ #当文件夹下的文件发生变化时自动重载 stats = /app/model_platform/run/uwsgi.status #stats = 0.0.0.0:9000 #容器运行状态 每个work运行状态 也可以发布到一个http服务上 lazy-apps = true #在每个worker而不是master中加载应用 http = 0.0.0.0:8000 #服务发布的端口号 callable = app processes = 2 #启动2个工作进程，生成指定数目的worker/进程 threads = 2 #每个进程的线程数 buffer-size = 65536 #设置用于uwsgi包解析的内部缓存区大小为64k。默认是4k。 daemonize = /app/project_name/log/myapp_uwsgi." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/uwsgi1/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-07-31T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-07-31T00:00:00+00:00" />
+
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/uwsgi1/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.jpeg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Phantom
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">关于本站</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">分类</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">博客</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags/">标签</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">联系作者</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇬🇧</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/uwsgi1/">
+              uWSGI入门
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2019-07-31T00:00:00Z">
+                July 31, 2019
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              阅读时间：2 分钟
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa-solid fa-folder" aria-hidden="true"></i>
+    <a href="/categories/uwsgi/">Uwsgi</a></div>
+
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/uwsgi/">Uwsgi</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h1 id="什么是uwsgi">
+  什么是uWSGI？
+  <a class="heading-link" href="#%e4%bb%80%e4%b9%88%e6%98%afuwsgi">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h1>
+<p>uWSGI是一个Web服务器，它实现了WSGI协议、uwsgi、http等协议。
+它是一个Web服务器（如nginx，uWSGI等服务器）与web应用（如用Flask框架写的程序）通信的一种规范。</p>
+<p>要注意 WSGI / uwsgi / uWSGI 这三个概念的区分。<br>
+<font color="blue">WSGI</font>是一种通信协议。<br>
+<font color="blue">uwsgi</font>是一种线路协议而不是通信协议，在此常用于在uWSGI服务器与其他网络服务器的数据通信。<br>
+<font color="blue">uWSGI</font>是实现了uwsgi和WSGI两种协议的Web服务器。</p>
+<!-- more -->
+<h1 id="安装uwsgi">
+  安装uWSGI
+  <a class="heading-link" href="#%e5%ae%89%e8%a3%85uwsgi">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl">	<span class="n">pip</span> <span class="n">install</span> <span class="n">uwsgitop</span>
+</span></span></code></pre></div><p>核心配置文件 <font color = "#0080FF">uwsgi.ini</font></p>
+<h1 id="配置文件">
+  配置文件
+  <a class="heading-link" href="#%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h1>
+<p>配置文件内容如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl">	<span class="k">[uwsgi]</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="na">master</span> <span class="o">=</span> <span class="s">true
+</span></span></span><span class="line"><span class="cl"><span class="s">	#启动主进程，来管理其他进程，其它的uwsgi进程都是这个master进程的子进程，如果kill这个master进程，相当于重启所有的uwsgi进程。
+</span></span></span><span class="line"><span class="cl"><span class="s">	# 主进程的名称自定义
+</span></span></span><span class="line"><span class="cl"><span class="s">	procname-master = project_name</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="na">pythonpath</span> <span class="o">=</span> <span class="s">/app/project_name
+</span></span></span><span class="line"><span class="cl"><span class="s">	#在app加载前切换到当前目录， 指定运行目录</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="na">wsgi-file</span> <span class="o">=</span> <span class="s">/app/project_name/run.py
+</span></span></span><span class="line"><span class="cl"><span class="s">	touch-reload=/app/project_name/app/ #当文件夹下的文件发生变化时自动重载</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="na">stats</span> <span class="o">=</span> <span class="s">/app/model_platform/run/uwsgi.status
+</span></span></span><span class="line"><span class="cl"><span class="s">	#stats = 0.0.0.0:9000
+</span></span></span><span class="line"><span class="cl"><span class="s">	#容器运行状态 每个work运行状态 也可以发布到一个http服务上</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="na">lazy-apps</span> <span class="o">=</span> <span class="s">true
+</span></span></span><span class="line"><span class="cl"><span class="s">	#在每个worker而不是master中加载应用</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="na">http</span> <span class="o">=</span> <span class="s">0.0.0.0:8000
+</span></span></span><span class="line"><span class="cl"><span class="s">	#服务发布的端口号</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="na">callable</span> <span class="o">=</span> <span class="s">app</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="na">processes</span> <span class="o">=</span> <span class="s">2
+</span></span></span><span class="line"><span class="cl"><span class="s">	#启动2个工作进程，生成指定数目的worker/进程</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="na">threads</span> <span class="o">=</span> <span class="s">2
+</span></span></span><span class="line"><span class="cl"><span class="s">	#每个进程的线程数</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="na">buffer-size</span> <span class="o">=</span> <span class="s">65536
+</span></span></span><span class="line"><span class="cl"><span class="s">	#设置用于uwsgi包解析的内部缓存区大小为64k。默认是4k。</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="na">daemonize</span> <span class="o">=</span> <span class="s">/app/project_name/log/myapp_uwsgi.log
+</span></span></span><span class="line"><span class="cl"><span class="s">	# 使进程在后台运行，并将日志打到指定的日志文件或者udp服务器</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="na">log-maxsize</span> <span class="o">=</span> <span class="s">5000000
+</span></span></span><span class="line"><span class="cl"><span class="s">	#设置最大日志文件大小</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="c1"># disable-logging = true</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">#禁用请求日志记录</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="na">vacuum</span> <span class="o">=</span> <span class="s">true
+</span></span></span><span class="line"><span class="cl"><span class="s">	#当服务器退出的时候自动删除unix socket文件和pid文件。</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="na">listen</span> <span class="o">=</span> <span class="s">100
+</span></span></span><span class="line"><span class="cl"><span class="s">	#设置socket的监听队列大小（默认：100）</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="na">pidfile</span> <span class="o">=</span> <span class="s">/app/project_name/run/uwsgi.pid
+</span></span></span><span class="line"><span class="cl"><span class="s">	#指定pid文件   可以用来杀死进程 或者 重启服务</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="na">enable-threads</span> <span class="o">=</span> <span class="s">true
+</span></span></span><span class="line"><span class="cl"><span class="s">	#允许用内嵌的语言启动线程。这将允许你在app程序中产生一个子线程</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="na">reload-mercy</span> <span class="o">=</span> <span class="s">8
+</span></span></span><span class="line"><span class="cl"><span class="s">	#设置在平滑的重启（直到接收到的请求处理完才重启）一个工作子进程中，等待这个工作结束的最长秒数。这个配置会使在平滑地重启工作子进程中，如果工作进程结束时间超过了8秒就会被强行结束（忽略之前已经接收到的请求而直接结束）</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="na">max-requests</span> <span class="o">=</span> <span class="s">1000
+</span></span></span><span class="line"><span class="cl"><span class="s">	#为每个工作进程设置请求数的上限。当一个工作进程处理的请求数达到这个值，那么该工作进程就会被回收重用（重启）。你可以使用这个选项来默默地对抗内存泄漏</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="na">limit-as</span> <span class="o">=</span> <span class="s">32768
+</span></span></span><span class="line"><span class="cl"><span class="s">	#通过使用POSIX/UNIX的setrlimit()函数来限制每个uWSGI进程的虚拟内存使用数。这个配置会限制uWSGI的进程占用虚拟内存不超过32G。如果虚拟内存已经达到32G，并继续申请虚拟内存则会使程序报内存错误，本次的http请求将返回500错误。</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="na">harakiri</span> <span class="o">=</span> <span class="s">7200
+</span></span></span><span class="line"><span class="cl"><span class="s">	#一个请求花费的时间超过了这个harakiri超时时间，那么这个请求都会被丢弃，并且当前处理这个请求的工作进程会被回收再利用（即重启）</span>
+</span></span></code></pre></div><h1 id="常用指令">
+  常用指令
+  <a class="heading-link" href="#%e5%b8%b8%e7%94%a8%e6%8c%87%e4%bb%a4">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">	uwsgi --ini uwsgi.ini             <span class="c1"># 启动</span>
+</span></span><span class="line"><span class="cl">	uwsgi --reload uwsgi.pid          <span class="c1"># 重启</span>
+</span></span><span class="line"><span class="cl">	uwsgi --stop uwsgi.pid            <span class="c1"># 关闭</span>
+</span></span></code></pre></div><h1 id="查询容器运行状态">
+  查询容器运行状态
+  <a class="heading-link" href="#%e6%9f%a5%e8%af%a2%e5%ae%b9%e5%99%a8%e8%bf%90%e8%a1%8c%e7%8a%b6%e6%80%81">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h1>
+<p>查询web应用的运行日志进入到配置文件的日志输出位置查看
+查询容器运行状态有两种方式</p>
+<h2 id="方式一-使用uswgi自带的命令">
+  方式一 使用uswgi自带的命令
+  <a class="heading-link" href="#%e6%96%b9%e5%bc%8f%e4%b8%80-%e4%bd%bf%e7%94%a8uswgi%e8%87%aa%e5%b8%a6%e7%9a%84%e5%91%bd%e4%bb%a4">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">uwsgi --connect-and-read uwsgi/uwsgi.status
+</span></span></code></pre></div><p>读取的结果是一个json串，包括每个总的状态，每个work是状态，响应时间等，非常全面。</p>
+<h2 id="方式二-使用官方插件">
+  方式二 使用官方插件
+  <a class="heading-link" href="#%e6%96%b9%e5%bc%8f%e4%ba%8c-%e4%bd%bf%e7%94%a8%e5%ae%98%e6%96%b9%e6%8f%92%e4%bb%b6">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>uwsgitop
+这个官方开发的一款专门用于监控uswgi状态的插件</p>
+<p>安装uwsgitop插件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">	pip install uwsgitop
+</span></span></code></pre></div><p>执行指令</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">	uwsgitop uwsgi/uwsgi.status
+</span></span></code></pre></div><p>可以看到服务器控制台动态输出</p>
+<pre tabindex="0"><code class="language-linux" data-lang="linux">	uwsgi-2.0.18 - Thu Aug  1 14:37:36 2019 - req: 6 - RPS: 0 - lq: 0 - tx: 2.9K
+	node: 127.0.0.1 - cwd: /app/xxx - uid: 1001 - gid: 1001 - masterpid: 12630
+	 WID    %       PID     REQ     RPS     EXC     SIG     STATUS  AVG     RSS     VSZ     TX      ReSpwn  HC      Ru
+	 1      83.3    12631   5       0       0       0       idle    50ms    0       0       2.4K    1       0       93
+	 2      16.7    12632   1       0       0       0       idle    398ms   0       0       467     1       0       79
+	 3      0.0     12633   0       0       0       0       idle    0ms     0       0       0       1       0       0.
+	 4      0.0     12634   0       0       0       0       idle    0ms     0       0       0       1       0       0.
+	 5      0.0     12635   0       0       0       0       idle    0ms     0       0       0       1       0       0.
+	0       14:07:54
+</code></pre>
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2024
+     ZHXS 
+    ·
+    
+    技术支持 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>

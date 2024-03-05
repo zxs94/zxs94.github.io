@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  SpringBoot集成kafka实现生产消费 · Phantom
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="ZHXS">
+<meta name="description" content="场景 链接到标题 对接方需要使用kafka作为消息中间件来交互数据，需要提供一个消费接口消费对方柜面系统前端实时更新的数据，结合我们平台本身的批处理定时任务，模型跑完数据需要生产到另一个主题供对接方消费。
+依赖引入 链接到标题 pom.xml 引入依赖 注意kafka版本
+springboot配置文件里加入kafka配置
+注意如果关闭自动提交需要如图listener中配置 否则在使用Acknowledgment自动提交时会报参数异常，但是在低版本的kafka没有这个问题。
+一些kafka配置 仅供参考
+#kafka配置信息 kafka: producer: bootstrap-servers:0.0.0.0:9092 batch-size: 16785 #一次最多发送数据量 retries: 1 #发送失败后的重复发送次数 buffer-memory: 33554432 #32M批处理缓冲区 linger: 1 consumer: group-id: mms_test bootstrap-servers: 0.0.0.0:9092 auto-offset-reset: latest #最早未被消费的offset earliest enable-auto-commit: false #是否开启自动提交 max-poll-records: 3100 #批量消费一次最大拉取的数据量 auto-commit-interval: 1000 #自动提交的间隔时间 session-timeout: 20000 #连接超时时间 max-poll-interval: 15000 #手动提交设置与poll的心跳数,如果消息队列中没有消息，等待毫秒后，调用poll()方法。如果队列中有消息，立即消费消息，每次消费的消息的多少可以通过max.poll.records配置。 max-partition-fetch-bytes: 15728640 #设置拉取数据的大小,15M listener: ack-mode: manual # 配置参数 手动提交偏移量 batch-listener: true #是否开启批量消费，true表示批量消费 concurrency: 5 #设置消费的线程数 poll-timeout: 1500 消费者 链接到标题 核心注解">
+<meta name="keywords" content="blog,developer,personal">
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="SpringBoot集成kafka实现生产消费"/>
+<meta name="twitter:description" content="场景 链接到标题 对接方需要使用kafka作为消息中间件来交互数据，需要提供一个消费接口消费对方柜面系统前端实时更新的数据，结合我们平台本身的批处理定时任务，模型跑完数据需要生产到另一个主题供对接方消费。
+依赖引入 链接到标题 pom.xml 引入依赖 注意kafka版本
+springboot配置文件里加入kafka配置
+注意如果关闭自动提交需要如图listener中配置 否则在使用Acknowledgment自动提交时会报参数异常，但是在低版本的kafka没有这个问题。
+一些kafka配置 仅供参考
+#kafka配置信息 kafka: producer: bootstrap-servers:0.0.0.0:9092 batch-size: 16785 #一次最多发送数据量 retries: 1 #发送失败后的重复发送次数 buffer-memory: 33554432 #32M批处理缓冲区 linger: 1 consumer: group-id: mms_test bootstrap-servers: 0.0.0.0:9092 auto-offset-reset: latest #最早未被消费的offset earliest enable-auto-commit: false #是否开启自动提交 max-poll-records: 3100 #批量消费一次最大拉取的数据量 auto-commit-interval: 1000 #自动提交的间隔时间 session-timeout: 20000 #连接超时时间 max-poll-interval: 15000 #手动提交设置与poll的心跳数,如果消息队列中没有消息，等待毫秒后，调用poll()方法。如果队列中有消息，立即消费消息，每次消费的消息的多少可以通过max.poll.records配置。 max-partition-fetch-bytes: 15728640 #设置拉取数据的大小,15M listener: ack-mode: manual # 配置参数 手动提交偏移量 batch-listener: true #是否开启批量消费，true表示批量消费 concurrency: 5 #设置消费的线程数 poll-timeout: 1500 消费者 链接到标题 核心注解"/>
+
+<meta property="og:title" content="SpringBoot集成kafka实现生产消费" />
+<meta property="og:description" content="场景 链接到标题 对接方需要使用kafka作为消息中间件来交互数据，需要提供一个消费接口消费对方柜面系统前端实时更新的数据，结合我们平台本身的批处理定时任务，模型跑完数据需要生产到另一个主题供对接方消费。
+依赖引入 链接到标题 pom.xml 引入依赖 注意kafka版本
+springboot配置文件里加入kafka配置
+注意如果关闭自动提交需要如图listener中配置 否则在使用Acknowledgment自动提交时会报参数异常，但是在低版本的kafka没有这个问题。
+一些kafka配置 仅供参考
+#kafka配置信息 kafka: producer: bootstrap-servers:0.0.0.0:9092 batch-size: 16785 #一次最多发送数据量 retries: 1 #发送失败后的重复发送次数 buffer-memory: 33554432 #32M批处理缓冲区 linger: 1 consumer: group-id: mms_test bootstrap-servers: 0.0.0.0:9092 auto-offset-reset: latest #最早未被消费的offset earliest enable-auto-commit: false #是否开启自动提交 max-poll-records: 3100 #批量消费一次最大拉取的数据量 auto-commit-interval: 1000 #自动提交的间隔时间 session-timeout: 20000 #连接超时时间 max-poll-interval: 15000 #手动提交设置与poll的心跳数,如果消息队列中没有消息，等待毫秒后，调用poll()方法。如果队列中有消息，立即消费消息，每次消费的消息的多少可以通过max.poll.records配置。 max-partition-fetch-bytes: 15728640 #设置拉取数据的大小,15M listener: ack-mode: manual # 配置参数 手动提交偏移量 batch-listener: true #是否开启批量消费，true表示批量消费 concurrency: 5 #设置消费的线程数 poll-timeout: 1500 消费者 链接到标题 核心注解" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/springboot-kafka/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-12-18T16:47:50+00:00" />
+<meta property="article:modified_time" content="2019-12-18T16:47:50+00:00" />
+
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/springboot-kafka/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.jpeg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Phantom
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">关于本站</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">分类</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">博客</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags/">标签</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">联系作者</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇬🇧</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/springboot-kafka/">
+              SpringBoot集成kafka实现生产消费
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2019-12-18T16:47:50Z">
+                December 18, 2019
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              阅读时间：1 分钟
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa-solid fa-folder" aria-hidden="true"></i>
+    <a href="/categories/springboot/">SpringBoot</a></div>
+
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/kafka/">Kafka</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h3 id="场景">
+  场景
+  <a class="heading-link" href="#%e5%9c%ba%e6%99%af">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>对接方需要使用kafka作为消息中间件来交互数据，需要提供一个消费接口消费对方柜面系统前端实时更新的数据，结合我们平台本身的批处理定时任务，模型跑完数据需要生产到另一个主题供对接方消费。</p>
+<h3 id="依赖引入">
+  依赖引入
+  <a class="heading-link" href="#%e4%be%9d%e8%b5%96%e5%bc%95%e5%85%a5">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>pom.xml 引入依赖 注意kafka版本</p>
+<p><img alt="引入依赖" src="/SpringBoot-Kafka/pom-import.png"></p>
+<!-- more -->
+<p>springboot配置文件里加入kafka配置</p>
+<p><img alt="配置文件" src="/SpringBoot-Kafka/settings.png"></p>
+<p>注意如果关闭自动提交需要如图listener中配置 否则在使用Acknowledgment自动提交时会报参数异常，但是在低版本的kafka没有这个问题。</p>
+<p>一些kafka配置 仅供参考</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="w">  </span><span class="c">#kafka配置信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">kafka</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">producer</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="l">bootstrap-servers:0.0.0.0:9092</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">batch-size</span><span class="p">:</span><span class="w"> </span><span class="m">16785</span><span class="w">                                   </span><span class="c">#一次最多发送数据量</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">                                          </span><span class="c">#发送失败后的重复发送次数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">buffer-memory</span><span class="p">:</span><span class="w"> </span><span class="m">33554432</span><span class="w">                             </span><span class="c">#32M批处理缓冲区</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">linger</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">consumer</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">group-id</span><span class="p">:</span><span class="w"> </span><span class="l">mms_test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">bootstrap-servers</span><span class="p">:</span><span class="w"> </span><span class="m">0.0.0.0</span><span class="p">:</span><span class="m">9092</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">auto-offset-reset</span><span class="p">:</span><span class="w"> </span><span class="l">latest                          </span><span class="w"> </span><span class="c">#最早未被消费的offset earliest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">enable-auto-commit</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">                           </span><span class="c">#是否开启自动提交</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">max-poll-records</span><span class="p">:</span><span class="w"> </span><span class="m">3100</span><span class="w">                              </span><span class="c">#批量消费一次最大拉取的数据量</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">auto-commit-interval</span><span class="p">:</span><span class="w"> </span><span class="m">1000</span><span class="w">                          </span><span class="c">#自动提交的间隔时间</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">session-timeout</span><span class="p">:</span><span class="w"> </span><span class="m">20000</span><span class="w">                              </span><span class="c">#连接超时时间</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">max-poll-interval</span><span class="p">:</span><span class="w"> </span><span class="m">15000</span><span class="w">                            </span><span class="c">#手动提交设置与poll的心跳数,如果消息队列中没有消息，等待毫秒后，调用poll()方法。如果队列中有消息，立即消费消息，每次消费的消息的多少可以通过max.poll.records配置。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">max-partition-fetch-bytes</span><span class="p">:</span><span class="w"> </span><span class="m">15728640</span><span class="w">                 </span><span class="c">#设置拉取数据的大小,15M</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">listener</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">ack-mode</span><span class="p">:</span><span class="w"> </span><span class="l">manual</span><span class="w"> </span><span class="c"># 配置参数 手动提交偏移量</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">batch-listener</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">                                </span><span class="c">#是否开启批量消费，true表示批量消费</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">concurrency</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">                                      </span><span class="c">#设置消费的线程数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">poll-timeout</span><span class="p">:</span><span class="w"> </span><span class="m">1500</span><span class="w">  
+</span></span></span></code></pre></div><h3 id="消费者">
+  消费者
+  <a class="heading-link" href="#%e6%b6%88%e8%b4%b9%e8%80%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>核心注解</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@KafkaListener</span><span class="p">(</span><span class="n">topics</span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&#34;${kafka-consumer-topic}&#34;</span><span class="p">})</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="n">topics</span><span class="w"> </span><span class="n">注入约定的主题名称</span><span class="w">
+</span></span></span></code></pre></div><p><img alt="消费者" src="/SpringBoot-Kafka/consumer.png"></p>
+<h3 id="生产者">
+  生产者
+  <a class="heading-link" href="#%e7%94%9f%e4%ba%a7%e8%80%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>实现方式</p>
+<p>注入kafkaTemplate</p>
+<p><img alt="生产者" src="/SpringBoot-Kafka/producer.png"></p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2024
+     ZHXS 
+    ·
+    
+    技术支持 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>

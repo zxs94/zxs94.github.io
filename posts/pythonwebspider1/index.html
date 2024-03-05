@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Python网络爬虫入门 · Phantom
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="ZHXS">
+<meta name="description" content="为了更深入了解python和大数据准备学习网络爬虫，参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。
+部分内容参考以下博文整理 ，方便自己学习总结。 地址：https://python3webspider.cuiqingcai.com
+python环境的安装配置不再过多赘述
+请求库安装 链接到标题 requests 的安装 链接到标题 requests 属于第三方库，Python 默认不会自带这个库
+pip install requests 相关链接
+GitHub:https://github.com/requests/requests
+PyPi: https://pypi.python.org/pypi/requests
+官方文档: http://www.python-requests.org
+中文文档: http://docs.python-requests.org/zh_CN/latest
+Selenium 的安装 链接到标题 Selenium 是一个自动化测试工具，利用它我们可以驱动浏览器执行特定的动作，如点击、下拉等操作。
+pip install selenium 相关链接
+官方网站: http://www.seleniumhq.org
+GitHub: (https://github.com/SeleniumHQ/selenium/tree/master/py
+PyPI: https://pypi.python.org/pypi/selenium
+官方文档: http://selenium-python.readthedocs.io
+中文文档: http://selenium-python-zh.readthedocs.io
+ChromeDriver、GeckoDriver、PhantomJS 的安装 链接到标题 前面我们成功安装好了 Selenium 库，但是它是一个自动化测试工具，需要浏览器来配合使用 ChromeDriver、GeckoDriver 分别是谷歌和火狐的驱动
+PhantomJS 是一个无界面的、可脚本编程的 WebKit 浏览器引擎，它原生支持多种 Web 标准：DOM 操作、CSS 选择器、JSON、Canvas 以及 SVG。 Selenium 支持 PhantomJS，这样在运行的时候就不会再弹出一个浏览器了。而且 PhantomJS 的运行效率也很高，还支持各种参数配置，使用非常方便。
+这三个插件的配置方式都类似，我才用最简单的方法，去官网下载驱动包将.exe文件拷贝到python目录下，因为我使用的是anaconda所以直接赋值到相应的环境目录下即可。
+ChromeDriver 链接到标题 官方网站: https://sites.">
+<meta name="keywords" content="blog,developer,personal">
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Python网络爬虫入门"/>
+<meta name="twitter:description" content="为了更深入了解python和大数据准备学习网络爬虫，参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。
+部分内容参考以下博文整理 ，方便自己学习总结。 地址：https://python3webspider.cuiqingcai.com
+python环境的安装配置不再过多赘述
+请求库安装 链接到标题 requests 的安装 链接到标题 requests 属于第三方库，Python 默认不会自带这个库
+pip install requests 相关链接
+GitHub:https://github.com/requests/requests
+PyPi: https://pypi.python.org/pypi/requests
+官方文档: http://www.python-requests.org
+中文文档: http://docs.python-requests.org/zh_CN/latest
+Selenium 的安装 链接到标题 Selenium 是一个自动化测试工具，利用它我们可以驱动浏览器执行特定的动作，如点击、下拉等操作。
+pip install selenium 相关链接
+官方网站: http://www.seleniumhq.org
+GitHub: (https://github.com/SeleniumHQ/selenium/tree/master/py
+PyPI: https://pypi.python.org/pypi/selenium
+官方文档: http://selenium-python.readthedocs.io
+中文文档: http://selenium-python-zh.readthedocs.io
+ChromeDriver、GeckoDriver、PhantomJS 的安装 链接到标题 前面我们成功安装好了 Selenium 库，但是它是一个自动化测试工具，需要浏览器来配合使用 ChromeDriver、GeckoDriver 分别是谷歌和火狐的驱动
+PhantomJS 是一个无界面的、可脚本编程的 WebKit 浏览器引擎，它原生支持多种 Web 标准：DOM 操作、CSS 选择器、JSON、Canvas 以及 SVG。 Selenium 支持 PhantomJS，这样在运行的时候就不会再弹出一个浏览器了。而且 PhantomJS 的运行效率也很高，还支持各种参数配置，使用非常方便。
+这三个插件的配置方式都类似，我才用最简单的方法，去官网下载驱动包将.exe文件拷贝到python目录下，因为我使用的是anaconda所以直接赋值到相应的环境目录下即可。
+ChromeDriver 链接到标题 官方网站: https://sites."/>
+
+<meta property="og:title" content="Python网络爬虫入门" />
+<meta property="og:description" content="为了更深入了解python和大数据准备学习网络爬虫，参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。
+部分内容参考以下博文整理 ，方便自己学习总结。 地址：https://python3webspider.cuiqingcai.com
+python环境的安装配置不再过多赘述
+请求库安装 链接到标题 requests 的安装 链接到标题 requests 属于第三方库，Python 默认不会自带这个库
+pip install requests 相关链接
+GitHub:https://github.com/requests/requests
+PyPi: https://pypi.python.org/pypi/requests
+官方文档: http://www.python-requests.org
+中文文档: http://docs.python-requests.org/zh_CN/latest
+Selenium 的安装 链接到标题 Selenium 是一个自动化测试工具，利用它我们可以驱动浏览器执行特定的动作，如点击、下拉等操作。
+pip install selenium 相关链接
+官方网站: http://www.seleniumhq.org
+GitHub: (https://github.com/SeleniumHQ/selenium/tree/master/py
+PyPI: https://pypi.python.org/pypi/selenium
+官方文档: http://selenium-python.readthedocs.io
+中文文档: http://selenium-python-zh.readthedocs.io
+ChromeDriver、GeckoDriver、PhantomJS 的安装 链接到标题 前面我们成功安装好了 Selenium 库，但是它是一个自动化测试工具，需要浏览器来配合使用 ChromeDriver、GeckoDriver 分别是谷歌和火狐的驱动
+PhantomJS 是一个无界面的、可脚本编程的 WebKit 浏览器引擎，它原生支持多种 Web 标准：DOM 操作、CSS 选择器、JSON、Canvas 以及 SVG。 Selenium 支持 PhantomJS，这样在运行的时候就不会再弹出一个浏览器了。而且 PhantomJS 的运行效率也很高，还支持各种参数配置，使用非常方便。
+这三个插件的配置方式都类似，我才用最简单的方法，去官网下载驱动包将.exe文件拷贝到python目录下，因为我使用的是anaconda所以直接赋值到相应的环境目录下即可。
+ChromeDriver 链接到标题 官方网站: https://sites." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/pythonwebspider1/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-09-11T14:06:07+00:00" />
+<meta property="article:modified_time" content="2019-09-11T14:06:07+00:00" />
+
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/pythonwebspider1/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.jpeg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Phantom
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">关于本站</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">分类</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">博客</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags/">标签</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">联系作者</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇬🇧</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/pythonwebspider1/">
+              Python网络爬虫入门
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2019-09-11T14:06:07Z">
+                September 11, 2019
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              阅读时间：4 分钟
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa-solid fa-folder" aria-hidden="true"></i>
+    <a href="/categories/python/">Python</a></div>
+
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/%E7%88%AC%E8%99%AB/">爬虫</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/python/">Python</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>为了更深入了解python和大数据准备学习网络爬虫，参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。</p>
+<p>部分内容参考以下博文整理 ，方便自己学习总结。
+地址：<a href="https://python3webspider.cuiqingcai.com"  class="external-link" target="_blank" rel="noopener">https://python3webspider.cuiqingcai.com</a></p>
+<!-- more -->
+<p><strong>python环境的安装配置不再过多赘述</strong></p>
+<h3 id="请求库安装">
+  请求库安装
+  <a class="heading-link" href="#%e8%af%b7%e6%b1%82%e5%ba%93%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<h4 id="requests-的安装">
+  requests 的安装
+  <a class="heading-link" href="#requests-%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>requests 属于第三方库，Python 默认不会自带这个库</p>
+<pre><code>pip install requests
+</code></pre>
+<p><strong>相关链接</strong></p>
+<p>GitHub:<a href="https://github.com/requests/requests"  class="external-link" target="_blank" rel="noopener">https://github.com/requests/requests</a><br>
+PyPi: <a href="https://pypi.python.org/pypi/requests"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/requests</a><br>
+官方文档: <a href="http://www.python-requests.org"  class="external-link" target="_blank" rel="noopener">http://www.python-requests.org</a><br>
+中文文档: <a href="http://docs.python-requests.org/zh_CN/latest"  class="external-link" target="_blank" rel="noopener">http://docs.python-requests.org/zh_CN/latest</a></p>
+<h4 id="selenium-的安装">
+  Selenium 的安装
+  <a class="heading-link" href="#selenium-%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>Selenium 是一个自动化测试工具，利用它我们可以驱动浏览器执行特定的动作，如点击、下拉等操作。</p>
+<pre><code>pip install selenium
+</code></pre>
+<p><strong>相关链接</strong></p>
+<p>官方网站: <a href="http://www.seleniumhq.org"  class="external-link" target="_blank" rel="noopener">http://www.seleniumhq.org</a><br>
+GitHub: <a href="https://github.com/SeleniumHQ/selenium/tree/master/py"  class="external-link" target="_blank" rel="noopener">(https://github.com/SeleniumHQ/selenium/tree/master/py</a><br>
+PyPI: <a href="https://pypi.python.org/pypi/selenium"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/selenium</a><br>
+官方文档: <a href="http://selenium-python.readthedocs.io"  class="external-link" target="_blank" rel="noopener">http://selenium-python.readthedocs.io</a><br>
+中文文档: <a href="http://selenium-python-zh.readthedocs.io"  class="external-link" target="_blank" rel="noopener">http://selenium-python-zh.readthedocs.io</a></p>
+<h4 id="chromedrivergeckodriverphantomjs-的安装">
+  ChromeDriver、GeckoDriver、PhantomJS 的安装
+  <a class="heading-link" href="#chromedrivergeckodriverphantomjs-%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>前面我们成功安装好了 Selenium 库，但是它是一个自动化测试工具，需要浏览器来配合使用
+ChromeDriver、GeckoDriver 分别是谷歌和火狐的驱动</p>
+<p>PhantomJS 是一个无界面的、可脚本编程的 WebKit 浏览器引擎，它原生支持多种 Web 标准：DOM 操作、CSS 选择器、JSON、Canvas 以及 SVG。
+Selenium 支持 PhantomJS，这样在运行的时候就不会再弹出一个浏览器了。而且 PhantomJS 的运行效率也很高，还支持各种参数配置，使用非常方便。</p>
+<p>这三个插件的配置方式都类似，我才用最简单的方法，去官网下载驱动包将.exe文件拷贝到python目录下，因为我使用的是anaconda所以直接赋值到相应的环境目录下即可。</p>
+<h5 id="chromedriver">
+  ChromeDriver
+  <a class="heading-link" href="#chromedriver">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h5>
+<p>官方网站: <a href="https://sites.google.com/a/chromium.org/chromedriver"  class="external-link" target="_blank" rel="noopener">https://sites.google.com/a/chromium.org/chromedriver</a><br>
+下载地址: <a href="https://chromedriver.storage.googleapis.com/index.html"  class="external-link" target="_blank" rel="noopener">https://chromedriver.storage.googleapis.com/index.html</a><br>
+阿里镜像源: <a href="http://npm.taobao.org/mirrors/chromedriver/"  class="external-link" target="_blank" rel="noopener">http://npm.taobao.org/mirrors/chromedriver/</a></p>
+<p>解压下载后的文件 拷贝 chromedriver.exe 到目录下</p>
+<pre><code>chromedriver
+#控制台有版本信息之类的输出证明配置成功
+</code></pre>
+<p>在python程序中测试  执行弹出浏览器即为成功
+<code>python from selenium import webdriver browser = webdriver.Chrome()	 </code></p>
+<h5 id="geckodriver">
+  GeckoDriver
+  <a class="heading-link" href="#geckodriver">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h5>
+<p>火狐的驱动暂时没有安装基本步骤类似谷歌</p>
+<p>GitHub: <a href="https://github.com/mozilla/geckodriver"  class="external-link" target="_blank" rel="noopener">https://github.com/mozilla/geckodriver</a><br>
+下载地址: <a href="https://github.com/mozilla/geckodriver/releases"  class="external-link" target="_blank" rel="noopener">https://github.com/mozilla/geckodriver/releases</a></p>
+<h5 id="phantomjs">
+  PhantomJS
+  <a class="heading-link" href="#phantomjs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h5>
+<p>官方网站: <a href="http://phantomjs.org"  class="external-link" target="_blank" rel="noopener">http://phantomjs.org</a><br>
+官方文档: <a href="ttp://phantomjs.org/quick-start.html" >http://phantomjs.org/quick-start.html</a><br>
+下载地址: <a href="http://phantomjs.org/download.html"  class="external-link" target="_blank" rel="noopener">http://phantomjs.org/download.html</a><br>
+API接口说明: <a href="http://phantomjs.org/api/command-line.html"  class="external-link" target="_blank" rel="noopener">http://phantomjs.org/api/command-line.html</a></p>
+<p>命令验证</p>
+<pre><code>phantomjs 
+</code></pre>
+<p>测试程序  没有弹出页面控制台输出百度网址
+<code>python from selenium import webdriver browser = webdriver.PhantomJS() browser.get('https://www.baidu.com') print(browser.current_url) </code></p>
+<h4 id="aiohttp-的安装">
+  aiohttp 的安装
+  <a class="heading-link" href="#aiohttp-%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>requests 库是一个阻塞式 HTTP 请求库，当我们发出一个请求后，程序会一直等待服务器响应，直到得到响应后，程序才会进行下一步处理。</p>
+<p>aiohttp 就是这样一个提供异步 Web 服务的库，从 Python 3.5 版本开始，Python 中加入了 async/await 关键字，使得回调的写法更加直观和人性化。</p>
+<p><strong>相关链接</strong></p>
+<p>官方文档：<a href="http://aiohttp.readthedocs.io/en/stable"  class="external-link" target="_blank" rel="noopener">http://aiohttp.readthedocs.io/en/stable</a><br>
+GitHub：<a href="https://github.com/aio-libs/aiohttp"  class="external-link" target="_blank" rel="noopener">https://github.com/aio-libs/aiohttp</a><br>
+PyPI：<a href="https://pypi.python.org/pypi/aiohttp"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/aiohttp</a></p>
+<p><strong>安装</strong></p>
+<p>官方还推荐安装如下两个库：一个是字符编码检测库 cchardet，另一个是加速 DNS 的解析库 aiodns。</p>
+<pre><code>pip install aiohttp
+pip install cchardet aiodns
+</code></pre>
+<p>在python交互模型 引入不报错即安装成功</p>
+<pre><code>import aiohttp
+</code></pre>
+<h3 id="解析库安装">
+  解析库安装
+  <a class="heading-link" href="#%e8%a7%a3%e6%9e%90%e5%ba%93%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<h4 id="lxml-的安装">
+  lxml 的安装
+  <a class="heading-link" href="#lxml-%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>lxml 是 Python 的一个解析库，支持 HTML 和 XML 的解析，支持 XPath 解析方式</p>
+<p><strong>相关链接</strong></p>
+<p>官方网站：<a href="http://lxml.de"  class="external-link" target="_blank" rel="noopener">http://lxml.de</a><br>
+GitHub：<a href="https://github.com/lxml/lxml"  class="external-link" target="_blank" rel="noopener">https://github.com/lxml/lxml</a><br>
+PyPI：<a href="https://pypi.python.org/pypi/lxml"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/lxml</a></p>
+<p><strong>安装命令</strong></p>
+<p>没有报错就代表成功 如果报错在查询是否需要安装其他依赖</p>
+<pre><code>pip install lxml
+</code></pre>
+<h4 id="beautiful-soup-的安装">
+  Beautiful Soup 的安装
+  <a class="heading-link" href="#beautiful-soup-%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>Beautiful Soup 是 Python 的一个 HTML 或 XML 的解析库，我们可以用它来方便地从网页中提取数据。</p>
+<p><strong>相关链接</strong></p>
+<p>官方文档：<a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc"  class="external-link" target="_blank" rel="noopener">https://www.crummy.com/software/BeautifulSoup/bs4/doc</a><br>
+中文文档：<a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh"  class="external-link" target="_blank" rel="noopener">https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh</a><br>
+PyPI：<a href="https://pypi.python.org/pypi/beautifulsoup4"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/beautifulsoup4</a></p>
+<p>Beautiful Soup 的 HTML 和 XML 解析器是依赖于 lxml 库的，所以在此之前请确保已经成功安装好了 lxml 库。</p>
+<p><strong>安装命令</strong></p>
+<pre><code>pip install beautifulsoup4
+</code></pre>
+<p><strong>测试程序</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>  
+</span></span><span class="line"><span class="cl"><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="s1">&#39;&amp;lt;p&amp;gt;Hello&amp;lt;/p&amp;gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;lxml&#39;</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">string</span><span class="p">)</span>
+</span></span></code></pre></div><p>输出结果 Hello 证明成功</p>
+<h4 id="pyquery-的安装">
+  pyquery 的安装
+  <a class="heading-link" href="#pyquery-%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>pyquery 同样是一个强大的网页解析工具，它提供了和 jQuery 类似的语法来解析 HTML 文档，支持 CSS 选择器。</p>
+<p><strong>相关链接</strong></p>
+<p>GitHub：<a href="https://github.com/gawel/pyquery"  class="external-link" target="_blank" rel="noopener">https://github.com/gawel/pyquery</a><br>
+PyPI：<a href="https://pypi.python.org/pypi/pyquery"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/pyquery</a><br>
+官方文档：<a href="http://pyquery.readthedocs.io"  class="external-link" target="_blank" rel="noopener">http://pyquery.readthedocs.io</a></p>
+<p><strong>安装命令</strong></p>
+<pre><code>pip install pyquery
+</code></pre>
+<p>验证 交互命令导入依赖 不报错即为成功</p>
+<pre><code>import pyquery
+</code></pre>
+<h4 id="tesserocr-的安装">
+  tesserocr 的安装
+  <a class="heading-link" href="#tesserocr-%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>在爬虫过程中，难免会遇到各种各样的验证码，而大多数验证码还是图形验证码，这时候我们可以直接用 OCR 来识别。</p>
+<p>OCR，即 Optical Character Recognition，光学字符识别，是指通过扫描字符，然后通过其形状将其翻译成电子文本的过程。</p>
+<p><strong>相关链接</strong></p>
+<p>GitHub：<a href="https://github.com/sirfz/tesserocr"  class="external-link" target="_blank" rel="noopener">https://github.com/sirfz/tesserocr</a><br>
+PyPI：<a href="https://pypi.python.org/pypi/tesserocr"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/tesserocr</a><br>
+下载地址：<a href="http://digi.bib.uni-mannheim.de/tesseract"  class="external-link" target="_blank" rel="noopener">http://digi.bib.uni-mannheim.de/tesseract</a><br>
+GitHub：<a href="https://github.com/tesseract-ocr/tesseract"  class="external-link" target="_blank" rel="noopener">https://github.com/tesseract-ocr/tesseract</a><br>
+语言包：<a href="https://github.com/tesseract-ocr/tessdata"  class="external-link" target="_blank" rel="noopener">https://github.com/tesseract-ocr/tessdata</a><br>
+文档：<a href="https://github.com/tesseract-ocr/tesseract/wiki/Documentation"  class="external-link" target="_blank" rel="noopener">https://github.com/tesseract-ocr/tesseract/wiki/Documentation</a></p>
+<p><strong>window下</strong></p>
+<p>首先需要下载tesseract
+选择不带dev的稳定版安装</p>
+<p>勾选 Additional language data (download) 选项来安装 OCR 识别支持的语言包，这样 OCR 便可以识别多国语言。</p>
+<p>安装后记得配置环境变量，配置在用户的path下。</p>
+<p>在环境下安装 tesserocr window下需要依赖c环境没有需要下载安装<br>
+本人使用github上下载的对应3.6python环境的.whl文件安装的，推荐这种安装方式。</p>
+<p><strong>安装命令</strong></p>
+<pre><code>pip install tesserocr pillow
+</code></pre>
+<p><strong>验证 tesseract和tesserocr</strong></p>
+<h3 id="数据库的安装">
+  数据库的安装
+  <a class="heading-link" href="#%e6%95%b0%e6%8d%ae%e5%ba%93%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>数据库主要用到关系型数据库mysql、非关系型Redis和MongoDB</p>
+<h4 id="mysql-的安装">
+  MySQL 的安装
+  <a class="heading-link" href="#mysql-%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>Mysql的安装不在过多描述 推荐5.6以上版本。</p>
+<h4 id="mongodb-的安装">
+  MongoDB 的安装
+  <a class="heading-link" href="#mongodb-%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>MongoDB 是由 C++ 语言编写的非关系型数据库，是一个基于分布式文件存储的开源数据库系统，其内容存储形式类似 JSON 对象，它的字段值可以包含其他文档、数组及文档数组，非常灵活。</p>
+<p><strong>相关链接</strong></p>
+<p>官方网站：<a href="https://www.mongodb.com"  class="external-link" target="_blank" rel="noopener">https://www.mongodb.com</a><br>
+官方文档：<a href="https://docs.mongodb.com"  class="external-link" target="_blank" rel="noopener">https://docs.mongodb.com</a><br>
+GitHub：<a href="https://github.com/mongodb"  class="external-link" target="_blank" rel="noopener">https://github.com/mongodb</a><br>
+中文教程：<a href="http://www.runoob.com/mongodb/mongodb-tutorial.html"  class="external-link" target="_blank" rel="noopener">http://www.runoob.com/mongodb/mongodb-tutorial.html</a></p>
+<p><strong>登录官网下载</strong></p>
+<p>找到 sever标签<br>
+MongoDB Community Server 选择适合的版本、操作系统 下载MSI文件进行安装。</p>
+<p>安装时选择custom、新版会自动配置data和log的位置不用手动创建了。<br>
+但是需要在data下创建db文件夹。</p>
+<p>安装后进入bin目录、输入指令，路径换成你自己的目录，路径前记得加空格不然指令报错。</p>
+<pre><code>mongod --dbpath &quot;D:\MongoDB\Server\4.2\data\db&quot;
+</code></pre>
+<p>看到如下图输出信息，就代表成功启动了</p>
+<p><img alt="控制台输出" src="PythonWebSpider1/MongoDB-CMD.png"></p>
+<p>但是如果我们想一直使用 MongoDB，就不能关闭此命令行了。如果意外关闭或重启，MongoDB 服务就不能使用了。所以，接下来还需将 MongoDB 配置成系统服务。</p>
+<p>使用管理员启动cmd，在bin和data同级的log下创建mongodb.log文件。</p>
+<p><strong>命令行输入以下指令：</strong></p>
+<p>注意指令间的空格</p>
+<pre><code>mongod --bind_ip 0.0.0.0 --logpath &quot;D:\MongoDB\Server\4.2\log\mongodb.log&quot; --logappend --dbpath &quot;D:\MongoDB\Server\4.2\data\db&quot;--port 27017 --serviceName &quot;MongoDB&quot; --serviceDisplayName &quot;MongoDB&quot; --install
+</code></pre>
+<p>这里的意思是绑定 IP 为 0.0.0.0（即任意 IP 均可访问），指定日志路径、数据库路径和端口，指定服务名称。需要注意的是，这里依然需要把路径替换成你的 MongoDB 安装路径，运行此命令后即可安装服务，运行结果如图所示。</p>
+<p><img alt="配置服务" src="PythonWebSpider1/MongoDB-service.png"></p>
+<p>如果没有出现错误提示，则证明 MongoDB 服务已经安装成功。
+可以在服务管理页面查看到系统服务。</p>
+<p>但是我发现新版本的MongoDB不需要手动配置，自动就有一个服务名称：MongoDB Server..</p>
+<p><img alt="配置服务" src="PythonWebSpider1/MongoDB-server.png"></p>
+<p>但是启动的时候发现报错了= =。。</p>
+<p>查阅资料找到了一种成功配置的方法</p>
+<p>首先删除自带的服务</p>
+<p><img alt="删除服务" src="PythonWebSpider1/delete-mongo-server.png"></p>
+<p>使用以下指令 成功添加服务，不知道是不是自带的服务没删除的原因，之前创建服务的命令没有成功所以我换了下边这种。。</p>
+<pre><code>mongod --dbpath=D:\MongoDB\Server\4.2\data\db  --logpath=D:\MongoDB\Server\4.2\log\mongodb.log --install --serviceName &quot;MongoDB&quot;
+</code></pre>
+<p>启动MongoDB，到bin目录下启动，也可以配置环境变量。</p>
+<p>成功启动如图，警告是因为新版本需要创建管理用户连接。</p>
+<p><img alt="启动Mongo" src="PythonWebSpider1/mongo-start.png"></p>
+<p>到此Mongo的配置就基本完成。</p>
+<h4 id="redis-的安装">
+  Redis 的安装
+  <a class="heading-link" href="#redis-%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>Redis的安装比较简单，因为我已经安装了好了本地环境,就不重复安装了。</p>
+<p><strong>相关链接</strong></p>
+<p>官方网站：<a href="https://redis.io"  class="external-link" target="_blank" rel="noopener">https://redis.io</a><br>
+官方文档：<a href="https://redis.io/documentation"  class="external-link" target="_blank" rel="noopener">https://redis.io/documentation</a><br>
+中文官网：<a href="http://www.redis.cn"  class="external-link" target="_blank" rel="noopener">http://www.redis.cn</a><br>
+GitHub：<a href="https://github.com/antirez/redis"  class="external-link" target="_blank" rel="noopener">https://github.com/antirez/redis</a><br>
+中文教程：<a href="http://www.runoob.com/redis/redis-tutorial.html"  class="external-link" target="_blank" rel="noopener">http://www.runoob.com/redis/redis-tutorial.html</a><br>
+Redis Desktop Manager：<a href="https://redisdesktop.com"  class="external-link" target="_blank" rel="noopener">https://redisdesktop.com</a><br>
+Redis Desktop Manager GitHub：<a href="https://github.com/uglide/RedisDesktopManager"  class="external-link" target="_blank" rel="noopener">https://github.com/uglide/RedisDesktopManager</a></p>
+<p>推荐一个网页端的Redis管理工具：</p>
+<p><a href="https://github.com/yswenli/WebRedisManager"  class="external-link" target="_blank" rel="noopener">https://github.com/yswenli/WebRedisManager</a></p>
+<h3 id="存储库的安装">
+  存储库的安装
+  <a class="heading-link" href="#%e5%ad%98%e5%82%a8%e5%ba%93%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>如果想要和 Python 交互的话，还需要安装一些 Python 存储库，如 MySQL 需要安装 PyMySQL，MongoDB 需要安装 PyMongo 等。</p>
+<h4 id="pymysql--的安装">
+  PyMySQL  的安装
+  <a class="heading-link" href="#pymysql--%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>因为以前使用过pymysql操作MySql数据库所以不多描述。</p>
+<p><strong>相关链接</strong></p>
+<p>GitHub：<a href="https://github.com/PyMySQL/PyMySQL"  class="external-link" target="_blank" rel="noopener">https://github.com/PyMySQL/PyMySQL</a><br>
+官方文档：<a href="http://pymysql.readthedocs.io/"  class="external-link" target="_blank" rel="noopener">http://pymysql.readthedocs.io/</a><br>
+PyPI：<a href="https://pypi.python.org/pypi/PyMySQL"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/PyMySQL</a></p>
+<p><strong>安装命令</strong></p>
+<pre><code>pip install pymysql
+</code></pre>
+<p><strong>验证</strong></p>
+<p>在python程序中导入</p>
+<pre><code>import pymysql
+</code></pre>
+<h4 id="pymongo-的安装">
+  PyMongo 的安装
+  <a class="heading-link" href="#pymongo-%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>在 Python 中，如果想要和 MongoDB 进行交互，就需要借助于 PyMongo 库，这里就来了解一下它的安装方法。</p>
+<p><strong>相关链接</strong></p>
+<p>GitHub：<a href="https://github.com/mongodb/mongo-python-driver"  class="external-link" target="_blank" rel="noopener">https://github.com/mongodb/mongo-python-driver</a><br>
+官方文档：<a href="https://api.mongodb.com/python/current/"  class="external-link" target="_blank" rel="noopener">https://api.mongodb.com/python/current/</a><br>
+PyPI：<a href="https://pypi.python.org/pypi/pymongo"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/pymongo</a></p>
+<p><strong>安装指令</strong></p>
+<pre><code>pip install pymongo
+</code></pre>
+<p><strong>验证</strong></p>
+<pre><code>import pymongo
+pymongo.version
+</code></pre>
+<p>输出版本号即成功安装</p>
+<h4 id="redis-py-的安装">
+  redis-py 的安装
+  <a class="heading-link" href="#redis-py-%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>对于 Redis 要使用 redis-py 库来与其交互</p>
+<p><strong>相关链接</strong></p>
+<p>GitHub：<a href="https://github.com/andymccurdy/redis-py"  class="external-link" target="_blank" rel="noopener">https://github.com/andymccurdy/redis-py</a><br>
+官方文档：<a href="https://redis-py.readthedocs.io/"  class="external-link" target="_blank" rel="noopener">https://redis-py.readthedocs.io/</a></p>
+<p><strong>安装指令</strong></p>
+<pre><code>pip install redis
+</code></pre>
+<p><strong>验证</strong></p>
+<pre><code>import redis
+redis.VERSION
+</code></pre>
+<p>打印版本信息即为成功安装</p>
+<h4 id="redisdump-的安装">
+  RedisDump 的安装
+  <a class="heading-link" href="#redisdump-%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>RedisDump 是一个用于 Redis 数据导入 / 导出的工具，是基于 Ruby 实现的，所以要安装 RedisDump，需要先安装 Ruby。</p>
+<p><strong>相关链接</strong></p>
+<p>GitHub：<a href="https://github.com/delano/redis-dump"  class="external-link" target="_blank" rel="noopener">https://github.com/delano/redis-dump</a><br>
+官方文档：<a href="http://delanotes.com/redis-dump"  class="external-link" target="_blank" rel="noopener">http://delanotes.com/redis-dump</a></p>
+<p><strong>安装 Ruby</strong></p>
+<p>参考  <a href="http://www.ruby-lang.org/zh_cn/documentation/installation"  class="external-link" target="_blank" rel="noopener">http://www.ruby-lang.org/zh_cn/documentation/installation</a></p>
+<p><strong>gem 安装</strong></p>
+<p>安装完成之后，就可以执行 gem 命令了</p>
+<pre><code>gem install redis-dump
+</code></pre>
+<p><strong>验证安装</strong></p>
+<p>安装成功后，就可以执行如下两个命令：</p>
+<pre><code>redis-dump  
+redis-load
+</code></pre>
+<p>调用成功代表安装成功</p>
+<p>相当于使用ruby的一个包来操作，需要在响应环境下执行指令。</p>
+<h3 id="web库的安装">
+  Web库的安装
+  <a class="heading-link" href="#web%e5%ba%93%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<h4 id="flask-的安装">
+  Flask 的安装
+  <a class="heading-link" href="#flask-%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>Flask 是一个轻量级的 Web 服务程序，它简单、易用、灵活，这里主要用来做一些 API 服务</p>
+<p><strong>相关链接</strong></p>
+<p>GitHub：<a href="https://github.com/pallets/flask"  class="external-link" target="_blank" rel="noopener">https://github.com/pallets/flask</a><br>
+官方文档：<a href="http://flask.pocoo.org"  class="external-link" target="_blank" rel="noopener">http://flask.pocoo.org</a><br>
+中文文档：<a href="http://docs.jinkan.org/docs/flask"  class="external-link" target="_blank" rel="noopener">http://docs.jinkan.org/docs/flask</a><br>
+PyPI：<a href="https://pypi.python.org/pypi/Flask"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/Flask</a></p>
+<p><strong>安装命令：</strong></p>
+<pre><code>pip install flask
+</code></pre>
+<p>利用 Flask + Redis 维护动态代理池和 Cookies 池</p>
+<h4 id="tornado-的安装">
+  Tornado 的安装
+  <a class="heading-link" href="#tornado-%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>Tornado 是一个支持异步的 Web 框架，通过使用非阻塞 I/O 流，它可以支撑成千上万的开放连接，效率非常高。</p>
+<p><strong>相关链接</strong></p>
+<p>GitHub：<a href="https://github.com/tornadoweb/tornado"  class="external-link" target="_blank" rel="noopener">https://github.com/tornadoweb/tornado</a> <br>
+PyPI：<a href="https://pypi.python.org/pypi/tornado"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/tornado</a><br>
+官方文档：<a href="http://www.tornadoweb.org"  class="external-link" target="_blank" rel="noopener">http://www.tornadoweb.org</a></p>
+<p><strong>安装命令：</strong></p>
+<pre><code>pip install tornado
+</code></pre>
+<p>利用 Tornado + Redis 来搭建一个 ADSL 拨号代理池</p>
+<h3 id="app爬取相关库的安装">
+  App爬取相关库的安装
+  <a class="heading-link" href="#app%e7%88%ac%e5%8f%96%e7%9b%b8%e5%85%b3%e5%ba%93%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>暂时不考虑 后续有相关需求参考资料进行安装</p>
+<h3 id="爬虫框架的安装">
+  爬虫框架的安装
+  <a class="heading-link" href="#%e7%88%ac%e8%99%ab%e6%a1%86%e6%9e%b6%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>我们直接用 requests、Selenium 等库写爬虫，如果爬取量不是太大，速度要求不高，是完全可以满足需求的。但是写多了会发现其内部许多代码和组件是可以复用的，如果我们把这些组件抽离出来，将各个功能模块化，就慢慢会形成一个框架雏形，久而久之，爬虫框架就诞生了。<br>
+主要介绍的爬虫框架有 pyspider 和 Scrapy。</p>
+<h4 id="pyspider-的安装">
+  pyspider 的安装
+  <a class="heading-link" href="#pyspider-%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>pyspider 是国人 binux 编写的强大的网络爬虫框架，它带有强大的 WebUI、脚本编辑器、任务监控器、项目管理器以及结果处理器，同时支持多种数据库后端、多种消息队列，另外还支持 JavaScript 渲染页面的爬取</p>
+<p><strong>相关链接</strong></p>
+<p>官方文档：<a href="http://docs.pyspider.org/"  class="external-link" target="_blank" rel="noopener">http://docs.pyspider.org/</a><br>
+PyPi：<a href="https://pypi.python.org/pypi/pyspider"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/pyspider</a><br>
+GitHub：<a href="https://github.com/binux/pyspider"  class="external-link" target="_blank" rel="noopener">https://github.com/binux/pyspider</a><br>
+官方教程：<a href="http://docs.pyspider.org/en/latest/tutorial"  class="external-link" target="_blank" rel="noopener">http://docs.pyspider.org/en/latest/tutorial</a><br>
+在线实例：<a href="http://demo.pyspider.org"  class="external-link" target="_blank" rel="noopener">http://demo.pyspider.org</a></p>
+<p>pyspider 是支持 JavaScript 渲染的，而这个过程是依赖于 PhantomJS</p>
+<p><strong>推荐使用 pip 安装</strong></p>
+<pre><code>pip install pyspider
+</code></pre>
+<p>安装时报错提示，pycurl需要安装依赖包，下载whl文件安装，安装后启动pyspider发现如下报错</p>
+<p><img src="PythonWebSpider1/pyspider-run-error.png"></p>
+<p><strong>解决方法：</strong><br>
+找到pyspider安装位置 site-packages\pyspider\webui找到webui下webdav.py文件 修改209行</p>
+<pre><code>'domaincontroller': NeedAuthController(app),替换为
+'http_authenticator.domain_controller': NeedAuthController(app)
+</code></pre>
+<p><img src="PythonWebSpider1/pyspider-run-error2.png"></p>
+<p>执行成功运行在5000端口上</p>
+<p><img src="PythonWebSpider1/pyspider-run-error3.png"></p>
+<h4 id="scrapy-的安装">
+  Scrapy 的安装
+  <a class="heading-link" href="#scrapy-%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>Scrapy 是一个十分强大的爬虫框架，依赖的库比较多，至少需要依赖的库有 Twisted 14.0、lxml 3.4 和 pyOpenSSL 0.14。在不同的平台环境下，它所依赖的库也各不相同，所以在安装之前，最好确保把一些基本库安装好。</p>
+<p><strong>相关链接</strong></p>
+<p>官方网站：<a href="https://scrapy.org"  class="external-link" target="_blank" rel="noopener">https://scrapy.org</a><br>
+官方文档：<a href="https://docs.scrapy.org"  class="external-link" target="_blank" rel="noopener">https://docs.scrapy.org</a><br>
+PyPi：<a href="https://pypi.python.org/pypi/Scrapy"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/Scrapy</a><br>
+GitHub：<a href="https://github.com/scrapy/scrapy"  class="external-link" target="_blank" rel="noopener">https://github.com/scrapy/scrapy</a><br>
+中文文档：<a href="http://scrapy-chs.readthedocs.io"  class="external-link" target="_blank" rel="noopener">http://scrapy-chs.readthedocs.io</a></p>
+<p>使用conda安装</p>
+<pre><code>conda install Scrapy
+</code></pre>
+<p>运行命令scrapy报错</p>
+<p><img src="PythonWebSpider1/scrapy-error.png"></p>
+<p>使用 pip 安装后成功启动</p>
+<pre><code>pip install Scrapy
+</code></pre>
+<h4 id="scrapy-splash-的安装">
+  Scrapy-Splash 的安装
+  <a class="heading-link" href="#scrapy-splash-%e7%9a%84%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>Scrapy-Splash 是一个 Scrapy 中支持 JavaScript 渲染的工具</p>
+<p><strong>相关链接</strong></p>
+<p>GitHub：<a href="https://github.com/scrapy-plugins/scrapy-splash"  class="external-link" target="_blank" rel="noopener">https://github.com/scrapy-plugins/scrapy-splash</a><br>
+PyPi：<a href="https://pypi.python.org/pypi/scrapy-splash"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/scrapy-splash</a><br>
+使用说明：<a href="https://github.com/scrapy-plugins/scrapy-splash#configuration"  class="external-link" target="_blank" rel="noopener">https://github.com/scrapy-plugins/scrapy-splash#configuration</a><br>
+Splash 官方文档：<a href="http://splash.readthedocs.io"  class="external-link" target="_blank" rel="noopener">http://splash.readthedocs.io</a></p>
+<p>由于相关前置包 Splash 需要依赖docker环境所以暂时先不配置，后续按需配置。</p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2024
+     ZHXS 
+    ·
+    
+    技术支持 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>

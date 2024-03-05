@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  SpringBoot整合Quartz(二) · Phantom
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="ZHXS">
+<meta name="description" content="接上一篇文章，本文中展示在springboot项目中根据特定需求配置quartz定时任务。
+POM文件中添加依赖 链接到标题 &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-quartz&lt;/artifactId&gt; &lt;/dependency&gt; 配置类 StartQuartzJobListener.java 链接到标题 首先需要有个配置类来初始化quartz，
+QuartzManager 是 quartz的具体管理类。
+MyJobFactory 是一个自定义的Job工厂类，用来解决默认的Job类不支持spring注入。 TimeTaskPlanMapper 是具体的业务Mapper接口用来查询数据库中的配置。
+@Configuration public class StartQuartzJobListener implements ApplicationListener&lt;ContextRefreshedEvent&gt; { private static final Logger logger = LoggerFactory.getLogger(StartQuartzJobListener.class); /* quartz */ @Autowired private QuartzManager quartzManager; @Autowired private MyJobFactory myJobFactory; @Resource private TimeTaskPlanMapper ttpm; /** * 初始启动quartz */ @Override public void onApplicationEvent(ContextRefreshedEvent event) { try { logger.debug(&#34;查询配置表中启动的定时任务集合&#34;); // 从数据库查询定时任务列表 List&lt;UpperCaseMap&gt; tasklist = ttpm.getTimeTasks(); for (UpperCaseMap upperCaseMap : tasklist) { int task_plan_code = (int) upperCaseMap.">
+<meta name="keywords" content="blog,developer,personal">
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="SpringBoot整合Quartz(二)"/>
+<meta name="twitter:description" content="接上一篇文章，本文中展示在springboot项目中根据特定需求配置quartz定时任务。
+POM文件中添加依赖 链接到标题 &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-quartz&lt;/artifactId&gt; &lt;/dependency&gt; 配置类 StartQuartzJobListener.java 链接到标题 首先需要有个配置类来初始化quartz，
+QuartzManager 是 quartz的具体管理类。
+MyJobFactory 是一个自定义的Job工厂类，用来解决默认的Job类不支持spring注入。 TimeTaskPlanMapper 是具体的业务Mapper接口用来查询数据库中的配置。
+@Configuration public class StartQuartzJobListener implements ApplicationListener&lt;ContextRefreshedEvent&gt; { private static final Logger logger = LoggerFactory.getLogger(StartQuartzJobListener.class); /* quartz */ @Autowired private QuartzManager quartzManager; @Autowired private MyJobFactory myJobFactory; @Resource private TimeTaskPlanMapper ttpm; /** * 初始启动quartz */ @Override public void onApplicationEvent(ContextRefreshedEvent event) { try { logger.debug(&#34;查询配置表中启动的定时任务集合&#34;); // 从数据库查询定时任务列表 List&lt;UpperCaseMap&gt; tasklist = ttpm.getTimeTasks(); for (UpperCaseMap upperCaseMap : tasklist) { int task_plan_code = (int) upperCaseMap."/>
+
+<meta property="og:title" content="SpringBoot整合Quartz(二)" />
+<meta property="og:description" content="接上一篇文章，本文中展示在springboot项目中根据特定需求配置quartz定时任务。
+POM文件中添加依赖 链接到标题 &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-quartz&lt;/artifactId&gt; &lt;/dependency&gt; 配置类 StartQuartzJobListener.java 链接到标题 首先需要有个配置类来初始化quartz，
+QuartzManager 是 quartz的具体管理类。
+MyJobFactory 是一个自定义的Job工厂类，用来解决默认的Job类不支持spring注入。 TimeTaskPlanMapper 是具体的业务Mapper接口用来查询数据库中的配置。
+@Configuration public class StartQuartzJobListener implements ApplicationListener&lt;ContextRefreshedEvent&gt; { private static final Logger logger = LoggerFactory.getLogger(StartQuartzJobListener.class); /* quartz */ @Autowired private QuartzManager quartzManager; @Autowired private MyJobFactory myJobFactory; @Resource private TimeTaskPlanMapper ttpm; /** * 初始启动quartz */ @Override public void onApplicationEvent(ContextRefreshedEvent event) { try { logger.debug(&#34;查询配置表中启动的定时任务集合&#34;); // 从数据库查询定时任务列表 List&lt;UpperCaseMap&gt; tasklist = ttpm.getTimeTasks(); for (UpperCaseMap upperCaseMap : tasklist) { int task_plan_code = (int) upperCaseMap." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/springbootquartz2/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-07-04T15:32:11+00:00" />
+<meta property="article:modified_time" content="2019-07-04T15:32:11+00:00" />
+
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/springbootquartz2/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.jpeg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Phantom
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">关于本站</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">分类</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">博客</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags/">标签</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">联系作者</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇬🇧</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/springbootquartz2/">
+              SpringBoot整合Quartz(二)
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2019-07-04T15:32:11Z">
+                July 4, 2019
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              阅读时间：3 分钟
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa-solid fa-folder" aria-hidden="true"></i>
+    <a href="/categories/springboot/">SpringBoot</a></div>
+
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/quartz/">Quartz</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>接上一篇文章，本文中展示在springboot项目中根据特定需求配置quartz定时任务。</p>
+<h2 id="pom文件中添加依赖">
+  POM文件中添加依赖
+  <a class="heading-link" href="#pom%e6%96%87%e4%bb%b6%e4%b8%ad%e6%b7%bb%e5%8a%a0%e4%be%9d%e8%b5%96">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl">	<span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-quartz<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;/dependency&gt;</span>
+</span></span></code></pre></div><h2 id="配置类-startquartzjoblistenerjava">
+  配置类 StartQuartzJobListener.java
+  <a class="heading-link" href="#%e9%85%8d%e7%bd%ae%e7%b1%bb-startquartzjoblistenerjava">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>首先需要有个配置类来初始化quartz，<br>
+QuartzManager 是 quartz的具体管理类。<br>
+MyJobFactory 是一个自定义的Job工厂类，用来解决默认的Job类不支持spring注入。
+TimeTaskPlanMapper 是具体的业务Mapper接口用来查询数据库中的配置。</p>
+<!-- more -->
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">	</span><span class="nd">@Configuration</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">StartQuartzJobListener</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ApplicationListener</span><span class="o">&lt;</span><span class="n">ContextRefreshedEvent</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">StartQuartzJobListener</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="cm">/* quartz */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="nd">@Autowired</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="kd">private</span><span class="w"> </span><span class="n">QuartzManager</span><span class="w"> </span><span class="n">quartzManager</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="nd">@Autowired</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="kd">private</span><span class="w"> </span><span class="n">MyJobFactory</span><span class="w"> </span><span class="n">myJobFactory</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="nd">@Resource</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="kd">private</span><span class="w"> </span><span class="n">TimeTaskPlanMapper</span><span class="w"> </span><span class="n">ttpm</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">	     * 初始启动quartz
+</span></span></span><span class="line"><span class="cl"><span class="cm">	     */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onApplicationEvent</span><span class="p">(</span><span class="n">ContextRefreshedEvent</span><span class="w"> </span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        	</span><span class="n">logger</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&#34;查询配置表中启动的定时任务集合&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        	</span><span class="c1">// 从数据库查询定时任务列表</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		    	</span><span class="n">List</span><span class="o">&lt;</span><span class="n">UpperCaseMap</span><span class="o">&gt;</span><span class="w"> </span><span class="n">tasklist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ttpm</span><span class="p">.</span><span class="na">getTimeTasks</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		    	</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">UpperCaseMap</span><span class="w"> </span><span class="n">upperCaseMap</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">tasklist</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		    		</span><span class="kt">int</span><span class="w"> </span><span class="n">task_plan_code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">upperCaseMap</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&#34;task_plan_code&#34;</span><span class="p">);</span><span class="w"> </span><span class="c1">// xxx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		    		</span><span class="n">String</span><span class="w"> </span><span class="n">task_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="p">)</span><span class="w"> </span><span class="n">upperCaseMap</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&#34;task_id&#34;</span><span class="p">);</span><span class="w">  </span><span class="c1">// xxx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		    		</span><span class="n">String</span><span class="w"> </span><span class="n">model_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="p">)</span><span class="w"> </span><span class="n">upperCaseMap</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&#34;model_name&#34;</span><span class="p">);</span><span class="w"> </span><span class="c1">// xxx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="kt">int</span><span class="w"> </span><span class="n">repeat_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">upperCaseMap</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&#34;repeat_interval&#34;</span><span class="p">);</span><span class="c1">// xxx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="n">String</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="p">)</span><span class="w"> </span><span class="n">upperCaseMap</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&#34;unit&#34;</span><span class="p">);</span><span class="c1">// xxx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="n">Date</span><span class="w"> </span><span class="n">start_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Date</span><span class="p">)</span><span class="w"> </span><span class="n">upperCaseMap</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&#34;start_time&#34;</span><span class="p">);</span><span class="c1">// xxx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="n">Date</span><span class="w"> </span><span class="n">end_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Date</span><span class="p">)</span><span class="w"> </span><span class="n">upperCaseMap</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&#34;end_time&#34;</span><span class="p">);</span><span class="c1">// xxx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="n">quartzManager</span><span class="p">.</span><span class="na">startJob</span><span class="p">(</span><span class="n">task_plan_code</span><span class="p">,</span><span class="n">task_id</span><span class="p">,</span><span class="n">model_name</span><span class="p">,</span><span class="n">repeat_interval</span><span class="p">,</span><span class="n">unit</span><span class="p">,</span><span class="n">start_time</span><span class="p">,</span><span class="n">end_time</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&#34;项目初始化定时任务已经启动...定时任务编号&#34;</span><span class="o">+</span><span class="n">task_id</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		    	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">SchedulerException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">	     * @title:修改默认的jobFactory 支持Job中注入
+</span></span></span><span class="line"><span class="cl"><span class="cm">	     * @author:zhangxueshan
+</span></span></span><span class="line"><span class="cl"><span class="cm">	     * @date 2019年6月20日 下午4:19:06
+</span></span></span><span class="line"><span class="cl"><span class="cm">	     */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="nd">@Bean</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="kd">public</span><span class="w"> </span><span class="n">SchedulerFactoryBean</span><span class="w"> </span><span class="nf">schedulerFactoryBean</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">SchedulerFactoryBean</span><span class="w"> </span><span class="n">factoryBean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SchedulerFactoryBean</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">factoryBean</span><span class="p">.</span><span class="na">setOverwriteExistingJobs</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="c1">//延时启动20秒</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">factoryBean</span><span class="p">.</span><span class="na">setStartupDelay</span><span class="p">(</span><span class="n">20</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">factoryBean</span><span class="p">.</span><span class="na">setJobFactory</span><span class="p">(</span><span class="n">myJobFactory</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="k">return</span><span class="w"> </span><span class="n">factoryBean</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">	     * 初始注入scheduler
+</span></span></span><span class="line"><span class="cl"><span class="cm">	     * @return
+</span></span></span><span class="line"><span class="cl"><span class="cm">	     * @throws SchedulerException
+</span></span></span><span class="line"><span class="cl"><span class="cm">	     */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="nd">@Bean</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;scheduler&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="kd">public</span><span class="w"> </span><span class="n">Scheduler</span><span class="w"> </span><span class="nf">scheduler</span><span class="p">(){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="k">return</span><span class="w"> </span><span class="n">schedulerFactoryBean</span><span class="p">().</span><span class="na">getScheduler</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><h2 id="quartz定时任务管理类-quartzmanagerjava">
+  Quartz定时任务管理类 QuartzManager.java
+  <a class="heading-link" href="#quartz%e5%ae%9a%e6%97%b6%e4%bb%bb%e5%8a%a1%e7%ae%a1%e7%90%86%e7%b1%bb-quartzmanagerjava">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>真正启动quartz的类，包括启动移除</p>
+<p>startJobDemo中的是我们需要在任务启动的时候传入的一些参数以及指定任务的分组名称、以及使用哪种触发器。<br>
+具体的触发器的创建可以根据需求换成不同的触发器以应对不同的需求场景。</p>
+<p><strong><font color="red">需要注意的一点</font></strong>，在我们创建触发器的时候，触发器默认有一个错失触发机制，也就是如果启动定时任务的时间比开始时间晚且没有超过结束时间，就会自动执行一次，这样的话跟具业务的不同选择是否取消，因为我们的项目里不需要补跑定时，所以我把这个取消掉了，否则在定时启动的时候有时会立马执行一次。</p>
+<p><strong><font color="red">不同的触发器会有不同的方法，我这里使用CalendarIntervalScheduleBuilder的withMisfireHandlingInstructionDoNothing()方法来关闭错失执行。</font></strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">	</span><span class="nd">@Component</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">QuartzManager</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">QuartzManager</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="cm">/* 注入定时器实例 */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nd">@Autowired</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="kd">private</span><span class="w"> </span><span class="n">Scheduler</span><span class="w"> </span><span class="n">scheduler</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="cm">/* 参数可以调整 按实际业务需求 */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">startJob</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">task_plan_code</span><span class="p">,</span><span class="n">String</span><span class="w"> </span><span class="n">task_id</span><span class="p">,</span><span class="n">String</span><span class="w"> </span><span class="n">model_name</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">repeat_interval</span><span class="p">,</span><span class="n">String</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="n">Date</span><span class="w"> </span><span class="n">start_time</span><span class="p">,</span><span class="n">Date</span><span class="w"> </span><span class="n">end_time</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">SchedulerException</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="c1">// 注入定时任务类 传递参数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">startJobDemo</span><span class="p">(</span><span class="n">scheduler</span><span class="p">,</span><span class="n">task_plan_code</span><span class="p">,</span><span class="n">task_id</span><span class="p">,</span><span class="n">model_name</span><span class="p">,</span><span class="n">repeat_interval</span><span class="p">,</span><span class="n">unit</span><span class="p">,</span><span class="n">start_time</span><span class="p">,</span><span class="n">end_time</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="c1">// 开启定时任务</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">startJobDemo</span><span class="p">(</span><span class="n">Scheduler</span><span class="w"> </span><span class="n">scheduler</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">task_plan_code</span><span class="p">,</span><span class="n">String</span><span class="w"> </span><span class="n">task_id</span><span class="p">,</span><span class="n">String</span><span class="w"> </span><span class="n">model_name</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">repeat_interval</span><span class="p">,</span><span class="n">String</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="n">Date</span><span class="w"> </span><span class="n">start_time</span><span class="p">,</span><span class="n">Date</span><span class="w"> </span><span class="n">end_time</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">SchedulerException</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="c1">// 查询定时任务是否已经启动 已经启动先停用在重启</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="kt">boolean</span><span class="w"> </span><span class="n">checkExists</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">checkExists</span><span class="p">(</span><span class="n">task_id</span><span class="p">,</span><span class="s">&#34;group1&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">checkExists</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&#34;定时任务已存在 移除定时任务 并重启..任务编号：&#34;</span><span class="o">+</span><span class="n">task_id</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="n">removeJob</span><span class="p">(</span><span class="n">task_id</span><span class="p">,</span><span class="s">&#34;group1&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="c1">// 通过JobBuilder构建JobDetail实例，JobDetail规定只能是实现Job接口的实例</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="c1">// JobDetail 是具体Job实例</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">JobDetail</span><span class="w"> </span><span class="n">jobDetail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JobBuilder</span><span class="p">.</span><span class="na">newJob</span><span class="p">(</span><span class="n">QuartzJob</span><span class="p">.</span><span class="na">class</span><span class="p">).</span><span class="na">withIdentity</span><span class="p">(</span><span class="n">task_id</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;group1&#34;</span><span class="p">).</span><span class="na">build</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="c1">// 向jobDetail传参数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">jobDetail</span><span class="p">.</span><span class="na">getJobDataMap</span><span class="p">().</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;task_plan_code&#34;</span><span class="p">,</span><span class="n">task_plan_code</span><span class="p">);</span><span class="w"> </span><span class="c1">// 需要传递到 job中的参数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">jobDetail</span><span class="p">.</span><span class="na">getJobDataMap</span><span class="p">().</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;task_id&#34;</span><span class="p">,</span><span class="n">task_id</span><span class="p">);</span><span class="w"> </span><span class="c1">// 需要传递到 job中的参数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">jobDetail</span><span class="p">.</span><span class="na">getJobDataMap</span><span class="p">().</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;model_name&#34;</span><span class="p">,</span><span class="n">model_name</span><span class="p">);</span><span class="w"> </span><span class="c1">// 需要传递到 job中的参数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="c1">// 获取基于时间段的触发器 CalendarIntervalTrigger</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">CalendarIntervalScheduleBuilder</span><span class="w"> </span><span class="n">calendarIntervalSchedule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">setInterval</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span><span class="n">repeat_interval</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="c1">// TriggerBuilder 用于构建触发器实例</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="c1">// 触发器 继承于Trigger</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">CalendarIntervalTrigger</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TriggerBuilder</span><span class="p">.</span><span class="na">newTrigger</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="p">.</span><span class="na">startAt</span><span class="p">(</span><span class="n">start_time</span><span class="p">)</span><span class="w">    </span><span class="c1">// 开始时间</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="p">.</span><span class="na">endAt</span><span class="p">(</span><span class="n">end_time</span><span class="p">)</span><span class="w">        </span><span class="c1">// 结束时间</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="p">.</span><span class="na">withIdentity</span><span class="p">(</span><span class="n">task_id</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;group1&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="p">.</span><span class="na">withSchedule</span><span class="p">(</span><span class="n">calendarIntervalSchedule</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="p">.</span><span class="na">build</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">scheduler</span><span class="p">.</span><span class="na">scheduleJob</span><span class="p">(</span><span class="n">jobDetail</span><span class="p">,</span><span class="w"> </span><span class="n">build</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">scheduler</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w"> </span><span class="c1">// 启动</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&#34;开始启动定时任务...定时任务编号：&#34;</span><span class="o">+</span><span class="n">task_id</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="c1">// 通过间隔时间单位来设置间隔时间  返回工厂对象</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="c1">// 根据业务设定 月周日小时分钟秒的时间间隔</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="n">CalendarIntervalScheduleBuilder</span><span class="w"> </span><span class="nf">setInterval</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">repeat_interval</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">CalendarIntervalScheduleBuilder</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CalendarIntervalScheduleBuilder</span><span class="p">.</span><span class="na">calendarIntervalSchedule</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="k">switch</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="k">case</span><span class="w"> </span><span class="s">&#34;s&#34;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="n">c</span><span class="p">.</span><span class="na">withIntervalInSeconds</span><span class="p">(</span><span class="n">repeat_interval</span><span class="p">);</span><span class="c1">// 秒</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="k">break</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="k">case</span><span class="w"> </span><span class="s">&#34;ms&#34;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="n">c</span><span class="p">.</span><span class="na">withIntervalInMinutes</span><span class="p">(</span><span class="n">repeat_interval</span><span class="p">);</span><span class="c1">// 分钟</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="k">break</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="k">case</span><span class="w"> </span><span class="s">&#34;h&#34;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="n">c</span><span class="p">.</span><span class="na">withIntervalInHours</span><span class="p">(</span><span class="n">repeat_interval</span><span class="p">);</span><span class="c1">// 小时</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="k">break</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="k">case</span><span class="w"> </span><span class="s">&#34;d&#34;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="n">c</span><span class="p">.</span><span class="na">withIntervalInDays</span><span class="p">(</span><span class="n">repeat_interval</span><span class="p">);</span><span class="w"> </span><span class="c1">// 日</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="k">break</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="k">case</span><span class="w"> </span><span class="s">&#34;m&#34;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="n">c</span><span class="p">.</span><span class="na">withIntervalInMonths</span><span class="p">(</span><span class="n">repeat_interval</span><span class="p">);</span><span class="c1">// 月</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="k">break</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="k">case</span><span class="w"> </span><span class="s">&#34;w&#34;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="n">c</span><span class="p">.</span><span class="na">withIntervalInWeeks</span><span class="p">(</span><span class="n">repeat_interval</span><span class="p">);</span><span class="c1">// 周</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="k">break</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="c1">// 关闭错失执行  防止启动定时的时候 开始时间已经过去会自动执行一次</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">c</span><span class="p">.</span><span class="na">withMisfireHandlingInstructionDoNothing</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="c1">// 通过cron表达式来生成定时  返回工厂对象</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="n">CronScheduleBuilder</span><span class="w"> </span><span class="nf">setIntervalByCron</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">cron</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">CronScheduleBuilder</span><span class="w"> </span><span class="n">cronScheduleBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CronScheduleBuilder</span><span class="p">.</span><span class="na">cronSchedule</span><span class="p">(</span><span class="n">cron</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="n">cronScheduleBuilder</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="c1">// 移除定时任务</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">removeJob</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">jobName</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">groupName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&#34;开始停用xxx：&#34;</span><span class="o">+</span><span class="n">jobName</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">TriggerKey</span><span class="w"> </span><span class="n">triggerKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TriggerKey</span><span class="p">.</span><span class="na">triggerKey</span><span class="p">(</span><span class="n">jobName</span><span class="p">,</span><span class="w"> </span><span class="n">groupName</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">checkExists</span><span class="p">(</span><span class="n">jobName</span><span class="p">,</span><span class="w"> </span><span class="n">groupName</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="n">scheduler</span><span class="p">.</span><span class="na">pauseTrigger</span><span class="p">(</span><span class="n">triggerKey</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">					</span><span class="n">scheduler</span><span class="p">.</span><span class="na">unscheduleJob</span><span class="p">(</span><span class="n">triggerKey</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">				</span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="n">e</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="c1">// 查询定时是否存在</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">checkExists</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">jobName</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">groupName</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">SchedulerException</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="n">TriggerKey</span><span class="w"> </span><span class="n">triggerKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TriggerKey</span><span class="p">.</span><span class="na">triggerKey</span><span class="p">(</span><span class="n">jobName</span><span class="p">,</span><span class="w"> </span><span class="n">groupName</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">			</span><span class="k">return</span><span class="w"> </span><span class="n">scheduler</span><span class="p">.</span><span class="na">checkExists</span><span class="p">(</span><span class="n">triggerKey</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div>
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2024
+     ZHXS 
+    ·
+    
+    技术支持 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>

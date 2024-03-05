@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  SpringBoot整合Quartz(一) · Phantom
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="ZHXS">
+<meta name="description" content="在做springboot的项目中有一个特殊需求，前端动态添加定时任务，动态停启定时任务，任务内容是通过动态新增的数据来发起post请求请求python对外接口。
+首先想到使用SpringBoot自带的注解@Scheduled来实现定时，通过相关注解可以配置同步、异步任务。
+后来发现对这种动态的支持不是很好，所以改用quartz来实现。
+Quartz 简单介绍 链接到标题 Quartz 是一个完全由 Java 编写的开源作业调度框架，为在 Java 应用程序中进行作业调度提供了简单却强大的机制。 Quartz 可以与 J2EE 与 J2SE 应用程序相结合也可以单独使用。 Quartz 允许程序开发人员根据时间的间隔来调度作业。 Quartz 实现了作业和触发器的多对多的关系，还能把多个作业与不同的触发器关联。
+Quartz 核心概念 链接到标题 我们需要明白 Quartz 的几个核心概念，这样理解起 Quartz 的原理就会变得简单了。
+1.Job 表示一个工作，要执行的具体内容。此接口中只有一个方法，如下：
+void execute(JobExecutionContext context) 2.JobDetail 表示一个具体的可执行的调度程序，Job 是这个可执行程调度程序所要执行的内容，另外 JobDetail 还包含了这个任务调度的方案和策略。
+3.Trigger 代表一个调度参数的配置，什么时候去调。
+4.Scheduler 代表一个调度容器，一个调度容器中可以注册多个 JobDetail 和 Trigger。 当 Trigger 与 JobDetail 组合，就可以被 Scheduler 容器调度了。
+在Springboot中整合quartz非常简单，在高版本的springboot中自带quartz支持和默认配置。
+Quartz 触发器 链接到标题 在这里简单说一下quartz的触发器，在项目中需求定时要求输入开始时间，结束时间，时间间隔和单位，分析之后选择使用日历触发器来实现。
+例举quartz的触发器：
+SimpleTrigger 链接到标题 简单触发器，适用于短期内的循环定时任务，定义一个开始时间到达开始时间就执行定时，进行循环。 因为需求原因需要区别日期，例如当月1日10点执行，下个月1日10点在触发。简单触发器就不支持，直接间隔年月日这种类型。
+CronTrigger 链接到标题 cron表达式的触发器，这种触发器支持基于日历来定时，不过需要生成cron表达式，在前端集成插件或者后台判断生成cron都比较重，我们的功能要求的比较简单所以没采用cron的触发器。
+CalendarIntervalTrigger 链接到标题 日历触发器，类似于SimpleTrigger，指定从某一个时间开始，以一定的时间间隔执行的任务。 但是不同的是SimpleTrigger指定的时间间隔为毫秒，没办法指定每隔一个月执行一次（每月的时间间隔不是固定值），而CalendarIntervalTrigger支持的间隔单位有秒，分钟，小时，天，月，年，星期。">
+<meta name="keywords" content="blog,developer,personal">
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="SpringBoot整合Quartz(一)"/>
+<meta name="twitter:description" content="在做springboot的项目中有一个特殊需求，前端动态添加定时任务，动态停启定时任务，任务内容是通过动态新增的数据来发起post请求请求python对外接口。
+首先想到使用SpringBoot自带的注解@Scheduled来实现定时，通过相关注解可以配置同步、异步任务。
+后来发现对这种动态的支持不是很好，所以改用quartz来实现。
+Quartz 简单介绍 链接到标题 Quartz 是一个完全由 Java 编写的开源作业调度框架，为在 Java 应用程序中进行作业调度提供了简单却强大的机制。 Quartz 可以与 J2EE 与 J2SE 应用程序相结合也可以单独使用。 Quartz 允许程序开发人员根据时间的间隔来调度作业。 Quartz 实现了作业和触发器的多对多的关系，还能把多个作业与不同的触发器关联。
+Quartz 核心概念 链接到标题 我们需要明白 Quartz 的几个核心概念，这样理解起 Quartz 的原理就会变得简单了。
+1.Job 表示一个工作，要执行的具体内容。此接口中只有一个方法，如下：
+void execute(JobExecutionContext context) 2.JobDetail 表示一个具体的可执行的调度程序，Job 是这个可执行程调度程序所要执行的内容，另外 JobDetail 还包含了这个任务调度的方案和策略。
+3.Trigger 代表一个调度参数的配置，什么时候去调。
+4.Scheduler 代表一个调度容器，一个调度容器中可以注册多个 JobDetail 和 Trigger。 当 Trigger 与 JobDetail 组合，就可以被 Scheduler 容器调度了。
+在Springboot中整合quartz非常简单，在高版本的springboot中自带quartz支持和默认配置。
+Quartz 触发器 链接到标题 在这里简单说一下quartz的触发器，在项目中需求定时要求输入开始时间，结束时间，时间间隔和单位，分析之后选择使用日历触发器来实现。
+例举quartz的触发器：
+SimpleTrigger 链接到标题 简单触发器，适用于短期内的循环定时任务，定义一个开始时间到达开始时间就执行定时，进行循环。 因为需求原因需要区别日期，例如当月1日10点执行，下个月1日10点在触发。简单触发器就不支持，直接间隔年月日这种类型。
+CronTrigger 链接到标题 cron表达式的触发器，这种触发器支持基于日历来定时，不过需要生成cron表达式，在前端集成插件或者后台判断生成cron都比较重，我们的功能要求的比较简单所以没采用cron的触发器。
+CalendarIntervalTrigger 链接到标题 日历触发器，类似于SimpleTrigger，指定从某一个时间开始，以一定的时间间隔执行的任务。 但是不同的是SimpleTrigger指定的时间间隔为毫秒，没办法指定每隔一个月执行一次（每月的时间间隔不是固定值），而CalendarIntervalTrigger支持的间隔单位有秒，分钟，小时，天，月，年，星期。"/>
+
+<meta property="og:title" content="SpringBoot整合Quartz(一)" />
+<meta property="og:description" content="在做springboot的项目中有一个特殊需求，前端动态添加定时任务，动态停启定时任务，任务内容是通过动态新增的数据来发起post请求请求python对外接口。
+首先想到使用SpringBoot自带的注解@Scheduled来实现定时，通过相关注解可以配置同步、异步任务。
+后来发现对这种动态的支持不是很好，所以改用quartz来实现。
+Quartz 简单介绍 链接到标题 Quartz 是一个完全由 Java 编写的开源作业调度框架，为在 Java 应用程序中进行作业调度提供了简单却强大的机制。 Quartz 可以与 J2EE 与 J2SE 应用程序相结合也可以单独使用。 Quartz 允许程序开发人员根据时间的间隔来调度作业。 Quartz 实现了作业和触发器的多对多的关系，还能把多个作业与不同的触发器关联。
+Quartz 核心概念 链接到标题 我们需要明白 Quartz 的几个核心概念，这样理解起 Quartz 的原理就会变得简单了。
+1.Job 表示一个工作，要执行的具体内容。此接口中只有一个方法，如下：
+void execute(JobExecutionContext context) 2.JobDetail 表示一个具体的可执行的调度程序，Job 是这个可执行程调度程序所要执行的内容，另外 JobDetail 还包含了这个任务调度的方案和策略。
+3.Trigger 代表一个调度参数的配置，什么时候去调。
+4.Scheduler 代表一个调度容器，一个调度容器中可以注册多个 JobDetail 和 Trigger。 当 Trigger 与 JobDetail 组合，就可以被 Scheduler 容器调度了。
+在Springboot中整合quartz非常简单，在高版本的springboot中自带quartz支持和默认配置。
+Quartz 触发器 链接到标题 在这里简单说一下quartz的触发器，在项目中需求定时要求输入开始时间，结束时间，时间间隔和单位，分析之后选择使用日历触发器来实现。
+例举quartz的触发器：
+SimpleTrigger 链接到标题 简单触发器，适用于短期内的循环定时任务，定义一个开始时间到达开始时间就执行定时，进行循环。 因为需求原因需要区别日期，例如当月1日10点执行，下个月1日10点在触发。简单触发器就不支持，直接间隔年月日这种类型。
+CronTrigger 链接到标题 cron表达式的触发器，这种触发器支持基于日历来定时，不过需要生成cron表达式，在前端集成插件或者后台判断生成cron都比较重，我们的功能要求的比较简单所以没采用cron的触发器。
+CalendarIntervalTrigger 链接到标题 日历触发器，类似于SimpleTrigger，指定从某一个时间开始，以一定的时间间隔执行的任务。 但是不同的是SimpleTrigger指定的时间间隔为毫秒，没办法指定每隔一个月执行一次（每月的时间间隔不是固定值），而CalendarIntervalTrigger支持的间隔单位有秒，分钟，小时，天，月，年，星期。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/springbootquartz/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-07-04T14:40:10+00:00" />
+<meta property="article:modified_time" content="2019-07-04T14:40:10+00:00" />
+
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/springbootquartz/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.jpeg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Phantom
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">关于本站</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">分类</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">博客</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags/">标签</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">联系作者</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇬🇧</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/springbootquartz/">
+              SpringBoot整合Quartz(一)
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2019-07-04T14:40:10Z">
+                July 4, 2019
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              阅读时间：1 分钟
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa-solid fa-folder" aria-hidden="true"></i>
+    <a href="/categories/springboot/">SpringBoot</a></div>
+
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/quartz/">Quartz</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>在做springboot的项目中有一个特殊需求，前端动态添加定时任务，动态停启定时任务，任务内容是通过动态新增的数据来发起post请求请求python对外接口。</p>
+<p>首先想到使用SpringBoot自带的注解@Scheduled来实现定时，通过相关注解可以配置同步、异步任务。</p>
+<p>后来发现对这种动态的支持不是很好，所以改用quartz来实现。</p>
+<h2 id="quartz-简单介绍">
+  Quartz 简单介绍
+  <a class="heading-link" href="#quartz-%e7%ae%80%e5%8d%95%e4%bb%8b%e7%bb%8d">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>Quartz 是一个完全由 Java 编写的开源作业调度框架，为在 Java 应用程序中进行作业调度提供了简单却强大的机制。
+Quartz 可以与 J2EE 与 J2SE 应用程序相结合也可以单独使用。
+Quartz 允许程序开发人员根据时间的间隔来调度作业。
+Quartz 实现了作业和触发器的多对多的关系，还能把多个作业与不同的触发器关联。</p>
+<h2 id="quartz-核心概念">
+  Quartz 核心概念
+  <a class="heading-link" href="#quartz-%e6%a0%b8%e5%bf%83%e6%a6%82%e5%bf%b5">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>我们需要明白 Quartz 的几个核心概念，这样理解起 Quartz 的原理就会变得简单了。</p>
+<!-- more -->
+<p>1.<strong><font color="blue">Job</font></strong> 表示一个工作，要执行的具体内容。此接口中只有一个方法，如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">	</span><span class="kt">void</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="n">JobExecutionContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> 
+</span></span></span></code></pre></div><p>2.<strong><font color="blue">JobDetail</font></strong>  表示一个具体的可执行的调度程序，Job 是这个可执行程调度程序所要执行的内容，另外 JobDetail 还包含了这个任务调度的方案和策略。</p>
+<p>3.<strong><font color="blue">Trigger</font></strong> 代表一个调度参数的配置，什么时候去调。</p>
+<p>4.<strong><font color="blue">Scheduler</font></strong> 代表一个调度容器，一个调度容器中可以注册多个 JobDetail 和 Trigger。
+当 Trigger 与 JobDetail 组合，就可以被 Scheduler 容器调度了。</p>
+<p><strong>在Springboot中整合quartz非常简单，在高版本的springboot中自带quartz支持和默认配置。</strong></p>
+<h2 id="quartz-触发器">
+  Quartz 触发器
+  <a class="heading-link" href="#quartz-%e8%a7%a6%e5%8f%91%e5%99%a8">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>在这里简单说一下quartz的触发器，在项目中需求定时要求输入开始时间，结束时间，时间间隔和单位，分析之后选择使用日历触发器来实现。</p>
+<p>例举quartz的触发器：</p>
+<h3 id="simpletrigger">
+  SimpleTrigger
+  <a class="heading-link" href="#simpletrigger">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>简单触发器，适用于短期内的循环定时任务，定义一个开始时间到达开始时间就执行定时，进行循环。
+因为需求原因需要区别日期，例如当月1日10点执行，下个月1日10点在触发。简单触发器就不支持，直接间隔年月日这种类型。</p>
+<h3 id="crontrigger">
+  CronTrigger
+  <a class="heading-link" href="#crontrigger">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>cron表达式的触发器，这种触发器支持基于日历来定时，不过需要生成cron表达式，在前端集成插件或者后台判断生成cron都比较重，我们的功能要求的比较简单所以没采用cron的触发器。</p>
+<h3 id="calendarintervaltrigger">
+  CalendarIntervalTrigger
+  <a class="heading-link" href="#calendarintervaltrigger">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>日历触发器，类似于SimpleTrigger，指定从某一个时间开始，以一定的时间间隔执行的任务。 但是不同的是SimpleTrigger指定的时间间隔为毫秒，没办法指定每隔一个月执行一次（每月的时间间隔不是固定值），而CalendarIntervalTrigger支持的间隔单位有秒，分钟，小时，天，月，年，星期。</p>
+<p><strong>所以在项目中我们选择这种触发器来实现。</strong></p>
+<h3 id="dailytimeintervaltrigger">
+  DailyTimeIntervalTrigger
+  <a class="heading-link" href="#dailytimeintervaltrigger">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>指定每天的某个时间段内，以一定的时间间隔执行任务。并且它可以支持指定星期。
+它适合的任务类似于：指定每天9:00 至 18:00 ，每隔70秒执行一次，并且只要周一至周五执行。</p>
+<h3 id="nthincludeddaytrigger">
+  NthIncludedDayTrigger
+  <a class="heading-link" href="#nthincludeddaytrigger">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>org.quartz.NthIncludedDayTrigger 是 Quartz 开发团队最新加入到框架中的一个 Trigger。它设计用于在每一间隔类型的第几天执行 Job。</p>
+<p>例如，你要在每个月的 15 号执行一个 Job，用 NthIncludedDayTrigger 就再合适不过了。Quartz 的 Caldendar 也可与 Trigger 关联以此把周末与节假日考虑进来，并在必要时跳开这些日期。</p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2024
+     ZHXS 
+    ·
+    
+    技术支持 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pandas on Phantom</title>
+    <link>http://localhost:1313/categories/pandas/</link>
+    <description>Recent content in Pandas on Phantom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 04 Sep 2019 17:41:46 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/pandas/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pandas使用经验(一)</title>
+      <link>http://localhost:1313/posts/pandas1/</link>
+      <pubDate>Wed, 04 Sep 2019 17:41:46 +0000</pubDate>
+      <guid>http://localhost:1313/posts/pandas1/</guid>
+      <description> Pandas: 强大的Python数据分析工具包 链接到标题 Pandas是一个开源的，BSD许可的库，为Python编程语言提供高性能，易于使用的数据结构和数据分析工具。&#xA;官方api地址：地址&#xA;导入方式&#xA;```python import pandas as pd ``` 1.pandas读取mysql查询结果 链接到标题 参数：sql语句 数据库连接&#xA;pd.read_sql(sql,connection_obj)&#xA;例： 使用pymsql创建一个连接并查询&#xA;sql = &amp;#39;select * from xxx&amp;#39; connection = pymysql.connect( host=&amp;#39;10.10.10.10&amp;#39;, port=3306, user=&amp;#39;root&amp;#39;, password=&amp;#39;123&amp;#39;, database=&amp;#39;xxx&amp;#39;, charset=&amp;#39;utf8&amp;#39; ) df = pd.read_sql(sql,connection) ``` #### 2.pandas将dataframe数据写入数据库 #### ```python from sqlalchemy import create_engine e = create_engine(&amp;#39;mysql+pymysql://root:root@localhost:3306/question?charset=utf8&amp;#39;) df.to_sql(&amp;#39;table_name&amp;#39;, con=e, if_exists=&amp;#39;append&amp;#39;,index=False) </description>
+    </item>
+  </channel>
+</rss>

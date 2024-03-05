@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  SpringBoot之多数据源配置 · Phantom
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="ZHXS">
+<meta name="description" content="应用背景 链接到标题 因为项目需求导致需要连接多个数据源，可能为Mysql及其他源，所以需要在项目中配置多数据源，来达到执行不同业务的时候切换不同的数据源。
+参考了很多资料，结合应用本身，决定使用配置类来配置动态数据源，通过配置AOP在service层上配置切点来控制数据源的切换。
+1.动态数据源 DynamicDataSource.java 链接到标题 首先定义一个动态数据源类
+public class DynamicDataSource extends AbstractRoutingDataSource { @Override protected Object determineCurrentLookupKey() { DataSourceType.DataBaseType dataBaseType = DataSourceType.getDataBaseType(); return dataBaseType; } } 2.切换数据源线程类 DataSourceType.java 链接到标题 public class DataSourceType { public enum DataBaseType { DATA1, DATA2 } // 使用ThreadLocal保证线程安全 private static final ThreadLocal&lt;DataBaseType&gt; TYPE = new ThreadLocal&lt;DataBaseType&gt;(); // 往当前线程里设置数据源类型 public static void setDataBaseType(DataBaseType dataBaseType) { if (dataBaseType == null) { throw new NullPointerException(); } System.err.println(&#34;[将当前数据源改为]：&#34; &#43; dataBaseType); TYPE.">
+<meta name="keywords" content="blog,developer,personal">
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="SpringBoot之多数据源配置"/>
+<meta name="twitter:description" content="应用背景 链接到标题 因为项目需求导致需要连接多个数据源，可能为Mysql及其他源，所以需要在项目中配置多数据源，来达到执行不同业务的时候切换不同的数据源。
+参考了很多资料，结合应用本身，决定使用配置类来配置动态数据源，通过配置AOP在service层上配置切点来控制数据源的切换。
+1.动态数据源 DynamicDataSource.java 链接到标题 首先定义一个动态数据源类
+public class DynamicDataSource extends AbstractRoutingDataSource { @Override protected Object determineCurrentLookupKey() { DataSourceType.DataBaseType dataBaseType = DataSourceType.getDataBaseType(); return dataBaseType; } } 2.切换数据源线程类 DataSourceType.java 链接到标题 public class DataSourceType { public enum DataBaseType { DATA1, DATA2 } // 使用ThreadLocal保证线程安全 private static final ThreadLocal&lt;DataBaseType&gt; TYPE = new ThreadLocal&lt;DataBaseType&gt;(); // 往当前线程里设置数据源类型 public static void setDataBaseType(DataBaseType dataBaseType) { if (dataBaseType == null) { throw new NullPointerException(); } System.err.println(&#34;[将当前数据源改为]：&#34; &#43; dataBaseType); TYPE."/>
+
+<meta property="og:title" content="SpringBoot之多数据源配置" />
+<meta property="og:description" content="应用背景 链接到标题 因为项目需求导致需要连接多个数据源，可能为Mysql及其他源，所以需要在项目中配置多数据源，来达到执行不同业务的时候切换不同的数据源。
+参考了很多资料，结合应用本身，决定使用配置类来配置动态数据源，通过配置AOP在service层上配置切点来控制数据源的切换。
+1.动态数据源 DynamicDataSource.java 链接到标题 首先定义一个动态数据源类
+public class DynamicDataSource extends AbstractRoutingDataSource { @Override protected Object determineCurrentLookupKey() { DataSourceType.DataBaseType dataBaseType = DataSourceType.getDataBaseType(); return dataBaseType; } } 2.切换数据源线程类 DataSourceType.java 链接到标题 public class DataSourceType { public enum DataBaseType { DATA1, DATA2 } // 使用ThreadLocal保证线程安全 private static final ThreadLocal&lt;DataBaseType&gt; TYPE = new ThreadLocal&lt;DataBaseType&gt;(); // 往当前线程里设置数据源类型 public static void setDataBaseType(DataBaseType dataBaseType) { if (dataBaseType == null) { throw new NullPointerException(); } System.err.println(&#34;[将当前数据源改为]：&#34; &#43; dataBaseType); TYPE." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/springbootdatasource/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-07-03T14:14:44+00:00" />
+<meta property="article:modified_time" content="2019-07-03T14:14:44+00:00" />
+
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/springbootdatasource/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.jpeg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Phantom
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">关于本站</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">分类</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">博客</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags/">标签</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">联系作者</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇬🇧</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/springbootdatasource/">
+              SpringBoot之多数据源配置
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2019-07-03T14:14:44Z">
+                July 3, 2019
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              阅读时间：2 分钟
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa-solid fa-folder" aria-hidden="true"></i>
+    <a href="/categories/springboot/">SpringBoot</a></div>
+
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/">多数据源</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h1 id="应用背景">
+  应用背景
+  <a class="heading-link" href="#%e5%ba%94%e7%94%a8%e8%83%8c%e6%99%af">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h1>
+<p>因为项目需求导致需要连接多个数据源，可能为Mysql及其他源，所以需要在项目中配置多数据源，来达到执行不同业务的时候切换不同的数据源。</p>
+<p>参考了很多资料，结合应用本身，决定使用配置类来配置动态数据源，通过配置AOP在service层上配置切点来控制数据源的切换。</p>
+<h2 id="1动态数据源-dynamicdatasourcejava">
+  1.动态数据源 DynamicDataSource.java
+  <a class="heading-link" href="#1%e5%8a%a8%e6%80%81%e6%95%b0%e6%8d%ae%e6%ba%90-dynamicdatasourcejava">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>首先定义一个动态数据源类</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DynamicDataSource</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractRoutingDataSource</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="kd">protected</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="nf">determineCurrentLookupKey</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">DataSourceType</span><span class="p">.</span><span class="na">DataBaseType</span><span class="w"> </span><span class="n">dataBaseType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataSourceType</span><span class="p">.</span><span class="na">getDataBaseType</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="k">return</span><span class="w"> </span><span class="n">dataBaseType</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><!-- more -->
+<h2 id="2切换数据源线程类-datasourcetypejava">
+  2.切换数据源线程类 DataSourceType.java
+  <a class="heading-link" href="#2%e5%88%87%e6%8d%a2%e6%95%b0%e6%8d%ae%e6%ba%90%e7%ba%bf%e7%a8%8b%e7%b1%bb-datasourcetypejava">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DataSourceType</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">DataBaseType</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">DATA1</span><span class="p">,</span><span class="w"> </span><span class="n">DATA2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="c1">// 使用ThreadLocal保证线程安全</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ThreadLocal</span><span class="o">&lt;</span><span class="n">DataBaseType</span><span class="o">&gt;</span><span class="w"> </span><span class="n">TYPE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ThreadLocal</span><span class="o">&lt;</span><span class="n">DataBaseType</span><span class="o">&gt;</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="c1">// 往当前线程里设置数据源类型</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setDataBaseType</span><span class="p">(</span><span class="n">DataBaseType</span><span class="w"> </span><span class="n">dataBaseType</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dataBaseType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NullPointerException</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;[将当前数据源改为]：&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dataBaseType</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">TYPE</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">dataBaseType</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="c1">// 获取数据源类型</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">DataBaseType</span><span class="w"> </span><span class="nf">getDataBaseType</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">DataBaseType</span><span class="w"> </span><span class="n">dataBaseType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TYPE</span><span class="p">.</span><span class="na">get</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">DataBaseType</span><span class="p">.</span><span class="na">DATA1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">TYPE</span><span class="p">.</span><span class="na">get</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;[当前数据源]：&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dataBaseType</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="k">return</span><span class="w"> </span><span class="n">dataBaseType</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="c1">// 清空数据类型</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">clearDataBaseType</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">TYPE</span><span class="p">.</span><span class="na">remove</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><h2 id="3配置类-datasourceconfigjava">
+  3.配置类 DataSourceConfig.java 
+  <a class="heading-link" href="#3%e9%85%8d%e7%bd%ae%e7%b1%bb-datasourceconfigjava">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>用来配置包扫描 自定义sqlSessionFactory</p>
+<p>@Configuration 代表springboot加载配置，因为手动定义数据源，所以需要在springboot的启动类中添加注解防止重复实例，还需要取消启动类中的包扫描配置。<br>
+@MapperScan 填充值为dao包或者mapper接口包名</p>
+<p><font color="red">在启动类中添加注解</font><br>
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class,DruidDataSourceAutoConfigure.class})</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">	</span><span class="nd">@Configuration</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nd">@MapperScan</span><span class="p">(</span><span class="n">basePackages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;com.xxx.xxx.mapper&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">sqlSessionFactoryRef</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;SqlSessionFactory&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DataSourceConfig</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nd">@Autowired</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="kd">private</span><span class="w"> </span><span class="n">Environment</span><span class="w"> </span><span class="n">env</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="c1">// 默认数据源</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="c1">// 通过配置文件创建数据源 此处使用自定义的配置</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="nd">@Primary</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="nd">@Bean</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;test1DataSource&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="kd">public</span><span class="w"> </span><span class="n">DataSource</span><span class="w"> </span><span class="nf">getDateSource1</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    	</span><span class="n">Properties</span><span class="w"> </span><span class="n">props</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Properties</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    	</span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;type&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">env</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="s">&#34;spring.datasource.test1.type&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    	</span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;driverClassName&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">env</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="s">&#34;spring.datasource.test1.driver-class-name&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    	</span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;url&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">env</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="s">&#34;spring.datasource.test1.url&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    	</span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;username&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">env</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="s">&#34;spring.datasource.test1.username&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    	</span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;password&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">env</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="s">&#34;spring.datasource.test1.password&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="k">return</span><span class="w"> </span><span class="n">DruidDataSourceFactory</span><span class="p">.</span><span class="na">createDataSource</span><span class="p">(</span><span class="n">props</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="nd">@Bean</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;test2DataSource&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="kd">public</span><span class="w"> </span><span class="n">DataSource</span><span class="w"> </span><span class="nf">getDateSource2</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    	</span><span class="n">Properties</span><span class="w"> </span><span class="n">props</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Properties</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    	</span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;type&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">env</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="s">&#34;spring.datasource.test2.type&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    	</span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;driverClassName&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">env</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="s">&#34;spring.datasource.test2.driver-class-name&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    	</span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;url&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">env</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="s">&#34;spring.datasource.test2.url&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    	</span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;username&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">env</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="s">&#34;spring.datasource.test2.username&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    	</span><span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&#34;password&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">env</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="s">&#34;spring.datasource.test2.password&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="k">return</span><span class="w"> </span><span class="n">DruidDataSourceFactory</span><span class="p">.</span><span class="na">createDataSource</span><span class="p">(</span><span class="n">props</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="nd">@Bean</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;dynamicDataSource&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="kd">public</span><span class="w"> </span><span class="n">DynamicDataSource</span><span class="w"> </span><span class="nf">DataSource</span><span class="p">(</span><span class="nd">@Qualifier</span><span class="p">(</span><span class="s">&#34;test1DataSource&#34;</span><span class="p">)</span><span class="w"> </span><span class="n">DataSource</span><span class="w"> </span><span class="n">test1DataSource</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	            </span><span class="nd">@Qualifier</span><span class="p">(</span><span class="s">&#34;test2DataSource&#34;</span><span class="p">)</span><span class="w"> </span><span class="n">DataSource</span><span class="w"> </span><span class="n">test2DataSource</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Object</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">targetDataSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">targetDataSource</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">DataSourceType</span><span class="p">.</span><span class="na">DataBaseType</span><span class="p">.</span><span class="na">DATA1</span><span class="p">,</span><span class="w"> </span><span class="n">test1DataSource</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">targetDataSource</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">DataSourceType</span><span class="p">.</span><span class="na">DataBaseType</span><span class="p">.</span><span class="na">DATA2</span><span class="p">,</span><span class="w"> </span><span class="n">test2DataSource</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">DynamicDataSource</span><span class="w"> </span><span class="n">dataSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DynamicDataSource</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">dataSource</span><span class="p">.</span><span class="na">setTargetDataSources</span><span class="p">(</span><span class="n">targetDataSource</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">dataSource</span><span class="p">.</span><span class="na">setDefaultTargetDataSource</span><span class="p">(</span><span class="n">test1DataSource</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="k">return</span><span class="w"> </span><span class="n">dataSource</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="nd">@Bean</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;SqlSessionFactory&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="kd">public</span><span class="w"> </span><span class="n">SqlSessionFactory</span><span class="w"> </span><span class="nf">test1SqlSessionFactory</span><span class="p">(</span><span class="nd">@Qualifier</span><span class="p">(</span><span class="s">&#34;dynamicDataSource&#34;</span><span class="p">)</span><span class="w"> </span><span class="n">DataSource</span><span class="w"> </span><span class="n">dynamicDataSource</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	            </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">SqlSessionFactoryBean</span><span class="w"> </span><span class="n">bean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SqlSessionFactoryBean</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">bean</span><span class="p">.</span><span class="na">setDataSource</span><span class="p">(</span><span class="n">dynamicDataSource</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">bean</span><span class="p">.</span><span class="na">setMapperLocations</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	                </span><span class="k">new</span><span class="w"> </span><span class="n">PathMatchingResourcePatternResolver</span><span class="p">().</span><span class="na">getResources</span><span class="p">(</span><span class="s">&#34;classpath*:mapper/*.xml&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="k">return</span><span class="w"> </span><span class="n">bean</span><span class="p">.</span><span class="na">getObject</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><h2 id="4aop类-datasourceaopjava">
+  4.AOP类 DataSourceAop.java 
+  <a class="heading-link" href="#4aop%e7%b1%bb-datasourceaopjava">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>通过配置aop切点来切换数据源，此处使用简单的aop配置 只配置切点和方法执行前切换数据源。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">	</span><span class="nd">@Aspect</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nd">@Component</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DataSourceAop</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="c1">// 配置切点</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nd">@Pointcut</span><span class="p">(</span><span class="s">&#34;execution(* com.xxx.xxx..*.*(..))&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">dataSourcePointCut</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nd">@Before</span><span class="p">(</span><span class="s">&#34;dataSourcePointCut()&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setDataSource2test01</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;DATA1业务&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">DataSourceType</span><span class="p">.</span><span class="na">setDataBaseType</span><span class="p">(</span><span class="n">DataBaseType</span><span class="p">.</span><span class="na">DATA1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="nd">@Before</span><span class="p">(</span><span class="s">&#34;dataSourcePointCut()&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setDataSource2test02</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">System</span><span class="p">.</span><span class="na">err</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;DATA2业务&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	        </span><span class="n">DataSourceType</span><span class="p">.</span><span class="na">setDataBaseType</span><span class="p">(</span><span class="n">DataBaseType</span><span class="p">.</span><span class="na">DATA2</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">	
+</span></span></span></code></pre></div><p>配置完成后启动项目，在响应切点配置方法的执行前会输出切换的提示。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="o">[</span><span class="n">当前数据源</span><span class="o">]</span><span class="err">：</span><span class="n">DATA1</span><span class="w">
+</span></span></span></code></pre></div>
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2024
+     ZHXS 
+    ·
+    
+    技术支持 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>

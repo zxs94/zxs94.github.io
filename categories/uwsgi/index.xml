@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Uwsgi on Phantom</title>
+    <link>http://localhost:1313/categories/uwsgi/</link>
+    <description>Recent content in Uwsgi on Phantom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 31 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/uwsgi/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>uWSGI入门</title>
+      <link>http://localhost:1313/posts/uwsgi1/</link>
+      <pubDate>Wed, 31 Jul 2019 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/uwsgi1/</guid>
+      <description>什么是uWSGI？ 链接到标题 uWSGI是一个Web服务器，它实现了WSGI协议、uwsgi、http等协议。 它是一个Web服务器（如nginx，uWSGI等服务器）与web应用（如用Flask框架写的程序）通信的一种规范。&#xA;要注意 WSGI / uwsgi / uWSGI 这三个概念的区分。&#xA;WSGI是一种通信协议。&#xA;uwsgi是一种线路协议而不是通信协议，在此常用于在uWSGI服务器与其他网络服务器的数据通信。&#xA;uWSGI是实现了uwsgi和WSGI两种协议的Web服务器。&#xA;安装uWSGI 链接到标题 pip install uwsgitop 核心配置文件 uwsgi.ini&#xA;配置文件 链接到标题 配置文件内容如下：&#xA;[uwsgi] master = true #启动主进程，来管理其他进程，其它的uwsgi进程都是这个master进程的子进程，如果kill这个master进程，相当于重启所有的uwsgi进程。 # 主进程的名称自定义 procname-master = project_name pythonpath = /app/project_name #在app加载前切换到当前目录， 指定运行目录 wsgi-file = /app/project_name/run.py touch-reload=/app/project_name/app/ #当文件夹下的文件发生变化时自动重载 stats = /app/model_platform/run/uwsgi.status #stats = 0.0.0.0:9000 #容器运行状态 每个work运行状态 也可以发布到一个http服务上 lazy-apps = true #在每个worker而不是master中加载应用 http = 0.0.0.0:8000 #服务发布的端口号 callable = app processes = 2 #启动2个工作进程，生成指定数目的worker/进程 threads = 2 #每个进程的线程数 buffer-size = 65536 #设置用于uwsgi包解析的内部缓存区大小为64k。默认是4k。 daemonize = /app/project_name/log/myapp_uwsgi.</description>
+    </item>
+  </channel>
+</rss>

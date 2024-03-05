@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Supervisor · Phantom
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="ZHXS">
+<meta name="description" content="简介 链接到标题 Supervisor 是一个用 Python 写的进程管理工具，可以很方便的用来在 UNIX-like 系统（不支持 Windows）下启动、重启（自动重启程序）、关闭进程（不仅仅是 Python 进程）。
+安装 链接到标题 pip install supervisor 配置文件 链接到标题 这里采用引入式 正则匹配目录下的其他配置
+**主配置文件supervisor.conf **
+在include中引入其他配置 不需要配置[program]进程相关信息 并且把进程状态发布到9003端口
+[supervisord] loglevel=debug [supervisorctl] serverurl = http://127.0.0.1:9003 username = admin password = xxx [inet_http_server] port = :9003 username = admin password = xxx [rpcinterface:supervisor] supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface [include] files = /app/supervisor-conf/*.conf 进程配置
+只需要配置进程属性中的配置信息
+[program:mms] command=java -jar mms.jar directory = /app/mms startsecs=0 stopwaitsecs=0 autostart=true autorestart=false stdout_logfile=/app/mms/supervisor_log/supervisord.log stderr_logfile=/app/mms/supervisor_log/supervisord.">
+<meta name="keywords" content="blog,developer,personal">
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Supervisor"/>
+<meta name="twitter:description" content="简介 链接到标题 Supervisor 是一个用 Python 写的进程管理工具，可以很方便的用来在 UNIX-like 系统（不支持 Windows）下启动、重启（自动重启程序）、关闭进程（不仅仅是 Python 进程）。
+安装 链接到标题 pip install supervisor 配置文件 链接到标题 这里采用引入式 正则匹配目录下的其他配置
+**主配置文件supervisor.conf **
+在include中引入其他配置 不需要配置[program]进程相关信息 并且把进程状态发布到9003端口
+[supervisord] loglevel=debug [supervisorctl] serverurl = http://127.0.0.1:9003 username = admin password = xxx [inet_http_server] port = :9003 username = admin password = xxx [rpcinterface:supervisor] supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface [include] files = /app/supervisor-conf/*.conf 进程配置
+只需要配置进程属性中的配置信息
+[program:mms] command=java -jar mms.jar directory = /app/mms startsecs=0 stopwaitsecs=0 autostart=true autorestart=false stdout_logfile=/app/mms/supervisor_log/supervisord.log stderr_logfile=/app/mms/supervisor_log/supervisord."/>
+
+<meta property="og:title" content="Supervisor" />
+<meta property="og:description" content="简介 链接到标题 Supervisor 是一个用 Python 写的进程管理工具，可以很方便的用来在 UNIX-like 系统（不支持 Windows）下启动、重启（自动重启程序）、关闭进程（不仅仅是 Python 进程）。
+安装 链接到标题 pip install supervisor 配置文件 链接到标题 这里采用引入式 正则匹配目录下的其他配置
+**主配置文件supervisor.conf **
+在include中引入其他配置 不需要配置[program]进程相关信息 并且把进程状态发布到9003端口
+[supervisord] loglevel=debug [supervisorctl] serverurl = http://127.0.0.1:9003 username = admin password = xxx [inet_http_server] port = :9003 username = admin password = xxx [rpcinterface:supervisor] supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface [include] files = /app/supervisor-conf/*.conf 进程配置
+只需要配置进程属性中的配置信息
+[program:mms] command=java -jar mms.jar directory = /app/mms startsecs=0 stopwaitsecs=0 autostart=true autorestart=false stdout_logfile=/app/mms/supervisor_log/supervisord.log stderr_logfile=/app/mms/supervisor_log/supervisord." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/supervisor/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-11-04T14:25:32+00:00" />
+<meta property="article:modified_time" content="2019-11-04T14:25:32+00:00" />
+
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/supervisor/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.jpeg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Phantom
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">关于本站</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">分类</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">博客</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags/">标签</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">联系作者</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇬🇧</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/supervisor/">
+              Supervisor
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2019-11-04T14:25:32Z">
+                November 4, 2019
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              阅读时间：1 分钟
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa-solid fa-folder" aria-hidden="true"></i>
+    <a href="/categories/supervisor/">Supervisor</a></div>
+
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/supervisor/">Supervisor</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h3 id="简介">
+  简介 
+  <a class="heading-link" href="#%e7%ae%80%e4%bb%8b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>Supervisor 是一个用 Python 写的进程管理工具，可以很方便的用来在 UNIX-like 系统（不支持 Windows）下启动、重启（自动重启程序）、关闭进程（不仅仅是 Python 进程）。</p>
+<!-- more -->
+<h3 id="安装">
+  安装
+  <a class="heading-link" href="#%e5%ae%89%e8%a3%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">	<span class="n">pip</span> <span class="n">install</span> <span class="n">supervisor</span>
+</span></span></code></pre></div><h3 id="配置文件">
+  配置文件
+  <a class="heading-link" href="#%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>这里采用引入式 正则匹配目录下的其他配置</p>
+<p>**主配置文件supervisor.conf **</p>
+<p>在include中引入其他配置 不需要配置[program]进程相关信息 并且把进程状态发布到9003端口</p>
+<pre tabindex="0"><code class="language-conf" data-lang="conf">	[supervisord]
+	loglevel=debug
+	
+	[supervisorctl]
+	serverurl = http://127.0.0.1:9003
+	username = admin
+	password = xxx
+	
+	[inet_http_server]
+	port = :9003
+	username = admin
+	password = xxx
+	
+	[rpcinterface:supervisor]
+	supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
+	
+	[include]
+	files = /app/supervisor-conf/*.conf 
+</code></pre><p><strong>进程配置</strong></p>
+<p>只需要配置进程属性中的配置信息</p>
+<pre tabindex="0"><code class="language-conf" data-lang="conf">[program:mms]
+command=java -jar mms.jar
+directory = /app/mms
+startsecs=0
+stopwaitsecs=0
+autostart=true
+autorestart=false
+stdout_logfile=/app/mms/supervisor_log/supervisord.log
+stderr_logfile=/app/mms/supervisor_log/supervisord.err
+</code></pre><h3 id="启动指令">
+  启动指令
+  <a class="heading-link" href="#%e5%90%af%e5%8a%a8%e6%8c%87%e4%bb%a4">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>启动</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">supervisord -c supervisor.conf
+</span></span></code></pre></div><p>执行指令进入交互界面</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">supervisorctl -c supervisor.conf
+</span></span></code></pre></div><p>supervisorctl命令</p>
+<pre tabindex="0"><code>help # 查看帮助
+status # 查看程序状态
+stop program_name # 关闭 指定的程序
+start program_name # 启动 指定的程序
+restart program_name # 重启 指定的程序
+tail -f program_name # 查看 该程序的日志
+update # 重启配置文件修改过的程序（修改了配置，通过这个命令加载新的配置)
+reload # 重新加载并且重启supervisor
+</code></pre><h3 id="web服务进行控制">
+  web服务进行控制
+  <a class="heading-link" href="#web%e6%9c%8d%e5%8a%a1%e8%bf%9b%e8%a1%8c%e6%8e%a7%e5%88%b6">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>登录监听的端口 使用配置好的用户名和密码可以查看到监控的进程的状态，可以进行启动、停止、重启操作并且可以实时查看进程输出日志。</p>
+<p><img src="Supervisor/supervisor-web.png"></p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2024
+     ZHXS 
+    ·
+    
+    技术支持 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>

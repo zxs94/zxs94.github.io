@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Pandas使用经验(一) · Phantom
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="ZHXS">
+<meta name="description" content=" Pandas: 强大的Python数据分析工具包 链接到标题 Pandas是一个开源的，BSD许可的库，为Python编程语言提供高性能，易于使用的数据结构和数据分析工具。
+官方api地址：地址
+导入方式
+```python import pandas as pd ``` 1.pandas读取mysql查询结果 链接到标题 参数：sql语句 数据库连接
+pd.read_sql(sql,connection_obj)
+例： 使用pymsql创建一个连接并查询
+sql = &#39;select * from xxx&#39; connection = pymysql.connect( host=&#39;10.10.10.10&#39;, port=3306, user=&#39;root&#39;, password=&#39;123&#39;, database=&#39;xxx&#39;, charset=&#39;utf8&#39; ) df = pd.read_sql(sql,connection) ``` #### 2.pandas将dataframe数据写入数据库 #### ```python from sqlalchemy import create_engine e = create_engine(&#39;mysql&#43;pymysql://root:root@localhost:3306/question?charset=utf8&#39;) df.to_sql(&#39;table_name&#39;, con=e, if_exists=&#39;append&#39;,index=False) ">
+<meta name="keywords" content="blog,developer,personal">
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Pandas使用经验(一)"/>
+<meta name="twitter:description" content=" Pandas: 强大的Python数据分析工具包 链接到标题 Pandas是一个开源的，BSD许可的库，为Python编程语言提供高性能，易于使用的数据结构和数据分析工具。
+官方api地址：地址
+导入方式
+```python import pandas as pd ``` 1.pandas读取mysql查询结果 链接到标题 参数：sql语句 数据库连接
+pd.read_sql(sql,connection_obj)
+例： 使用pymsql创建一个连接并查询
+sql = &#39;select * from xxx&#39; connection = pymysql.connect( host=&#39;10.10.10.10&#39;, port=3306, user=&#39;root&#39;, password=&#39;123&#39;, database=&#39;xxx&#39;, charset=&#39;utf8&#39; ) df = pd.read_sql(sql,connection) ``` #### 2.pandas将dataframe数据写入数据库 #### ```python from sqlalchemy import create_engine e = create_engine(&#39;mysql&#43;pymysql://root:root@localhost:3306/question?charset=utf8&#39;) df.to_sql(&#39;table_name&#39;, con=e, if_exists=&#39;append&#39;,index=False) "/>
+
+<meta property="og:title" content="Pandas使用经验(一)" />
+<meta property="og:description" content=" Pandas: 强大的Python数据分析工具包 链接到标题 Pandas是一个开源的，BSD许可的库，为Python编程语言提供高性能，易于使用的数据结构和数据分析工具。
+官方api地址：地址
+导入方式
+```python import pandas as pd ``` 1.pandas读取mysql查询结果 链接到标题 参数：sql语句 数据库连接
+pd.read_sql(sql,connection_obj)
+例： 使用pymsql创建一个连接并查询
+sql = &#39;select * from xxx&#39; connection = pymysql.connect( host=&#39;10.10.10.10&#39;, port=3306, user=&#39;root&#39;, password=&#39;123&#39;, database=&#39;xxx&#39;, charset=&#39;utf8&#39; ) df = pd.read_sql(sql,connection) ``` #### 2.pandas将dataframe数据写入数据库 #### ```python from sqlalchemy import create_engine e = create_engine(&#39;mysql&#43;pymysql://root:root@localhost:3306/question?charset=utf8&#39;) df.to_sql(&#39;table_name&#39;, con=e, if_exists=&#39;append&#39;,index=False) " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/pandas1/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-09-04T17:41:46+00:00" />
+<meta property="article:modified_time" content="2019-09-04T17:41:46+00:00" />
+
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/pandas1/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.jpeg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Phantom
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">关于本站</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">分类</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">博客</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags/">标签</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">联系作者</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇬🇧</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/pandas1/">
+              Pandas使用经验(一)
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2019-09-04T17:41:46Z">
+                September 4, 2019
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              阅读时间：1 分钟
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa-solid fa-folder" aria-hidden="true"></i>
+    <a href="/categories/pandas/">Pandas</a></div>
+
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/pandas/">Pandas</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/dateframe/">DateFrame</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h2 id="pandas-强大的python数据分析工具包">
+  Pandas: 强大的Python数据分析工具包
+  <a class="heading-link" href="#pandas-%e5%bc%ba%e5%a4%a7%e7%9a%84python%e6%95%b0%e6%8d%ae%e5%88%86%e6%9e%90%e5%b7%a5%e5%85%b7%e5%8c%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>Pandas是一个开源的，BSD许可的库，为Python编程语言提供高性能，易于使用的数据结构和数据分析工具。</p>
+<p>官方api地址：<a href="https://pandas.pydata.org/pandas-docs/stable/index.html"  class="external-link" target="_blank" rel="noopener">地址</a></p>
+<p>导入方式</p>
+<pre><code>```python
+import pandas as pd
+
+```
+</code></pre>
+<!-- more -->
+<h4 id="1pandas读取mysql查询结果">
+  1.pandas读取mysql查询结果
+  <a class="heading-link" href="#1pandas%e8%af%bb%e5%8f%96mysql%e6%9f%a5%e8%af%a2%e7%bb%93%e6%9e%9c">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>参数：sql语句 数据库连接<br>
+pd.read_sql(sql,connection_obj)</p>
+<p>例：
+使用pymsql创建一个连接并查询</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">sql</span> <span class="o">=</span> <span class="s1">&#39;select * from xxx&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">connection</span> <span class="o">=</span> <span class="n">pymysql</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="n">host</span><span class="o">=</span><span class="s1">&#39;10.10.10.10&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="n">port</span><span class="o">=</span><span class="mi">3306</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="n">user</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="n">password</span><span class="o">=</span><span class="s1">&#39;123&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="n">database</span><span class="o">=</span><span class="s1">&#39;xxx&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="n">charset</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span><span class="n">connection</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="err">```</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#### 2.pandas将dataframe数据写入数据库 ####</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">```</span><span class="n">python</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
+</span></span><span class="line"><span class="cl"><span class="n">e</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;mysql+pymysql://root:root@localhost:3306/question?charset=utf8&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;table_name&#39;</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">e</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;append&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></span></code></pre></div>
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2024
+     ZHXS 
+    ·
+    
+    技术支持 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>

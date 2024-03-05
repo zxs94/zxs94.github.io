@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Airflow生产实践（一）安装配置 · Phantom
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="ZHXS">
+<meta name="description" content="airflow安装及配置 链接到标题 说明：该环境不需要自己装redis、mysql，但需要能够访问
+建议可以创建一个单独数据库，存放airflow相关表（不然会显得比较乱）
+首先确保有bzip2功能
+如果没有需要获取,不然安装时会出现错误：
+sudo yum install -y bzip2
+离线安装anaconda3,附带所有需要依赖的包，包通过拷贝其他site-packages的方式
+准备工作：联网下载 链接到标题 有网环境下载：wget https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh
+离线拷贝,并安装anaconda3 链接到标题 将下载好的安装包离线拷贝到需要安装的服务器：Anaconda3-5.2.0-Linux-x86_64.sh
+使用对应用户安装：
+sh Anaconda3-5.2.0-Linux-x86_64.sh 中间需要输入yes和回车，直至展示下图,这一步是添加环境变量,直接同意，若这里没有添加，则需要手动添加环境变量
+输入yes.
+最后如果询问你是否安装Microsoft VSCode，输入no
+问题兼容 链接到标题 进入anaconda内置的Python目录
+cd /home/rong/anaconda3/lib/python3.6
+#额外复制一份configparser命名为ConfigParser
+cp configparser.py ConfigParser.py
+拷贝site-packages（关键） 链接到标题 选择一台已经安装好Airflow的环境，拷贝其anaconda3对应目录：
+anaconda3/lib/python3.6/site-packages
+删除新安装anaconda3的lib/python3.6/site-packages目录，将拷贝安装好Airflow的环境机器的anaconda3/lib/python3.6/site-packages替换到新机器对应位置
+拷贝airflow 和gunicorn
+将原先anaconda3/bin目录中的airflow 和gunicorn拷贝到对应新的anaconda3/bin目录下
+修改两个文件第一行python解释器为为新的anaconda3对应目录
+修改两个文件权限为775
+配置airflow 链接到标题 mysql操作 链接到标题 &ndash; 初始化 airflow 需要使用的库 CREATE DATABASE airflow;
+&ndash; 这个一定要设置，否则会报错 set global explicit_defaults_for_timestamp =1;
+redis操作 链接到标题 修改redis.conf：
+将bind 127.0.0.1 注释 将protected-mode修改为no">
+<meta name="keywords" content="blog,developer,personal">
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Airflow生产实践（一）安装配置"/>
+<meta name="twitter:description" content="airflow安装及配置 链接到标题 说明：该环境不需要自己装redis、mysql，但需要能够访问
+建议可以创建一个单独数据库，存放airflow相关表（不然会显得比较乱）
+首先确保有bzip2功能
+如果没有需要获取,不然安装时会出现错误：
+sudo yum install -y bzip2
+离线安装anaconda3,附带所有需要依赖的包，包通过拷贝其他site-packages的方式
+准备工作：联网下载 链接到标题 有网环境下载：wget https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh
+离线拷贝,并安装anaconda3 链接到标题 将下载好的安装包离线拷贝到需要安装的服务器：Anaconda3-5.2.0-Linux-x86_64.sh
+使用对应用户安装：
+sh Anaconda3-5.2.0-Linux-x86_64.sh 中间需要输入yes和回车，直至展示下图,这一步是添加环境变量,直接同意，若这里没有添加，则需要手动添加环境变量
+输入yes.
+最后如果询问你是否安装Microsoft VSCode，输入no
+问题兼容 链接到标题 进入anaconda内置的Python目录
+cd /home/rong/anaconda3/lib/python3.6
+#额外复制一份configparser命名为ConfigParser
+cp configparser.py ConfigParser.py
+拷贝site-packages（关键） 链接到标题 选择一台已经安装好Airflow的环境，拷贝其anaconda3对应目录：
+anaconda3/lib/python3.6/site-packages
+删除新安装anaconda3的lib/python3.6/site-packages目录，将拷贝安装好Airflow的环境机器的anaconda3/lib/python3.6/site-packages替换到新机器对应位置
+拷贝airflow 和gunicorn
+将原先anaconda3/bin目录中的airflow 和gunicorn拷贝到对应新的anaconda3/bin目录下
+修改两个文件第一行python解释器为为新的anaconda3对应目录
+修改两个文件权限为775
+配置airflow 链接到标题 mysql操作 链接到标题 &ndash; 初始化 airflow 需要使用的库 CREATE DATABASE airflow;
+&ndash; 这个一定要设置，否则会报错 set global explicit_defaults_for_timestamp =1;
+redis操作 链接到标题 修改redis.conf：
+将bind 127.0.0.1 注释 将protected-mode修改为no"/>
+
+<meta property="og:title" content="Airflow生产实践（一）安装配置" />
+<meta property="og:description" content="airflow安装及配置 链接到标题 说明：该环境不需要自己装redis、mysql，但需要能够访问
+建议可以创建一个单独数据库，存放airflow相关表（不然会显得比较乱）
+首先确保有bzip2功能
+如果没有需要获取,不然安装时会出现错误：
+sudo yum install -y bzip2
+离线安装anaconda3,附带所有需要依赖的包，包通过拷贝其他site-packages的方式
+准备工作：联网下载 链接到标题 有网环境下载：wget https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh
+离线拷贝,并安装anaconda3 链接到标题 将下载好的安装包离线拷贝到需要安装的服务器：Anaconda3-5.2.0-Linux-x86_64.sh
+使用对应用户安装：
+sh Anaconda3-5.2.0-Linux-x86_64.sh 中间需要输入yes和回车，直至展示下图,这一步是添加环境变量,直接同意，若这里没有添加，则需要手动添加环境变量
+输入yes.
+最后如果询问你是否安装Microsoft VSCode，输入no
+问题兼容 链接到标题 进入anaconda内置的Python目录
+cd /home/rong/anaconda3/lib/python3.6
+#额外复制一份configparser命名为ConfigParser
+cp configparser.py ConfigParser.py
+拷贝site-packages（关键） 链接到标题 选择一台已经安装好Airflow的环境，拷贝其anaconda3对应目录：
+anaconda3/lib/python3.6/site-packages
+删除新安装anaconda3的lib/python3.6/site-packages目录，将拷贝安装好Airflow的环境机器的anaconda3/lib/python3.6/site-packages替换到新机器对应位置
+拷贝airflow 和gunicorn
+将原先anaconda3/bin目录中的airflow 和gunicorn拷贝到对应新的anaconda3/bin目录下
+修改两个文件第一行python解释器为为新的anaconda3对应目录
+修改两个文件权限为775
+配置airflow 链接到标题 mysql操作 链接到标题 &ndash; 初始化 airflow 需要使用的库 CREATE DATABASE airflow;
+&ndash; 这个一定要设置，否则会报错 set global explicit_defaults_for_timestamp =1;
+redis操作 链接到标题 修改redis.conf：
+将bind 127.0.0.1 注释 将protected-mode修改为no" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/airflowproduct/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-23T16:45:39+00:00" />
+<meta property="article:modified_time" content="2022-03-23T16:45:39+00:00" />
+
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/airflowproduct/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.jpeg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Phantom
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">关于本站</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">分类</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">博客</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags/">标签</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">联系作者</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇬🇧</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/airflowproduct/">
+              Airflow生产实践（一）安装配置
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2022-03-23T16:45:39Z">
+                March 23, 2022
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              阅读时间：2 分钟
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa-solid fa-folder" aria-hidden="true"></i>
+    <a href="/categories/airflow/">Airflow</a></div>
+
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/airflow/">Airflow</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h3 id="airflow安装及配置">
+  airflow安装及配置
+  <a class="heading-link" href="#airflow%e5%ae%89%e8%a3%85%e5%8f%8a%e9%85%8d%e7%bd%ae">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>说明：该环境不需要自己装redis、mysql，但需要能够访问</p>
+<p>建议可以创建一个单独数据库，存放airflow相关表（不然会显得比较乱）</p>
+<p><strong>首先确保有bzip2功能</strong></p>
+<p>如果没有需要获取,不然安装时会出现错误：</p>
+<p>sudo yum install -y bzip2</p>
+<p>离线安装anaconda3,附带所有需要依赖的包，包通过拷贝其他site-packages的方式</p>
+<!-- more -->
+<h4 id="准备工作联网下载">
+  准备工作：联网下载
+  <a class="heading-link" href="#%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c%e8%81%94%e7%bd%91%e4%b8%8b%e8%bd%bd">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>有网环境下载：wget <a href="https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh"  class="external-link" target="_blank" rel="noopener">https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh</a></p>
+<h4 id="离线拷贝并安装anaconda3">
+  离线拷贝,并安装anaconda3
+  <a class="heading-link" href="#%e7%a6%bb%e7%ba%bf%e6%8b%b7%e8%b4%9d%e5%b9%b6%e5%ae%89%e8%a3%85anaconda3">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>将下载好的安装包离线拷贝到需要安装的服务器：Anaconda3-5.2.0-Linux-x86_64.sh</p>
+<p>使用对应用户安装：</p>
+<p>sh Anaconda3-5.2.0-Linux-x86_64.sh
+中间需要输入yes和回车，直至展示下图,这一步是添加环境变量,直接同意，若这里没有添加，则需要手动添加环境变量</p>
+<p><img src="https://zhxs-images.oss-cn-beijing.aliyuncs.com/img/2024/03/234a102939982c3d9734ab75a0eaff9e.png"></p>
+<p>输入yes.</p>
+<p>最后如果询问你是否安装Microsoft VSCode，输入no</p>
+<h4 id="问题兼容">
+  问题兼容
+  <a class="heading-link" href="#%e9%97%ae%e9%a2%98%e5%85%bc%e5%ae%b9">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>进入anaconda内置的Python目录</p>
+<p>cd /home/rong/anaconda3/lib/python3.6</p>
+<p>#额外复制一份configparser命名为ConfigParser</p>
+<p>cp configparser.py ConfigParser.py</p>
+<h4 id="拷贝site-packages关键">
+  拷贝site-packages（关键）
+  <a class="heading-link" href="#%e6%8b%b7%e8%b4%9dsite-packages%e5%85%b3%e9%94%ae">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>选择一台已经安装好Airflow的环境，拷贝其anaconda3对应目录：</p>
+<p>anaconda3/lib/python3.6/site-packages</p>
+<p>删除新安装anaconda3的lib/python3.6/site-packages目录，将拷贝安装好Airflow的环境机器的anaconda3/lib/python3.6/site-packages替换到新机器对应位置</p>
+<p>拷贝airflow 和gunicorn</p>
+<p>将原先anaconda3/bin目录中的airflow 和gunicorn拷贝到对应新的anaconda3/bin目录下</p>
+<p>修改两个文件第一行python解释器为为新的anaconda3对应目录</p>
+<p>修改两个文件权限为775</p>
+<h4 id="配置airflow">
+  配置airflow
+  <a class="heading-link" href="#%e9%85%8d%e7%bd%aeairflow">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<h5 id="mysql操作">
+  mysql操作
+  <a class="heading-link" href="#mysql%e6%93%8d%e4%bd%9c">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h5>
+<p>&ndash; 初始化 airflow 需要使用的库
+CREATE DATABASE airflow;</p>
+<p>&ndash; 这个一定要设置，否则会报错
+set global explicit_defaults_for_timestamp =1;</p>
+<h5 id="redis操作">
+  redis操作
+  <a class="heading-link" href="#redis%e6%93%8d%e4%bd%9c">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h5>
+<p>修改redis.conf：</p>
+<p>将bind 127.0.0.1 注释
+将protected-mode修改为no</p>
+<h5 id="airflow预初始化">
+  airflow预初始化
+  <a class="heading-link" href="#airflow%e9%a2%84%e5%88%9d%e5%a7%8b%e5%8c%96">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h5>
+<p>在用户路径下.bashrc中配置,配置完成后记得使环境变量生效：</p>
+<p>vim ~/.bashrc
+# airflow部署路径,添加以下内容
+export AIRFLOW_HOME=/app/mms_lhq/mms_feature/airflow
+export SLUGIFY_USES_TEXT_UNIDECODE=yes</p>
+<p>使环境变量生效</p>
+<p>source ~/.bashrc</p>
+<p><em><strong>*初始化数据库*</strong></em></p>
+<p>cd /app/mms_lhq/mms_feature</p>
+<p>airflow db init</p>
+<p>此时初始化有可能会失败，但无所谓，初始化后会在/app/mms_lhq/mms_feature/airflow 生成文件，其中重要的是airflow.cfg</p>
+<h5 id="airflow配置">
+  airflow配置
+  <a class="heading-link" href="#airflow%e9%85%8d%e7%bd%ae">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h5>
+<p>vim airflow.cfg</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">#1. 修改Executor配置</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># executor = LocalExecutor</span>
+</span></span><span class="line"><span class="cl"><span class="nv">executor</span> <span class="o">=</span> CeleryExecutor
+</span></span><span class="line"><span class="cl"><span class="c1">#2. 修改元数据库（metestore)配置</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#sql_alchemy_conn = sqlite:home/apps/airflow/airflow.db</span>
+</span></span><span class="line"><span class="cl"><span class="nv">sql_alchemy_conn</span> <span class="o">=</span> <span class="o">[</span>mysql://airflow:airflow@127.0.0.1:3306/airflow<span class="o">](</span>mysql://airflow:airflow@127.0.0.1:3306/airflow<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#注意：这里如果mysql密码包含%，需在%前面加%进行转义</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#3.设置消息队列broker，这里使用redis，但注意启动前要启动redis，以及是否允许外部访问</span>
+</span></span><span class="line"><span class="cl"><span class="nv">broker_url</span> <span class="o">=</span> <span class="o">[</span>redis://:<span class="o">](</span>redis://redis:6379/0<span class="o">)[</span>Mrzy8h96kZ!@10.8.69.2<span class="o">](</span>mailto:Mrzy8h96kZ@10.8.69.2<span class="o">)</span>:6379/1
+</span></span><span class="line"><span class="cl"><span class="c1">#4.设定结果存储后端backend</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># result_backend = db+[postgresql://postgres:airflow@postgres/airflow](postgresql://postgres:airflow@postgres/airflow)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">result_backend</span> <span class="o">=</span> db+<span class="o">[</span>mysql://airflow:airflow@127.0.0.1:3306/airflow<span class="o">](</span>mysql://airflow:airflow@127.0.0.1:3306/airflow<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#5. 修改时区</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># default_timezone = utc</span>
+</span></span><span class="line"><span class="cl"><span class="nv">default_timezone</span> <span class="o">=</span> Asia/Shanghai
+</span></span><span class="line"><span class="cl"><span class="nv">default_ui_timezone</span> <span class="o">=</span> Asia/Shanghai
+</span></span><span class="line"><span class="cl"><span class="c1">#6. 配置web端口(默认8080,为避免冲突，改为8009)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">endpoint_url</span> <span class="o">=</span> <span class="o">[</span>http://localhost:8009<span class="o">](</span>http://localhost:8009/<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">base_url</span> <span class="o">=</span> <span class="o">[</span>http://localhost:8009<span class="o">](</span>http://localhost:8009/<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">web_server_port</span> <span class="o">=</span> <span class="m">8009</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#注意：这里如果不是开放端口，而是通过nginx代理配置，则base_url 需要进行修改，修改为代理中域名配置的地址</span>
+</span></span></code></pre></div><h5 id="airflow初始化及密码设置">
+  airflow初始化及密码设置
+  <a class="heading-link" href="#airflow%e5%88%9d%e5%a7%8b%e5%8c%96%e5%8f%8a%e5%af%86%e7%a0%81%e8%ae%be%e7%bd%ae">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h5>
+<p>1.运行初始化db命令
+airflow db init</p>
+<p>操作后会在mysql中生成对应的表
+2.生成一个登录用户及密码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 运行命令后输入登录密码</span>
+</span></span><span class="line"><span class="cl">airflow users create --username admin --firstname admin --lastname admin --role Admin --email admin<span class="o">[</span>@xxx.com<span class="o">](</span>
+</span></span></code></pre></div><p>执行后会要求输入两次密码，自己设定密码即可
+5.启动airflow
+# 启动 web server
+airflow webserver -D
+# 启动调度
+nohup airflow scheduler &amp;
+启动worker
+# 先启动flower，在需要启动worker服务器执行（可不启动flower)
+airflow celery flower -D
+# 启动worker，在需要启动worker服务器执行
+airflow celery worker -D</p>
+<h5 id="配置重启文件">
+  配置重启文件
+  <a class="heading-link" href="#%e9%85%8d%e7%bd%ae%e9%87%8d%e5%90%af%e6%96%87%e4%bb%b6">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h5>
+<p>为了方便airflow重启，可配置重启文件 restart.sh 放在airflow目录下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nb">set</span> -u
+</span></span><span class="line"><span class="cl">ps -ef <span class="p">|</span> grep -Ei <span class="s1">&#39;celeryd&#39;</span> <span class="p">|</span> grep -v <span class="s1">&#39;grep&#39;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span> <span class="p">|</span> xargs -i <span class="nb">kill</span> <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">ps -ef <span class="p">|</span> grep -Ei <span class="s1">&#39;airflow&#39;</span> <span class="p">|</span> grep -v <span class="s1">&#39;grep&#39;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span> <span class="p">|</span> xargs -i <span class="nb">kill</span> <span class="o">{}</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /app/mms_lhq/mms_feature/airflow/
+</span></span><span class="line"><span class="cl"><span class="se">\#</span>rm -f log/webserver.log
+</span></span><span class="line"><span class="cl"><span class="se">\#</span>rm -f log/worker.log
+</span></span><span class="line"><span class="cl">nohup airflow webserver &gt;&gt;log/webserver.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl">nohup airflow scheduler &gt;&gt;log/scheduler.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl">nohup airflow celery worker &gt;&gt;log/worker.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+</span></span></code></pre></div>
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2024
+     ZHXS 
+    ·
+    
+    技术支持 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>

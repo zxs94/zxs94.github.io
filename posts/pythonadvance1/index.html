@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Python进阶之：*args,**kwargs的使用 · Phantom
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="ZHXS">
+<meta name="description" content="维护模型接口代码的时候，发现在装饰器的函数内部和解析函数上面经常使用*args, **kwargs,这两个参数。
+这两个参数到底代表什么呢？
+1. *args 链接到标题 这个参数主要表示一个系列的参数，元素名前面带 *并不是指代指针，而是表示指向一系列的参数。
+例举：
+*list = &#39;red&#39;, &#39;blue&#39;,&#39;green&#39; 所以我们可以对函数传入一系列的参数，而只定义一个参数。这样做的好处就在于当函数参数个数未定的情况下，我们可以使用这种参数声明，给我们的编程带来便捷，特别是在参数确定不了的情况下。
+def test(*args): for i, item in enumerate(args): print(i, item) print(&#34;test:&#34;) test(&#39;red&#39;, &#39;blue&#39;, &#39;green&#39;) 向函数传递三个参数，输出结果：
+test: 0 red 1 blue 2 green 2. **kwargs 链接到标题 在python中这个主要用于传入一个字典类型的（key=parameter）一系列
+def testKey(**kwargs): for key, parameter in kwargs.items(): print(key, parameter) print(&#34;testKey:&#34;) test2(a=&#39;1&#39;, b=&#39;2&#39;) 输出结果
+testKey: a 1 b 2 ">
+<meta name="keywords" content="blog,developer,personal">
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Python进阶之：*args,**kwargs的使用"/>
+<meta name="twitter:description" content="维护模型接口代码的时候，发现在装饰器的函数内部和解析函数上面经常使用*args, **kwargs,这两个参数。
+这两个参数到底代表什么呢？
+1. *args 链接到标题 这个参数主要表示一个系列的参数，元素名前面带 *并不是指代指针，而是表示指向一系列的参数。
+例举：
+*list = &#39;red&#39;, &#39;blue&#39;,&#39;green&#39; 所以我们可以对函数传入一系列的参数，而只定义一个参数。这样做的好处就在于当函数参数个数未定的情况下，我们可以使用这种参数声明，给我们的编程带来便捷，特别是在参数确定不了的情况下。
+def test(*args): for i, item in enumerate(args): print(i, item) print(&#34;test:&#34;) test(&#39;red&#39;, &#39;blue&#39;, &#39;green&#39;) 向函数传递三个参数，输出结果：
+test: 0 red 1 blue 2 green 2. **kwargs 链接到标题 在python中这个主要用于传入一个字典类型的（key=parameter）一系列
+def testKey(**kwargs): for key, parameter in kwargs.items(): print(key, parameter) print(&#34;testKey:&#34;) test2(a=&#39;1&#39;, b=&#39;2&#39;) 输出结果
+testKey: a 1 b 2 "/>
+
+<meta property="og:title" content="Python进阶之：*args,**kwargs的使用" />
+<meta property="og:description" content="维护模型接口代码的时候，发现在装饰器的函数内部和解析函数上面经常使用*args, **kwargs,这两个参数。
+这两个参数到底代表什么呢？
+1. *args 链接到标题 这个参数主要表示一个系列的参数，元素名前面带 *并不是指代指针，而是表示指向一系列的参数。
+例举：
+*list = &#39;red&#39;, &#39;blue&#39;,&#39;green&#39; 所以我们可以对函数传入一系列的参数，而只定义一个参数。这样做的好处就在于当函数参数个数未定的情况下，我们可以使用这种参数声明，给我们的编程带来便捷，特别是在参数确定不了的情况下。
+def test(*args): for i, item in enumerate(args): print(i, item) print(&#34;test:&#34;) test(&#39;red&#39;, &#39;blue&#39;, &#39;green&#39;) 向函数传递三个参数，输出结果：
+test: 0 red 1 blue 2 green 2. **kwargs 链接到标题 在python中这个主要用于传入一个字典类型的（key=parameter）一系列
+def testKey(**kwargs): for key, parameter in kwargs.items(): print(key, parameter) print(&#34;testKey:&#34;) test2(a=&#39;1&#39;, b=&#39;2&#39;) 输出结果
+testKey: a 1 b 2 " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/pythonadvance1/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-07-31T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-07-31T00:00:00+00:00" />
+
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/pythonadvance1/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.jpeg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Phantom
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">关于本站</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">分类</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">博客</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/tags/">标签</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">联系作者</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇬🇧</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/pythonadvance1/">
+              Python进阶之：*args,**kwargs的使用
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2019-07-31T00:00:00Z">
+                July 31, 2019
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              阅读时间：1 分钟
+            </span>
+          </div>
+          
+          <div class="categories">
+  <i class="fa-solid fa-folder" aria-hidden="true"></i>
+    <a href="/categories/python/">Python</a></div>
+
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/python/">Python</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <p>维护模型接口代码的时候，发现在装饰器的函数内部和解析函数上面经常使用*args, **kwargs,这两个参数。</p>
+<p>这两个参数到底代表什么呢？</p>
+<!-- more -->
+<h2 id="1-args">
+  1. *args
+  <a class="heading-link" href="#1-args">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>这个参数主要表示一个系列的参数，元素名前面带 *并不是指代指针，而是表示指向一系列的参数。</p>
+<p>例举：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl">	<span class="o">*</span><span class="nb">list</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span>
+</span></span></code></pre></div><p>所以我们可以对函数传入一系列的参数，而只定义一个参数。这样做的好处就在于当函数参数个数未定的情况下，我们可以使用这种参数声明，给我们的编程带来便捷，特别是在参数确定不了的情况下。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl">	<span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;test:&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">test</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">)</span> 
+</span></span></code></pre></div><p>向函数传递三个参数，输出结果：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">test</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span> <span class="n">red</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span> <span class="n">blue</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span> <span class="n">green</span>
+</span></span></code></pre></div><h2 id="2-kwargs">
+  2. **kwargs
+  <a class="heading-link" href="#2-kwargs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>在python中这个主要用于传入一个字典类型的（key=parameter）一系列</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl">	<span class="k">def</span> <span class="nf">testKey</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">parameter</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">	        <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="nb">print</span><span class="p">(</span><span class="s2">&#34;testKey:&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">test2</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s1">&#39;2&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><p>输出结果</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">testKey</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="mi">1</span> 
+</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="mi">2</span> 
+</span></span></code></pre></div>
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2019 -
+    
+    2024
+     ZHXS 
+    ·
+    
+    技术支持 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>
