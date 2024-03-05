@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>上传 on Phantom</title>
-    <link>http://localhost:1313/tags/%E4%B8%8A%E4%BC%A0/</link>
+    <link>https://zxs94.github.io/tags/%E4%B8%8A%E4%BC%A0/</link>
     <description>Recent content in 上传 on Phantom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 08 Oct 2019 15:55:23 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/%E4%B8%8A%E4%BC%A0/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zxs94.github.io/tags/%E4%B8%8A%E4%BC%A0/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SpringBoot上传踩坑-linux临时文件</title>
-      <link>http://localhost:1313/posts/springbootuploadtmp/</link>
+      <link>https://zxs94.github.io/posts/springbootuploadtmp/</link>
       <pubDate>Tue, 08 Oct 2019 15:55:23 +0000</pubDate>
-      <guid>http://localhost:1313/posts/springbootuploadtmp/</guid>
+      <guid>https://zxs94.github.io/posts/springbootuploadtmp/</guid>
       <description>今天生产上传文件的功能无法使用，定位问题，springboot项目日志输出IO异常，如下图&#xA;观察异常信息，明显是指在linux服务器下/tmp下的一个临时文件路径不可用。&#xA;cd到tmp路径下查询真的没有这个路径，查阅资料后发现，在启动时会自动指定一个默认的临时上传路径，但是linux的/tmp下的临时文件如果一定时间不使用的话会被清理掉，没有这个目录在上传新文件的时候就会报错。&#xA;这个报错也是在十一国庆假期后发现的，在开发测试中因为经常重启所以可能这个问题没有暴露出来，引以为戒。&#xA;重启项目只是治标不治本的方法，所以我们在启动类中指定临时文件的路径，这样我们在服务器上创建一个固定的位置就不用但是会被清理掉了。&#xA;springboot指定上传临时路径 链接到标题 在你的springboot项目的启动类中添加如下代码：&#xA;@Bean public MultipartConfigElement multipartConfigElement() { MultipartConfigFactory factory = new MultipartConfigFactory(); // 指定服务器上的固定路径 factory.setLocation(&amp;#34;/app/mms/upload&amp;#34;); return factory.createMultipartConfig(); } 配置完成后就不用担心临时文件路径的问题了！</description>
     </item>
   </channel>
