@@ -261,7 +261,6 @@ ChromeDriver 链接到标题 官方网站: https://sites." />
         <p>为了更深入了解python和大数据准备学习网络爬虫，参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。</p>
 <p>部分内容参考以下博文整理 ，方便自己学习总结。
 地址：<a href="https://python3webspider.cuiqingcai.com"  class="external-link" target="_blank" rel="noopener">https://python3webspider.cuiqingcai.com</a></p>
-<!-- more -->
 <p><strong>python环境的安装配置不再过多赘述</strong></p>
 <h3 id="请求库安装">
   请求库安装
@@ -278,9 +277,8 @@ ChromeDriver 链接到标题 官方网站: https://sites." />
   </a>
 </h4>
 <p>requests 属于第三方库，Python 默认不会自带这个库</p>
-<pre><code>pip install requests
-</code></pre>
-<p><strong>相关链接</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pip install requests
+</span></span></code></pre></div><p><strong>相关链接</strong></p>
 <p>GitHub:<a href="https://github.com/requests/requests"  class="external-link" target="_blank" rel="noopener">https://github.com/requests/requests</a><br>
 PyPi: <a href="https://pypi.python.org/pypi/requests"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/requests</a><br>
 官方文档: <a href="http://www.python-requests.org"  class="external-link" target="_blank" rel="noopener">http://www.python-requests.org</a><br>
@@ -293,9 +291,8 @@ PyPi: <a href="https://pypi.python.org/pypi/requests"  class="external-link" tar
   </a>
 </h4>
 <p>Selenium 是一个自动化测试工具，利用它我们可以驱动浏览器执行特定的动作，如点击、下拉等操作。</p>
-<pre><code>pip install selenium
-</code></pre>
-<p><strong>相关链接</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pip install selenium
+</span></span></code></pre></div><p><strong>相关链接</strong></p>
 <p>官方网站: <a href="http://www.seleniumhq.org"  class="external-link" target="_blank" rel="noopener">http://www.seleniumhq.org</a><br>
 GitHub: <a href="https://github.com/SeleniumHQ/selenium/tree/master/py"  class="external-link" target="_blank" rel="noopener">(https://github.com/SeleniumHQ/selenium/tree/master/py</a><br>
 PyPI: <a href="https://pypi.python.org/pypi/selenium"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/selenium</a><br>
@@ -324,10 +321,9 @@ Selenium 支持 PhantomJS，这样在运行的时候就不会再弹出一个浏�
 下载地址: <a href="https://chromedriver.storage.googleapis.com/index.html"  class="external-link" target="_blank" rel="noopener">https://chromedriver.storage.googleapis.com/index.html</a><br>
 阿里镜像源: <a href="http://npm.taobao.org/mirrors/chromedriver/"  class="external-link" target="_blank" rel="noopener">http://npm.taobao.org/mirrors/chromedriver/</a></p>
 <p>解压下载后的文件 拷贝 chromedriver.exe 到目录下</p>
-<pre><code>chromedriver
-#控制台有版本信息之类的输出证明配置成功
-</code></pre>
-<p>在python程序中测试  执行弹出浏览器即为成功
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">chromedriver
+</span></span><span class="line"><span class="cl"><span class="c1">#控制台有版本信息之类的输出证明配置成功</span>
+</span></span></code></pre></div><p>在python程序中测试  执行弹出浏览器即为成功
 <code>python from selenium import webdriver browser = webdriver.Chrome()	 </code></p>
 <h5 id="geckodriver">
   GeckoDriver
@@ -351,9 +347,8 @@ Selenium 支持 PhantomJS，这样在运行的时候就不会再弹出一个浏�
 下载地址: <a href="http://phantomjs.org/download.html"  class="external-link" target="_blank" rel="noopener">http://phantomjs.org/download.html</a><br>
 API接口说明: <a href="http://phantomjs.org/api/command-line.html"  class="external-link" target="_blank" rel="noopener">http://phantomjs.org/api/command-line.html</a></p>
 <p>命令验证</p>
-<pre><code>phantomjs 
-</code></pre>
-<p>测试程序  没有弹出页面控制台输出百度网址
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">phantomjs 
+</span></span></code></pre></div><p>测试程序  没有弹出页面控制台输出百度网址
 <code>python from selenium import webdriver browser = webdriver.PhantomJS() browser.get('https://www.baidu.com') print(browser.current_url) </code></p>
 <h4 id="aiohttp-的安装">
   aiohttp 的安装
@@ -370,13 +365,11 @@ GitHub：<a href="https://github.com/aio-libs/aiohttp"  class="external-link" ta
 PyPI：<a href="https://pypi.python.org/pypi/aiohttp"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/aiohttp</a></p>
 <p><strong>安装</strong></p>
 <p>官方还推荐安装如下两个库：一个是字符编码检测库 cchardet，另一个是加速 DNS 的解析库 aiodns。</p>
-<pre><code>pip install aiohttp
-pip install cchardet aiodns
-</code></pre>
-<p>在python交互模型 引入不报错即安装成功</p>
-<pre><code>import aiohttp
-</code></pre>
-<h3 id="解析库安装">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pip install aiohttp
+</span></span><span class="line"><span class="cl">pip install cchardet aiodns
+</span></span></code></pre></div><p>在python交互模型 引入不报错即安装成功</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">aiohttp</span>
+</span></span></code></pre></div><h3 id="解析库安装">
   解析库安装
   <a class="heading-link" href="#%e8%a7%a3%e6%9e%90%e5%ba%93%e5%ae%89%e8%a3%85">
     <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
@@ -397,9 +390,8 @@ GitHub：<a href="https://github.com/lxml/lxml"  class="external-link" target="_
 PyPI：<a href="https://pypi.python.org/pypi/lxml"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/lxml</a></p>
 <p><strong>安装命令</strong></p>
 <p>没有报错就代表成功 如果报错在查询是否需要安装其他依赖</p>
-<pre><code>pip install lxml
-</code></pre>
-<h4 id="beautiful-soup-的安装">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pip install lxml
+</span></span></code></pre></div><h4 id="beautiful-soup-的安装">
   Beautiful Soup 的安装
   <a class="heading-link" href="#beautiful-soup-%e7%9a%84%e5%ae%89%e8%a3%85">
     <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
@@ -413,9 +405,8 @@ PyPI：<a href="https://pypi.python.org/pypi/lxml"  class="external-link" target
 PyPI：<a href="https://pypi.python.org/pypi/beautifulsoup4"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/beautifulsoup4</a></p>
 <p>Beautiful Soup 的 HTML 和 XML 解析器是依赖于 lxml 库的，所以在此之前请确保已经成功安装好了 lxml 库。</p>
 <p><strong>安装命令</strong></p>
-<pre><code>pip install beautifulsoup4
-</code></pre>
-<p><strong>测试程序</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pip install beautifulsoup4
+</span></span></code></pre></div><p><strong>测试程序</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>  
 </span></span><span class="line"><span class="cl"><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="s1">&#39;&amp;lt;p&amp;gt;Hello&amp;lt;/p&amp;gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;lxml&#39;</span><span class="p">)</span>  
 </span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">string</span><span class="p">)</span>
@@ -433,12 +424,10 @@ PyPI：<a href="https://pypi.python.org/pypi/beautifulsoup4"  class="external-li
 PyPI：<a href="https://pypi.python.org/pypi/pyquery"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/pyquery</a><br>
 官方文档：<a href="http://pyquery.readthedocs.io"  class="external-link" target="_blank" rel="noopener">http://pyquery.readthedocs.io</a></p>
 <p><strong>安装命令</strong></p>
-<pre><code>pip install pyquery
-</code></pre>
-<p>验证 交互命令导入依赖 不报错即为成功</p>
-<pre><code>import pyquery
-</code></pre>
-<h4 id="tesserocr-的安装">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pip install pyquery
+</span></span></code></pre></div><p>验证 交互命令导入依赖 不报错即为成功</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pyquery</span>
+</span></span></code></pre></div><h4 id="tesserocr-的安装">
   tesserocr 的安装
   <a class="heading-link" href="#tesserocr-%e7%9a%84%e5%ae%89%e8%a3%85">
     <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
@@ -462,9 +451,9 @@ GitHub：<a href="https://github.com/tesseract-ocr/tesseract"  class="external-l
 <p>在环境下安装 tesserocr window下需要依赖c环境没有需要下载安装<br>
 本人使用github上下载的对应3.6python环境的.whl文件安装的，推荐这种安装方式。</p>
 <p><strong>安装命令</strong></p>
-<pre><code>pip install tesserocr pillow
-</code></pre>
-<p><strong>验证 tesseract和tesserocr</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pip install tesserocr pillow
+</span></span></code></pre></div><p><strong>验证 tesseract和tesserocr</strong></p>
+<p>​</p>
 <h3 id="数据库的安装">
   数据库的安装
   <a class="heading-link" href="#%e6%95%b0%e6%8d%ae%e5%ba%93%e7%9a%84%e5%ae%89%e8%a3%85">
@@ -500,32 +489,29 @@ MongoDB Community Server 选择适合的版本、操作系统 下载MSI文件进
 <p>安装时选择custom、新版会自动配置data和log的位置不用手动创建了。<br>
 但是需要在data下创建db文件夹。</p>
 <p>安装后进入bin目录、输入指令，路径换成你自己的目录，路径前记得加空格不然指令报错。</p>
-<pre><code>mongod --dbpath &quot;D:\MongoDB\Server\4.2\data\db&quot;
-</code></pre>
-<p>看到如下图输出信息，就代表成功启动了</p>
-<p><img alt="控制台输出" src="PythonWebSpider1/MongoDB-CMD.png"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mongod --dbpath <span class="s2">&#34;D:\MongoDB\Server\4.2\data\db&#34;</span>
+</span></span></code></pre></div><p>看到如下图输出信息，就代表成功启动了</p>
+<p><img src="https://zhxs-images.oss-cn-beijing.aliyuncs.com/img/2024/03/da8614aff5f0128137797dfcf56e20e2.png"></p>
 <p>但是如果我们想一直使用 MongoDB，就不能关闭此命令行了。如果意外关闭或重启，MongoDB 服务就不能使用了。所以，接下来还需将 MongoDB 配置成系统服务。</p>
 <p>使用管理员启动cmd，在bin和data同级的log下创建mongodb.log文件。</p>
 <p><strong>命令行输入以下指令：</strong></p>
 <p>注意指令间的空格</p>
-<pre><code>mongod --bind_ip 0.0.0.0 --logpath &quot;D:\MongoDB\Server\4.2\log\mongodb.log&quot; --logappend --dbpath &quot;D:\MongoDB\Server\4.2\data\db&quot;--port 27017 --serviceName &quot;MongoDB&quot; --serviceDisplayName &quot;MongoDB&quot; --install
-</code></pre>
-<p>这里的意思是绑定 IP 为 0.0.0.0（即任意 IP 均可访问），指定日志路径、数据库路径和端口，指定服务名称。需要注意的是，这里依然需要把路径替换成你的 MongoDB 安装路径，运行此命令后即可安装服务，运行结果如图所示。</p>
-<p><img alt="配置服务" src="PythonWebSpider1/MongoDB-service.png"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mongod --bind_ip 0.0.0.0 --logpath <span class="s2">&#34;D:\MongoDB\Server\4.2\log\mongodb.log&#34;</span> --logappend --dbpath <span class="s2">&#34;D:\MongoDB\Server\4.2\data\db&#34;</span>--port <span class="m">27017</span> --serviceName <span class="s2">&#34;MongoDB&#34;</span> --serviceDisplayName <span class="s2">&#34;MongoDB&#34;</span> --install
+</span></span></code></pre></div><p>这里的意思是绑定 IP 为 0.0.0.0（即任意 IP 均可访问），指定日志路径、数据库路径和端口，指定服务名称。需要注意的是，这里依然需要把路径替换成你的 MongoDB 安装路径，运行此命令后即可安装服务，运行结果如图所示。</p>
+<p><img src="https://zhxs-images.oss-cn-beijing.aliyuncs.com/img/2024/03/5b875c4a1e0831a0bf3b8c0f32c2f8e1.png"></p>
 <p>如果没有出现错误提示，则证明 MongoDB 服务已经安装成功。
 可以在服务管理页面查看到系统服务。</p>
 <p>但是我发现新版本的MongoDB不需要手动配置，自动就有一个服务名称：MongoDB Server..</p>
-<p><img alt="配置服务" src="PythonWebSpider1/MongoDB-server.png"></p>
+<p><img src="https://zhxs-images.oss-cn-beijing.aliyuncs.com/img/2024/03/733008a948d5c345b0a8c48de7564311.png"></p>
 <p>但是启动的时候发现报错了= =。。</p>
 <p>查阅资料找到了一种成功配置的方法</p>
 <p>首先删除自带的服务</p>
-<p><img alt="删除服务" src="PythonWebSpider1/delete-mongo-server.png"></p>
+<p><img src="https://zhxs-images.oss-cn-beijing.aliyuncs.com/img/2024/03/fdccb6561849c92d1341b654353cfd64.png"></p>
 <p>使用以下指令 成功添加服务，不知道是不是自带的服务没删除的原因，之前创建服务的命令没有成功所以我换了下边这种。。</p>
-<pre><code>mongod --dbpath=D:\MongoDB\Server\4.2\data\db  --logpath=D:\MongoDB\Server\4.2\log\mongodb.log --install --serviceName &quot;MongoDB&quot;
-</code></pre>
-<p>启动MongoDB，到bin目录下启动，也可以配置环境变量。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mongod --dbpath<span class="o">=</span>D:<span class="se">\M</span>ongoDB<span class="se">\S</span>erver<span class="se">\4</span>.2<span class="se">\d</span>ata<span class="se">\d</span>b  --logpath<span class="o">=</span>D:<span class="se">\M</span>ongoDB<span class="se">\S</span>erver<span class="se">\4</span>.2<span class="se">\l</span>og<span class="se">\m</span>ongodb.log --install --serviceName <span class="s2">&#34;MongoDB&#34;</span>
+</span></span></code></pre></div><p>启动MongoDB，到bin目录下启动，也可以配置环境变量。</p>
 <p>成功启动如图，警告是因为新版本需要创建管理用户连接。</p>
-<p><img alt="启动Mongo" src="PythonWebSpider1/mongo-start.png"></p>
+<p><img src="https://zhxs-images.oss-cn-beijing.aliyuncs.com/img/2024/03/c2d6946d1f8ba5d7cf6c3882e7c7aa23.png"></p>
 <p>到此Mongo的配置就基本完成。</p>
 <h4 id="redis-的安装">
   Redis 的安装
@@ -566,13 +552,11 @@ Redis Desktop Manager GitHub：<a href="https://github.com/uglide/RedisDesktopMa
 官方文档：<a href="http://pymysql.readthedocs.io/"  class="external-link" target="_blank" rel="noopener">http://pymysql.readthedocs.io/</a><br>
 PyPI：<a href="https://pypi.python.org/pypi/PyMySQL"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/PyMySQL</a></p>
 <p><strong>安装命令</strong></p>
-<pre><code>pip install pymysql
-</code></pre>
-<p><strong>验证</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pip install pymysql
+</span></span></code></pre></div><p><strong>验证</strong></p>
 <p>在python程序中导入</p>
-<pre><code>import pymysql
-</code></pre>
-<h4 id="pymongo-的安装">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pymysql</span>
+</span></span></code></pre></div><h4 id="pymongo-的安装">
   PyMongo 的安装
   <a class="heading-link" href="#pymongo-%e7%9a%84%e5%ae%89%e8%a3%85">
     <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
@@ -585,13 +569,11 @@ PyPI：<a href="https://pypi.python.org/pypi/PyMySQL"  class="external-link" tar
 官方文档：<a href="https://api.mongodb.com/python/current/"  class="external-link" target="_blank" rel="noopener">https://api.mongodb.com/python/current/</a><br>
 PyPI：<a href="https://pypi.python.org/pypi/pymongo"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/pymongo</a></p>
 <p><strong>安装指令</strong></p>
-<pre><code>pip install pymongo
-</code></pre>
-<p><strong>验证</strong></p>
-<pre><code>import pymongo
-pymongo.version
-</code></pre>
-<p>输出版本号即成功安装</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pip install pymongo
+</span></span></code></pre></div><p><strong>验证</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pymongo</span>
+</span></span><span class="line"><span class="cl"><span class="n">pymongo</span><span class="o">.</span><span class="n">version</span>
+</span></span></code></pre></div><p>输出版本号即成功安装</p>
 <h4 id="redis-py-的安装">
   redis-py 的安装
   <a class="heading-link" href="#redis-py-%e7%9a%84%e5%ae%89%e8%a3%85">
@@ -604,13 +586,11 @@ pymongo.version
 <p>GitHub：<a href="https://github.com/andymccurdy/redis-py"  class="external-link" target="_blank" rel="noopener">https://github.com/andymccurdy/redis-py</a><br>
 官方文档：<a href="https://redis-py.readthedocs.io/"  class="external-link" target="_blank" rel="noopener">https://redis-py.readthedocs.io/</a></p>
 <p><strong>安装指令</strong></p>
-<pre><code>pip install redis
-</code></pre>
-<p><strong>验证</strong></p>
-<pre><code>import redis
-redis.VERSION
-</code></pre>
-<p>打印版本信息即为成功安装</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pip install redis
+</span></span></code></pre></div><p><strong>验证</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">redis</span>
+</span></span><span class="line"><span class="cl"><span class="n">redis</span><span class="o">.</span><span class="n">VERSION</span>
+</span></span></code></pre></div><p>打印版本信息即为成功安装</p>
 <h4 id="redisdump-的安装">
   RedisDump 的安装
   <a class="heading-link" href="#redisdump-%e7%9a%84%e5%ae%89%e8%a3%85">
@@ -626,14 +606,12 @@ redis.VERSION
 <p>参考  <a href="http://www.ruby-lang.org/zh_cn/documentation/installation"  class="external-link" target="_blank" rel="noopener">http://www.ruby-lang.org/zh_cn/documentation/installation</a></p>
 <p><strong>gem 安装</strong></p>
 <p>安装完成之后，就可以执行 gem 命令了</p>
-<pre><code>gem install redis-dump
-</code></pre>
-<p><strong>验证安装</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">gem install redis-dump
+</span></span></code></pre></div><p><strong>验证安装</strong></p>
 <p>安装成功后，就可以执行如下两个命令：</p>
-<pre><code>redis-dump  
-redis-load
-</code></pre>
-<p>调用成功代表安装成功</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">redis-dump  
+</span></span><span class="line"><span class="cl">redis-load
+</span></span></code></pre></div><p>调用成功代表安装成功</p>
 <p>相当于使用ruby的一个包来操作，需要在响应环境下执行指令。</p>
 <h3 id="web库的安装">
   Web库的安装
@@ -656,9 +634,8 @@ redis-load
 中文文档：<a href="http://docs.jinkan.org/docs/flask"  class="external-link" target="_blank" rel="noopener">http://docs.jinkan.org/docs/flask</a><br>
 PyPI：<a href="https://pypi.python.org/pypi/Flask"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/Flask</a></p>
 <p><strong>安装命令：</strong></p>
-<pre><code>pip install flask
-</code></pre>
-<p>利用 Flask + Redis 维护动态代理池和 Cookies 池</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pip install flask
+</span></span></code></pre></div><p>利用 Flask + Redis 维护动态代理池和 Cookies 池</p>
 <h4 id="tornado-的安装">
   Tornado 的安装
   <a class="heading-link" href="#tornado-%e7%9a%84%e5%ae%89%e8%a3%85">
@@ -672,9 +649,8 @@ PyPI：<a href="https://pypi.python.org/pypi/Flask"  class="external-link" targe
 PyPI：<a href="https://pypi.python.org/pypi/tornado"  class="external-link" target="_blank" rel="noopener">https://pypi.python.org/pypi/tornado</a><br>
 官方文档：<a href="http://www.tornadoweb.org"  class="external-link" target="_blank" rel="noopener">http://www.tornadoweb.org</a></p>
 <p><strong>安装命令：</strong></p>
-<pre><code>pip install tornado
-</code></pre>
-<p>利用 Tornado + Redis 来搭建一个 ADSL 拨号代理池</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pip install tornado
+</span></span></code></pre></div><p>利用 Tornado + Redis 来搭建一个 ADSL 拨号代理池</p>
 <h3 id="app爬取相关库的安装">
   App爬取相关库的安装
   <a class="heading-link" href="#app%e7%88%ac%e5%8f%96%e7%9b%b8%e5%85%b3%e5%ba%93%e7%9a%84%e5%ae%89%e8%a3%85">
@@ -708,18 +684,16 @@ GitHub：<a href="https://github.com/binux/pyspider"  class="external-link" targ
 在线实例：<a href="http://demo.pyspider.org"  class="external-link" target="_blank" rel="noopener">http://demo.pyspider.org</a></p>
 <p>pyspider 是支持 JavaScript 渲染的，而这个过程是依赖于 PhantomJS</p>
 <p><strong>推荐使用 pip 安装</strong></p>
-<pre><code>pip install pyspider
-</code></pre>
-<p>安装时报错提示，pycurl需要安装依赖包，下载whl文件安装，安装后启动pyspider发现如下报错</p>
-<p><img src="PythonWebSpider1/pyspider-run-error.png"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pip install pyspider
+</span></span></code></pre></div><p>安装时报错提示，pycurl需要安装依赖包，下载whl文件安装，安装后启动pyspider发现如下报错</p>
+<p><img src="https://zhxs-images.oss-cn-beijing.aliyuncs.com/img/2024/03/2ffec2d5587fedabd0658a96a2c3baf9.png"></p>
 <p><strong>解决方法：</strong><br>
 找到pyspider安装位置 site-packages\pyspider\webui找到webui下webdav.py文件 修改209行</p>
-<pre><code>'domaincontroller': NeedAuthController(app),替换为
-'http_authenticator.domain_controller': NeedAuthController(app)
-</code></pre>
-<p><img src="PythonWebSpider1/pyspider-run-error2.png"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">&#39;domaincontroller&#39;: NeedAuthController(app),替换为
+</span></span><span class="line"><span class="cl">&#39;http_authenticator.domain_controller&#39;: NeedAuthController(app)
+</span></span></code></pre></div><p><img src="https://zhxs-images.oss-cn-beijing.aliyuncs.com/img/2024/03/bfc2775ea250ec8d0714d7c13627eb14.png"></p>
 <p>执行成功运行在5000端口上</p>
-<p><img src="PythonWebSpider1/pyspider-run-error3.png"></p>
+<p><img src="https://zhxs-images.oss-cn-beijing.aliyuncs.com/img/2024/03/eea94e139bdccf04a9b4ff43415521b9.png"></p>
 <h4 id="scrapy-的安装">
   Scrapy 的安装
   <a class="heading-link" href="#scrapy-%e7%9a%84%e5%ae%89%e8%a3%85">
@@ -735,14 +709,12 @@ PyPi：<a href="https://pypi.python.org/pypi/Scrapy"  class="external-link" targ
 GitHub：<a href="https://github.com/scrapy/scrapy"  class="external-link" target="_blank" rel="noopener">https://github.com/scrapy/scrapy</a><br>
 中文文档：<a href="http://scrapy-chs.readthedocs.io"  class="external-link" target="_blank" rel="noopener">http://scrapy-chs.readthedocs.io</a></p>
 <p>使用conda安装</p>
-<pre><code>conda install Scrapy
-</code></pre>
-<p>运行命令scrapy报错</p>
-<p><img src="PythonWebSpider1/scrapy-error.png"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">conda install Scrapy
+</span></span></code></pre></div><p>运行命令scrapy报错</p>
+<p><img src="https://zhxs-images.oss-cn-beijing.aliyuncs.com/img/2024/03/4f939de289e836c00b55fe86a8d24d4e.png"></p>
 <p>使用 pip 安装后成功启动</p>
-<pre><code>pip install Scrapy
-</code></pre>
-<h4 id="scrapy-splash-的安装">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pip install Scrapy
+</span></span></code></pre></div><h4 id="scrapy-splash-的安装">
   Scrapy-Splash 的安装
   <a class="heading-link" href="#scrapy-splash-%e7%9a%84%e5%ae%89%e8%a3%85">
     <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>

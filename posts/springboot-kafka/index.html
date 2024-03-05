@@ -228,10 +228,10 @@ springboot配置文件里加入kafka配置
   </a>
 </h3>
 <p>pom.xml 引入依赖 注意kafka版本</p>
-<p><img alt="引入依赖" src="/SpringBoot-Kafka/pom-import.png"></p>
+<p><img src="https://zhxs-images.oss-cn-beijing.aliyuncs.com/img/2024/03/f448c450538d1bf59d3354298772d851.png"></p>
 <!-- more -->
 <p>springboot配置文件里加入kafka配置</p>
-<p><img alt="配置文件" src="/SpringBoot-Kafka/settings.png"></p>
+<p><img src="https://zhxs-images.oss-cn-beijing.aliyuncs.com/img/2024/03/a848d9d62aa4206747fb4a943ed780e4.png"></p>
 <p>注意如果关闭自动提交需要如图listener中配置 否则在使用Acknowledgment自动提交时会报参数异常，但是在低版本的kafka没有这个问题。</p>
 <p>一些kafka配置 仅供参考</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="w">  </span><span class="c">#kafka配置信息</span><span class="w">
@@ -267,7 +267,7 @@ springboot配置文件里加入kafka配置
 <p>核心注解</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@KafkaListener</span><span class="p">(</span><span class="n">topics</span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&#34;${kafka-consumer-topic}&#34;</span><span class="p">})</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="n">topics</span><span class="w"> </span><span class="n">注入约定的主题名称</span><span class="w">
-</span></span></span></code></pre></div><p><img alt="消费者" src="/SpringBoot-Kafka/consumer.png"></p>
+</span></span></span></code></pre></div><p><img src="https://zhxs-images.oss-cn-beijing.aliyuncs.com/img/2024/03/32cf4888f2b68b87441889c6f01ee66b.png"></p>
 <h3 id="生产者">
   生产者
   <a class="heading-link" href="#%e7%94%9f%e4%ba%a7%e8%80%85">
@@ -277,7 +277,7 @@ springboot配置文件里加入kafka配置
 </h3>
 <p>实现方式</p>
 <p>注入kafkaTemplate</p>
-<p><img alt="生产者" src="/SpringBoot-Kafka/producer.png"></p>
+<p><img src="https://zhxs-images.oss-cn-beijing.aliyuncs.com/img/2024/03/71f87c0c01d9fa8058f5da3d2a723793.png"></p>
 
       </div>
 

@@ -79,13 +79,6 @@
       <description>今天生产上传文件的功能无法使用，定位问题，springboot项目日志输出IO异常，如下图&#xA;观察异常信息，明显是指在linux服务器下/tmp下的一个临时文件路径不可用。&#xA;cd到tmp路径下查询真的没有这个路径，查阅资料后发现，在启动时会自动指定一个默认的临时上传路径，但是linux的/tmp下的临时文件如果一定时间不使用的话会被清理掉，没有这个目录在上传新文件的时候就会报错。&#xA;这个报错也是在十一国庆假期后发现的，在开发测试中因为经常重启所以可能这个问题没有暴露出来，引以为戒。&#xA;重启项目只是治标不治本的方法，所以我们在启动类中指定临时文件的路径，这样我们在服务器上创建一个固定的位置就不用但是会被清理掉了。&#xA;springboot指定上传临时路径 链接到标题 在你的springboot项目的启动类中添加如下代码：&#xA;@Bean public MultipartConfigElement multipartConfigElement() { MultipartConfigFactory factory = new MultipartConfigFactory(); // 指定服务器上的固定路径 factory.setLocation(&amp;#34;/app/mms/upload&amp;#34;); return factory.createMultipartConfig(); } 配置完成后就不用担心临时文件路径的问题了！</description>
     </item>
     <item>
-      <title>Python网络爬虫入门(二) 基础库的使用</title>
-      <link>http://localhost:1313/posts/pythonwebspider2/</link>
-      <pubDate>Thu, 19 Sep 2019 14:39:37 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pythonwebspider2/</guid>
-      <description>主要介绍 urllib、request 相关请求技术，异常捕获，正则表达。&#xA;requests&#xA;提示需要idna包，从pip官网下载2.7版本的(python3.6以下)</description>
-    </item>
-    <item>
       <title>Python网络爬虫入门</title>
       <link>http://localhost:1313/posts/pythonwebspider1/</link>
       <pubDate>Wed, 11 Sep 2019 14:06:07 +0000</pubDate>
@@ -118,7 +111,7 @@
       <link>http://localhost:1313/posts/springboottransactional/</link>
       <pubDate>Thu, 08 Aug 2019 14:07:08 +0000</pubDate>
       <guid>http://localhost:1313/posts/springboottransactional/</guid>
-      <description>在项目多使用了多数据源(因为可能会有odps等多数据源的查询需求)，并且是手动配置数据源的方式，在配置了一段时间后使用数据源和切换都没有问题，但是在开发业务的时候发现在一个插入操作里，分别要向4张数据表中记录数据，最后请求服务，通过服务的响应来决定数据是否回滚，因为没有异常操作，所以我使用手动回滚的方式在if判断里回滚数据，结果尴尬的发现事务不好用了。。。！&#xA;因为使用的是声明式事务，也就是在service的实现类上添加@Transactional注解的实现方式，这里需要注意几个使用时容易采坑的点&#xA;注意点 链接到标题 1.一般在controller调用service中的方法，并且不要嵌套调用，因为实现原理是代理注解的类，必须由spring管理才能生效，类的内部调用没有使用注入对象所以spring不会拦截异常，事务不会开启。 2.@Transactional写在类上或者方法上。&#xA;3.Aop声明事务是只捕获unchecked exception也就是默认对RuntimeException()异常或是其子类进行事务回滚，如果想在抛出Exception捕获需要添加注解属性&#xA;@Transactional(rollbackFor = Exception.class) 或者在try catch块中添加手动回滚的代码(侵入性比较大)&#xA;TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); 4.数据库需要支持事务、比如用的是mysql就必须使用innoDB的引擎，否则不支持事务。&#xA;问题跟踪 链接到标题 在确定自己没有犯以上的错误后，事务还是无法回滚。。。最后决定开始debug跟一下源码发现，在拿到数据连接对象执行回滚之前要判断transactionInfo这个对象是否为空，结果发现，虽然事务管理器是开启了，但是数据库连接的事务对象是null.. 也就是说，在数据源初始化配置的时候开启的事务管理器和项目中使用的数据源连接根本就没有绑定上&#xA;再看一下我多数据源在实例化事务管理器的代码： 这里的test1DataSoource是我在实例化动态数据源配置对象的时候的默认数据源、也就是主数据源。&#xA;实例化动态数据源对象配置： 问题找到了，问题就出现在我在事务管理器初始化时用的数据源不是我配置的动态数据源的DataSource对象dynamicDataSource，而是test1DataSource。。。&#xA;将实例化事务管理器的声明参数修改成dynamicDataSource、试验回滚方法成功！</description>
+      <description>在项目多使用了多数据源(因为可能会有odps等多数据源的查询需求)，并且是手动配置数据源的方式，在配置了一段时间后使用数据源和切换都没有问题，但是在开发业务的时候发现在一个插入操作里，分别要向4张数据表中记录数据，最后请求服务，通过服务的响应来决定数据是否回滚，因为没有异常操作，所以我使用手动回滚的方式在if判断里回滚数据，结果尴尬的发现事务不好用了。。。！&#xA;因为使用的是声明式事务，也就是在service的实现类上添加@Transactional注解的实现方式，这里需要注意几个使用时容易采坑的点&#xA;注意点 链接到标题 1.一般在controller调用service中的方法，并且不要嵌套调用，因为实现原理是代理注解的类，必须由spring管理才能生效，类的内部调用没有使用注入对象所以spring不会拦截异常，事务不会开启。 2.@Transactional写在类上或者方法上。&#xA;3.Aop声明事务是只捕获unchecked exception也就是默认对RuntimeException()异常或是其子类进行事务回滚，如果想在抛出Exception捕获需要添加注解属性&#xA;@Transactional(rollbackFor = Exception.class) 或者在try catch块中添加手动回滚的代码(侵入性比较大)&#xA;TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); 4.数据库需要支持事务、比如用的是mysql就必须使用innoDB的引擎，否则不支持事务。&#xA;问题跟踪 链接到标题 在确定自己没有犯以上的错误后，事务还是无法回滚。。。最后决定开始debug跟一下源码发现，在拿到数据连接对象执行回滚之前要判断transactionInfo这个对象是否为空，结果发现，虽然事务管理器是开启了，但是数据库连接的事务对象是null..&#xA;也就是说，在数据源初始化配置的时候开启的事务管理器和项目中使用的数据源连接根本就没有绑定上&#xA;再看一下我多数据源在实例化事务管理器的代码：&#xA;这里的test1DataSoource是我在实例化动态数据源配置对象的时候的默认数据源、也就是主数据源。&#xA;实例化动态数据源对象配置：&#xA;问题找到了，问题就出现在我在事务管理器初始化时用的数据源不是我配置的动态数据源的DataSource对象dynamicDataSource，而是test1DataSource。。。&#xA;将实例化事务管理器的声明参数修改成dynamicDataSource、试验回滚方法成功！</description>
     </item>
     <item>
       <title>Python进阶之：*args,**kwargs的使用</title>

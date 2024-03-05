@@ -220,7 +220,7 @@ springboot指定上传临时路径 链接到标题 在你的springboot项目的�
       <div class="post-content">
         
         <p>今天生产上传文件的功能无法使用，定位问题，springboot项目日志输出IO异常，如下图</p>
-<p><img src="SpringBootUploadTmp/error.png"></p>
+<p><img src="https://zhxs-images.oss-cn-beijing.aliyuncs.com/img/2024/03/7e8e030521f6b0909ca59808e7e9717b.png"></p>
 <p>观察异常信息，明显是指在linux服务器下/tmp下的一个临时文件路径不可用。</p>
 <!-- more -->
 <p>cd到tmp路径下查询真的没有这个路径，查阅资料后发现，在启动时会自动指定一个默认的临时上传路径，但是linux的/tmp下的临时文件如果一定时间不使用的话会被清理掉，没有这个目录在上传新文件的时候就会报错。</p>

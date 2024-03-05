@@ -19,9 +19,12 @@
 3.Aop声明事务是只捕获unchecked exception也就是默认对RuntimeException()异常或是其子类进行事务回滚，如果想在抛出Exception捕获需要添加注解属性
 @Transactional(rollbackFor = Exception.class) 或者在try catch块中添加手动回滚的代码(侵入性比较大)
 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); 4.数据库需要支持事务、比如用的是mysql就必须使用innoDB的引擎，否则不支持事务。
-问题跟踪 链接到标题 在确定自己没有犯以上的错误后，事务还是无法回滚。。。最后决定开始debug跟一下源码发现，在拿到数据连接对象执行回滚之前要判断transactionInfo这个对象是否为空，结果发现，虽然事务管理器是开启了，但是数据库连接的事务对象是null.. 也就是说，在数据源初始化配置的时候开启的事务管理器和项目中使用的数据源连接根本就没有绑定上
-再看一下我多数据源在实例化事务管理器的代码： 这里的test1DataSoource是我在实例化动态数据源配置对象的时候的默认数据源、也就是主数据源。
-实例化动态数据源对象配置： 问题找到了，问题就出现在我在事务管理器初始化时用的数据源不是我配置的动态数据源的DataSource对象dynamicDataSource，而是test1DataSource。。。
+问题跟踪 链接到标题 在确定自己没有犯以上的错误后，事务还是无法回滚。。。最后决定开始debug跟一下源码发现，在拿到数据连接对象执行回滚之前要判断transactionInfo这个对象是否为空，结果发现，虽然事务管理器是开启了，但是数据库连接的事务对象是null..
+也就是说，在数据源初始化配置的时候开启的事务管理器和项目中使用的数据源连接根本就没有绑定上
+再看一下我多数据源在实例化事务管理器的代码：
+这里的test1DataSoource是我在实例化动态数据源配置对象的时候的默认数据源、也就是主数据源。
+实例化动态数据源对象配置：
+问题找到了，问题就出现在我在事务管理器初始化时用的数据源不是我配置的动态数据源的DataSource对象dynamicDataSource，而是test1DataSource。。。
 将实例化事务管理器的声明参数修改成dynamicDataSource、试验回滚方法成功！">
 <meta name="keywords" content="blog,developer,personal">
 
@@ -32,9 +35,12 @@ TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); 4.数据�
 3.Aop声明事务是只捕获unchecked exception也就是默认对RuntimeException()异常或是其子类进行事务回滚，如果想在抛出Exception捕获需要添加注解属性
 @Transactional(rollbackFor = Exception.class) 或者在try catch块中添加手动回滚的代码(侵入性比较大)
 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); 4.数据库需要支持事务、比如用的是mysql就必须使用innoDB的引擎，否则不支持事务。
-问题跟踪 链接到标题 在确定自己没有犯以上的错误后，事务还是无法回滚。。。最后决定开始debug跟一下源码发现，在拿到数据连接对象执行回滚之前要判断transactionInfo这个对象是否为空，结果发现，虽然事务管理器是开启了，但是数据库连接的事务对象是null.. 也就是说，在数据源初始化配置的时候开启的事务管理器和项目中使用的数据源连接根本就没有绑定上
-再看一下我多数据源在实例化事务管理器的代码： 这里的test1DataSoource是我在实例化动态数据源配置对象的时候的默认数据源、也就是主数据源。
-实例化动态数据源对象配置： 问题找到了，问题就出现在我在事务管理器初始化时用的数据源不是我配置的动态数据源的DataSource对象dynamicDataSource，而是test1DataSource。。。
+问题跟踪 链接到标题 在确定自己没有犯以上的错误后，事务还是无法回滚。。。最后决定开始debug跟一下源码发现，在拿到数据连接对象执行回滚之前要判断transactionInfo这个对象是否为空，结果发现，虽然事务管理器是开启了，但是数据库连接的事务对象是null..
+也就是说，在数据源初始化配置的时候开启的事务管理器和项目中使用的数据源连接根本就没有绑定上
+再看一下我多数据源在实例化事务管理器的代码：
+这里的test1DataSoource是我在实例化动态数据源配置对象的时候的默认数据源、也就是主数据源。
+实例化动态数据源对象配置：
+问题找到了，问题就出现在我在事务管理器初始化时用的数据源不是我配置的动态数据源的DataSource对象dynamicDataSource，而是test1DataSource。。。
 将实例化事务管理器的声明参数修改成dynamicDataSource、试验回滚方法成功！"/>
 
 <meta property="og:title" content="SpringBoot之事务踩坑" />
@@ -44,9 +50,12 @@ TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); 4.数据�
 3.Aop声明事务是只捕获unchecked exception也就是默认对RuntimeException()异常或是其子类进行事务回滚，如果想在抛出Exception捕获需要添加注解属性
 @Transactional(rollbackFor = Exception.class) 或者在try catch块中添加手动回滚的代码(侵入性比较大)
 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); 4.数据库需要支持事务、比如用的是mysql就必须使用innoDB的引擎，否则不支持事务。
-问题跟踪 链接到标题 在确定自己没有犯以上的错误后，事务还是无法回滚。。。最后决定开始debug跟一下源码发现，在拿到数据连接对象执行回滚之前要判断transactionInfo这个对象是否为空，结果发现，虽然事务管理器是开启了，但是数据库连接的事务对象是null.. 也就是说，在数据源初始化配置的时候开启的事务管理器和项目中使用的数据源连接根本就没有绑定上
-再看一下我多数据源在实例化事务管理器的代码： 这里的test1DataSoource是我在实例化动态数据源配置对象的时候的默认数据源、也就是主数据源。
-实例化动态数据源对象配置： 问题找到了，问题就出现在我在事务管理器初始化时用的数据源不是我配置的动态数据源的DataSource对象dynamicDataSource，而是test1DataSource。。。
+问题跟踪 链接到标题 在确定自己没有犯以上的错误后，事务还是无法回滚。。。最后决定开始debug跟一下源码发现，在拿到数据连接对象执行回滚之前要判断transactionInfo这个对象是否为空，结果发现，虽然事务管理器是开启了，但是数据库连接的事务对象是null..
+也就是说，在数据源初始化配置的时候开启的事务管理器和项目中使用的数据源连接根本就没有绑定上
+再看一下我多数据源在实例化事务管理器的代码：
+这里的test1DataSoource是我在实例化动态数据源配置对象的时候的默认数据源、也就是主数据源。
+实例化动态数据源对象配置：
+问题找到了，问题就出现在我在事务管理器初始化时用的数据源不是我配置的动态数据源的DataSource对象dynamicDataSource，而是test1DataSource。。。
 将实例化事务管理器的声明参数修改成dynamicDataSource、试验回滚方法成功！" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/posts/springboottransactional/" /><meta property="article:section" content="posts" />
@@ -248,17 +257,17 @@ TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); 4.数据�
     <span class="sr-only">链接到标题</span>
   </a>
 </h2>
-<p>在确定自己没有犯以上的错误后，事务还是无法回滚。。。最后决定开始debug跟一下源码发现，在拿到数据连接对象执行回滚之前要判断transactionInfo这个对象是否为空，结果发现，虽然事务管理器是开启了，但是数据库连接的事务对象是null..
-<img src="SpringBootTransactional/transactionInfo.png"></p>
+<p>在确定自己没有犯以上的错误后，事务还是无法回滚。。。最后决定开始debug跟一下源码发现，在拿到数据连接对象执行回滚之前要判断transactionInfo这个对象是否为空，结果发现，虽然事务管理器是开启了，但是数据库连接的事务对象是null..</p>
+<p><img src="https://zhxs-images.oss-cn-beijing.aliyuncs.com/img/2024/03/08891e32cc94292d9f912168547297bb.png"></p>
 <p>也就是说，在数据源初始化配置的时候开启的事务管理器和项目中使用的数据源连接根本就没有绑定上</p>
-<p>再看一下我多数据源在实例化事务管理器的代码：
-<img src="SpringBootTransactional/txManager1.png">
-这里的test1DataSoource是我在实例化动态数据源配置对象的时候的默认数据源、也就是主数据源。</p>
-<p>实例化动态数据源对象配置：
-<img src="SpringBootTransactional/datasource.png"></p>
+<p>再看一下我多数据源在实例化事务管理器的代码：</p>
+<p><img src="https://zhxs-images.oss-cn-beijing.aliyuncs.com/img/2024/03/996f5da3d670952332dedbb7f0a89e54.png"></p>
+<p>这里的test1DataSoource是我在实例化动态数据源配置对象的时候的默认数据源、也就是主数据源。</p>
+<p>实例化动态数据源对象配置：</p>
+<p><img src="https://zhxs-images.oss-cn-beijing.aliyuncs.com/img/2024/03/ad52fa561307f7121fd9c3a328102e1d.png"></p>
 <p>问题找到了，问题就出现在我在事务管理器初始化时用的数据源不是我配置的动态数据源的DataSource对象dynamicDataSource，而是test1DataSource。。。</p>
-<p><img src="SpringBootTransactional/txManager2.png">
-将实例化事务管理器的声明参数修改成dynamicDataSource、试验回滚方法成功！</p>
+<p><img src="https://zhxs-images.oss-cn-beijing.aliyuncs.com/img/2024/03/8e461c1346ebac1624e1c5b97b114963.png"></p>
+<p>将实例化事务管理器的声明参数修改成dynamicDataSource、试验回滚方法成功！</p>
 
       </div>
 
