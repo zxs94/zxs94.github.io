@@ -2,206 +2,213 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Phantom</title>
-    <link>http://localhost:1313/</link>
+    <link>https://zxs94.github.io/</link>
     <description>Recent content on Phantom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 05 Jan 2023 01:15:52 +0100</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 06 Mar 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://zxs94.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>初识milvus向量数据库</title>
+      <link>https://zxs94.github.io/posts/%E5%88%9D%E8%AF%86milvus%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Wed, 06 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://zxs94.github.io/posts/%E5%88%9D%E8%AF%86milvus%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description>什么是Milvus向量数据库？ 链接到标题 Milvus 是一款全球领先的开源向量数据库，赋能 AI 应用和向量相似度搜索，加速非结构化数据检索。&#xA;Milvus专注于存储、索引及管理由深度神经网络和其他机器学习（ML）模型生成的海量嵌入向量，能够轻松应对万亿级别的向量索引任务。&#xA;与传统关系型数据库有什么不同？ 链接到标题 与传统关系型数据库主要处理结构化数据不同，Milvus从底层设计就针对非结构化数据转换而来的嵌入向量进行处理，适应了互联网时代非结构化数据的爆炸性增长，例如短视频、种草图文、物联网传感器数据、蛋白质结构等等&#xA;Milvus的实现机制 链接到标题 为了实现计算机对非结构化数据的理解和处理，开发者利用嵌入技术将其转换为向量。借助Milvus存储和索引这些向量，解决了AI应用开发中的痛点。通过计算向量之间的相似距离，Milvus可以快速分析两个向量间的关联性，从而判断原始数据源的相似程度，为开发者提供更高效便捷的数据处理手段。&#xA;安装搭建 链接到标题 这里我选用了docker的方式进行实验，使用了苏洋(作者)提供的一个milvus-2.1.0版本的最小化镜像。&#xA;下面是安装流程：&#xA;1.从远程仓库下载镜像并启动容器 链接到标题 docker run --rm -it --name=milvus soulteary/milvus:embed-2.1.0 2.启动后看日志 链接到标题 看见日志输出以下内容就是启动成功了&#xA;---Milvus Proxy successfully initialized and ready to serve!--- 3.验证测试脚本 链接到标题 作者提供了一份hello-world.py的脚本供我们测试使用，我们直接使用容器执行python脚本,注意容器如果没有指定名称请使用容器id。&#xA;docker exec -it milvus python hello-world.py 4.查看python的依赖库 链接到标题 为了后续方便我们在本地环境进行测试所以我们需要知道需要安装哪些python依赖。&#xA;pip list Package Version --------------- -------- grpcio 1.49.0 mmh3 3.0.0 numpy 1.23.3 pandas 1.4.4 pip 21.2.4 protobuf 3.20.2 pymilvus 2.1.0 python-dateutil 2.</description>
+    </item>
     <item>
       <title>Autores de Hugo</title>
-      <link>http://localhost:1313/autores/autores-de-hugo/</link>
+      <link>https://zxs94.github.io/autores/autores-de-hugo/</link>
       <pubDate>Thu, 05 Jan 2023 01:15:52 +0100</pubDate>
-      <guid>http://localhost:1313/autores/autores-de-hugo/</guid>
+      <guid>https://zxs94.github.io/autores/autores-de-hugo/</guid>
       <description></description>
     </item>
     <item>
       <title>temas</title>
-      <link>http://localhost:1313/categoria/temas/</link>
+      <link>https://zxs94.github.io/categoria/temas/</link>
       <pubDate>Wed, 04 Jan 2023 23:21:18 +0100</pubDate>
-      <guid>http://localhost:1313/categoria/temas/</guid>
+      <guid>https://zxs94.github.io/categoria/temas/</guid>
       <description></description>
     </item>
     <item>
       <title>sintaxe</title>
-      <link>http://localhost:1313/categoria/sintaxe/</link>
+      <link>https://zxs94.github.io/categoria/sintaxe/</link>
       <pubDate>Wed, 04 Jan 2023 23:21:06 +0100</pubDate>
-      <guid>http://localhost:1313/categoria/sintaxe/</guid>
+      <guid>https://zxs94.github.io/categoria/sintaxe/</guid>
       <description></description>
     </item>
     <item>
       <title>Códigos curtos</title>
-      <link>http://localhost:1313/tags/shortcodes/_index.pt-br/</link>
+      <link>https://zxs94.github.io/tags/shortcodes/_index.pt-br/</link>
       <pubDate>Wed, 04 Jan 2023 11:51:36 +0100</pubDate>
-      <guid>http://localhost:1313/tags/shortcodes/_index.pt-br/</guid>
+      <guid>https://zxs94.github.io/tags/shortcodes/_index.pt-br/</guid>
       <description></description>
     </item>
     <item>
       <title>Airflow生产实践（三）操作</title>
-      <link>http://localhost:1313/posts/airflowproduct3/</link>
+      <link>https://zxs94.github.io/posts/airflowproduct3/</link>
       <pubDate>Thu, 24 Mar 2022 08:57:30 +0000</pubDate>
-      <guid>http://localhost:1313/posts/airflowproduct3/</guid>
+      <guid>https://zxs94.github.io/posts/airflowproduct3/</guid>
       <description>airflow操作 链接到标题 web页面操作 链接到标题 首页 链接到标题 首页展示DAGs,分为All,Active和Paused。其中Active下面的DAG是可以执行的DAG.&#xA;菜单栏 链接到标题 菜单栏分别如下：&#xA;DAGs为跳回首页。&#xA;Security包含用户、角色、权限等查看功能。&#xA;Browse包含Airflow包含的DAG Runs、Jobs、Task Instances等列表信息。&#xA;Admin包含一些配置等操作。其中Variables可以配置变量，在DAG代码中可以调用。Connection包含连接配置等Url地址。&#xA;Docs中可以查看一些官方文档、API接口等。更多详细内容可以在这里查看。&#xA;DAGS操作 链接到标题 DAGs首页列表中，从左到右依次为：&#xA;按钮：Active开关&#xA;DAG：显示DAG名字和标签&#xA;Owner所属者&#xA;Runs ：最近的DAG run状态&#xA;Schedule: 定时方式，None表示没有指定定时&#xA;Last Run：&#xA;Recent Tasks：最近的Tasks状态&#xA;Actions：操作按钮，分别为手动触发DAG,刷新DAG,删除DAG(删除不要轻易操作)&#xA;Links：一系列操作链接，鼠标放在按钮上可以出现操作键&#xA;依次如下：&#xA;Tree View（常用）&#xA;可以树状图形式查看具体DAG Task的执行状态，从左往右按时间顺序展示。&#xA;Graph View（常用）&#xA;流程图图形形式显示DAG任务执行状态。&#xA;点击对应Task的按钮，可以弹出Task操作内容：&#xA;可以按照下面选项，对Task执行Run、Clear、Mark Failed、Mark Success等操作。&#xA;也可以点击最上面一行，查看实例详情，该任务具体执行命令、log日志、该Task所有实例、过滤Task只保留该Task及其上游Task。&#xA;Calendar View&#xA;显示具体日期DAG的运行情况&#xA;Task Duration&#xA;任务Task执行时间统计&#xA;Task Tries&#xA;任务重试次数&#xA;Gantt 甘特图&#xA;Detais&#xA;DAG详细信息&#xA;Code&#xA;DAG代码&#xA;DAG开发操作 链接到标题 具体开发可参考官方示例：&#xA;https://airflow.apache.org/docs/apache-airflow/2.1.3/tutorial.html#</description>
     </item>
     <item>
       <title>Airflow生产实践（二）概述</title>
-      <link>http://localhost:1313/posts/airflowproduct2/</link>
+      <link>https://zxs94.github.io/posts/airflowproduct2/</link>
       <pubDate>Thu, 24 Mar 2022 08:57:27 +0000</pubDate>
-      <guid>http://localhost:1313/posts/airflowproduct2/</guid>
+      <guid>https://zxs94.github.io/posts/airflowproduct2/</guid>
       <description>airflow概述 链接到标题 airflow简介 链接到标题 airflow是一个使用Python编写实现的任务管理、调度、监控工作流平台。&#xA;由Airbnb开源，airflow 将workflow编排为由tasks组成的DAGs(有向无环图)&#xA;airflow 提供了丰富的命令行工具和简单易用的用户界面以便用户查看和操作&#xA;airflow提供了监控和报警系统。&#xA;airflow的调度依赖于crontab命令&#xA;与crontab相比, airflow可以直观的看到任务执行情况、任务之间的逻辑依赖关系、可以设定任务出错时邮件提醒、可以查看任务执行日志。&#xA;Airflow重要概念 链接到标题 DAG&#xA;DAG 意为有向无循环图，在 Airflow 中则定义了整个完整的作业。同一个 DAG 中的所有 Task 拥有相同的调度时间。&#xA;Task&#xA;Task 为 DAG 中具体的作业任务，它必须存在于某一个 DAG 之中。Task 在 DAG 中配置依赖关系，跨 DAG 的依赖是可行的，*但是并不推荐*。跨 DAG 依赖会导致 DAG 图的直观性降低，并给依赖管理带来麻烦。&#xA;DAG Run&#xA;当一个 DAG 满足它的调度时间，或者被外部触发时，就会产生一个 DAG Run。可以理解为由 DAG 实例化的实例。&#xA;Task Instance&#xA;当一个 Task 被调度启动时，就会产生一个 Task Instance。可以理解为由 Task 实例化的实例。&#xA;DAG 链接到标题 在 Airflow 中，DAG（或者叫有向无环图）是您要运行的所有任务的集合，以反映其关系和依赖关系的方式进行组织。&#xA;例如，一个简单的 DAG 可以包含三个任务：A，B 和 C.&#xA;可以设定 A 必须在 B 可以运行之前成功运行，但 C 可以随时运行。 可以设定任务 A 在 5 分钟后超时，并且 B 可以重新启动最多 5 次以防它失败。 也可以设定工作流程将在每天晚上 10 点运行，但不应该在某个特定日期之前开始。 重要的是，DAG 并不关心其组成任务的作用;它的工作是确保他们都在正确的时间，或正确的顺序，或正确处理任何意外的问题。</description>
     </item>
     <item>
       <title>Airflow生产实践（一）安装配置</title>
-      <link>http://localhost:1313/posts/airflowproduct/</link>
+      <link>https://zxs94.github.io/posts/airflowproduct/</link>
       <pubDate>Wed, 23 Mar 2022 16:45:39 +0000</pubDate>
-      <guid>http://localhost:1313/posts/airflowproduct/</guid>
+      <guid>https://zxs94.github.io/posts/airflowproduct/</guid>
       <description>airflow安装及配置 链接到标题 说明：该环境不需要自己装redis、mysql，但需要能够访问&#xA;建议可以创建一个单独数据库，存放airflow相关表（不然会显得比较乱）&#xA;首先确保有bzip2功能&#xA;如果没有需要获取,不然安装时会出现错误：&#xA;sudo yum install -y bzip2&#xA;离线安装anaconda3,附带所有需要依赖的包，包通过拷贝其他site-packages的方式&#xA;准备工作：联网下载 链接到标题 有网环境下载：wget https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh&#xA;离线拷贝,并安装anaconda3 链接到标题 将下载好的安装包离线拷贝到需要安装的服务器：Anaconda3-5.2.0-Linux-x86_64.sh&#xA;使用对应用户安装：&#xA;sh Anaconda3-5.2.0-Linux-x86_64.sh 中间需要输入yes和回车，直至展示下图,这一步是添加环境变量,直接同意，若这里没有添加，则需要手动添加环境变量&#xA;输入yes.&#xA;最后如果询问你是否安装Microsoft VSCode，输入no&#xA;问题兼容 链接到标题 进入anaconda内置的Python目录&#xA;cd /home/rong/anaconda3/lib/python3.6&#xA;#额外复制一份configparser命名为ConfigParser&#xA;cp configparser.py ConfigParser.py&#xA;拷贝site-packages（关键） 链接到标题 选择一台已经安装好Airflow的环境，拷贝其anaconda3对应目录：&#xA;anaconda3/lib/python3.6/site-packages&#xA;删除新安装anaconda3的lib/python3.6/site-packages目录，将拷贝安装好Airflow的环境机器的anaconda3/lib/python3.6/site-packages替换到新机器对应位置&#xA;拷贝airflow 和gunicorn&#xA;将原先anaconda3/bin目录中的airflow 和gunicorn拷贝到对应新的anaconda3/bin目录下&#xA;修改两个文件第一行python解释器为为新的anaconda3对应目录&#xA;修改两个文件权限为775&#xA;配置airflow 链接到标题 mysql操作 链接到标题 &amp;ndash; 初始化 airflow 需要使用的库 CREATE DATABASE airflow;&#xA;&amp;ndash; 这个一定要设置，否则会报错 set global explicit_defaults_for_timestamp =1;&#xA;redis操作 链接到标题 修改redis.conf：&#xA;将bind 127.0.0.1 注释 将protected-mode修改为no</description>
     </item>
     <item>
       <title>Airflow本地安装</title>
-      <link>http://localhost:1313/posts/airflowlocal/</link>
+      <link>https://zxs94.github.io/posts/airflowlocal/</link>
       <pubDate>Wed, 23 Mar 2022 16:36:24 +0000</pubDate>
-      <guid>http://localhost:1313/posts/airflowlocal/</guid>
+      <guid>https://zxs94.github.io/posts/airflowlocal/</guid>
       <description>conda安装airflow 安装版本为2.2.3 链接到标题 # Airflow needs a home. ~/airflow is the default, but you can put it&#xA;# somewhere else if you prefer (optional)&#xA;export AIRFLOW_HOME=~/airflow&#xA;# Install Airflow using the constraints file&#xA;AIRFLOW_VERSION=2.2.3&#xA;PYTHON_VERSION=&amp;quot;$(python &amp;ndash;version | cut -d &amp;quot; &amp;quot; -f 2 | cut -d &amp;ldquo;.&amp;rdquo; -f 1-2)&amp;quot;&#xA;# For example: 3.6&#xA;CONSTRAINT_URL=&amp;ldquo;https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt&#34;&#xA;# For example: https://raw.githubusercontent.com/apache/airflow/constraints-2.2.3/constraints-3.6.txt&#xA;pip install &amp;ldquo;apache-airflow==${AIRFLOW_VERSION}&amp;rdquo; &amp;ndash;constraint &amp;ldquo;${CONSTRAINT_URL}&amp;rdquo;&#xA;# The Standalone command will initialise the database, make a user,</description>
     </item>
     <item>
       <title>Redis实践之单点集群搭建</title>
-      <link>http://localhost:1313/posts/redisclustersingle/</link>
+      <link>https://zxs94.github.io/posts/redisclustersingle/</link>
       <pubDate>Wed, 23 Mar 2022 15:38:01 +0000</pubDate>
-      <guid>http://localhost:1313/posts/redisclustersingle/</guid>
+      <guid>https://zxs94.github.io/posts/redisclustersingle/</guid>
       <description>实践场景 链接到标题 由于公司原因只能使用redis5以下的redis版本进行投产，所以记录下redis-3.2.8的单节点集群搭建实践过程。&#xA;进入测试服务器redis-3.2.8目录下 链接到标题 创建conf目录用于存放集群配置文件 链接到标题 redis-3.2.8目录下创建&#xA;redis-3.2.8/conf/6379 redis-3.2.8/conf/6378 redis-3.2.8/conf/6377 redis-3.2.8/conf/6376 redis-3.2.8/conf/6375 redis-3.2.8/conf/6374 配置文件修改 链接到标题 这里举例6379的配置文件&#xA;配置为127.0.0.1只能本地支持不能远程连接，所以修改为0.0.0.0,出于安全考虑也可以配置需要连接的ip用空格间隔&#xA;50 # ~~~ WARNING ~~~ If the computer running Redis is directly exposed to the 51 # internet, binding to all the interfaces is dangerous and will expose the 52 # instance to everybody on the internet. So by default we uncomment the 53 # following bind directive, that will force Redis to listen only into 54 # the IPv4 lookback interface address (this means Redis will be able to 55 # accept connections only from clients running into the same computer it 56 # is running).</description>
     </item>
     <item>
       <title>Redis基础</title>
-      <link>http://localhost:1313/posts/redisbasics/</link>
+      <link>https://zxs94.github.io/posts/redisbasics/</link>
       <pubDate>Mon, 13 Apr 2020 10:36:24 +0000</pubDate>
-      <guid>http://localhost:1313/posts/redisbasics/</guid>
+      <guid>https://zxs94.github.io/posts/redisbasics/</guid>
       <description>启动指令 链接到标题 服务端启动&#xA;配置文件中可以修改端口号 redis-server.exe redis.windows.conf 客户端启动&#xA;redis-cli.exe -h 127.0.0.1 -p 6379 配置 链接到标题 查看所有配置项&#xA;CONFIG GET * 数据类型 链接到标题 String(字符串) 链接到标题 string 是 redis 最基本的类型，你可以理解成与 Memcached 一模一样的类型，一个 key 对应一个 value。 string 类型是二进制安全的。意思是 redis 的 string 可以包含任何数据。比如jpg图片或者序列化的对象。 string 类型是 Redis 最基本的数据类型，string 类型的值最大能存储 512MB。&#xA;简单实例：&#xA;redis 127.0.0.1:6379&amp;gt; SET a &amp;#34;你好&amp;#34; OK redis 127.0.0.1:6379&amp;gt; GET a &amp;#34;你好&amp;#34; Hash（哈希） 链接到标题 Redis hash 是一个键值(key=&amp;gt;value)对集合。 Redis hash 是一个 string 类型的 field 和 value 的映射表，hash 特别适合用于存储对象。</description>
     </item>
     <item>
       <title>SpringBoot集成kafka实现生产消费</title>
-      <link>http://localhost:1313/posts/springboot-kafka/</link>
+      <link>https://zxs94.github.io/posts/springboot-kafka/</link>
       <pubDate>Wed, 18 Dec 2019 16:47:50 +0000</pubDate>
-      <guid>http://localhost:1313/posts/springboot-kafka/</guid>
+      <guid>https://zxs94.github.io/posts/springboot-kafka/</guid>
       <description>场景 链接到标题 对接方需要使用kafka作为消息中间件来交互数据，需要提供一个消费接口消费对方柜面系统前端实时更新的数据，结合我们平台本身的批处理定时任务，模型跑完数据需要生产到另一个主题供对接方消费。&#xA;依赖引入 链接到标题 pom.xml 引入依赖 注意kafka版本&#xA;springboot配置文件里加入kafka配置&#xA;注意如果关闭自动提交需要如图listener中配置 否则在使用Acknowledgment自动提交时会报参数异常，但是在低版本的kafka没有这个问题。&#xA;一些kafka配置 仅供参考&#xA;#kafka配置信息 kafka: producer: bootstrap-servers:0.0.0.0:9092 batch-size: 16785 #一次最多发送数据量 retries: 1 #发送失败后的重复发送次数 buffer-memory: 33554432 #32M批处理缓冲区 linger: 1 consumer: group-id: mms_test bootstrap-servers: 0.0.0.0:9092 auto-offset-reset: latest #最早未被消费的offset earliest enable-auto-commit: false #是否开启自动提交 max-poll-records: 3100 #批量消费一次最大拉取的数据量 auto-commit-interval: 1000 #自动提交的间隔时间 session-timeout: 20000 #连接超时时间 max-poll-interval: 15000 #手动提交设置与poll的心跳数,如果消息队列中没有消息，等待毫秒后，调用poll()方法。如果队列中有消息，立即消费消息，每次消费的消息的多少可以通过max.poll.records配置。 max-partition-fetch-bytes: 15728640 #设置拉取数据的大小,15M listener: ack-mode: manual # 配置参数 手动提交偏移量 batch-listener: true #是否开启批量消费，true表示批量消费 concurrency: 5 #设置消费的线程数 poll-timeout: 1500 消费者 链接到标题 核心注解</description>
     </item>
     <item>
       <title>Kafka单节点搭建</title>
-      <link>http://localhost:1313/posts/kafkasinglebuild/</link>
+      <link>https://zxs94.github.io/posts/kafkasinglebuild/</link>
       <pubDate>Wed, 18 Dec 2019 16:47:10 +0000</pubDate>
-      <guid>http://localhost:1313/posts/kafkasinglebuild/</guid>
+      <guid>https://zxs94.github.io/posts/kafkasinglebuild/</guid>
       <description>Kafka介绍 链接到标题 Kafka是LinkedIn开源的分布式发布-订阅消息系统，目前归属于Apache顶级项目。Kafka主要特点是基于Pull的模式来处理消息消费，追求高吞吐量，一开始的目的就是用于日志收集和传输。&#xA;不支持事务，对消息的重复、丢失、错误没有严格要求，适合产生大量数据的互联网服务的数据收集业务。&#xA;单节点卡夫卡搭建 链接到标题 1.Zookeeper 链接到标题 因为kafka使用zk作为注册中心、所以我们需要先在服务器上搭一个zk,也可以使用kafka自带的zk启动，注意需要预装jdk。&#xA;zk默认端口2181。&#xA;tar zxvf zookeeper-3.4.13.tar.gz 解压完成后在bin目录下执行启动指令&#xA;./zkServer.sh start zookeeper.out 查看启动信息&#xA;2. Kafka 链接到标题 解压kafka&#xA;tar zxvf kafka_2.12-2.1.0.tgz 相关指令&#xA;1.zookeeper启动 cd zookeeper-3.4.13/bin ./zkServer.sh start 2.kafka启动 # 修改配置 listeners=PLAINTEXT://localhost:9092 最好修改成服务器ip ./bin/kafka-server-start.sh -daemon ./config/server.properties 3.kafka创建topic bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test 4.kafka查询topic bin/kafka-topics.sh --list --zookeeper localhost:2181 5.kafka删除topic bin/kafka-topics.sh --delete --zookeeper localhost:2181 --topic test 6.发送消息 bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test 7.消费消息 bin/kafka-console-consumer.</description>
     </item>
     <item>
       <title>Supervisor</title>
-      <link>http://localhost:1313/posts/supervisor/</link>
+      <link>https://zxs94.github.io/posts/supervisor/</link>
       <pubDate>Mon, 04 Nov 2019 14:25:32 +0000</pubDate>
-      <guid>http://localhost:1313/posts/supervisor/</guid>
+      <guid>https://zxs94.github.io/posts/supervisor/</guid>
       <description>简介 链接到标题 Supervisor 是一个用 Python 写的进程管理工具，可以很方便的用来在 UNIX-like 系统（不支持 Windows）下启动、重启（自动重启程序）、关闭进程（不仅仅是 Python 进程）。&#xA;安装 链接到标题 pip install supervisor 配置文件 链接到标题 这里采用引入式 正则匹配目录下的其他配置&#xA;**主配置文件supervisor.conf **&#xA;在include中引入其他配置 不需要配置[program]进程相关信息 并且把进程状态发布到9003端口&#xA;[supervisord] loglevel=debug [supervisorctl] serverurl = http://127.0.0.1:9003 username = admin password = xxx [inet_http_server] port = :9003 username = admin password = xxx [rpcinterface:supervisor] supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface [include] files = /app/supervisor-conf/*.conf 进程配置&#xA;只需要配置进程属性中的配置信息&#xA;[program:mms] command=java -jar mms.jar directory = /app/mms startsecs=0 stopwaitsecs=0 autostart=true autorestart=false stdout_logfile=/app/mms/supervisor_log/supervisord.log stderr_logfile=/app/mms/supervisor_log/supervisord.</description>
     </item>
     <item>
       <title>SpringBoot上传踩坑-linux临时文件</title>
-      <link>http://localhost:1313/posts/springbootuploadtmp/</link>
+      <link>https://zxs94.github.io/posts/springbootuploadtmp/</link>
       <pubDate>Tue, 08 Oct 2019 15:55:23 +0000</pubDate>
-      <guid>http://localhost:1313/posts/springbootuploadtmp/</guid>
+      <guid>https://zxs94.github.io/posts/springbootuploadtmp/</guid>
       <description>今天生产上传文件的功能无法使用，定位问题，springboot项目日志输出IO异常，如下图&#xA;观察异常信息，明显是指在linux服务器下/tmp下的一个临时文件路径不可用。&#xA;cd到tmp路径下查询真的没有这个路径，查阅资料后发现，在启动时会自动指定一个默认的临时上传路径，但是linux的/tmp下的临时文件如果一定时间不使用的话会被清理掉，没有这个目录在上传新文件的时候就会报错。&#xA;这个报错也是在十一国庆假期后发现的，在开发测试中因为经常重启所以可能这个问题没有暴露出来，引以为戒。&#xA;重启项目只是治标不治本的方法，所以我们在启动类中指定临时文件的路径，这样我们在服务器上创建一个固定的位置就不用但是会被清理掉了。&#xA;springboot指定上传临时路径 链接到标题 在你的springboot项目的启动类中添加如下代码：&#xA;@Bean public MultipartConfigElement multipartConfigElement() { MultipartConfigFactory factory = new MultipartConfigFactory(); // 指定服务器上的固定路径 factory.setLocation(&amp;#34;/app/mms/upload&amp;#34;); return factory.createMultipartConfig(); } 配置完成后就不用担心临时文件路径的问题了！</description>
     </item>
     <item>
       <title>Python网络爬虫入门</title>
-      <link>http://localhost:1313/posts/pythonwebspider1/</link>
+      <link>https://zxs94.github.io/posts/pythonwebspider1/</link>
       <pubDate>Wed, 11 Sep 2019 14:06:07 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pythonwebspider1/</guid>
+      <guid>https://zxs94.github.io/posts/pythonwebspider1/</guid>
       <description>为了更深入了解python和大数据准备学习网络爬虫，参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。&#xA;部分内容参考以下博文整理 ，方便自己学习总结。 地址：https://python3webspider.cuiqingcai.com&#xA;python环境的安装配置不再过多赘述&#xA;请求库安装 链接到标题 requests 的安装 链接到标题 requests 属于第三方库，Python 默认不会自带这个库&#xA;pip install requests 相关链接&#xA;GitHub:https://github.com/requests/requests&#xA;PyPi: https://pypi.python.org/pypi/requests&#xA;官方文档: http://www.python-requests.org&#xA;中文文档: http://docs.python-requests.org/zh_CN/latest&#xA;Selenium 的安装 链接到标题 Selenium 是一个自动化测试工具，利用它我们可以驱动浏览器执行特定的动作，如点击、下拉等操作。&#xA;pip install selenium 相关链接&#xA;官方网站: http://www.seleniumhq.org&#xA;GitHub: (https://github.com/SeleniumHQ/selenium/tree/master/py&#xA;PyPI: https://pypi.python.org/pypi/selenium&#xA;官方文档: http://selenium-python.readthedocs.io&#xA;中文文档: http://selenium-python-zh.readthedocs.io&#xA;ChromeDriver、GeckoDriver、PhantomJS 的安装 链接到标题 前面我们成功安装好了 Selenium 库，但是它是一个自动化测试工具，需要浏览器来配合使用 ChromeDriver、GeckoDriver 分别是谷歌和火狐的驱动&#xA;PhantomJS 是一个无界面的、可脚本编程的 WebKit 浏览器引擎，它原生支持多种 Web 标准：DOM 操作、CSS 选择器、JSON、Canvas 以及 SVG。 Selenium 支持 PhantomJS，这样在运行的时候就不会再弹出一个浏览器了。而且 PhantomJS 的运行效率也很高，还支持各种参数配置，使用非常方便。&#xA;这三个插件的配置方式都类似，我才用最简单的方法，去官网下载驱动包将.exe文件拷贝到python目录下，因为我使用的是anaconda所以直接赋值到相应的环境目录下即可。&#xA;ChromeDriver 链接到标题 官方网站: https://sites.</description>
     </item>
     <item>
       <title>hexo优化配置</title>
-      <link>http://localhost:1313/posts/hexo-config/</link>
+      <link>https://zxs94.github.io/posts/hexo-config/</link>
       <pubDate>Thu, 05 Sep 2019 15:55:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/hexo-config/</guid>
+      <guid>https://zxs94.github.io/posts/hexo-config/</guid>
       <description>博客搭建过程中的配置记录，优化hexo的next主题配置。&#xA;git提交 链接到标题 npm install --save hexo-deployer-git git config --global user.name &amp;quot;GitHub 用户名&amp;quot; git config --global user.email &amp;quot;GitHub 邮箱&amp;quot; 文章中引用图片 链接到标题 npm install https://github.com/CodeFalling/hexo-asset-image --save 2D动态看板娘 链接到标题 npm install --save hexo-helper-live2d # 人物模型下载 model后面跟着指定模型名称 npm install --save live2d-widget-model-wanko # 主配置文件中添加代码 live2d: enable: true scriptFrom: local model: use: live2d-widget-model-wanko display: position: right width: 150 height: 300 mobile: show: true 代码高亮主题 链接到标题 # 默认为白色主题 normal，night， night blue， night bright， night eighties 底部访问人数统计 链接到标题 打开\themes\next\layout_partials\footer.</description>
     </item>
     <item>
       <title>Pandas使用经验(一)</title>
-      <link>http://localhost:1313/posts/pandas1/</link>
+      <link>https://zxs94.github.io/posts/pandas1/</link>
       <pubDate>Wed, 04 Sep 2019 17:41:46 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pandas1/</guid>
+      <guid>https://zxs94.github.io/posts/pandas1/</guid>
       <description> Pandas: 强大的Python数据分析工具包 链接到标题 Pandas是一个开源的，BSD许可的库，为Python编程语言提供高性能，易于使用的数据结构和数据分析工具。&#xA;官方api地址：地址&#xA;导入方式&#xA;```python import pandas as pd ``` 1.pandas读取mysql查询结果 链接到标题 参数：sql语句 数据库连接&#xA;pd.read_sql(sql,connection_obj)&#xA;例： 使用pymsql创建一个连接并查询&#xA;sql = &amp;#39;select * from xxx&amp;#39; connection = pymysql.connect( host=&amp;#39;10.10.10.10&amp;#39;, port=3306, user=&amp;#39;root&amp;#39;, password=&amp;#39;123&amp;#39;, database=&amp;#39;xxx&amp;#39;, charset=&amp;#39;utf8&amp;#39; ) df = pd.read_sql(sql,connection) ``` #### 2.pandas将dataframe数据写入数据库 #### ```python from sqlalchemy import create_engine e = create_engine(&amp;#39;mysql+pymysql://root:root@localhost:3306/question?charset=utf8&amp;#39;) df.to_sql(&amp;#39;table_name&amp;#39;, con=e, if_exists=&amp;#39;append&amp;#39;,index=False) </description>
     </item>
     <item>
       <title>Hexo图片引用</title>
-      <link>http://localhost:1313/posts/hexo-image/</link>
+      <link>https://zxs94.github.io/posts/hexo-image/</link>
       <pubDate>Thu, 08 Aug 2019 15:51:15 +0000</pubDate>
-      <guid>http://localhost:1313/posts/hexo-image/</guid>
+      <guid>https://zxs94.github.io/posts/hexo-image/</guid>
       <description>经过参考资料决定使用hexo-asset-image插件来实现博客的图片引用&#xA;使用流程 链接到标题 基本参照网上的配置方式&#xA;设置站点配置_config.yml:将post_asset_folder: false改为post_asset_folder: true&#xA;执行 npm install hexo-asset-image –save 装插件&#xA;执行hexo new [xxxx],生成xxxx.md和xxxx文件夹&#xA;把要引用的图片拷贝到xxxx文件夹中&#xA;使用 ![](xxxx/example.jpg) 来引用本地图片&#xA;踩坑 链接到标题 使用以上配置在项目中插入图片发现，页面引用时无法显示，查看生成的静态页面发现标签图片是&#xA;&amp;lt;img src=&amp;quot;/.io//xxx.png&amp;quot;/&amp;gt;&#xA;经过一番查询找了一个解决办法、就是将博客根目录下的package.json中的插件版本换成0.0.1版本 原有版本为(1.0.0),编辑完成后 hexo clean hexo g 即可看到图片img标签变为 &amp;lt;img src=&amp;quot;/2019/08/08/&amp;lsquo;文章文件名称&amp;rsquo;/&amp;lsquo;图片名称&amp;rsquo;.png&amp;quot;/&amp;gt;&#xA;降低插件版本后即可成功引用。</description>
     </item>
     <item>
       <title>SpringBoot之事务踩坑</title>
-      <link>http://localhost:1313/posts/springboottransactional/</link>
+      <link>https://zxs94.github.io/posts/springboottransactional/</link>
       <pubDate>Thu, 08 Aug 2019 14:07:08 +0000</pubDate>
-      <guid>http://localhost:1313/posts/springboottransactional/</guid>
+      <guid>https://zxs94.github.io/posts/springboottransactional/</guid>
       <description>在项目多使用了多数据源(因为可能会有odps等多数据源的查询需求)，并且是手动配置数据源的方式，在配置了一段时间后使用数据源和切换都没有问题，但是在开发业务的时候发现在一个插入操作里，分别要向4张数据表中记录数据，最后请求服务，通过服务的响应来决定数据是否回滚，因为没有异常操作，所以我使用手动回滚的方式在if判断里回滚数据，结果尴尬的发现事务不好用了。。。！&#xA;因为使用的是声明式事务，也就是在service的实现类上添加@Transactional注解的实现方式，这里需要注意几个使用时容易采坑的点&#xA;注意点 链接到标题 1.一般在controller调用service中的方法，并且不要嵌套调用，因为实现原理是代理注解的类，必须由spring管理才能生效，类的内部调用没有使用注入对象所以spring不会拦截异常，事务不会开启。 2.@Transactional写在类上或者方法上。&#xA;3.Aop声明事务是只捕获unchecked exception也就是默认对RuntimeException()异常或是其子类进行事务回滚，如果想在抛出Exception捕获需要添加注解属性&#xA;@Transactional(rollbackFor = Exception.class) 或者在try catch块中添加手动回滚的代码(侵入性比较大)&#xA;TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); 4.数据库需要支持事务、比如用的是mysql就必须使用innoDB的引擎，否则不支持事务。&#xA;问题跟踪 链接到标题 在确定自己没有犯以上的错误后，事务还是无法回滚。。。最后决定开始debug跟一下源码发现，在拿到数据连接对象执行回滚之前要判断transactionInfo这个对象是否为空，结果发现，虽然事务管理器是开启了，但是数据库连接的事务对象是null..&#xA;也就是说，在数据源初始化配置的时候开启的事务管理器和项目中使用的数据源连接根本就没有绑定上&#xA;再看一下我多数据源在实例化事务管理器的代码：&#xA;这里的test1DataSoource是我在实例化动态数据源配置对象的时候的默认数据源、也就是主数据源。&#xA;实例化动态数据源对象配置：&#xA;问题找到了，问题就出现在我在事务管理器初始化时用的数据源不是我配置的动态数据源的DataSource对象dynamicDataSource，而是test1DataSource。。。&#xA;将实例化事务管理器的声明参数修改成dynamicDataSource、试验回滚方法成功！</description>
     </item>
     <item>
       <title>Python进阶之：*args,**kwargs的使用</title>
-      <link>http://localhost:1313/posts/pythonadvance1/</link>
+      <link>https://zxs94.github.io/posts/pythonadvance1/</link>
       <pubDate>Wed, 31 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pythonadvance1/</guid>
+      <guid>https://zxs94.github.io/posts/pythonadvance1/</guid>
       <description>维护模型接口代码的时候，发现在装饰器的函数内部和解析函数上面经常使用*args, **kwargs,这两个参数。&#xA;这两个参数到底代表什么呢？&#xA;1. *args 链接到标题 这个参数主要表示一个系列的参数，元素名前面带 *并不是指代指针，而是表示指向一系列的参数。&#xA;例举：&#xA;*list = &amp;#39;red&amp;#39;, &amp;#39;blue&amp;#39;,&amp;#39;green&amp;#39; 所以我们可以对函数传入一系列的参数，而只定义一个参数。这样做的好处就在于当函数参数个数未定的情况下，我们可以使用这种参数声明，给我们的编程带来便捷，特别是在参数确定不了的情况下。&#xA;def test(*args): for i, item in enumerate(args): print(i, item) print(&amp;#34;test:&amp;#34;) test(&amp;#39;red&amp;#39;, &amp;#39;blue&amp;#39;, &amp;#39;green&amp;#39;) 向函数传递三个参数，输出结果：&#xA;test: 0 red 1 blue 2 green 2. **kwargs 链接到标题 在python中这个主要用于传入一个字典类型的（key=parameter）一系列&#xA;def testKey(**kwargs): for key, parameter in kwargs.items(): print(key, parameter) print(&amp;#34;testKey:&amp;#34;) test2(a=&amp;#39;1&amp;#39;, b=&amp;#39;2&amp;#39;) 输出结果&#xA;testKey: a 1 b 2 </description>
     </item>
     <item>
       <title>uWSGI入门</title>
-      <link>http://localhost:1313/posts/uwsgi1/</link>
+      <link>https://zxs94.github.io/posts/uwsgi1/</link>
       <pubDate>Wed, 31 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/uwsgi1/</guid>
+      <guid>https://zxs94.github.io/posts/uwsgi1/</guid>
       <description>什么是uWSGI？ 链接到标题 uWSGI是一个Web服务器，它实现了WSGI协议、uwsgi、http等协议。 它是一个Web服务器（如nginx，uWSGI等服务器）与web应用（如用Flask框架写的程序）通信的一种规范。&#xA;要注意 WSGI / uwsgi / uWSGI 这三个概念的区分。&#xA;WSGI是一种通信协议。&#xA;uwsgi是一种线路协议而不是通信协议，在此常用于在uWSGI服务器与其他网络服务器的数据通信。&#xA;uWSGI是实现了uwsgi和WSGI两种协议的Web服务器。&#xA;安装uWSGI 链接到标题 pip install uwsgitop 核心配置文件 uwsgi.ini&#xA;配置文件 链接到标题 配置文件内容如下：&#xA;[uwsgi] master = true #启动主进程，来管理其他进程，其它的uwsgi进程都是这个master进程的子进程，如果kill这个master进程，相当于重启所有的uwsgi进程。 # 主进程的名称自定义 procname-master = project_name pythonpath = /app/project_name #在app加载前切换到当前目录， 指定运行目录 wsgi-file = /app/project_name/run.py touch-reload=/app/project_name/app/ #当文件夹下的文件发生变化时自动重载 stats = /app/model_platform/run/uwsgi.status #stats = 0.0.0.0:9000 #容器运行状态 每个work运行状态 也可以发布到一个http服务上 lazy-apps = true #在每个worker而不是master中加载应用 http = 0.0.0.0:8000 #服务发布的端口号 callable = app processes = 2 #启动2个工作进程，生成指定数目的worker/进程 threads = 2 #每个进程的线程数 buffer-size = 65536 #设置用于uwsgi包解析的内部缓存区大小为64k。默认是4k。 daemonize = /app/project_name/log/myapp_uwsgi.</description>
     </item>
     <item>
       <title>SpringBoot整合Quartz(三)</title>
-      <link>http://localhost:1313/posts/springbootquartz3/</link>
+      <link>https://zxs94.github.io/posts/springbootquartz3/</link>
       <pubDate>Thu, 04 Jul 2019 15:58:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/springbootquartz3/</guid>
+      <guid>https://zxs94.github.io/posts/springbootquartz3/</guid>
       <description>MyJobFactory.java 链接到标题 由于业务需要在执行时调用业务逻辑，所以在job类的执行时就必须注入，在开始写配置的时候，执行注入的mapper接口的方法时报了空指针异常。&#xA;查了资料发现是由于quartz的Job默认是由quartz创建的不受spring管理，所以无法注入。所以使用继承AdaptableJobFactory的自定义工厂来创建定时器。&#xA;/** * @title: 自定义Job工厂 * 解决job由quartz创建spring无法注入的问题 * @author zhangxueshan * @date:2019年6月20日 下午4:11:43 */ @Component public class MyJobFactory extends AdaptableJobFactory { @Autowired private AutowireCapableBeanFactory capableBeanFactory; protected Object createJobInstance(TriggerFiredBundle bundle) throws Exception { Object jobInstance = super.createJobInstance(bundle); capableBeanFactory.autowireBean(jobInstance); return jobInstance; } } QuartzJob.java 链接到标题 最后就是job类了，在里面写好要执行的业务逻辑，其实就是调用service层的方法。&#xA;/** * @title:定时任务类 * @author zhangxueshan * @date:2019年5月16日 下午5:15:23 */ @Service public class QuartzJob implements Job{ private static final Logger logger = LoggerFactory.</description>
     </item>
     <item>
       <title>SpringBoot整合Quartz(二)</title>
-      <link>http://localhost:1313/posts/springbootquartz2/</link>
+      <link>https://zxs94.github.io/posts/springbootquartz2/</link>
       <pubDate>Thu, 04 Jul 2019 15:32:11 +0000</pubDate>
-      <guid>http://localhost:1313/posts/springbootquartz2/</guid>
+      <guid>https://zxs94.github.io/posts/springbootquartz2/</guid>
       <description>接上一篇文章，本文中展示在springboot项目中根据特定需求配置quartz定时任务。&#xA;POM文件中添加依赖 链接到标题 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-quartz&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; 配置类 StartQuartzJobListener.java 链接到标题 首先需要有个配置类来初始化quartz，&#xA;QuartzManager 是 quartz的具体管理类。&#xA;MyJobFactory 是一个自定义的Job工厂类，用来解决默认的Job类不支持spring注入。 TimeTaskPlanMapper 是具体的业务Mapper接口用来查询数据库中的配置。&#xA;@Configuration public class StartQuartzJobListener implements ApplicationListener&amp;lt;ContextRefreshedEvent&amp;gt; { private static final Logger logger = LoggerFactory.getLogger(StartQuartzJobListener.class); /* quartz */ @Autowired private QuartzManager quartzManager; @Autowired private MyJobFactory myJobFactory; @Resource private TimeTaskPlanMapper ttpm; /** * 初始启动quartz */ @Override public void onApplicationEvent(ContextRefreshedEvent event) { try { logger.debug(&amp;#34;查询配置表中启动的定时任务集合&amp;#34;); // 从数据库查询定时任务列表 List&amp;lt;UpperCaseMap&amp;gt; tasklist = ttpm.getTimeTasks(); for (UpperCaseMap upperCaseMap : tasklist) { int task_plan_code = (int) upperCaseMap.</description>
     </item>
     <item>
       <title>SpringBoot整合Quartz(一)</title>
-      <link>http://localhost:1313/posts/springbootquartz/</link>
+      <link>https://zxs94.github.io/posts/springbootquartz/</link>
       <pubDate>Thu, 04 Jul 2019 14:40:10 +0000</pubDate>
-      <guid>http://localhost:1313/posts/springbootquartz/</guid>
+      <guid>https://zxs94.github.io/posts/springbootquartz/</guid>
       <description>在做springboot的项目中有一个特殊需求，前端动态添加定时任务，动态停启定时任务，任务内容是通过动态新增的数据来发起post请求请求python对外接口。&#xA;首先想到使用SpringBoot自带的注解@Scheduled来实现定时，通过相关注解可以配置同步、异步任务。&#xA;后来发现对这种动态的支持不是很好，所以改用quartz来实现。&#xA;Quartz 简单介绍 链接到标题 Quartz 是一个完全由 Java 编写的开源作业调度框架，为在 Java 应用程序中进行作业调度提供了简单却强大的机制。 Quartz 可以与 J2EE 与 J2SE 应用程序相结合也可以单独使用。 Quartz 允许程序开发人员根据时间的间隔来调度作业。 Quartz 实现了作业和触发器的多对多的关系，还能把多个作业与不同的触发器关联。&#xA;Quartz 核心概念 链接到标题 我们需要明白 Quartz 的几个核心概念，这样理解起 Quartz 的原理就会变得简单了。&#xA;1.Job 表示一个工作，要执行的具体内容。此接口中只有一个方法，如下：&#xA;void execute(JobExecutionContext context) 2.JobDetail 表示一个具体的可执行的调度程序，Job 是这个可执行程调度程序所要执行的内容，另外 JobDetail 还包含了这个任务调度的方案和策略。&#xA;3.Trigger 代表一个调度参数的配置，什么时候去调。&#xA;4.Scheduler 代表一个调度容器，一个调度容器中可以注册多个 JobDetail 和 Trigger。 当 Trigger 与 JobDetail 组合，就可以被 Scheduler 容器调度了。&#xA;在Springboot中整合quartz非常简单，在高版本的springboot中自带quartz支持和默认配置。&#xA;Quartz 触发器 链接到标题 在这里简单说一下quartz的触发器，在项目中需求定时要求输入开始时间，结束时间，时间间隔和单位，分析之后选择使用日历触发器来实现。&#xA;例举quartz的触发器：&#xA;SimpleTrigger 链接到标题 简单触发器，适用于短期内的循环定时任务，定义一个开始时间到达开始时间就执行定时，进行循环。 因为需求原因需要区别日期，例如当月1日10点执行，下个月1日10点在触发。简单触发器就不支持，直接间隔年月日这种类型。&#xA;CronTrigger 链接到标题 cron表达式的触发器，这种触发器支持基于日历来定时，不过需要生成cron表达式，在前端集成插件或者后台判断生成cron都比较重，我们的功能要求的比较简单所以没采用cron的触发器。&#xA;CalendarIntervalTrigger 链接到标题 日历触发器，类似于SimpleTrigger，指定从某一个时间开始，以一定的时间间隔执行的任务。 但是不同的是SimpleTrigger指定的时间间隔为毫秒，没办法指定每隔一个月执行一次（每月的时间间隔不是固定值），而CalendarIntervalTrigger支持的间隔单位有秒，分钟，小时，天，月，年，星期。</description>
     </item>
     <item>
       <title>SpringBoot之多数据源配置</title>
-      <link>http://localhost:1313/posts/springbootdatasource/</link>
+      <link>https://zxs94.github.io/posts/springbootdatasource/</link>
       <pubDate>Wed, 03 Jul 2019 14:14:44 +0000</pubDate>
-      <guid>http://localhost:1313/posts/springbootdatasource/</guid>
+      <guid>https://zxs94.github.io/posts/springbootdatasource/</guid>
       <description>应用背景 链接到标题 因为项目需求导致需要连接多个数据源，可能为Mysql及其他源，所以需要在项目中配置多数据源，来达到执行不同业务的时候切换不同的数据源。&#xA;参考了很多资料，结合应用本身，决定使用配置类来配置动态数据源，通过配置AOP在service层上配置切点来控制数据源的切换。&#xA;1.动态数据源 DynamicDataSource.java 链接到标题 首先定义一个动态数据源类&#xA;public class DynamicDataSource extends AbstractRoutingDataSource { @Override protected Object determineCurrentLookupKey() { DataSourceType.DataBaseType dataBaseType = DataSourceType.getDataBaseType(); return dataBaseType; } } 2.切换数据源线程类 DataSourceType.java 链接到标题 public class DataSourceType { public enum DataBaseType { DATA1, DATA2 } // 使用ThreadLocal保证线程安全 private static final ThreadLocal&amp;lt;DataBaseType&amp;gt; TYPE = new ThreadLocal&amp;lt;DataBaseType&amp;gt;(); // 往当前线程里设置数据源类型 public static void setDataBaseType(DataBaseType dataBaseType) { if (dataBaseType == null) { throw new NullPointerException(); } System.err.println(&amp;#34;[将当前数据源改为]：&amp;#34; + dataBaseType); TYPE.</description>
     </item>
     <item>
       <title>关于本站</title>
-      <link>http://localhost:1313/about/</link>
+      <link>https://zxs94.github.io/about/</link>
       <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/about/</guid>
+      <guid>https://zxs94.github.io/about/</guid>
       <description>纸上得来终觉浅，绝知此事要躬行。</description>
     </item>
     <item>
       <title></title>
-      <link>http://localhost:1313/contact/</link>
+      <link>https://zxs94.github.io/contact/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/contact/</guid>
+      <guid>https://zxs94.github.io/contact/</guid>
       <description> 联系方式 链接到标题 email: zhxs1219work@sina.com&#xA;微信: zhxs_94&#xA;个人介绍 链接到标题 项⽬管理: 具有独⽴跟进和推动项⽬进度经验，把控研发测试交付进展。 前端经验: 参与开发过H5、JSP等传统前端项⽬，也使⽤过Vue脚⼿架搭建上线过嵌套在app端的web项⽬， 最后过度到React+antdPro的前端架构。 后端经验: SpringMVC、SpringBoot的maven多模块⼯程。熟悉SpringBoot和Mybatis的项⽬开发，熟悉相关 中间件集成使⽤。了解学习过SpringCloud微服务框架及SpringCloudAlibaba的相关组件实践和应⽤场景。 运维经验：具有⼀定运维能⼒，独⽴部署运维项⽬，中间件部署redis（集群）、gitlab、grafana、airflow 等常⽤中间件部署维护，参与搭建过基于Docker+K8s的机器学习在线开发及建模分析环境。 脚本经验：有shell、python相关脚本编写及实践经验。对于shell和python脚本有基础的运维能⼒。 国产化: 有项⽬信创改造经验，后端集成国产化Web中间件，服务器（中标麒麟、统信）及数据库 （OceanBase）国产化改造经验。 </description>
     </item>
     <item>
       <title>Projects</title>
-      <link>http://localhost:1313/projects/</link>
+      <link>https://zxs94.github.io/projects/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/projects/</guid>
+      <guid>https://zxs94.github.io/projects/</guid>
       <description>Nothing to see here&amp;hellip; Move along!</description>
     </item>
   </channel>

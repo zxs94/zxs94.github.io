@@ -2,115 +2,129 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Phantom</title>
-    <link>http://localhost:1313/tags/</link>
+    <link>https://zxs94.github.io/tags/</link>
     <description>Recent content in Tags on Phantom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 24 Mar 2022 08:57:30 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 06 Mar 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://zxs94.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Milvus</title>
+      <link>https://zxs94.github.io/tags/milvus/</link>
+      <pubDate>Wed, 06 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://zxs94.github.io/tags/milvus/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>向量数据库</title>
+      <link>https://zxs94.github.io/tags/%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Wed, 06 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://zxs94.github.io/tags/%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Airflow</title>
-      <link>http://localhost:1313/tags/airflow/</link>
+      <link>https://zxs94.github.io/tags/airflow/</link>
       <pubDate>Thu, 24 Mar 2022 08:57:30 +0000</pubDate>
-      <guid>http://localhost:1313/tags/airflow/</guid>
+      <guid>https://zxs94.github.io/tags/airflow/</guid>
       <description></description>
     </item>
     <item>
       <title>Redis</title>
-      <link>http://localhost:1313/tags/redis/</link>
+      <link>https://zxs94.github.io/tags/redis/</link>
       <pubDate>Wed, 23 Mar 2022 15:38:01 +0000</pubDate>
-      <guid>http://localhost:1313/tags/redis/</guid>
+      <guid>https://zxs94.github.io/tags/redis/</guid>
       <description></description>
     </item>
     <item>
       <title>Kafka</title>
-      <link>http://localhost:1313/tags/kafka/</link>
+      <link>https://zxs94.github.io/tags/kafka/</link>
       <pubDate>Wed, 18 Dec 2019 16:47:50 +0000</pubDate>
-      <guid>http://localhost:1313/tags/kafka/</guid>
+      <guid>https://zxs94.github.io/tags/kafka/</guid>
       <description></description>
     </item>
     <item>
       <title>Supervisor</title>
-      <link>http://localhost:1313/tags/supervisor/</link>
+      <link>https://zxs94.github.io/tags/supervisor/</link>
       <pubDate>Mon, 04 Nov 2019 14:25:32 +0000</pubDate>
-      <guid>http://localhost:1313/tags/supervisor/</guid>
+      <guid>https://zxs94.github.io/tags/supervisor/</guid>
       <description></description>
     </item>
     <item>
       <title>Linux</title>
-      <link>http://localhost:1313/tags/linux/</link>
+      <link>https://zxs94.github.io/tags/linux/</link>
       <pubDate>Tue, 08 Oct 2019 15:55:23 +0000</pubDate>
-      <guid>http://localhost:1313/tags/linux/</guid>
+      <guid>https://zxs94.github.io/tags/linux/</guid>
       <description></description>
     </item>
     <item>
       <title>上传</title>
-      <link>http://localhost:1313/tags/%E4%B8%8A%E4%BC%A0/</link>
+      <link>https://zxs94.github.io/tags/%E4%B8%8A%E4%BC%A0/</link>
       <pubDate>Tue, 08 Oct 2019 15:55:23 +0000</pubDate>
-      <guid>http://localhost:1313/tags/%E4%B8%8A%E4%BC%A0/</guid>
+      <guid>https://zxs94.github.io/tags/%E4%B8%8A%E4%BC%A0/</guid>
       <description></description>
     </item>
     <item>
       <title>Python</title>
-      <link>http://localhost:1313/tags/python/</link>
+      <link>https://zxs94.github.io/tags/python/</link>
       <pubDate>Wed, 11 Sep 2019 14:06:07 +0000</pubDate>
-      <guid>http://localhost:1313/tags/python/</guid>
+      <guid>https://zxs94.github.io/tags/python/</guid>
       <description></description>
     </item>
     <item>
       <title>爬虫</title>
-      <link>http://localhost:1313/tags/%E7%88%AC%E8%99%AB/</link>
+      <link>https://zxs94.github.io/tags/%E7%88%AC%E8%99%AB/</link>
       <pubDate>Wed, 11 Sep 2019 14:06:07 +0000</pubDate>
-      <guid>http://localhost:1313/tags/%E7%88%AC%E8%99%AB/</guid>
+      <guid>https://zxs94.github.io/tags/%E7%88%AC%E8%99%AB/</guid>
       <description></description>
     </item>
     <item>
       <title>Hexo</title>
-      <link>http://localhost:1313/tags/hexo/</link>
+      <link>https://zxs94.github.io/tags/hexo/</link>
       <pubDate>Thu, 05 Sep 2019 15:55:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/hexo/</guid>
+      <guid>https://zxs94.github.io/tags/hexo/</guid>
       <description></description>
     </item>
     <item>
       <title>DateFrame</title>
-      <link>http://localhost:1313/tags/dateframe/</link>
+      <link>https://zxs94.github.io/tags/dateframe/</link>
       <pubDate>Wed, 04 Sep 2019 17:41:46 +0000</pubDate>
-      <guid>http://localhost:1313/tags/dateframe/</guid>
+      <guid>https://zxs94.github.io/tags/dateframe/</guid>
       <description></description>
     </item>
     <item>
       <title>Pandas</title>
-      <link>http://localhost:1313/tags/pandas/</link>
+      <link>https://zxs94.github.io/tags/pandas/</link>
       <pubDate>Wed, 04 Sep 2019 17:41:46 +0000</pubDate>
-      <guid>http://localhost:1313/tags/pandas/</guid>
+      <guid>https://zxs94.github.io/tags/pandas/</guid>
       <description></description>
     </item>
     <item>
       <title>事务</title>
-      <link>http://localhost:1313/tags/%E4%BA%8B%E5%8A%A1/</link>
+      <link>https://zxs94.github.io/tags/%E4%BA%8B%E5%8A%A1/</link>
       <pubDate>Thu, 08 Aug 2019 14:07:08 +0000</pubDate>
-      <guid>http://localhost:1313/tags/%E4%BA%8B%E5%8A%A1/</guid>
+      <guid>https://zxs94.github.io/tags/%E4%BA%8B%E5%8A%A1/</guid>
       <description></description>
     </item>
     <item>
       <title>Uwsgi</title>
-      <link>http://localhost:1313/tags/uwsgi/</link>
+      <link>https://zxs94.github.io/tags/uwsgi/</link>
       <pubDate>Wed, 31 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/uwsgi/</guid>
+      <guid>https://zxs94.github.io/tags/uwsgi/</guid>
       <description></description>
     </item>
     <item>
       <title>Quartz</title>
-      <link>http://localhost:1313/tags/quartz/</link>
+      <link>https://zxs94.github.io/tags/quartz/</link>
       <pubDate>Thu, 04 Jul 2019 15:58:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/quartz/</guid>
+      <guid>https://zxs94.github.io/tags/quartz/</guid>
       <description></description>
     </item>
     <item>
       <title>多数据源</title>
-      <link>http://localhost:1313/tags/%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/</link>
+      <link>https://zxs94.github.io/tags/%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/</link>
       <pubDate>Wed, 03 Jul 2019 14:14:44 +0000</pubDate>
-      <guid>http://localhost:1313/tags/%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/</guid>
+      <guid>https://zxs94.github.io/tags/%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/</guid>
       <description></description>
     </item>
   </channel>

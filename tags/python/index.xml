@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Python on Phantom</title>
-    <link>http://localhost:1313/tags/python/</link>
+    <link>https://zxs94.github.io/tags/python/</link>
     <description>Recent content in Python on Phantom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 11 Sep 2019 14:06:07 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zxs94.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Python网络爬虫入门</title>
-      <link>http://localhost:1313/posts/pythonwebspider1/</link>
+      <link>https://zxs94.github.io/posts/pythonwebspider1/</link>
       <pubDate>Wed, 11 Sep 2019 14:06:07 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pythonwebspider1/</guid>
+      <guid>https://zxs94.github.io/posts/pythonwebspider1/</guid>
       <description>为了更深入了解python和大数据准备学习网络爬虫，参考互联网资源文献，先从基础入手来学习网络爬虫，一方面满足兴趣，一方面扩充自己的知识面的深度广度。&#xA;部分内容参考以下博文整理 ，方便自己学习总结。 地址：https://python3webspider.cuiqingcai.com&#xA;python环境的安装配置不再过多赘述&#xA;请求库安装 链接到标题 requests 的安装 链接到标题 requests 属于第三方库，Python 默认不会自带这个库&#xA;pip install requests 相关链接&#xA;GitHub:https://github.com/requests/requests&#xA;PyPi: https://pypi.python.org/pypi/requests&#xA;官方文档: http://www.python-requests.org&#xA;中文文档: http://docs.python-requests.org/zh_CN/latest&#xA;Selenium 的安装 链接到标题 Selenium 是一个自动化测试工具，利用它我们可以驱动浏览器执行特定的动作，如点击、下拉等操作。&#xA;pip install selenium 相关链接&#xA;官方网站: http://www.seleniumhq.org&#xA;GitHub: (https://github.com/SeleniumHQ/selenium/tree/master/py&#xA;PyPI: https://pypi.python.org/pypi/selenium&#xA;官方文档: http://selenium-python.readthedocs.io&#xA;中文文档: http://selenium-python-zh.readthedocs.io&#xA;ChromeDriver、GeckoDriver、PhantomJS 的安装 链接到标题 前面我们成功安装好了 Selenium 库，但是它是一个自动化测试工具，需要浏览器来配合使用 ChromeDriver、GeckoDriver 分别是谷歌和火狐的驱动&#xA;PhantomJS 是一个无界面的、可脚本编程的 WebKit 浏览器引擎，它原生支持多种 Web 标准：DOM 操作、CSS 选择器、JSON、Canvas 以及 SVG。 Selenium 支持 PhantomJS，这样在运行的时候就不会再弹出一个浏览器了。而且 PhantomJS 的运行效率也很高，还支持各种参数配置，使用非常方便。&#xA;这三个插件的配置方式都类似，我才用最简单的方法，去官网下载驱动包将.exe文件拷贝到python目录下，因为我使用的是anaconda所以直接赋值到相应的环境目录下即可。&#xA;ChromeDriver 链接到标题 官方网站: https://sites.</description>
     </item>
     <item>
       <title>Python进阶之：*args,**kwargs的使用</title>
-      <link>http://localhost:1313/posts/pythonadvance1/</link>
+      <link>https://zxs94.github.io/posts/pythonadvance1/</link>
       <pubDate>Wed, 31 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pythonadvance1/</guid>
+      <guid>https://zxs94.github.io/posts/pythonadvance1/</guid>
       <description>维护模型接口代码的时候，发现在装饰器的函数内部和解析函数上面经常使用*args, **kwargs,这两个参数。&#xA;这两个参数到底代表什么呢？&#xA;1. *args 链接到标题 这个参数主要表示一个系列的参数，元素名前面带 *并不是指代指针，而是表示指向一系列的参数。&#xA;例举：&#xA;*list = &amp;#39;red&amp;#39;, &amp;#39;blue&amp;#39;,&amp;#39;green&amp;#39; 所以我们可以对函数传入一系列的参数，而只定义一个参数。这样做的好处就在于当函数参数个数未定的情况下，我们可以使用这种参数声明，给我们的编程带来便捷，特别是在参数确定不了的情况下。&#xA;def test(*args): for i, item in enumerate(args): print(i, item) print(&amp;#34;test:&amp;#34;) test(&amp;#39;red&amp;#39;, &amp;#39;blue&amp;#39;, &amp;#39;green&amp;#39;) 向函数传递三个参数，输出结果：&#xA;test: 0 red 1 blue 2 green 2. **kwargs 链接到标题 在python中这个主要用于传入一个字典类型的（key=parameter）一系列&#xA;def testKey(**kwargs): for key, parameter in kwargs.items(): print(key, parameter) print(&amp;#34;testKey:&amp;#34;) test2(a=&amp;#39;1&amp;#39;, b=&amp;#39;2&amp;#39;) 输出结果&#xA;testKey: a 1 b 2 </description>
     </item>
   </channel>

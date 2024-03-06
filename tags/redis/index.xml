@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Redis on Phantom</title>
-    <link>http://localhost:1313/tags/redis/</link>
+    <link>https://zxs94.github.io/tags/redis/</link>
     <description>Recent content in Redis on Phantom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 23 Mar 2022 15:38:01 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/redis/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zxs94.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Redis实践之单点集群搭建</title>
-      <link>http://localhost:1313/posts/redisclustersingle/</link>
+      <link>https://zxs94.github.io/posts/redisclustersingle/</link>
       <pubDate>Wed, 23 Mar 2022 15:38:01 +0000</pubDate>
-      <guid>http://localhost:1313/posts/redisclustersingle/</guid>
+      <guid>https://zxs94.github.io/posts/redisclustersingle/</guid>
       <description>实践场景 链接到标题 由于公司原因只能使用redis5以下的redis版本进行投产，所以记录下redis-3.2.8的单节点集群搭建实践过程。&#xA;进入测试服务器redis-3.2.8目录下 链接到标题 创建conf目录用于存放集群配置文件 链接到标题 redis-3.2.8目录下创建&#xA;redis-3.2.8/conf/6379 redis-3.2.8/conf/6378 redis-3.2.8/conf/6377 redis-3.2.8/conf/6376 redis-3.2.8/conf/6375 redis-3.2.8/conf/6374 配置文件修改 链接到标题 这里举例6379的配置文件&#xA;配置为127.0.0.1只能本地支持不能远程连接，所以修改为0.0.0.0,出于安全考虑也可以配置需要连接的ip用空格间隔&#xA;50 # ~~~ WARNING ~~~ If the computer running Redis is directly exposed to the 51 # internet, binding to all the interfaces is dangerous and will expose the 52 # instance to everybody on the internet. So by default we uncomment the 53 # following bind directive, that will force Redis to listen only into 54 # the IPv4 lookback interface address (this means Redis will be able to 55 # accept connections only from clients running into the same computer it 56 # is running).</description>
     </item>
     <item>
       <title>Redis基础</title>
-      <link>http://localhost:1313/posts/redisbasics/</link>
+      <link>https://zxs94.github.io/posts/redisbasics/</link>
       <pubDate>Mon, 13 Apr 2020 10:36:24 +0000</pubDate>
-      <guid>http://localhost:1313/posts/redisbasics/</guid>
+      <guid>https://zxs94.github.io/posts/redisbasics/</guid>
       <description>启动指令 链接到标题 服务端启动&#xA;配置文件中可以修改端口号 redis-server.exe redis.windows.conf 客户端启动&#xA;redis-cli.exe -h 127.0.0.1 -p 6379 配置 链接到标题 查看所有配置项&#xA;CONFIG GET * 数据类型 链接到标题 String(字符串) 链接到标题 string 是 redis 最基本的类型，你可以理解成与 Memcached 一模一样的类型，一个 key 对应一个 value。 string 类型是二进制安全的。意思是 redis 的 string 可以包含任何数据。比如jpg图片或者序列化的对象。 string 类型是 Redis 最基本的数据类型，string 类型的值最大能存储 512MB。&#xA;简单实例：&#xA;redis 127.0.0.1:6379&amp;gt; SET a &amp;#34;你好&amp;#34; OK redis 127.0.0.1:6379&amp;gt; GET a &amp;#34;你好&amp;#34; Hash（哈希） 链接到标题 Redis hash 是一个键值(key=&amp;gt;value)对集合。 Redis hash 是一个 string 类型的 field 和 value 的映射表，hash 特别适合用于存储对象。</description>
     </item>
   </channel>
