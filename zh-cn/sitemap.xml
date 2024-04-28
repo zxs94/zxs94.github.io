@@ -2,250 +2,250 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://zxs94.github.io/tags/milvus/</loc>
+    <loc>http://localhost:1313/tags/milvus/</loc>
     <lastmod>2024-03-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/categories/milvus/</loc>
+    <loc>http://localhost:1313/categories/milvus/</loc>
     <lastmod>2024-03-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/</loc>
+    <loc>http://localhost:1313/</loc>
     <lastmod>2024-03-06T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://zxs94.github.io/en/"
+                href="http://localhost:1313/en/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://zxs94.github.io/"
+                href="http://localhost:1313/"
                 />
   </url><url>
-    <loc>https://zxs94.github.io/posts/</loc>
+    <loc>http://localhost:1313/posts/</loc>
     <lastmod>2024-03-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/posts/%E5%88%9D%E8%AF%86milvus%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <loc>http://localhost:1313/posts/%E5%88%9D%E8%AF%86milvus%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2024-03-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/tags/%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <loc>http://localhost:1313/tags/%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2024-03-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/authors/</loc>
+    <loc>http://localhost:1313/authors/</loc>
     <lastmod>2023-01-05T01:15:52+01:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://zxs94.github.io/en/authors/"
+                href="http://localhost:1313/en/authors/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://zxs94.github.io/authors/"
+                href="http://localhost:1313/authors/"
                 />
   </url><url>
-    <loc>https://zxs94.github.io/autores/autores-de-hugo/</loc>
+    <loc>http://localhost:1313/autores/autores-de-hugo/</loc>
     <lastmod>2023-01-05T01:15:52+01:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/authors/hugo-authors/</loc>
+    <loc>http://localhost:1313/authors/hugo-authors/</loc>
     <lastmod>2023-01-05T01:15:29+01:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/categories/</loc>
+    <loc>http://localhost:1313/categories/</loc>
     <lastmod>2023-01-04T23:21:18+01:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://zxs94.github.io/en/categories/"
+                href="http://localhost:1313/en/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://zxs94.github.io/categories/"
+                href="http://localhost:1313/categories/"
                 />
   </url><url>
-    <loc>https://zxs94.github.io/categoria/temas/</loc>
+    <loc>http://localhost:1313/categoria/temas/</loc>
     <lastmod>2023-01-04T23:21:18+01:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/categoria/sintaxe/</loc>
+    <loc>http://localhost:1313/categoria/sintaxe/</loc>
     <lastmod>2023-01-04T23:21:06+01:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/tags/shortcodes/_index.pt-br/</loc>
+    <loc>http://localhost:1313/tags/shortcodes/_index.pt-br/</loc>
     <lastmod>2023-01-04T11:51:36+01:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/tags/</loc>
+    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2023-01-04T11:51:36+01:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://zxs94.github.io/en/tags/"
+                href="http://localhost:1313/en/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://zxs94.github.io/tags/"
+                href="http://localhost:1313/tags/"
                 />
   </url><url>
-    <loc>https://zxs94.github.io/tags/airflow/</loc>
+    <loc>http://localhost:1313/tags/airflow/</loc>
     <lastmod>2022-03-24T08:57:30+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/categories/airflow/</loc>
+    <loc>http://localhost:1313/categories/airflow/</loc>
     <lastmod>2022-03-24T08:57:30+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/posts/airflowproduct3/</loc>
+    <loc>http://localhost:1313/posts/airflowproduct3/</loc>
     <lastmod>2022-03-24T08:57:30+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/posts/airflowproduct2/</loc>
+    <loc>http://localhost:1313/posts/airflowproduct2/</loc>
     <lastmod>2022-03-24T08:57:27+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/posts/airflowproduct/</loc>
+    <loc>http://localhost:1313/posts/airflowproduct/</loc>
     <lastmod>2022-03-23T16:45:39+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/posts/airflowlocal/</loc>
+    <loc>http://localhost:1313/posts/airflowlocal/</loc>
     <lastmod>2022-03-23T16:36:24+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/tags/redis/</loc>
+    <loc>http://localhost:1313/tags/redis/</loc>
     <lastmod>2022-03-23T15:38:01+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/categories/redis/</loc>
+    <loc>http://localhost:1313/categories/redis/</loc>
     <lastmod>2022-03-23T15:38:01+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/posts/redisclustersingle/</loc>
+    <loc>http://localhost:1313/posts/redisclustersingle/</loc>
     <lastmod>2022-03-23T15:38:01+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/posts/redisbasics/</loc>
+    <loc>http://localhost:1313/posts/redisbasics/</loc>
     <lastmod>2020-04-13T10:36:24+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/tags/kafka/</loc>
+    <loc>http://localhost:1313/tags/kafka/</loc>
     <lastmod>2019-12-18T16:47:50+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/categories/springboot/</loc>
+    <loc>http://localhost:1313/categories/springboot/</loc>
     <lastmod>2019-12-18T16:47:50+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/posts/springboot-kafka/</loc>
+    <loc>http://localhost:1313/posts/springboot-kafka/</loc>
     <lastmod>2019-12-18T16:47:50+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/categories/kafka/</loc>
+    <loc>http://localhost:1313/categories/kafka/</loc>
     <lastmod>2019-12-18T16:47:10+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/posts/kafkasinglebuild/</loc>
+    <loc>http://localhost:1313/posts/kafkasinglebuild/</loc>
     <lastmod>2019-12-18T16:47:10+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/tags/supervisor/</loc>
+    <loc>http://localhost:1313/tags/supervisor/</loc>
     <lastmod>2019-11-04T14:25:32+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/categories/supervisor/</loc>
+    <loc>http://localhost:1313/categories/supervisor/</loc>
     <lastmod>2019-11-04T14:25:32+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/posts/supervisor/</loc>
+    <loc>http://localhost:1313/posts/supervisor/</loc>
     <lastmod>2019-11-04T14:25:32+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/tags/linux/</loc>
+    <loc>http://localhost:1313/tags/linux/</loc>
     <lastmod>2019-10-08T15:55:23+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/posts/springbootuploadtmp/</loc>
+    <loc>http://localhost:1313/posts/springbootuploadtmp/</loc>
     <lastmod>2019-10-08T15:55:23+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/tags/%E4%B8%8A%E4%BC%A0/</loc>
+    <loc>http://localhost:1313/tags/%E4%B8%8A%E4%BC%A0/</loc>
     <lastmod>2019-10-08T15:55:23+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/tags/python/</loc>
+    <loc>http://localhost:1313/tags/python/</loc>
     <lastmod>2019-09-11T14:06:07+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/categories/python/</loc>
+    <loc>http://localhost:1313/categories/python/</loc>
     <lastmod>2019-09-11T14:06:07+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/posts/pythonwebspider1/</loc>
+    <loc>http://localhost:1313/posts/pythonwebspider1/</loc>
     <lastmod>2019-09-11T14:06:07+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/tags/%E7%88%AC%E8%99%AB/</loc>
+    <loc>http://localhost:1313/tags/%E7%88%AC%E8%99%AB/</loc>
     <lastmod>2019-09-11T14:06:07+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/tags/hexo/</loc>
+    <loc>http://localhost:1313/tags/hexo/</loc>
     <lastmod>2019-09-05T15:55:00+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/categories/hexo/</loc>
+    <loc>http://localhost:1313/categories/hexo/</loc>
     <lastmod>2019-09-05T15:55:00+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/posts/hexo-config/</loc>
+    <loc>http://localhost:1313/posts/hexo-config/</loc>
     <lastmod>2019-09-05T15:55:00+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/tags/dateframe/</loc>
+    <loc>http://localhost:1313/tags/dateframe/</loc>
     <lastmod>2019-09-04T17:41:46+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/tags/pandas/</loc>
+    <loc>http://localhost:1313/tags/pandas/</loc>
     <lastmod>2019-09-04T17:41:46+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/categories/pandas/</loc>
+    <loc>http://localhost:1313/categories/pandas/</loc>
     <lastmod>2019-09-04T17:41:46+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/posts/pandas1/</loc>
+    <loc>http://localhost:1313/posts/pandas1/</loc>
     <lastmod>2019-09-04T17:41:46+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/posts/hexo-image/</loc>
+    <loc>http://localhost:1313/posts/hexo-image/</loc>
     <lastmod>2019-08-08T15:51:15+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/posts/springboottransactional/</loc>
+    <loc>http://localhost:1313/posts/springboottransactional/</loc>
     <lastmod>2019-08-08T14:07:08+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/tags/%E4%BA%8B%E5%8A%A1/</loc>
+    <loc>http://localhost:1313/tags/%E4%BA%8B%E5%8A%A1/</loc>
     <lastmod>2019-08-08T14:07:08+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/posts/pythonadvance1/</loc>
+    <loc>http://localhost:1313/posts/pythonadvance1/</loc>
     <lastmod>2019-07-31T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/tags/uwsgi/</loc>
+    <loc>http://localhost:1313/tags/uwsgi/</loc>
     <lastmod>2019-07-31T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/categories/uwsgi/</loc>
+    <loc>http://localhost:1313/categories/uwsgi/</loc>
     <lastmod>2019-07-31T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/posts/uwsgi1/</loc>
+    <loc>http://localhost:1313/posts/uwsgi1/</loc>
     <lastmod>2019-07-31T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/tags/quartz/</loc>
+    <loc>http://localhost:1313/tags/quartz/</loc>
     <lastmod>2019-07-04T15:58:00+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/posts/springbootquartz3/</loc>
+    <loc>http://localhost:1313/posts/springbootquartz3/</loc>
     <lastmod>2019-07-04T15:58:00+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/posts/springbootquartz2/</loc>
+    <loc>http://localhost:1313/posts/springbootquartz2/</loc>
     <lastmod>2019-07-04T15:32:11+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/posts/springbootquartz/</loc>
+    <loc>http://localhost:1313/posts/springbootquartz/</loc>
     <lastmod>2019-07-04T14:40:10+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/posts/springbootdatasource/</loc>
+    <loc>http://localhost:1313/posts/springbootdatasource/</loc>
     <lastmod>2019-07-03T14:14:44+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/tags/%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/</loc>
+    <loc>http://localhost:1313/tags/%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/</loc>
     <lastmod>2019-07-03T14:14:44+00:00</lastmod>
   </url><url>
-    <loc>https://zxs94.github.io/about/</loc>
+    <loc>http://localhost:1313/about/</loc>
     <lastmod>2019-02-28T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://zxs94.github.io/en/about/"
+                href="http://localhost:1313/en/about/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://zxs94.github.io/about/"
+                href="http://localhost:1313/about/"
                 />
   </url><url>
-    <loc>https://zxs94.github.io/contact/</loc>
+    <loc>http://localhost:1313/contact/</loc>
   </url><url>
-    <loc>https://zxs94.github.io/projects/</loc>
+    <loc>http://localhost:1313/projects/</loc>
   </url><url>
-    <loc>https://zxs94.github.io/series/</loc>
+    <loc>http://localhost:1313/series/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://zxs94.github.io/en/series/"
+                href="http://localhost:1313/en/series/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://zxs94.github.io/series/"
+                href="http://localhost:1313/series/"
                 />
   </url>
 </urlset>
