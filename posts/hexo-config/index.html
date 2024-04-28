@@ -1,48 +1,54 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
+  <script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  hexo优化配置 · Phantom
-</title>
+    hexo优化配置 · Phantom
+  </title>
   <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light dark">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
 
 
 
 
-<meta name="author" content="ZHXS">
-<meta name="description" content="博客搭建过程中的配置记录，优化hexo的next主题配置。
+  <meta name="author" content="ZHXS">
+  <meta name="description"
+    content="博客搭建过程中的配置记录，优化hexo的next主题配置。
 git提交 链接到标题 npm install --save hexo-deployer-git git config --global user.name &quot;GitHub 用户名&quot; git config --global user.email &quot;GitHub 邮箱&quot; 文章中引用图片 链接到标题 npm install https://github.com/CodeFalling/hexo-asset-image --save 2D动态看板娘 链接到标题 npm install --save hexo-helper-live2d # 人物模型下载 model后面跟着指定模型名称 npm install --save live2d-widget-model-wanko # 主配置文件中添加代码 live2d: enable: true scriptFrom: local model: use: live2d-widget-model-wanko display: position: right width: 150 height: 300 mobile: show: true 代码高亮主题 链接到标题 # 默认为白色主题 normal，night， night blue， night bright， night eighties 底部访问人数统计 链接到标题 打开\themes\next\layout_partials\footer.">
-<meta name="keywords" content="blog,developer,personal">
+  <meta name="keywords" content="blog,developer,personal">
 
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="hexo优化配置"/>
-<meta name="twitter:description" content="博客搭建过程中的配置记录，优化hexo的next主题配置。
-git提交 链接到标题 npm install --save hexo-deployer-git git config --global user.name &quot;GitHub 用户名&quot; git config --global user.email &quot;GitHub 邮箱&quot; 文章中引用图片 链接到标题 npm install https://github.com/CodeFalling/hexo-asset-image --save 2D动态看板娘 链接到标题 npm install --save hexo-helper-live2d # 人物模型下载 model后面跟着指定模型名称 npm install --save live2d-widget-model-wanko # 主配置文件中添加代码 live2d: enable: true scriptFrom: local model: use: live2d-widget-model-wanko display: position: right width: 150 height: 300 mobile: show: true 代码高亮主题 链接到标题 # 默认为白色主题 normal，night， night blue， night bright， night eighties 底部访问人数统计 链接到标题 打开\themes\next\layout_partials\footer."/>
-
-<meta property="og:title" content="hexo优化配置" />
-<meta property="og:description" content="博客搭建过程中的配置记录，优化hexo的next主题配置。
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="hexo优化配置" />
+  <meta name="twitter:description"
+    content="博客搭建过程中的配置记录，优化hexo的next主题配置。
 git提交 链接到标题 npm install --save hexo-deployer-git git config --global user.name &quot;GitHub 用户名&quot; git config --global user.email &quot;GitHub 邮箱&quot; 文章中引用图片 链接到标题 npm install https://github.com/CodeFalling/hexo-asset-image --save 2D动态看板娘 链接到标题 npm install --save hexo-helper-live2d # 人物模型下载 model后面跟着指定模型名称 npm install --save live2d-widget-model-wanko # 主配置文件中添加代码 live2d: enable: true scriptFrom: local model: use: live2d-widget-model-wanko display: position: right width: 150 height: 300 mobile: show: true 代码高亮主题 链接到标题 # 默认为白色主题 normal，night， night blue， night bright， night eighties 底部访问人数统计 链接到标题 打开\themes\next\layout_partials\footer." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/posts/hexo-config/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2019-09-05T15:55:00+00:00" />
-<meta property="article:modified_time" content="2019-09-05T15:55:00+00:00" />
+
+  <meta property="og:title" content="hexo优化配置" />
+  <meta property="og:description"
+    content="博客搭建过程中的配置记录，优化hexo的next主题配置。
+git提交 链接到标题 npm install --save hexo-deployer-git git config --global user.name &quot;GitHub 用户名&quot; git config --global user.email &quot;GitHub 邮箱&quot; 文章中引用图片 链接到标题 npm install https://github.com/CodeFalling/hexo-asset-image --save 2D动态看板娘 链接到标题 npm install --save hexo-helper-live2d # 人物模型下载 model后面跟着指定模型名称 npm install --save live2d-widget-model-wanko # 主配置文件中添加代码 live2d: enable: true scriptFrom: local model: use: live2d-widget-model-wanko display: position: right width: 150 height: 300 mobile: show: true 代码高亮主题 链接到标题 # 默认为白色主题 normal，night， night blue， night bright， night eighties 底部访问人数统计 链接到标题 打开\themes\next\layout_partials\footer." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://zxs94.github.io:1313/posts/hexo-config/" />
+  <meta property="article:section" content="posts" />
+  <meta property="article:published_time" content="2019-09-05T15:55:00+00:00" />
+  <meta property="article:modified_time" content="2019-09-05T15:55:00+00:00" />
 
 
 
 
 
-<link rel="canonical" href="http://localhost:1313/posts/hexo-config/">
+  <link rel="canonical" href="https://zxs94.github.io:1313/posts/hexo-config/">
 
 
-<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
 
 
-  
-  
+
+
   <link rel="stylesheet" href="/css/coder.css" media="screen">
 
 
@@ -50,28 +56,28 @@ git提交 链接到标题 npm install --save hexo-deployer-git git config --glob
 
 
 
-  
-    
-    
-    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
-  
 
 
 
- 
+  <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
 
 
 
 
-<link rel="icon" type="image/svg+xml" href="/images/favicon.jpeg" sizes="any">
-<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
 
-<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
 
-<link rel="manifest" href="/site.webmanifest">
-<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.jpeg" sizes="any">
+  <link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
 
 
 
@@ -89,148 +95,150 @@ git提交 链接到标题 npm install --save hexo-deployer-git git config --glob
 
 
 <body class="preload-transitions colorscheme-auto">
-  
-<div class="float-container">
+
+  <div class="float-container">
     <a id="dark-mode-toggle" class="colorscheme-toggle">
-        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+      <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
     </a>
-</div>
+  </div>
 
 
   <main class="wrapper">
     <nav class="navigation">
-  <section class="container">
-    
-    <a class="navigation-title" href="http://localhost:1313/">
-      Phantom
-    </a>
-    
-    
-      <input type="checkbox" id="menu-toggle" />
-      <label class="menu-button float-right" for="menu-toggle">
-        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
-      </label>
-      <ul class="navigation-list">
-        
-          
-            <li class="navigation-item">
-              <a class="navigation-link " href="/about/">关于本站</a>
-            </li>
-          
-            <li class="navigation-item">
-              <a class="navigation-link " href="/categories/">分类</a>
-            </li>
-          
-            <li class="navigation-item">
-              <a class="navigation-link " href="/posts/">博客</a>
-            </li>
-          
-            <li class="navigation-item">
-              <a class="navigation-link " href="/tags/">标签</a>
-            </li>
-          
-            <li class="navigation-item">
-              <a class="navigation-link " href="/contact/">联系作者</a>
-            </li>
-          
-        
-        
-          
-          
-          
-            
-          
-            
-              
-                <li class="navigation-item menu-separator">
-                  <span>|</span>
-                </li>
-                
-              
-              <li class="navigation-item">
-                <a href="/en/">🇬🇧</a>
-              </li>
-            
-          
-        
-      </ul>
-    
-  </section>
-</nav>
+      <section class="container">
+
+        <a class="navigation-title" href="https://zxs94.github.io/">
+          Phantom
+        </a>
+
+
+        <input type="checkbox" id="menu-toggle" />
+        <label class="menu-button float-right" for="menu-toggle">
+          <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+        </label>
+        <ul class="navigation-list">
+
+
+          <li class="navigation-item">
+            <a class="navigation-link " href="/about/">关于本站</a>
+          </li>
+
+          <li class="navigation-item">
+            <a class="navigation-link " href="/categories/">分类</a>
+          </li>
+
+          <li class="navigation-item">
+            <a class="navigation-link " href="/posts/">博客</a>
+          </li>
+
+          <li class="navigation-item">
+            <a class="navigation-link " href="/tags/">标签</a>
+          </li>
+
+          <li class="navigation-item">
+            <a class="navigation-link " href="/contact/">联系作者</a>
+          </li>
+
+
+
+
+
+
+
+
+
+
+          <li class="navigation-item menu-separator">
+            <span>|</span>
+          </li>
+
+
+          <li class="navigation-item">
+            <a href="/en/">🇬🇧</a>
+          </li>
+
+
+
+        </ul>
+
+      </section>
+    </nav>
 
 
     <div class="content">
-      
-  <section class="container post">
-    <article>
-      <header>
-        <div class="post-title">
-          <h1 class="title">
-            <a class="title-link" href="http://localhost:1313/posts/hexo-config/">
-              hexo优化配置
-            </a>
-          </h1>
-        </div>
-        <div class="post-meta">
-          <div class="date">
-            <span class="posted-on">
-              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2019-09-05T15:55:00Z">
-                September 5, 2019
-              </time>
-            </span>
-            <span class="reading-time">
-              <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              阅读时间：1 分钟
-            </span>
-          </div>
-          
-          <div class="categories">
-  <i class="fa-solid fa-folder" aria-hidden="true"></i>
-    <a href="/categories/hexo/">Hexo</a></div>
 
-          <div class="tags">
-  <i class="fa-solid fa-tag" aria-hidden="true"></i>
-    <span class="tag">
-      <a href="/tags/hexo/">Hexo</a>
-    </span></div>
+      <section class="container post">
+        <article>
+          <header>
+            <div class="post-title">
+              <h1 class="title">
+                <a class="title-link" href="https://zxs94.github.io:1313/posts/hexo-config/">
+                  hexo优化配置
+                </a>
+              </h1>
+            </div>
+            <div class="post-meta">
+              <div class="date">
+                <span class="posted-on">
+                  <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+                  <time datetime="2019-09-05T15:55:00Z">
+                    September 5, 2019
+                  </time>
+                </span>
+                <span class="reading-time">
+                  <i class="fa-solid fa-clock" aria-hidden="true"></i>
+                  阅读时间：1 分钟
+                </span>
+              </div>
 
-        </div>
-      </header>
+              <div class="categories">
+                <i class="fa-solid fa-folder" aria-hidden="true"></i>
+                <a href="/categories/hexo/">Hexo</a>
+              </div>
 
-      <div class="post-content">
-        
-        <p>博客搭建过程中的配置记录，优化hexo的next主题配置。</p>
-<!-- more -->
-<h4 id="git提交">
-  git提交
-  <a class="heading-link" href="#git%e6%8f%90%e4%ba%a4">
-    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
-    <span class="sr-only">链接到标题</span>
-  </a>
-</h4>
-<pre><code>npm install --save hexo-deployer-git
+              <div class="tags">
+                <i class="fa-solid fa-tag" aria-hidden="true"></i>
+                <span class="tag">
+                  <a href="/tags/hexo/">Hexo</a>
+                </span>
+              </div>
+
+            </div>
+          </header>
+
+          <div class="post-content">
+
+            <p>博客搭建过程中的配置记录，优化hexo的next主题配置。</p>
+            <!-- more -->
+            <h4 id="git提交">
+              git提交
+              <a class="heading-link" href="#git%e6%8f%90%e4%ba%a4">
+                <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+                <span class="sr-only">链接到标题</span>
+              </a>
+            </h4>
+            <pre><code>npm install --save hexo-deployer-git
 
 git config --global user.name &quot;GitHub 用户名&quot;
 git config --global user.email &quot;GitHub 邮箱&quot;
 </code></pre>
-<h4 id="文章中引用图片">
-  文章中引用图片
-  <a class="heading-link" href="#%e6%96%87%e7%ab%a0%e4%b8%ad%e5%bc%95%e7%94%a8%e5%9b%be%e7%89%87">
-    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
-    <span class="sr-only">链接到标题</span>
-  </a>
-</h4>
-<pre><code>npm install https://github.com/CodeFalling/hexo-asset-image --save
+            <h4 id="文章中引用图片">
+              文章中引用图片
+              <a class="heading-link" href="#%e6%96%87%e7%ab%a0%e4%b8%ad%e5%bc%95%e7%94%a8%e5%9b%be%e7%89%87">
+                <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+                <span class="sr-only">链接到标题</span>
+              </a>
+            </h4>
+            <pre><code>npm install https://github.com/CodeFalling/hexo-asset-image --save
 </code></pre>
-<h4 id="2d动态看板娘">
-  2D动态看板娘
-  <a class="heading-link" href="#2d%e5%8a%a8%e6%80%81%e7%9c%8b%e6%9d%bf%e5%a8%98">
-    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
-    <span class="sr-only">链接到标题</span>
-  </a>
-</h4>
-<pre><code>npm install --save hexo-helper-live2d
+            <h4 id="2d动态看板娘">
+              2D动态看板娘
+              <a class="heading-link" href="#2d%e5%8a%a8%e6%80%81%e7%9c%8b%e6%9d%bf%e5%a8%98">
+                <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+                <span class="sr-only">链接到标题</span>
+              </a>
+            </h4>
+            <pre><code>npm install --save hexo-helper-live2d
 
 # 人物模型下载  model后面跟着指定模型名称
 npm install --save live2d-widget-model-wanko
@@ -248,60 +256,75 @@ live2d:
   mobile: 
     show: true
 </code></pre>
-<h4 id="代码高亮主题">
-  代码高亮主题
-  <a class="heading-link" href="#%e4%bb%a3%e7%a0%81%e9%ab%98%e4%ba%ae%e4%b8%bb%e9%a2%98">
-    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
-    <span class="sr-only">链接到标题</span>
-  </a>
-</h4>
-<pre><code># 默认为白色主题
+            <h4 id="代码高亮主题">
+              代码高亮主题
+              <a class="heading-link" href="#%e4%bb%a3%e7%a0%81%e9%ab%98%e4%ba%ae%e4%b8%bb%e9%a2%98">
+                <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+                <span class="sr-only">链接到标题</span>
+              </a>
+            </h4>
+            <pre><code># 默认为白色主题
 normal，night， night blue， night bright， night eighties
 </code></pre>
-<h4 id="底部访问人数统计">
-  底部访问人数统计
-  <a class="heading-link" href="#%e5%ba%95%e9%83%a8%e8%ae%bf%e9%97%ae%e4%ba%ba%e6%95%b0%e7%bb%9f%e8%ae%a1">
-    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
-    <span class="sr-only">链接到标题</span>
-  </a>
-</h4>
-<p>打开\themes\next\layout_partials\footer.swig文件,在标签 class = copyright前加上代码：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span> <span class="kr">async</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&#34;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
-</span></span></code></pre></div><p>在文件最下方添加代码：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+            <h4 id="底部访问人数统计">
+              底部访问人数统计
+              <a class="heading-link" href="#%e5%ba%95%e9%83%a8%e8%ae%bf%e9%97%ae%e4%ba%ba%e6%95%b0%e7%bb%9f%e8%ae%a1">
+                <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+                <span class="sr-only">链接到标题</span>
+              </a>
+            </h4>
+            <p>打开\themes\next\layout_partials\footer.swig文件,在标签 class = copyright前加上代码：</p>
+            <div class="highlight">
+              <pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span> <span class="kr">async</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&#34;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span></span></code></pre>
+            </div>
+            <p>在文件最下方添加代码：</p>
+            <div class="highlight">
+              <pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;powered-by&#34;</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;fa fa-user-md&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">i</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;busuanzi_container_site_uv&#34;</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl">  本站访客数:<span class="p">&lt;</span><span class="nt">span</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;busuanzi_value_site_uv&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span></code></pre></div><h4 id="文章目录默认展开">
-  文章目录默认展开
-  <a class="heading-link" href="#%e6%96%87%e7%ab%a0%e7%9b%ae%e5%bd%95%e9%bb%98%e8%ae%a4%e5%b1%95%e5%bc%80">
-    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
-    <span class="sr-only">链接到标题</span>
-  </a>
-</h4>
-<p>进入 themes\next\source\css_custom\custom.styl 添加如下代码：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="o">//</span><span class="nt">文章目录默认展开</span>
+</span></span></code></pre>
+            </div>
+            <h4 id="文章目录默认展开">
+              文章目录默认展开
+              <a class="heading-link" href="#%e6%96%87%e7%ab%a0%e7%9b%ae%e5%bd%95%e9%bb%98%e8%ae%a4%e5%b1%95%e5%bc%80">
+                <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+                <span class="sr-only">链接到标题</span>
+              </a>
+            </h4>
+            <p>进入 themes\next\source\css_custom\custom.styl 添加如下代码：</p>
+            <div class="highlight">
+              <pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="o">//</span><span class="nt">文章目录默认展开</span>
 </span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nc">post-toc</span> <span class="p">.</span><span class="nc">nav</span> <span class="p">.</span><span class="nc">nav-child</span> <span class="p">{</span> <span class="k">display</span><span class="p">:</span> <span class="kc">block</span><span class="p">;</span> <span class="p">}</span>
-</span></span></code></pre></div><h4 id="文章底部标签样式修改">
-  文章底部标签样式修改
-  <a class="heading-link" href="#%e6%96%87%e7%ab%a0%e5%ba%95%e9%83%a8%e6%a0%87%e7%ad%be%e6%a0%b7%e5%bc%8f%e4%bf%ae%e6%94%b9">
-    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
-    <span class="sr-only">链接到标题</span>
-  </a>
-</h4>
-<p>修改模板/themes/next/layout/_macro/post.swig</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">搜索 rel=&#34;tag&#34;&gt;#，将 # 换成<span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;fa fa-tag&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>	
-</span></span></code></pre></div><h4 id="底部powered-by-hexo--强力驱动-隐藏">
-  底部powered By Hexo / 强力驱动 隐藏
-  <a class="heading-link" href="#%e5%ba%95%e9%83%a8powered-by-hexo--%e5%bc%ba%e5%8a%9b%e9%a9%b1%e5%8a%a8-%e9%9a%90%e8%97%8f">
-    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
-    <span class="sr-only">链接到标题</span>
-  </a>
-</h4>
-<p>themes/next/layout/_partials/footer.swig 注释相应代码的代码即可</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c">&lt;!--</span>
+</span></span></code></pre>
+            </div>
+            <h4 id="文章底部标签样式修改">
+              文章底部标签样式修改
+              <a class="heading-link"
+                href="#%e6%96%87%e7%ab%a0%e5%ba%95%e9%83%a8%e6%a0%87%e7%ad%be%e6%a0%b7%e5%bc%8f%e4%bf%ae%e6%94%b9">
+                <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+                <span class="sr-only">链接到标题</span>
+              </a>
+            </h4>
+            <p>修改模板/themes/next/layout/_macro/post.swig</p>
+            <div class="highlight">
+              <pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">搜索 rel=&#34;tag&#34;&gt;#，将 # 换成<span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;fa fa-tag&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>	
+</span></span></code></pre>
+            </div>
+            <h4 id="底部powered-by-hexo--强力驱动-隐藏">
+              底部powered By Hexo / 强力驱动 隐藏
+              <a class="heading-link"
+                href="#%e5%ba%95%e9%83%a8powered-by-hexo--%e5%bc%ba%e5%8a%9b%e9%a9%b1%e5%8a%a8-%e9%9a%90%e8%97%8f">
+                <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+                <span class="sr-only">链接到标题</span>
+              </a>
+            </h4>
+            <p>themes/next/layout/_partials/footer.swig 注释相应代码的代码即可</p>
+            <div class="highlight">
+              <pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c">&lt;!--</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="nx">theme</span><span class="p">.</span><span class="nx">footer</span><span class="p">.</span><span class="nx">powered</span> <span class="o">%</span><span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&#34;powered-by&#34;</span><span class="o">&gt;</span><span class="p">{</span><span class="err">#</span>
 </span></span><span class="line"><span class="cl">  <span class="err">#</span><span class="p">}{{</span> <span class="nx">__</span><span class="p">(</span><span class="s1">&#39;footer.powered&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;a class=&#34;theme-link&#34; target=&#34;_blank&#34; href=&#34;https://hexo.io&#34;&gt;Hexo&lt;/a&gt;&#39;</span><span class="p">)</span> <span class="p">}}{</span><span class="err">#</span>
@@ -321,102 +344,107 @@ normal，night， night blue， night bright， night eighties
 </span></span><span class="line"><span class="cl"><span class="err">#</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/div&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span><span class="o">%</span> <span class="nx">endif</span> <span class="o">%</span><span class="p">}</span> 
 </span></span><span class="line"><span class="cl"><span class="o">--&gt;</span>
-</span></span></code></pre></div><h4 id="博客背景">
-  博客背景
-  <a class="heading-link" href="#%e5%8d%9a%e5%ae%a2%e8%83%8c%e6%99%af">
-    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
-    <span class="sr-only">链接到标题</span>
-  </a>
-</h4>
-<p>在themes\next\source\css_custom\custom.styl 添加如下代码 引用素材网站随机图加载可能较慢</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">body</span> <span class="p">{</span>
+</span></span></code></pre>
+            </div>
+            <h4 id="博客背景">
+              博客背景
+              <a class="heading-link" href="#%e5%8d%9a%e5%ae%a2%e8%83%8c%e6%99%af">
+                <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+                <span class="sr-only">链接到标题</span>
+              </a>
+            </h4>
+            <p>在themes\next\source\css_custom\custom.styl 添加如下代码 引用素材网站随机图加载可能较慢</p>
+            <div class="highlight">
+              <pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">body</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">background</span><span class="p">:</span><span class="nb">url</span><span class="p">(</span><span class="sx">https://source.unsplash.com/random/1600x900?nature,water</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">background-repeat</span><span class="p">:</span> <span class="kc">no-repeat</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">background-attachment</span><span class="p">:</span><span class="kc">fixed</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">background-position</span><span class="p">:</span><span class="mi">50</span><span class="kt">%</span> <span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">background-size</span><span class="p">:</span><span class="kc">cover</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div>
-      </div>
+</span></span></code></pre>
+            </div>
+          </div>
 
 
-      <footer>
-        
+          <footer>
 
 
-        
-        
-        
-        
-        
 
-        
-      </footer>
-    </article>
 
-    
-  </section>
+
+
+
+
+
+
+          </footer>
+        </article>
+
+
+      </section>
 
     </div>
 
     <footer class="footer">
-  <section class="container">
-    ©
-    
-      2019 -
-    
-    2024
-     ZHXS 
-    ·
-    
-    技术支持 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
-    
-  </section>
-</footer>
+      <section class="container">
+        ©
+
+        2019 -
+
+        2024
+        ZHXS
+        ·
+
+        技术支持 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a
+          href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+
+      </section>
+    </footer>
 
   </main>
 
-  
 
-  
-  
+
+
+
   <script src="/js/coder.js"></script>
-  
-
-  
-
-  
 
 
-  
 
-  
 
-  
 
-  
 
-  
 
-  
 
-  
 
-  
 
-  
 
-  
 
-  
 
-  
 
-  
 
-  
 
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 
 </html>

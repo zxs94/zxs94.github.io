@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Milvus on Phantom</title>
-    <link>http://localhost:1313/tags/milvus/</link>
+    <link>https://zxs94.github.io:1313/tags/milvus/</link>
     <description>Recent content in Milvus on Phantom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 06 Mar 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/milvus/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zxs94.github.io:1313/tags/milvus/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>初识milvus向量数据库</title>
-      <link>http://localhost:1313/posts/%E5%88%9D%E8%AF%86milvus%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <link>https://zxs94.github.io:1313/posts/%E5%88%9D%E8%AF%86milvus%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
       <pubDate>Wed, 06 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/%E5%88%9D%E8%AF%86milvus%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <guid>https://zxs94.github.io:1313/posts/%E5%88%9D%E8%AF%86milvus%E5%90%91%E9%87%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
       <description>什么是Milvus向量数据库？ 链接到标题 Milvus 是一款全球领先的开源向量数据库，赋能 AI 应用和向量相似度搜索，加速非结构化数据检索。&#xA;Milvus专注于存储、索引及管理由深度神经网络和其他机器学习（ML）模型生成的海量嵌入向量，能够轻松应对万亿级别的向量索引任务。&#xA;与传统关系型数据库有什么不同？ 链接到标题 与传统关系型数据库主要处理结构化数据不同，Milvus从底层设计就针对非结构化数据转换而来的嵌入向量进行处理，适应了互联网时代非结构化数据的爆炸性增长，例如短视频、种草图文、物联网传感器数据、蛋白质结构等等&#xA;Milvus的实现机制 链接到标题 为了实现计算机对非结构化数据的理解和处理，开发者利用嵌入技术将其转换为向量。借助Milvus存储和索引这些向量，解决了AI应用开发中的痛点。通过计算向量之间的相似距离，Milvus可以快速分析两个向量间的关联性，从而判断原始数据源的相似程度，为开发者提供更高效便捷的数据处理手段。&#xA;安装搭建 链接到标题 这里我选用了docker的方式进行实验，使用了苏洋(作者)提供的一个milvus-2.1.0版本的最小化镜像。&#xA;下面是安装流程：&#xA;1.从远程仓库下载镜像并启动容器 链接到标题 docker run --rm -it --name=milvus soulteary/milvus:embed-2.1.0 2.启动后看日志 链接到标题 看见日志输出以下内容就是启动成功了&#xA;---Milvus Proxy successfully initialized and ready to serve!--- 3.验证测试脚本 链接到标题 作者提供了一份hello-world.py的脚本供我们测试使用，我们直接使用容器执行python脚本,注意容器如果没有指定名称请使用容器id。&#xA;docker exec -it milvus python hello-world.py 4.查看python的依赖库 链接到标题 为了后续方便我们在本地环境进行测试所以我们需要知道需要安装哪些python依赖。&#xA;pip list Package Version --------------- -------- grpcio 1.49.0 mmh3 3.0.0 numpy 1.23.3 pandas 1.4.4 pip 21.2.4 protobuf 3.20.2 pymilvus 2.1.0 python-dateutil 2.</description>
     </item>
   </channel>
