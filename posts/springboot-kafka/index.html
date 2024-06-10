@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
   <title>
   SpringBoot集成kafka实现生产消费 · Phantom
 </title>
@@ -19,7 +19,7 @@ springboot配置文件里加入kafka配置
 注意如果关闭自动提交需要如图listener中配置 否则在使用Acknowledgment自动提交时会报参数异常，但是在低版本的kafka没有这个问题。
 一些kafka配置 仅供参考
 #kafka配置信息 kafka: producer: bootstrap-servers:0.0.0.0:9092 batch-size: 16785 #一次最多发送数据量 retries: 1 #发送失败后的重复发送次数 buffer-memory: 33554432 #32M批处理缓冲区 linger: 1 consumer: group-id: mms_test bootstrap-servers: 0.0.0.0:9092 auto-offset-reset: latest #最早未被消费的offset earliest enable-auto-commit: false #是否开启自动提交 max-poll-records: 3100 #批量消费一次最大拉取的数据量 auto-commit-interval: 1000 #自动提交的间隔时间 session-timeout: 20000 #连接超时时间 max-poll-interval: 15000 #手动提交设置与poll的心跳数,如果消息队列中没有消息，等待毫秒后，调用poll()方法。如果队列中有消息，立即消费消息，每次消费的消息的多少可以通过max.poll.records配置。 max-partition-fetch-bytes: 15728640 #设置拉取数据的大小,15M listener: ack-mode: manual # 配置参数 手动提交偏移量 batch-listener: true #是否开启批量消费，true表示批量消费 concurrency: 5 #设置消费的线程数 poll-timeout: 1500 消费者 链接到标题 核心注解">
-<meta name="keywords" content="blog,developer,personal">
+<meta name="keywords" content="">
 
 <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="SpringBoot集成kafka实现生产消费"/>
 <meta name="twitter:description" content="场景 链接到标题 对接方需要使用kafka作为消息中间件来交互数据，需要提供一个消费接口消费对方柜面系统前端实时更新的数据，结合我们平台本身的批处理定时任务，模型跑完数据需要生产到另一个主题供对接方消费。
@@ -37,7 +37,7 @@ springboot配置文件里加入kafka配置
 一些kafka配置 仅供参考
 #kafka配置信息 kafka: producer: bootstrap-servers:0.0.0.0:9092 batch-size: 16785 #一次最多发送数据量 retries: 1 #发送失败后的重复发送次数 buffer-memory: 33554432 #32M批处理缓冲区 linger: 1 consumer: group-id: mms_test bootstrap-servers: 0.0.0.0:9092 auto-offset-reset: latest #最早未被消费的offset earliest enable-auto-commit: false #是否开启自动提交 max-poll-records: 3100 #批量消费一次最大拉取的数据量 auto-commit-interval: 1000 #自动提交的间隔时间 session-timeout: 20000 #连接超时时间 max-poll-interval: 15000 #手动提交设置与poll的心跳数,如果消息队列中没有消息，等待毫秒后，调用poll()方法。如果队列中有消息，立即消费消息，每次消费的消息的多少可以通过max.poll.records配置。 max-partition-fetch-bytes: 15728640 #设置拉取数据的大小,15M listener: ack-mode: manual # 配置参数 手动提交偏移量 batch-listener: true #是否开启批量消费，true表示批量消费 concurrency: 5 #设置消费的线程数 poll-timeout: 1500 消费者 链接到标题 核心注解" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://zxs94.github.io:1313/posts/springboot-kafka/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://zxs94.github.io/posts/springboot-kafka/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-12-18T16:47:50+00:00" />
 <meta property="article:modified_time" content="2019-12-18T16:47:50+00:00" />
 
@@ -45,7 +45,7 @@ springboot配置文件里加入kafka配置
 
 
 
-<link rel="canonical" href="https://zxs94.github.io:1313/posts/springboot-kafka/">
+<link rel="canonical" href="https://zxs94.github.io/posts/springboot-kafka/">
 
 
 <link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -55,7 +55,7 @@ springboot配置文件里加入kafka配置
 
   
   
-  <link rel="stylesheet" href="/css/coder.css" media="screen">
+  <link rel="stylesheet" href="/css/coder.min.577e3c5ead537873430da16f0964b754a120fd87c4e2203a00686e7c75b51378.css" integrity="sha256-V348Xq1TeHNDDaFvCWS3VKEg/YfE4iA6AGhufHW1E3g=" crossorigin="anonymous" media="screen" />
 
 
 
@@ -65,7 +65,7 @@ springboot配置文件里加入kafka配置
   
     
     
-    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+    <link rel="stylesheet" href="/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
   
 
 
@@ -113,7 +113,7 @@ springboot配置文件里加入kafka配置
     <nav class="navigation">
   <section class="container">
     
-    <a class="navigation-title" href="https://zxs94.github.io:1313/">
+    <a class="navigation-title" href="https://zxs94.github.io/">
       Phantom
     </a>
     
@@ -178,7 +178,7 @@ springboot配置文件里加入kafka配置
       <header>
         <div class="post-title">
           <h1 class="title">
-            <a class="title-link" href="https://zxs94.github.io:1313/posts/springboot-kafka/">
+            <a class="title-link" href="https://zxs94.github.io/posts/springboot-kafka/">
               SpringBoot集成kafka实现生产消费
             </a>
           </h1>
@@ -322,7 +322,7 @@ springboot配置文件里加入kafka配置
 
   
   
-  <script src="/js/coder.js"></script>
+  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
   
 
   

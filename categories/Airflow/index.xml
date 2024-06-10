@@ -2,38 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Airflow on Phantom</title>
-    <link>https://zxs94.github.io:1313/categories/airflow/</link>
+    <link>https://zxs94.github.io/categories/airflow/</link>
     <description>Recent content in Airflow on Phantom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 24 Mar 2022 08:57:30 +0000</lastBuildDate>
-    <atom:link href="https://zxs94.github.io:1313/categories/airflow/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zxs94.github.io/categories/airflow/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Airflow生产实践（三）操作</title>
-      <link>https://zxs94.github.io:1313/posts/airflowproduct3/</link>
+      <link>https://zxs94.github.io/posts/airflowproduct3/</link>
       <pubDate>Thu, 24 Mar 2022 08:57:30 +0000</pubDate>
-      <guid>https://zxs94.github.io:1313/posts/airflowproduct3/</guid>
+      <guid>https://zxs94.github.io/posts/airflowproduct3/</guid>
       <description>airflow操作 链接到标题 web页面操作 链接到标题 首页 链接到标题 首页展示DAGs,分为All,Active和Paused。其中Active下面的DAG是可以执行的DAG.&#xA;菜单栏 链接到标题 菜单栏分别如下：&#xA;DAGs为跳回首页。&#xA;Security包含用户、角色、权限等查看功能。&#xA;Browse包含Airflow包含的DAG Runs、Jobs、Task Instances等列表信息。&#xA;Admin包含一些配置等操作。其中Variables可以配置变量，在DAG代码中可以调用。Connection包含连接配置等Url地址。&#xA;Docs中可以查看一些官方文档、API接口等。更多详细内容可以在这里查看。&#xA;DAGS操作 链接到标题 DAGs首页列表中，从左到右依次为：&#xA;按钮：Active开关&#xA;DAG：显示DAG名字和标签&#xA;Owner所属者&#xA;Runs ：最近的DAG run状态&#xA;Schedule: 定时方式，None表示没有指定定时&#xA;Last Run：&#xA;Recent Tasks：最近的Tasks状态&#xA;Actions：操作按钮，分别为手动触发DAG,刷新DAG,删除DAG(删除不要轻易操作)&#xA;Links：一系列操作链接，鼠标放在按钮上可以出现操作键&#xA;依次如下：&#xA;Tree View（常用）&#xA;可以树状图形式查看具体DAG Task的执行状态，从左往右按时间顺序展示。&#xA;Graph View（常用）&#xA;流程图图形形式显示DAG任务执行状态。&#xA;点击对应Task的按钮，可以弹出Task操作内容：&#xA;可以按照下面选项，对Task执行Run、Clear、Mark Failed、Mark Success等操作。&#xA;也可以点击最上面一行，查看实例详情，该任务具体执行命令、log日志、该Task所有实例、过滤Task只保留该Task及其上游Task。&#xA;Calendar View&#xA;显示具体日期DAG的运行情况&#xA;Task Duration&#xA;任务Task执行时间统计&#xA;Task Tries&#xA;任务重试次数&#xA;Gantt 甘特图&#xA;Detais&#xA;DAG详细信息&#xA;Code&#xA;DAG代码&#xA;DAG开发操作 链接到标题 具体开发可参考官方示例：&#xA;https://airflow.apache.org/docs/apache-airflow/2.1.3/tutorial.html#</description>
     </item>
     <item>
       <title>Airflow生产实践（二）概述</title>
-      <link>https://zxs94.github.io:1313/posts/airflowproduct2/</link>
+      <link>https://zxs94.github.io/posts/airflowproduct2/</link>
       <pubDate>Thu, 24 Mar 2022 08:57:27 +0000</pubDate>
-      <guid>https://zxs94.github.io:1313/posts/airflowproduct2/</guid>
+      <guid>https://zxs94.github.io/posts/airflowproduct2/</guid>
       <description>airflow概述 链接到标题 airflow简介 链接到标题 airflow是一个使用Python编写实现的任务管理、调度、监控工作流平台。&#xA;由Airbnb开源，airflow 将workflow编排为由tasks组成的DAGs(有向无环图)&#xA;airflow 提供了丰富的命令行工具和简单易用的用户界面以便用户查看和操作&#xA;airflow提供了监控和报警系统。&#xA;airflow的调度依赖于crontab命令&#xA;与crontab相比, airflow可以直观的看到任务执行情况、任务之间的逻辑依赖关系、可以设定任务出错时邮件提醒、可以查看任务执行日志。&#xA;Airflow重要概念 链接到标题 DAG&#xA;DAG 意为有向无循环图，在 Airflow 中则定义了整个完整的作业。同一个 DAG 中的所有 Task 拥有相同的调度时间。&#xA;Task&#xA;Task 为 DAG 中具体的作业任务，它必须存在于某一个 DAG 之中。Task 在 DAG 中配置依赖关系，跨 DAG 的依赖是可行的，*但是并不推荐*。跨 DAG 依赖会导致 DAG 图的直观性降低，并给依赖管理带来麻烦。&#xA;DAG Run&#xA;当一个 DAG 满足它的调度时间，或者被外部触发时，就会产生一个 DAG Run。可以理解为由 DAG 实例化的实例。&#xA;Task Instance&#xA;当一个 Task 被调度启动时，就会产生一个 Task Instance。可以理解为由 Task 实例化的实例。&#xA;DAG 链接到标题 在 Airflow 中，DAG（或者叫有向无环图）是您要运行的所有任务的集合，以反映其关系和依赖关系的方式进行组织。&#xA;例如，一个简单的 DAG 可以包含三个任务：A，B 和 C.&#xA;可以设定 A 必须在 B 可以运行之前成功运行，但 C 可以随时运行。 可以设定任务 A 在 5 分钟后超时，并且 B 可以重新启动最多 5 次以防它失败。 也可以设定工作流程将在每天晚上 10 点运行，但不应该在某个特定日期之前开始。 重要的是，DAG 并不关心其组成任务的作用;它的工作是确保他们都在正确的时间，或正确的顺序，或正确处理任何意外的问题。</description>
     </item>
     <item>
       <title>Airflow生产实践（一）安装配置</title>
-      <link>https://zxs94.github.io:1313/posts/airflowproduct/</link>
+      <link>https://zxs94.github.io/posts/airflowproduct/</link>
       <pubDate>Wed, 23 Mar 2022 16:45:39 +0000</pubDate>
-      <guid>https://zxs94.github.io:1313/posts/airflowproduct/</guid>
+      <guid>https://zxs94.github.io/posts/airflowproduct/</guid>
       <description>airflow安装及配置 链接到标题 说明：该环境不需要自己装redis、mysql，但需要能够访问&#xA;建议可以创建一个单独数据库，存放airflow相关表（不然会显得比较乱）&#xA;首先确保有bzip2功能&#xA;如果没有需要获取,不然安装时会出现错误：&#xA;sudo yum install -y bzip2&#xA;离线安装anaconda3,附带所有需要依赖的包，包通过拷贝其他site-packages的方式&#xA;准备工作：联网下载 链接到标题 有网环境下载：wget https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh&#xA;离线拷贝,并安装anaconda3 链接到标题 将下载好的安装包离线拷贝到需要安装的服务器：Anaconda3-5.2.0-Linux-x86_64.sh&#xA;使用对应用户安装：&#xA;sh Anaconda3-5.2.0-Linux-x86_64.sh 中间需要输入yes和回车，直至展示下图,这一步是添加环境变量,直接同意，若这里没有添加，则需要手动添加环境变量&#xA;输入yes.&#xA;最后如果询问你是否安装Microsoft VSCode，输入no&#xA;问题兼容 链接到标题 进入anaconda内置的Python目录&#xA;cd /home/rong/anaconda3/lib/python3.6&#xA;#额外复制一份configparser命名为ConfigParser&#xA;cp configparser.py ConfigParser.py&#xA;拷贝site-packages（关键） 链接到标题 选择一台已经安装好Airflow的环境，拷贝其anaconda3对应目录：&#xA;anaconda3/lib/python3.6/site-packages&#xA;删除新安装anaconda3的lib/python3.6/site-packages目录，将拷贝安装好Airflow的环境机器的anaconda3/lib/python3.6/site-packages替换到新机器对应位置&#xA;拷贝airflow 和gunicorn&#xA;将原先anaconda3/bin目录中的airflow 和gunicorn拷贝到对应新的anaconda3/bin目录下&#xA;修改两个文件第一行python解释器为为新的anaconda3对应目录&#xA;修改两个文件权限为775&#xA;配置airflow 链接到标题 mysql操作 链接到标题 &amp;ndash; 初始化 airflow 需要使用的库 CREATE DATABASE airflow;&#xA;&amp;ndash; 这个一定要设置，否则会报错 set global explicit_defaults_for_timestamp =1;&#xA;redis操作 链接到标题 修改redis.conf：&#xA;将bind 127.0.0.1 注释 将protected-mode修改为no</description>
     </item>
     <item>
       <title>Airflow本地安装</title>
-      <link>https://zxs94.github.io:1313/posts/airflowlocal/</link>
+      <link>https://zxs94.github.io/posts/airflowlocal/</link>
       <pubDate>Wed, 23 Mar 2022 16:36:24 +0000</pubDate>
-      <guid>https://zxs94.github.io:1313/posts/airflowlocal/</guid>
+      <guid>https://zxs94.github.io/posts/airflowlocal/</guid>
       <description>conda安装airflow 安装版本为2.2.3 链接到标题 # Airflow needs a home. ~/airflow is the default, but you can put it&#xA;# somewhere else if you prefer (optional)&#xA;export AIRFLOW_HOME=~/airflow&#xA;# Install Airflow using the constraints file&#xA;AIRFLOW_VERSION=2.2.3&#xA;PYTHON_VERSION=&amp;quot;$(python &amp;ndash;version | cut -d &amp;quot; &amp;quot; -f 2 | cut -d &amp;ldquo;.&amp;rdquo; -f 1-2)&amp;quot;&#xA;# For example: 3.6&#xA;CONSTRAINT_URL=&amp;ldquo;https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt&#34;&#xA;# For example: https://raw.githubusercontent.com/apache/airflow/constraints-2.2.3/constraints-3.6.txt&#xA;pip install &amp;ldquo;apache-airflow==${AIRFLOW_VERSION}&amp;rdquo; &amp;ndash;constraint &amp;ldquo;${CONSTRAINT_URL}&amp;rdquo;&#xA;# The Standalone command will initialise the database, make a user,</description>
     </item>
   </channel>

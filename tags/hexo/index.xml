@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Hexo on Phantom</title>
-    <link>https://zxs94.github.io:1313/tags/hexo/</link>
+    <link>https://zxs94.github.io/tags/hexo/</link>
     <description>Recent content in Hexo on Phantom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 05 Sep 2019 15:55:00 +0000</lastBuildDate>
-    <atom:link href="https://zxs94.github.io:1313/tags/hexo/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zxs94.github.io/tags/hexo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>hexo优化配置</title>
-      <link>https://zxs94.github.io:1313/posts/hexo-config/</link>
+      <link>https://zxs94.github.io/posts/hexo-config/</link>
       <pubDate>Thu, 05 Sep 2019 15:55:00 +0000</pubDate>
-      <guid>https://zxs94.github.io:1313/posts/hexo-config/</guid>
+      <guid>https://zxs94.github.io/posts/hexo-config/</guid>
       <description>博客搭建过程中的配置记录，优化hexo的next主题配置。&#xA;git提交 链接到标题 npm install --save hexo-deployer-git git config --global user.name &amp;quot;GitHub 用户名&amp;quot; git config --global user.email &amp;quot;GitHub 邮箱&amp;quot; 文章中引用图片 链接到标题 npm install https://github.com/CodeFalling/hexo-asset-image --save 2D动态看板娘 链接到标题 npm install --save hexo-helper-live2d # 人物模型下载 model后面跟着指定模型名称 npm install --save live2d-widget-model-wanko # 主配置文件中添加代码 live2d: enable: true scriptFrom: local model: use: live2d-widget-model-wanko display: position: right width: 150 height: 300 mobile: show: true 代码高亮主题 链接到标题 # 默认为白色主题 normal，night， night blue， night bright， night eighties 底部访问人数统计 链接到标题 打开\themes\next\layout_partials\footer.</description>
     </item>
     <item>
       <title>Hexo图片引用</title>
-      <link>https://zxs94.github.io:1313/posts/hexo-image/</link>
+      <link>https://zxs94.github.io/posts/hexo-image/</link>
       <pubDate>Thu, 08 Aug 2019 15:51:15 +0000</pubDate>
-      <guid>https://zxs94.github.io:1313/posts/hexo-image/</guid>
+      <guid>https://zxs94.github.io/posts/hexo-image/</guid>
       <description>经过参考资料决定使用hexo-asset-image插件来实现博客的图片引用&#xA;使用流程 链接到标题 基本参照网上的配置方式&#xA;设置站点配置_config.yml:将post_asset_folder: false改为post_asset_folder: true&#xA;执行 npm install hexo-asset-image –save 装插件&#xA;执行hexo new [xxxx],生成xxxx.md和xxxx文件夹&#xA;把要引用的图片拷贝到xxxx文件夹中&#xA;使用 ![](xxxx/example.jpg) 来引用本地图片&#xA;踩坑 链接到标题 使用以上配置在项目中插入图片发现，页面引用时无法显示，查看生成的静态页面发现标签图片是&#xA;&amp;lt;img src=&amp;quot;/.io//xxx.png&amp;quot;/&amp;gt;&#xA;经过一番查询找了一个解决办法、就是将博客根目录下的package.json中的插件版本换成0.0.1版本 原有版本为(1.0.0),编辑完成后 hexo clean hexo g 即可看到图片img标签变为 &amp;lt;img src=&amp;quot;/2019/08/08/&amp;lsquo;文章文件名称&amp;rsquo;/&amp;lsquo;图片名称&amp;rsquo;.png&amp;quot;/&amp;gt;&#xA;降低插件版本后即可成功引用。</description>
     </item>
   </channel>

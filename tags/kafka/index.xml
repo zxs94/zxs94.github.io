@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Kafka on Phantom</title>
-    <link>https://zxs94.github.io:1313/tags/kafka/</link>
+    <link>https://zxs94.github.io/tags/kafka/</link>
     <description>Recent content in Kafka on Phantom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 18 Dec 2019 16:47:50 +0000</lastBuildDate>
-    <atom:link href="https://zxs94.github.io:1313/tags/kafka/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zxs94.github.io/tags/kafka/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SpringBoot集成kafka实现生产消费</title>
-      <link>https://zxs94.github.io:1313/posts/springboot-kafka/</link>
+      <link>https://zxs94.github.io/posts/springboot-kafka/</link>
       <pubDate>Wed, 18 Dec 2019 16:47:50 +0000</pubDate>
-      <guid>https://zxs94.github.io:1313/posts/springboot-kafka/</guid>
+      <guid>https://zxs94.github.io/posts/springboot-kafka/</guid>
       <description>场景 链接到标题 对接方需要使用kafka作为消息中间件来交互数据，需要提供一个消费接口消费对方柜面系统前端实时更新的数据，结合我们平台本身的批处理定时任务，模型跑完数据需要生产到另一个主题供对接方消费。&#xA;依赖引入 链接到标题 pom.xml 引入依赖 注意kafka版本&#xA;springboot配置文件里加入kafka配置&#xA;注意如果关闭自动提交需要如图listener中配置 否则在使用Acknowledgment自动提交时会报参数异常，但是在低版本的kafka没有这个问题。&#xA;一些kafka配置 仅供参考&#xA;#kafka配置信息 kafka: producer: bootstrap-servers:0.0.0.0:9092 batch-size: 16785 #一次最多发送数据量 retries: 1 #发送失败后的重复发送次数 buffer-memory: 33554432 #32M批处理缓冲区 linger: 1 consumer: group-id: mms_test bootstrap-servers: 0.0.0.0:9092 auto-offset-reset: latest #最早未被消费的offset earliest enable-auto-commit: false #是否开启自动提交 max-poll-records: 3100 #批量消费一次最大拉取的数据量 auto-commit-interval: 1000 #自动提交的间隔时间 session-timeout: 20000 #连接超时时间 max-poll-interval: 15000 #手动提交设置与poll的心跳数,如果消息队列中没有消息，等待毫秒后，调用poll()方法。如果队列中有消息，立即消费消息，每次消费的消息的多少可以通过max.poll.records配置。 max-partition-fetch-bytes: 15728640 #设置拉取数据的大小,15M listener: ack-mode: manual # 配置参数 手动提交偏移量 batch-listener: true #是否开启批量消费，true表示批量消费 concurrency: 5 #设置消费的线程数 poll-timeout: 1500 消费者 链接到标题 核心注解</description>
     </item>
     <item>
       <title>Kafka单节点搭建</title>
-      <link>https://zxs94.github.io:1313/posts/kafkasinglebuild/</link>
+      <link>https://zxs94.github.io/posts/kafkasinglebuild/</link>
       <pubDate>Wed, 18 Dec 2019 16:47:10 +0000</pubDate>
-      <guid>https://zxs94.github.io:1313/posts/kafkasinglebuild/</guid>
+      <guid>https://zxs94.github.io/posts/kafkasinglebuild/</guid>
       <description>Kafka介绍 链接到标题 Kafka是LinkedIn开源的分布式发布-订阅消息系统，目前归属于Apache顶级项目。Kafka主要特点是基于Pull的模式来处理消息消费，追求高吞吐量，一开始的目的就是用于日志收集和传输。&#xA;不支持事务，对消息的重复、丢失、错误没有严格要求，适合产生大量数据的互联网服务的数据收集业务。&#xA;单节点卡夫卡搭建 链接到标题 1.Zookeeper 链接到标题 因为kafka使用zk作为注册中心、所以我们需要先在服务器上搭一个zk,也可以使用kafka自带的zk启动，注意需要预装jdk。&#xA;zk默认端口2181。&#xA;tar zxvf zookeeper-3.4.13.tar.gz 解压完成后在bin目录下执行启动指令&#xA;./zkServer.sh start zookeeper.out 查看启动信息&#xA;2. Kafka 链接到标题 解压kafka&#xA;tar zxvf kafka_2.12-2.1.0.tgz 相关指令&#xA;1.zookeeper启动 cd zookeeper-3.4.13/bin ./zkServer.sh start 2.kafka启动 # 修改配置 listeners=PLAINTEXT://localhost:9092 最好修改成服务器ip ./bin/kafka-server-start.sh -daemon ./config/server.properties 3.kafka创建topic bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test 4.kafka查询topic bin/kafka-topics.sh --list --zookeeper localhost:2181 5.kafka删除topic bin/kafka-topics.sh --delete --zookeeper localhost:2181 --topic test 6.发送消息 bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test 7.消费消息 bin/kafka-console-consumer.</description>
     </item>
   </channel>
